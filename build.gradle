@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+}
+
+group 'com.tomcatsaddons'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '16'
+
+repositories {
+    mavenCentral()
+}
