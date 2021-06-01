@@ -1,0 +1,9 @@
+## Interface: 11307
+## Title: TomCat's AddOn Suite
+## Notes: Version 2.3.1-alpha (Classic Era)
+## Author: TomCat
+## Version: 2.3.1-alpha
+## DefaultState: enabled
+
+event.lua
+error.lua

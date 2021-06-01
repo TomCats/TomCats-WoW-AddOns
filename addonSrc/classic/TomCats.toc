@@ -1,0 +1,36 @@
+## Interface: 20501
+## Title: TomCat's AddOn Suite
+## Notes: Version 2.3.1-alpha (Classic)
+## Author: TomCat
+## Version: 2.3.1-alpha
+## DefaultState: enabled
+
+event.lua
+error.lua
+c_map.lua
+c_questlog.lua
+c_supertrack.lua
+atlasinfo.lua
+minimap.lua
+SharedXML\CallbackRegistry.lua
+SharedXML\NineSlice.lua
+SharedXML\SharedUIPanelTemplates.lua
+SharedXML\PortraitFrame.lua
+SharedXML\SharedUIPanelTemplates.xml
+FrameXML\QuestUtils.lua
+FrameXML\QuestFrameTemplates.xml
+FrameXML\QuestMapFrame.lua
+FrameXML\QuestMapFrame.xml
+FrameXML\QuestLogOwnerMixin.lua
+FrameXML\UIPanelTemplates.lua
+FrameXML\UIPanelTemplates.xml
+FrameXML\TutorialFrame.lua
+Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
+Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
+Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
+Blizzard_MapCanvas\Blizzard_MapCanvas.lua
+Blizzard_MapCanvas\Blizzard_MapCanvas.xml
+Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
+Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
+Blizzard_WorldMap\Blizzard_WorldMap.lua
+Blizzard_WorldMap\Blizzard_WorldMap.xml
