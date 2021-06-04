@@ -34,3 +34,4 @@ Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
 Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
 Blizzard_WorldMap\Blizzard_WorldMap.lua
 Blizzard_WorldMap\Blizzard_WorldMap.xml
+worldmapframe.lua
