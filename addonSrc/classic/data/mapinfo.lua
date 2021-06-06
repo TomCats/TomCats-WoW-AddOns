@@ -33,6 +33,7 @@ local mapInfoMetaData = {
 	end
 }
 
+--[[ columns: mapID, parentMapID, mapType, flags, areaID, textureBase ]]
 addon.mapInfos = {
 	[225] = { 225, 1453, 4, 0, 717, "Interface\\WorldMap\\TheStockade\\TheStockade1_" }
 }
