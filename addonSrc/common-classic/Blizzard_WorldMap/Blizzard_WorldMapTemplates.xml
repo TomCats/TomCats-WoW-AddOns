@@ -129,7 +129,7 @@
 <!--		</Scripts>-->
 <!--	</Button>-->
 	<!-- todo: check for compatibility (NavBarTemplate) -->
-	<Frame name="TomCats_WorldMapNavBarTemplate" inherits="NavBarTemplate" mixin="TomCats_WorldMapNavBarMixin" virtual="true">
+	<Frame name="TomCats_WorldMapNavBarTemplate" inherits="TomCats_NavBarTemplate" mixin="TomCats_WorldMapNavBarMixin" virtual="true">
 		<Anchors>
 			<Anchor point="TOPLEFT" relativeKey="$parent.BorderFrame" x="10" y="-23"/>
 		</Anchors>

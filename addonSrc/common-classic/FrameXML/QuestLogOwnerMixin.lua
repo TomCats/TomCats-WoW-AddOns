@@ -1,7 +1,7 @@
-local GetCVarBool = GetCVarBool;
-local HideUIPanel = HideUIPanel;
-local SetCVar = SetCVar;
-local ShowUIPanel = ShowUIPanel;
+local GetCVarBool = TomCats_GetCVarBool;
+local HideUIPanel = nop;
+local SetCVar = TomCats_SetCVar;
+local ShowUIPanel = nop;
 local UpdateUIPanelPositions = UpdateUIPanelPositions;
 
 local QuestLogOwnerMixin;
@@ -13,40 +13,40 @@ local DISPLAY_STATE_OPEN_MAXIMIZED = 4;
 
 QuestLogOwnerMixin = { }
 
-function QuestLogOwnerMixin:HandleUserActionToggleSelf()
-	local displayState;
-	if self:IsShown() then
-		if self:IsMaximized() then
-			displayState = DISPLAY_STATE_CLOSED;
-		else
-			if self:ShouldShowQuestLogPanel() == self.QuestLog:IsShown() then
-				if self:ShouldBeMaximized() then
-					displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
-				else
-					displayState = DISPLAY_STATE_CLOSED;
-				end
-			else
-				if self:ShouldBeMaximized() then
-					displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
-				else
-					displayState = DISPLAY_STATE_OPEN_MINIMIZED_NO_LOG;
-				end
-			end
-		end
-	else
-		self.wasShowingQuestLog = nil;
-		if self:ShouldBeMinimized() then
-			if self:ShouldShowQuestLogPanel() then
-				displayState = DISPLAY_STATE_OPEN_MINIMIZED_WITH_LOG;
-			else
-				displayState = DISPLAY_STATE_OPEN_MINIMIZED_NO_LOG;
-			end
-		else
-			displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
-		end
-	end
-	self:SetDisplayState(displayState);
-end
+--function QuestLogOwnerMixin:HandleUserActionToggleSelf()
+--	local displayState;
+--	if self:IsShown() then
+--		if self:IsMaximized() then
+--			displayState = DISPLAY_STATE_CLOSED;
+--		else
+--			if self:ShouldShowQuestLogPanel() == self.QuestLog:IsShown() then
+--				if self:ShouldBeMaximized() then
+--					displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
+--				else
+--					displayState = DISPLAY_STATE_CLOSED;
+--				end
+--			else
+--				if self:ShouldBeMaximized() then
+--					displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
+--				else
+--					displayState = DISPLAY_STATE_OPEN_MINIMIZED_NO_LOG;
+--				end
+--			end
+--		end
+--	else
+--		self.wasShowingQuestLog = nil;
+--		if self:ShouldBeMinimized() then
+--			if self:ShouldShowQuestLogPanel() then
+--				displayState = DISPLAY_STATE_OPEN_MINIMIZED_WITH_LOG;
+--			else
+--				displayState = DISPLAY_STATE_OPEN_MINIMIZED_NO_LOG;
+--			end
+--		else
+--			displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
+--		end
+--	end
+--	self:SetDisplayState(displayState);
+--end
 
 function QuestLogOwnerMixin:HandleUserActionToggleQuestLog()
 	local displayState;
@@ -138,10 +138,10 @@ function QuestLogOwnerMixin:SetDisplayState(displayState)
 	end
 
 	if self:IsMaximized() then
-		self.SidePanelToggle:Hide();
+--		self.SidePanelToggle:Hide();
 	else
-		self.SidePanelToggle:Show();
-		self.SidePanelToggle:Refresh();
+--		self.SidePanelToggle:Show();
+--		self.SidePanelToggle:Refresh();
 	end
 
 	self:RefreshQuestLog();
@@ -233,5 +233,47 @@ end
 function QuestLogOwnerMixin:OnQuestLogUpdate()
 	-- override in your mixin
 end
+
+-- override by TomCat
+
+local function HandleUserActionToggleSelf(self)
+	local displayState;
+	if not self:IsShown() then
+		if self:IsMaximized() then
+			displayState = DISPLAY_STATE_CLOSED;
+		else
+			if self:ShouldShowQuestLogPanel() == self.QuestLog:IsShown() then
+				if self:ShouldBeMaximized() then
+					displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
+				else
+					displayState = DISPLAY_STATE_CLOSED;
+				end
+			else
+				if self:ShouldBeMaximized() then
+					displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
+				else
+					displayState = DISPLAY_STATE_OPEN_MINIMIZED_NO_LOG;
+				end
+			end
+		end
+	else
+		self.wasShowingQuestLog = nil;
+		if self:ShouldBeMinimized() then
+			if self:ShouldShowQuestLogPanel() then
+				displayState = DISPLAY_STATE_OPEN_MINIMIZED_WITH_LOG;
+			else
+				displayState = DISPLAY_STATE_OPEN_MINIMIZED_NO_LOG;
+			end
+		else
+			displayState = DISPLAY_STATE_OPEN_MAXIMIZED;
+		end
+	end
+	self:SetDisplayState(displayState);
+end
+
+hooksecurefunc(WorldMapFrame, "HandleUserActionToggleSelf", function(self, ...)
+	if (not self.ShouldBeMinimized) then return end
+	HandleUserActionToggleSelf(self, ...)
+end)
 
 TomCats_QuestLogOwnerMixin = QuestLogOwnerMixin

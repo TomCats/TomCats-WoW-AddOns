@@ -8,7 +8,7 @@ local DoEmote = DoEmote
 local Enum = Enum
 local GameTooltip = GameTooltip
 local GetCVarBitfield = GetCVarBitfield
-local GetCVarBool = GetCVarBool
+local GetCVarBool = TomCats_GetCVarBool
 local HelpPlate_Hide = HelpPlate_Hide
 local HelpPlate_IsShowing = TomCats_HelpPlate_IsShowing
 local HelpPlate_Show = HelpPlate_Show
@@ -23,7 +23,7 @@ local MapCanvasMixin = TomCats_MapCanvasMixin
 local MapUtil = MapUtil
 local MaximizeUIPanel = MaximizeUIPanel
 local NewPlayerExperience = NewPlayerExperience
-local OpenWorldMap = OpenWorldMap
+local nop = nop
 local PlayerMovementFrameFader = PlayerMovementFrameFader
 local PlaySound = PlaySound
 local QuestMapFrame = TomCats_QuestMapFrame
@@ -38,6 +38,7 @@ local WORLD_MAP = WORLD_MAP
 local WORLD_MAP_TUTORIAL1 = WORLD_MAP_TUTORIAL1
 local WORLD_MAP_TUTORIAL2 = WORLD_MAP_TUTORIAL2
 local WORLD_MAP_TUTORIAL4 = WORLD_MAP_TUTORIAL4
+local WorldMapFrame = WorldMapFrame
 
 local AreaLabelDataProviderMixin = TomCats_AreaLabelDataProviderMixin
 local AreaPOIDataProviderMixin = TomCats_AreaPOIDataProviderMixin
@@ -73,6 +74,8 @@ local WorldMap_DebugDataProviderMixin = TomCats_WorldMap_DebugDataProviderMixin
 local WorldMap_EventOverlayDataProviderMixin = TomCats_WorldMap_EventOverlayDataProviderMixin
 local WorldMap_WorldQuestDataProviderMixin = WorldMap_WorldQuestDataProviderMixin
 
+local OpenWorldMap
+local ToggleWorldMap
 local WorldMapMixin;
 local WorldMapTutorialMixin;
 
@@ -112,7 +115,7 @@ function WorldMapMixin:Minimize()
 	self.BorderFrame:SetBorder("PortraitFrameTemplateMinimizable");
 	self.BorderFrame:SetPortraitShown(true);
 
-	self.BorderFrame.Tutorial:Show();
+--	self.BorderFrame.Tutorial:Show();
 	self.NavBar:SetPoint("TOPLEFT", self.TitleCanvasSpacerFrame, "TOPLEFT", 64, -25);
 
 	self:SynchronizeDisplayState();
@@ -126,7 +129,7 @@ function WorldMapMixin:Maximize()
 	self.BorderFrame:SetBorder("ButtonFrameTemplateNoPortraitMinimizable");
 	self.BorderFrame:SetPortraitShown(false);
 
-	self.BorderFrame.Tutorial:Hide();
+--	self.BorderFrame.Tutorial:Hide();
 	self.NavBar:SetPoint("TOPLEFT", self.TitleCanvasSpacerFrame, "TOPLEFT", 8, -25);
 
 	self:UpdateMaximizedSize();
@@ -158,7 +161,7 @@ function WorldMapMixin:IsMaximized()
 end
 
 function WorldMapMixin:OnLoad()
-	UIPanelWindows[self:GetName()] = { area = "left", pushable = 0, xoffset = 0, yoffset = 0, whileDead = 1, minYOffset = 0, maximizePoint = "TOP" };
+--	UIPanelWindows[self:GetName()] = { area = "left", pushable = 0, xoffset = 0, yoffset = 0, whileDead = 1, minYOffset = 0, maximizePoint = "TOP" };
 
 	MapCanvasMixin.OnLoad(self);
 
@@ -329,7 +332,7 @@ function WorldMapMixin:OnShow()
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN);
 
 	PlayerMovementFrameFader.AddDeferredFrame(self, .5, 1.0, .5, function() return GetCVarBool("mapFade") and not self:IsMouseOver() end);
-	self.BorderFrame.Tutorial:CheckAndShowTooltip();
+--	self.BorderFrame.Tutorial:CheckAndShowTooltip();
 
 	local miniWorldMap = GetCVarBool("miniWorldMap");
 	local maximized = self:IsMaximized();
@@ -514,18 +517,27 @@ end
 --function ToggleQuestLog()
 --	WorldMapFrame:HandleUserActionToggleQuestLog();
 --end
---
+
 --function ToggleWorldMap()
---	WorldMapFrame:HandleUserActionToggleSelf();
+--	print("ToggleWorldMap")
+--	--WorldMapFrame:HandleUserActionToggleSelf();
 --end
 --
 --function OpenWorldMap(mapID)
---	WorldMapFrame:HandleUserActionOpenSelf(mapID);
+--	print("OpenWorldMap")
+--	--WorldMapFrame:HandleUserActionOpenSelf(mapID);
 --end
---
+
 --function OpenQuestLog(mapID)
 --	WorldMapFrame:HandleUserActionOpenQuestLog(mapID);
 --end
+
+-- overrides by TomCat
+--WorldMapFrame.HandleUserActionToggleSelf = nop;
+--WorldMapFrame.HandleUserActionOpenSelf = nop;
+--
+--hooksecurefunc("ToggleWorldMap", ToggleWorldMap)
+--hooksecurefunc("OpenWorldMap", OpenWorldMap)
 
 TomCats_WorldMapMixin = WorldMapMixin
 TomCats_WorldMapTutorialMixin = WorldMapTutorialMixin

@@ -1,9 +1,9 @@
 local C_Map = TomCats_C_Map;
 local Enum = Enum;
 local MapUtil = MapUtil;
-local NavBar_AddButton = NavBar_AddButton;
-local NavBar_Initialize = NavBar_Initialize;
-local NavBar_Reset = NavBar_Reset;
+local NavBar_AddButton = TomCats_NavBar_AddButton;
+local NavBar_Initialize = TomCats_NavBar_Initialize;
+local NavBar_Reset = TomCats_NavBar_Reset;
 local tinsert = tinsert;
 local WORLD = WORLD;
 
@@ -314,8 +314,7 @@ function WorldMapNavBarMixin:OnLoad()
 			end
 		end,
 	}
-	--todo: check for compatibility
-	NavBar_Initialize(self, "NavButtonTemplate", homeData, self.home, self.overflow);
+	NavBar_Initialize(self, "TomCats_NavButtonTemplate", homeData, self.home, self.overflow);
 end
 
 function WorldMapNavBarMixin:GoToMap(mapID)

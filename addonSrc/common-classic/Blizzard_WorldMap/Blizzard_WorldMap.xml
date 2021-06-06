@@ -1,7 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-
 	<Frame name="TomCats_WorldMapFrameTemplate" inherits="TomCats_MapCanvasFrameTemplate" mixin="TomCats_QuestLogOwnerMixin, TomCats_WorldMapMixin" virtual="true">
 		<Frames>
 			<Frame parentKey="TitleCanvasSpacerFrame">
@@ -19,9 +18,9 @@
 		</Frames>
 		<Scripts>
 			<OnLoad method="OnLoad"/>
-			<OnShow method="OnShow"/>
-			<OnEvent method="OnEvent"/>
-			<OnHide method="OnHide"/>
+<!--			<OnShow method="OnShow"/>-->
+<!--			<OnEvent method="OnEvent"/>-->
+<!--			<OnHide method="OnHide"/>-->
 		</Scripts>
 	</Frame>
 
@@ -58,16 +57,16 @@
 					</Layer>
 				</Layers>
 				<Frames>
-					<Button parentKey="Tutorial" inherits="TomCats_MainHelpPlateButton" mixin="TomCats_WorldMapTutorialMixin">
-						<Anchors>
-							<Anchor point="TOPLEFT" x="43" y="19"/>
-						</Anchors>
-						<Scripts>
-							<OnLoad method="OnLoad"/>
-							<OnHide method="OnHide"/>
-							<OnClick method="ToggleHelpInfo"/>
-						</Scripts>
-					</Button>
+<!--					<Button parentKey="Tutorial" inherits="TomCats_MainHelpPlateButton" mixin="TomCats_WorldMapTutorialMixin">-->
+<!--						<Anchors>-->
+<!--							<Anchor point="TOPLEFT" x="43" y="19"/>-->
+<!--						</Anchors>-->
+<!--						<Scripts>-->
+<!--							<OnLoad method="OnLoad"/>-->
+<!--							<OnHide method="OnHide"/>-->
+<!--							<OnClick method="ToggleHelpInfo"/>-->
+<!--						</Scripts>-->
+<!--					</Button>-->
 					<Frame parentKey="MaximizeMinimizeFrame" inherits="TomCats_MaximizeMinimizeButtonFrameTemplate">
 						<Anchors>
 							<Anchor point="RIGHT" relativeKey="$parent.CloseButton" relativePoint="LEFT" x="8.5" y="0"/>

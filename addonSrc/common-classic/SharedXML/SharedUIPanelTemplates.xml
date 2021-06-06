@@ -50,48 +50,40 @@
 	<!--	<Texture name="!UI-Frame-LeftTile" atlas="!UI-Frame-LeftTile" virtual="true" vertTile="true" >-->
 	<!--		<Size x="16" y="256"/>-->
 	<!--	</Texture>-->
-	<!-- todo: convert this atlas -->
-<!--	<Texture name="TomCats_!UI-Frame-InnerRightTile" atlas="!UI-Frame-InnerRightTile" virtual="true" vertTile="true" >-->
-	<Texture name="TomCats_!UI-Frame-InnerRightTile" virtual="true" vertTile="true" >
+	<Texture name="TomCats_!UI-Frame-InnerRightTile" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723832" virtual="true" vertTile="true">
 		<Size x="3" y="256"/>
+		<TexCoords left="0.5625" right="0.609375" top="0" bottom="1" />
 	</Texture>
-	<!-- todo: convert this atlas -->
-<!--	<Texture name="TomCats_!UI-Frame-InnerLeftTile" atlas="!UI-Frame-InnerLeftTile" virtual="true" vertTile="true" >-->
-	<Texture name="TomCats_!UI-Frame-InnerLeftTile" virtual="true" vertTile="true" >
+	<Texture name="TomCats_!UI-Frame-InnerLeftTile" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723832" virtual="true" vertTile="true">
 		<Size x="3" y="256"/>
+		<TexCoords left="0.484375" right="0.53125" top="0" bottom="1" />
 	</Texture>
-
 	<!--	&lt;!&ndash; Horizontally tiling pieces &ndash;&gt;-->
-	<!-- todo: convert this atlas -->
-<!--		<Texture name="TomCats__UI-Frame-BtnBotTile" atlas="_UI-Frame-BtnBotTile" virtual="true" horizTile="true" >-->
-		<Texture name="TomCats__UI-Frame-BtnBotTile" virtual="true" horizTile="true" >
-			<Size x="256" y="3"/>
-		</Texture>
+	<Texture name="TomCats__UI-Frame-BtnBotTile" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723833" virtual="true" horizTile="true" >
+		<Size x="256" y="3"/>
+		<TexCoords left="0" right="1" top="0.828125" bottom="0.851563" />
+	</Texture>
 	<!--	<Texture name="_UI-Frame-Bot" atlas="_UI-Frame-Bot" virtual="true" horizTile="true" >-->
 	<!--		<Size x="256" y="9"/>-->
 	<!--	</Texture>-->
-	<!-- todo: convert this atlas -->
-	<!-- <Texture name="TomCats__UI-Frame-InnerTopTile" atlas="_UI-Frame-InnerTopTile" virtual="true" horizTile="true" > -->
-	<Texture name="TomCats__UI-Frame-InnerTopTile" virtual="true" horizTile="true" >
+	<Texture name="TomCats__UI-Frame-InnerTopTile" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723833" virtual="true" horizTile="true" >
 		<Size x="256" y="3"/>
+		<TexCoords left="0" right="1" top="0.90625" bottom="0.929688" />
 	</Texture>
-	<!-- todo: convert this atlas -->
-<!--	<Texture name="TomCats__UI-Frame-InnerBotTile" atlas="_UI-Frame-InnerBotTile" virtual="true" horizTile="true" >-->
-	<Texture name="TomCats__UI-Frame-InnerBotTile" virtual="true" horizTile="true" >
+	<Texture name="TomCats__UI-Frame-InnerBotTile" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723833" virtual="true" horizTile="true" >
 		<Size x="256" y="3"/>
+		<TexCoords left="0" right="1" top="0.867188" bottom="0.890625" />
 	</Texture>
-	<!-- todo: convert this atlas -->
-<!--	<Texture name="TomCats__UI-Frame-TitleTileBg" atlas="_UI-Frame-TitleTileBg" virtual="true" horizTile="true" >-->
-	<Texture name="TomCats__UI-Frame-TitleTileBg" virtual="true" horizTile="true" >
+	<Texture name="TomCats__UI-Frame-TitleTileBg" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723833" virtual="true" horizTile="true" >
 		<Size x="256" y="18"/> <!-- TODO: Fix asset to fit space, or bake it into all frames -->
+		<TexCoords left="0" right="1" top="0.59375" bottom="0.726563" />
 	</Texture>
 	<!--	<Texture name="_UI-Frame-TitleTile" atlas="_UI-Frame-TitleTile" virtual="true" horizTile="true" >-->
 	<!--		<Size x="256" y="28"/>-->
 	<!--	</Texture>-->
-	<!-- todo: convert this atlas -->
-	<!-- <Texture name="TomCats__UI-Frame-TopTileStreaks" atlas="_UI-Frame-TopTileStreaks" virtual="true" horizTile="true" > -->
-	<Texture name="TomCats__UI-Frame-TopTileStreaks" virtual="true" horizTile="true" >
+	<Texture name="TomCats__UI-Frame-TopTileStreaks" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723833" virtual="true" horizTile="true" >
 		<Size x="256" y="43"/>
+		<TexCoords left="0" right="1" top="0.007813" bottom="0.34375" />
 	</Texture>
 
 	<!--
@@ -117,15 +109,13 @@
 	<Texture name="TomCats_UI-Frame-InnerTopLeft" atlas="UI-Frame-InnerTopLeft" virtual="true">
 		<Size x="6" y="6"/>
 	</Texture>
-	<!-- todo: convert to normal texture -->
-<!--	<Texture name="TomCats_UI-Frame-InnerBotLeftCorner" atlas="UI-Frame-InnerBotLeftCorner" virtual="true">-->
-	<Texture name="TomCats_UI-Frame-InnerBotLeftCorner" virtual="true">
+	<Texture name="TomCats_UI-Frame-InnerBotLeftCorner" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723831" virtual="true">
 		<Size x="6" y="6"/>
+		<TexCoords left="0.6328125" right="0.6796875" top="0.554688" bottom="0.601563" />
 	</Texture>
-	<!-- todo: convert to normal texture -->
-<!--	<Texture name="TomCats_UI-Frame-InnerBotRight" atlas="UI-Frame-InnerBotRight" virtual="true">-->
-	<Texture name="TomCats_UI-Frame-InnerBotRight" virtual="true">
+	<Texture name="TomCats_UI-Frame-InnerBotRight" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723831" virtual="true">
 		<Size x="6" y="6"/>
+		<TexCoords left="0.6953125" right="0.7421875" top="0.554688" bottom="0.601563" />
 	</Texture>
 	<Texture name="TomCats_UI-Frame-BotCornerLeft" atlas="UI-Frame-BotCornerLeft" virtual="true">
 		<Size x="14" y="14"/>
@@ -133,10 +123,9 @@
 	<Texture name="TomCats_UI-Frame-TopCornerLeft" atlas="UI-Frame-TopLeftCorner" virtual="true">
 		<Size x="14" y="14"/>
 	</Texture>
-	<!-- todo: convert atlas -->
-<!--	<Texture name="TomCats_UI-Frame-BtnDivMiddle" atlas="UI-Frame-BtnDivMiddle" virtual="true">-->
-	<Texture name="TomCats_UI-Frame-BtnDivMiddle" virtual="true">
+	<Texture name="TomCats_UI-Frame-BtnDivMiddle" file="Interface/AddOns/TomCats/BlizzardInterfaceArt/1723831" virtual="true">
 		<Size x="13" y="25"/>
+		<TexCoords left="0.2265625" right="0.328125" top="0.632813" bottom="0.828125" />
 	</Texture>
 	<Texture name="TomCats_UI-Frame-BotCornerRight" atlas="UI-Frame-BotCornerRight" virtual="true">
 		<Size x="11" y="11"/>
@@ -965,7 +954,7 @@
 		</Frames>
 	</Frame>
 
-	<Frame name="TomCats_PortraitFrameTemplateMinimizable" inherits="TomCats_PortraitFrameTemplate" virtual="true">
+	<Frame name="TomCats_PortraitFrameTemplateMinimizable" inherits="TomCats_PortraitFrameTemplateNoCloseButton" virtual="true">
 		<KeyValues>
 			<KeyValue key="layoutType" value="PortraitFrameTemplateMinimizable" type="string"/>
 		</KeyValues>

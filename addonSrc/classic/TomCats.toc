@@ -1,15 +1,24 @@
 ## Interface: 20501
 ## Title: TomCat's AddOn Suite
-## Notes: Version 2.3.1-alpha (Classic)
+## Notes: Version 2.3.1 (Classic)
 ## Author: TomCat
-## Version: 2.3.1-alpha
+## Version: 2.3.1
 ## DefaultState: enabled
+## SavedVariablesPerCharacter: TomCats_Character
+## SavedVariables: TomCats_Account
+## X-TomCats-Expiry: 1624186632
 
+constants.lua
 event.lua
 error.lua
+default_saved_variables.lua
+saved_variables.lua
+update.lua
+cvar.lua
 c_map.lua
 c_questlog.lua
 c_supertrack.lua
+c_texture.lua
 atlasinfo.lua
 minimap.lua
 SharedXML\CallbackRegistry.lua
@@ -17,6 +26,12 @@ SharedXML\NineSlice.lua
 SharedXML\SharedUIPanelTemplates.lua
 SharedXML\PortraitFrame.lua
 SharedXML\SharedUIPanelTemplates.xml
+FrameXML\UIDropDownMenu.lua
+FrameXML\UIDropDownMenuTemplates.lua
+FrameXML\UIDropDownMenuTemplates.xml
+FrameXML\UIDropDownMenu.xml
+FrameXML\NavigationBar.lua
+FrameXML\NavigationBar.xml
 FrameXML\QuestUtils.lua
 FrameXML\QuestFrameTemplates.xml
 FrameXML\QuestMapFrame.lua

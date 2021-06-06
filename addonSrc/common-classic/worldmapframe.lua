@@ -87,6 +87,9 @@ local function MergeWorldMapFrame()
 	WorldMapFrame.BorderFrame:SetParent(WorldMapFrame)
 	WorldMapFrame.BorderFrame:ClearAllPoints()
 	WorldMapFrame.BorderFrame:SetAllPoints()
+	WorldMapFrame.BorderFrame.InsetBorderTop:ClearAllPoints()
+	WorldMapFrame.BorderFrame.InsetBorderTop:SetPoint("TOPLEFT",2,-63)
+	WorldMapFrame.BorderFrame.InsetBorderTop:SetPoint("RIGHT",WorldMapFrame.ScrollContainer)
 
 	local questLogAnchors = CollectAnchors(TomCats_WorldMapFrame.QuestLog)
 	WorldMapFrame.QuestLog = TomCats_WorldMapFrame.QuestLog
@@ -130,22 +133,31 @@ local function MergeWorldMapFrame()
 	WorldMapFrame.NavBar = WorldMapFrame:AddOverlayFrame("TomCats_WorldMapNavBarTemplate", "FRAME");
 	WorldMapFrame.NavBar:SetPoint("TOPLEFT", WorldMapFrame.TitleCanvasSpacerFrame, "TOPLEFT", 64, -25);
 	WorldMapFrame.NavBar:SetPoint("BOTTOMRIGHT", WorldMapFrame.TitleCanvasSpacerFrame, "BOTTOMRIGHT", -4, 9);
-	WorldMapFrame.SidePanelToggle = WorldMapFrame:AddOverlayFrame("TomCats_WorldMapSidePanelToggleTemplate", "BUTTON", "BOTTOMRIGHT", WorldMapFrame:GetCanvasContainer(), "BOTTOMRIGHT", -2, 1);
+	--WorldMapFrame.SidePanelToggle = WorldMapFrame:AddOverlayFrame("TomCats_WorldMapSidePanelToggleTemplate", "BUTTON", "BOTTOMRIGHT", WorldMapFrame:GetCanvasContainer(), "BOTTOMRIGHT", -2, 1);
 
 	WorldMapFrame:SetupMinimizeMaximizeButton()
 
-	_G.WorldMapContinentDropDown:SetParent(nil)
 	_G.WorldMapContinentDropDown:Hide()
-	_G.WorldMapZoneDropDown:SetParent(nil)
 	_G.WorldMapZoneDropDown:Hide()
-	_G.WorldMapZoneMinimapDropDown:SetParent(nil)
 	_G.WorldMapZoneMinimapDropDown:Hide()
-	_G.WorldMapZoomOutButton:SetParent(nil)
 	_G.WorldMapZoomOutButton:Hide()
-	_G.WorldMapMagnifyingGlassButton:SetParent(nil)
 	_G.WorldMapMagnifyingGlassButton:Hide()
-	_G.WorldMapFrameCloseButton:SetParent(nil)
-	_G.WorldMapFrameCloseButton:Hide()
+	_G.WorldMapContinentDropDown:SetParent(nil)
+	_G.WorldMapZoneDropDown:SetParent(nil)
+	_G.WorldMapZoneMinimapDropDown:SetParent(nil)
+	_G.WorldMapZoomOutButton:SetParent(nil)
+	_G.WorldMapMagnifyingGlassButton:SetParent(nil)
+
+	WorldMapFrame.CloseButton = _G.WorldMapFrameCloseButton
+	WorldMapFrame.CloseButton:ClearAllPoints()
+	WorldMapFrame.CloseButton:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", 5.6, 5)
+	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:ClearAllPoints()
+	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:SetPoint("RIGHT", WorldMapFrame.CloseButton, "LEFT", 8.5, 0)
+	if WorldMapFrame:ShouldBeMinimized() then
+		WorldMapFrame:Minimize();
+	else
+		WorldMapFrame:Maximize();
+	end
 end
 
 local function OnEvent(event, arg1)

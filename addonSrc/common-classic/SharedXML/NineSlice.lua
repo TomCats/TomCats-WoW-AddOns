@@ -1,4 +1,4 @@
-local C_Texture = C_Texture;
+local C_Texture = TomCats_C_Texture;
 local GetFinalNameFromTextureKit = GetFinalNameFromTextureKit;
 
 local NineSliceUtil;
@@ -118,9 +118,17 @@ local function SetupPieceVisuals(piece, setupInfo, pieceLayout, textureKit)
 	-- textureKit is optional, that's fine; but if it's nil the caller should ensure that there are no format specifiers in .atlas
 	local atlasName = GetFinalNameFromTextureKit(pieceLayout.atlas, textureKit);
 	local info = C_Texture.GetAtlasInfo(atlasName);
-	piece:SetHorizTile(info and info.tilesHorizontally or false);
-	piece:SetVertTile(info and info.tilesVertically or false);
-	piece:SetAtlas(atlasName, true);
+	if (C_Texture.IsOverridden(atlasName)) then
+		piece:SetTexture("Interface/AddOns/TomCats/BlizzardInterfaceArt/" .. info.file)
+		piece:SetTexCoord(info.leftTexCoord, info.rightTexCoord, info.topTexCoord, info.bottomTexCoord)
+		piece:SetSize(info.width * (info.scale or 1), info.height * (info.scale or 1))
+		piece:SetHorizTile(info.tilesHorizontally)
+		piece:SetVertTile(info.tilesVertically)
+	else
+		piece:SetHorizTile(info and info.tilesHorizontally or false);
+		piece:SetVertTile(info and info.tilesVertically or false);
+		piece:SetAtlas(atlasName, true);
+	end
 end
 
 local function SetupCorner(container, piece, setupInfo, pieceLayout)
