@@ -8,7 +8,7 @@ local Lerp = Lerp
 local MAP_CANVAS_MOUSE_WHEEL_ZOOM_BEHAVIOR_SMOOTH;
 local MAP_CANVAS_MOUSE_WHEEL_ZOOM_BEHAVIOR_FULL;
 local MAP_CANVAS_MOUSE_WHEEL_ZOOM_BEHAVIOR_NONE;
-local MapUtil = MapUtil
+local MapUtil = TomCats_MapUtil
 local PercentageBetween = PercentageBetween
 local Saturate = Saturate
 local UIParent = UIParent

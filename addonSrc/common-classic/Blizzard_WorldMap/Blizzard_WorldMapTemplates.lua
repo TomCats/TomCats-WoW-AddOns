@@ -1,6 +1,6 @@
 local C_Map = TomCats_C_Map;
 local Enum = Enum;
-local MapUtil = MapUtil;
+local MapUtil = TomCats_MapUtil;
 local NavBar_AddButton = TomCats_NavBar_AddButton;
 local NavBar_Initialize = TomCats_NavBar_Initialize;
 local NavBar_Reset = TomCats_NavBar_Reset;

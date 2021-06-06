@@ -2,7 +2,7 @@
 ## Title: TomCat's AddOn Suite
 ## Notes: Version 2.3.1 (Classic)
 ## Author: TomCat
-## Version: 2.3.1
+## Version: 2.3.2
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: TomCats_Character
 ## SavedVariables: TomCats_Account
@@ -40,6 +40,7 @@ FrameXML\QuestLogOwnerMixin.lua
 FrameXML\UIPanelTemplates.lua
 FrameXML\UIPanelTemplates.xml
 FrameXML\TutorialFrame.lua
+FrameXML\MapUtil.lua
 Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
 Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
 Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
