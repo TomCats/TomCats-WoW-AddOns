@@ -1,10 +1,9 @@
-local _, addon = ...
+local addonName, addon = ...
 
 local GetCVar = GetCVar
 local SetCVar = SetCVar
 
 local cvarOverrides = {
-	mapFade = "1",
 	questLogOpen = "0"
 }
 
@@ -36,3 +35,15 @@ function TomCats_SetCVar(cvar, val)
 	end
 end
 
+local function OnEvent(event, arg1)
+	if (event == "VARIABLES_LOADED") then
+		-- enforce enabling mapFade on a one-time basis for situations where a glitch caused it to be initially disabled
+		if (not TomCats_Character.mapFadeSet) then
+			SetCVar("mapFade",1)
+			TomCats_Character.mapFadeSet = true
+		end
+		addon.UnregisterEvent("VARIABLES_LOADED", OnEvent)
+	end
+end
+
+addon.RegisterEvent("VARIABLES_LOADED", OnEvent)

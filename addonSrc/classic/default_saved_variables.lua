@@ -6,7 +6,8 @@ addon.defaultSavedVariables = {
 		lastExpirationWarning = 0
 	},
 	TomCats_Character = {
-		miniWorldMap = "1"
+		miniWorldMap = "1",
+		mapFadeSet = false
 	}
 }
 
