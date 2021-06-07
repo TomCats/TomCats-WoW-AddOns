@@ -1,8 +1,8 @@
 ## Interface: 20501
 ## Title: TomCat's AddOn Suite
-## Notes: Version 2.3.2 (Classic)
+## Notes: Version 2.3.3 (Classic)
 ## Author: TomCat
-## Version: 2.3.2
+## Version: 2.3.3
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: TomCats_Character
 ## SavedVariables: TomCats_Account
