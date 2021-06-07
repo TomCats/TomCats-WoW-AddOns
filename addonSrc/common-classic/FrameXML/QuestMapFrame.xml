@@ -888,7 +888,7 @@
 		</Frames>
 		<Scripts>
 			<OnLoad function="TomCats_QuestMapFrame_OnLoad"/>
-			<OnEvent function="TomCats_QuestMapFrame_OnEvent"/>
+<!--			<OnEvent function="TomCats_QuestMapFrame_OnEvent"/>-->
 			<OnShow function="TomCats_QuestMapFrame_OnShow"/>
 			<OnHide function="TomCats_QuestMapFrame_OnHide"/>
 		</Scripts>
