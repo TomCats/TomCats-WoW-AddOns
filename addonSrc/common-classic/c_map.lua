@@ -31,17 +31,17 @@ end
 local GetMapArtLayerTextures = C_Map.GetMapArtLayerTextures
 
 function C_Map.GetMapArtLayerTextures(uiMapID, layerIndex)
-	local textures = GetMapArtLayerTextures(uiMapID, layerIndex)
+	local mapInfo = addon.mapInfos[uiMapID]
+	local textures = mapInfo and mapInfo.textures
 	if (not textures) then
-		local mapInfo = addon.mapInfos[uiMapID]
-		textures = mapInfo and mapInfo.textures
+		textures = GetMapArtLayerTextures(uiMapID, layerIndex)
 	end
 	return textures
 end
 
 function C_Map.GetMapInfo(mapID)
-	local mapInfo = GetMapInfo(mapID)
-	if (not mapInfo) then mapInfo = addon.mapInfos[mapID] end
+	local mapInfo = addon.mapInfos[mapID]
+	if (not mapInfo) then mapInfo = GetMapInfo(mapID) end
 	local overrides = GetMapInfoOverride(mapID)
 	if (mapInfo and overrides) then
 		Mixin(mapInfo, overrides)
