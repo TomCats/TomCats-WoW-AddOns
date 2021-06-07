@@ -34,8 +34,16 @@ local mapInfoMetaData = {
 }
 
 --[[ columns: mapID, parentMapID, mapType, flags, areaID, textureBase ]]
+-- 1) lookup by name in the Map table (retail)
+-- 2) ID is the instance map ID (for lookup table)
+-- 3) AreaTableID is the areaID
+-- 4) lookup name in the UIMap table (retail)
+-- 5) ID is the mapID
+-- 6) ParentUIMapID is the parentMapID, but may be incorrect for tbc.  Look at the name and match to TBC
+
 addon.mapInfos = {
-	[225] = { 225, 1453, 4, 0, 717, "Interface\\WorldMap\\TheStockade\\TheStockade1_" }
+	[225] = { 225, 1453, 4, 0, 717, "Interface\\WorldMap\\TheStockade\\TheStockade1_" },
+	[213] = { 213, 1454, 4, 0, 2437, "Interface\\WorldMap\\Ragefire\\Ragefire1_" }
 }
 
 for _, v in pairs(addon.mapInfos) do
@@ -44,6 +52,7 @@ end
 
 addon.instanceMapIDLookup = {
 	[34] = 225,
+	[389] = 213,
 }
 
 addon.mapDropDownOverrides = {
