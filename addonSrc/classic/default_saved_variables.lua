@@ -7,10 +7,16 @@ addon.defaultSavedVariables = {
 	},
 	TomCats_Character = {
 		miniWorldMap = "1",
-		mapFadeSet = false
+		mapFadeSet = false,
+		lastPlayerPosition = {
+			x = 0,
+			y = 0
+		},
+		showDungeonEntrancesOnMap = "1"
 	}
 }
 
 addon.cvarsAsSavedVariables = {
-	miniWorldMap = "TomCats_Character"
+	miniWorldMap = "TomCats_Character",
+	showDungeonEntrancesOnMap = "TomCats_Character"
 }

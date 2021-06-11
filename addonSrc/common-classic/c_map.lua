@@ -10,14 +10,6 @@ local UnitFactionGroup = UnitFactionGroup
 
 local GetMapInfo = C_Map.GetMapInfo
 
-local function GetMapInfoOverride(mapID)
-	local override = addon.mapInfoOverrides[mapID]
-	if (override) then
-		local faction = UnitFactionGroup("player")
-		return override[faction] or override
-	end
-end
-
 local GetMapArtLayers = C_Map.GetMapArtLayers
 
 function C_Map.GetMapArtLayers(uiMapID)
@@ -31,7 +23,7 @@ end
 local GetMapArtLayerTextures = C_Map.GetMapArtLayerTextures
 
 function C_Map.GetMapArtLayerTextures(uiMapID, layerIndex)
-	local mapInfo = addon.mapInfos[uiMapID]
+	local mapInfo = addon.GetMapInfo(uiMapID)
 	local textures = mapInfo and mapInfo.textures
 	if (not textures) then
 		textures = GetMapArtLayerTextures(uiMapID, layerIndex)
@@ -40,9 +32,9 @@ function C_Map.GetMapArtLayerTextures(uiMapID, layerIndex)
 end
 
 function C_Map.GetMapInfo(mapID)
-	local mapInfo = addon.mapInfos[mapID]
+	local mapInfo = addon.GetMapInfo(mapID)
 	if (not mapInfo) then mapInfo = GetMapInfo(mapID) end
-	local overrides = GetMapInfoOverride(mapID)
+	local overrides = addon.GetMapInfoOverride(mapID)
 	if (mapInfo and overrides) then
 		Mixin(mapInfo, overrides)
 	end
@@ -51,7 +43,7 @@ end
 
 function C_Map.IsMapValidForNavBarDropDown(mapID)
 	local mapInfo = C_Map.GetMapInfo(mapID);
-	if (addon.mapDropDownOverrides[mapID]) then return false end
+	if (addon.IsMapDropDownOverridden(mapID)) then return false end
 	return mapInfo.mapType == Enum.UIMapType.World or mapInfo.mapType == Enum.UIMapType.Continent or mapInfo.mapType == Enum.UIMapType.Zone;
 end
 
@@ -61,7 +53,10 @@ function C_Map.GetBestMapForUnit(unit)
 	local mapID = GetBestMapForUnit(unit)
 	if ((not mapID) and unit == "player" and IsInInstance()) then
 		local instanceID = select(8, GetInstanceInfo())
-		mapID = addon.instanceMapIDLookup[instanceID]
+		local mapInfo = addon.GetMapInfoByInstanceID(instanceID)
+		if (mapInfo and mapInfo.enabled) then
+			mapID = mapInfo.mapID
+		end
 	end
 	return mapID
 end
@@ -71,7 +66,12 @@ C_Map.CloseWorldMapInteraction = nop;
 local MapHasArt = C_Map.MapHasArt
 
 function C_Map.MapHasArt(uiMapID)
-	return MapHasArt(uiMapID) or addon.mapInfos[uiMapID] and true
+	local mapHasArt = MapHasArt(uiMapID)
+	if (mapHasArt) then
+		return mapHasArt
+	end
+	local mapInfo = addon.GetMapInfo(uiMapID)
+	return mapInfo and mapInfo.enabled
 end
 
 TomCats_C_Map = C_Map;

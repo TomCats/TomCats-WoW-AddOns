@@ -1,6 +1,8 @@
 local addonName, addon = ...
 
 local nop = nop
+local CreateFromMixins = CreateFromMixins
+local DungeonEntranceDataProviderMixin = TomCats_DungeonEntranceDataProviderMixin
 local TomCats_WorldMapFrame = TomCats_WorldMapFrame
 local UIParent = UIParent
 local WorldMapFrame = WorldMapFrame
@@ -158,6 +160,15 @@ local function MergeWorldMapFrame()
 	else
 		WorldMapFrame:Maximize();
 	end
+	for k in pairs(WorldMapFrame.dataProviders) do
+		if (k.setAreaLabelCallback) then
+			WorldMapFrame:RemoveDataProvider(k)
+			WorldMapFrame:AddDataProvider(k)
+			break;
+		end
+	end
+	WorldMapFrame:AddDataProvider(CreateFromMixins(DungeonEntranceDataProviderMixin));
+	WorldMapFrame:AddOverlayFrame("TomCats_WorldMapTrackingOptionsButtonTemplate", "DROPDOWNTOGGLEBUTTON", "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -4, -2);
 end
 
 local function OnEvent(event, arg1)

@@ -1932,7 +1932,7 @@
 	<!--		</Animations>-->
 	<!--	</Frame>-->
 
-		<Frame name="TomCats_MaximizeMinimizeButtonFrameTemplate" parentKey="MaxMinButtonFrame" mixin="TomCats_MaximizeMinimizeButtonFrameMixin" virtual="true">
+		<Frame name="TomCats_MaximizeMinimizeButtonFrameTemplate" parentKey="MaxMinButtonFrame" mixin="TomCats_MaximizeMinimizeButtonFrameMixin" virtual="true" frameLevel="11">
 			<Size x="32" y="32"/>
 			<Frames>
 				<Button parentKey="MaximizeButton" setAllPoints="true" hidden="true">

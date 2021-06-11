@@ -147,7 +147,7 @@
 				self:SetFrameLevel(self:GetParent():GetFrameLevel()+2);
 			</OnLoad>
 			<OnClick>
-				UIDropDownMenuButton_OnClick(self, button, down);
+				TomCats_UIDropDownMenuButton_OnClick(self, button, down);
 			</OnClick>
 			<OnEnter function="TomCats_UIDropDownMenuButton_OnEnter"/>
 			<OnLeave function="TomCats_UIDropDownMenuButton_OnLeave"/>

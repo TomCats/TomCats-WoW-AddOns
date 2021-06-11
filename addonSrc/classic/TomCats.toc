@@ -1,12 +1,12 @@
 ## Interface: 20501
 ## Title: TomCat's AddOn Suite
-## Notes: Version 2.3.3 (Classic)
+## Notes: Version 2.3.4 (Classic)
 ## Author: TomCat
-## Version: 2.3.3
+## Version: 2.3.4
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: TomCats_Character
 ## SavedVariables: TomCats_Account
-## X-TomCats-Expiry: 1624269852
+## X-TomCats-Expiry: 1624661571
 
 constants.lua
 event.lua
@@ -14,12 +14,15 @@ error.lua
 default_saved_variables.lua
 saved_variables.lua
 update.lua
+playerposition.lua
+data\dungeons.lua
 data\mapinfo.lua
 cvar.lua
 c_map.lua
 c_questlog.lua
 c_supertrack.lua
 c_texture.lua
+c_encounterjournal.lua
 atlasinfo.lua
 minimap.lua
 SharedXML\CallbackRegistry.lua
@@ -42,11 +45,14 @@ FrameXML\UIPanelTemplates.lua
 FrameXML\UIPanelTemplates.xml
 FrameXML\TutorialFrame.lua
 FrameXML\MapUtil.lua
+Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua
 Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
 Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
 Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
 Blizzard_MapCanvas\Blizzard_MapCanvas.lua
 Blizzard_MapCanvas\Blizzard_MapCanvas.xml
+Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.lua
+Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.xml
 Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
 Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
 Blizzard_WorldMap\Blizzard_WorldMap.lua

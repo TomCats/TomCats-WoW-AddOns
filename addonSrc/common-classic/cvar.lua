@@ -4,7 +4,8 @@ local GetCVar = GetCVar
 local SetCVar = SetCVar
 
 local cvarOverrides = {
-	questLogOpen = "0"
+	questLogOpen = "0",
+--	showDungeonEntrancesOnMap = "1"
 }
 
 function TomCats_GetCVar(cvar)

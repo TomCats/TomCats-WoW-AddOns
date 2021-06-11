@@ -1,15 +1,44 @@
+local ARCHAEOLOGY_SHOW_DIG_SITES = ARCHAEOLOGY_SHOW_DIG_SITES;
 local C_Map = TomCats_C_Map;
+local CanTrackBattlePets = CanTrackBattlePets;
 local Enum = Enum;
+local GetCVarBool = TomCats_GetCVarBool;
+local GetProfessions = GetProfessions;
 local MapUtil = TomCats_MapUtil;
 local NavBar_AddButton = TomCats_NavBar_AddButton;
 local NavBar_Initialize = TomCats_NavBar_Initialize;
 local NavBar_Reset = TomCats_NavBar_Reset;
+local PlaySound = PlaySound;
+local SetCVar = TomCats_SetCVar;
+--todo Localize
+local SHOW_DUNGEON_ENTRACES_ON_MAP_TEXT = "Dungeon Entrances";
+local SHOW_PET_BATTLES_ON_MAP_TEXT = SHOW_PET_BATTLES_ON_MAP_TEXT;
+local SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT = SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT;
+local SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT = SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT;
+local SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT = SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT;
+local SOUNDKIT = SOUNDKIT;
 local tinsert = tinsert;
+local ToggleDropDownMenu = TomCats_ToggleDropDownMenu;
+local UIDropDownMenu_AddButton = TomCats_UIDropDownMenu_AddButton;
+local UIDropDownMenu_AddSeparator = TomCats_UIDropDownMenu_AddSeparator;
+local UIDropDownMenu_CreateInfo = TomCats_UIDropDownMenu_CreateInfo;
+local UIDropDownMenu_SetDisplayMode = TomCats_UIDropDownMenu_SetDisplayMode;
+local UIDropDownMenu_SetInitializeFunction = TomCats_UIDropDownMenu_SetInitializeFunction;
 local WORLD = WORLD;
+local WORLD_MAP_FILTER_TITLE = WORLD_MAP_FILTER_TITLE;
+local WORLD_QUEST_REWARD_FILTERS_ANIMA = WORLD_QUEST_REWARD_FILTERS_ANIMA;
+local WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER = WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER;
+local WORLD_QUEST_REWARD_FILTERS_EQUIPMENT = WORLD_QUEST_REWARD_FILTERS_EQUIPMENT;
+local WORLD_QUEST_REWARD_FILTERS_GOLD = WORLD_QUEST_REWARD_FILTERS_GOLD;
+local WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS = WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS;
+local WORLD_QUEST_REWARD_FILTERS_REPUTATION = WORLD_QUEST_REWARD_FILTERS_REPUTATION;
+local WORLD_QUEST_REWARD_FILTERS_RESOURCES = WORLD_QUEST_REWARD_FILTERS_RESOURCES;
+local WORLD_QUEST_REWARD_FILTERS_TITLE = WORLD_QUEST_REWARD_FILTERS_TITLE;
 
 local WorldMapNavBarMixin;
 local WorldMapNavBarButtonMixin;
 local WorldMapSidePanelToggleMixin;
+local WorldMapTrackingOptionsButtonMixin;
 
 --WorldMapFloorNavigationFrameMixin = { }
 --
@@ -56,184 +85,184 @@ local WorldMapSidePanelToggleMixin;
 --	end
 --end
 --
---WorldMapTrackingOptionsButtonMixin = { };
---
---function WorldMapTrackingOptionsButtonMixin:OnLoad()
---	local function InitializeDropDown(self)
---		self:GetParent():InitializeDropDown();
---	end
---	UIDropDownMenu_SetInitializeFunction(self.DropDown, InitializeDropDown);
---	UIDropDownMenu_SetDisplayMode(self.DropDown, "MENU");
---end
---
---function WorldMapTrackingOptionsButtonMixin:OnMouseDown(button)
---	self.Icon:SetPoint("TOPLEFT", 8, -8);
---	self.IconOverlay:Show();
---
---	local mapID = self:GetParent():GetMapID();
---	if not mapID then
---		return;
---	end
---	self.DropDown.mapID = mapID;
---	ToggleDropDownMenu(1, nil, self.DropDown, self, 0, -5);
---	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
---end
---
---function WorldMapTrackingOptionsButtonMixin:OnMouseUp()
---	self.Icon:SetPoint("TOPLEFT", self, "TOPLEFT", 6, -6);
---	self.IconOverlay:Hide();
---end
---
---function WorldMapTrackingOptionsButtonMixin:Refresh()
---	-- nothing to do here
---end
---
---function WorldMapTrackingOptionsButtonMixin:OnSelection(value, checked)
---	if (checked) then
---		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
---	else
---		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
---	end
---
---	if (value == "quests") then
---		SetCVar("questPOI", checked and "1" or "0", "QUEST_POI");
---	elseif (value == "dungeon entrances") then
---		SetCVar("showDungeonEntrancesOnMap", checked and "1" or "0", "SHOW_DUNGEON_ENTRANCES");
---	elseif (value == "digsites") then
---		SetCVar("digSites", checked and "1" or "0", "SHOW_DIG_SITES");
---	elseif (value == "tamers") then
---		SetCVar("showTamers", checked and "1" or "0", "SHOW_TAMERS");
---	elseif (value == "primaryProfessionsFilter" or value == "secondaryProfessionsFilter") then
---		SetCVar(value, checked and "1" or "0");
---	elseif (value == "worldQuestFilterResources" or value == "worldQuestFilterArtifactPower" or
---			value == "worldQuestFilterProfessionMaterials" or value == "worldQuestFilterGold" or
---			value == "worldQuestFilterEquipment" or value == "worldQuestFilterReputation" or
---			value == "worldQuestFilterAnima") then
---		-- World quest reward filter cvars
---		SetCVar(value, checked and "1" or "0");
---	end
---	self:GetParent():RefreshAllDataProviders();
---end
---
---function WorldMapTrackingOptionsButtonMixin:InitializeDropDown()
---	local function OnSelection(button)
---		self:OnSelection(button.value, button.checked);
---	end
---
---	local info = UIDropDownMenu_CreateInfo();
---
---	info.isTitle = true;
---	info.notCheckable = true;
---	info.text = WORLD_MAP_FILTER_TITLE;
+WorldMapTrackingOptionsButtonMixin = { };
+
+function WorldMapTrackingOptionsButtonMixin:OnLoad()
+	local function InitializeDropDown(self)
+		self:GetParent():InitializeDropDown();
+	end
+	UIDropDownMenu_SetInitializeFunction(self.DropDown, InitializeDropDown);
+	UIDropDownMenu_SetDisplayMode(self.DropDown, "MENU");
+end
+
+function WorldMapTrackingOptionsButtonMixin:OnMouseDown(button)
+	self.Icon:SetPoint("TOPLEFT", 8, -8);
+	self.IconOverlay:Show();
+
+	local mapID = self:GetParent():GetMapID();
+	if not mapID then
+		return;
+	end
+	self.DropDown.mapID = mapID;
+	ToggleDropDownMenu(1, nil, self.DropDown, self, 0, -5);
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+end
+
+function WorldMapTrackingOptionsButtonMixin:OnMouseUp()
+	self.Icon:SetPoint("TOPLEFT", self, "TOPLEFT", 6, -6);
+	self.IconOverlay:Hide();
+end
+
+function WorldMapTrackingOptionsButtonMixin:Refresh()
+	-- nothing to do here
+end
+
+function WorldMapTrackingOptionsButtonMixin:OnSelection(value, checked)
+	if (checked) then
+		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+	else
+		PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF);
+	end
+
+	if (value == "quests") then
+		SetCVar("questPOI", checked and "1" or "0", "QUEST_POI");
+	elseif (value == "dungeon entrances") then
+		SetCVar("showDungeonEntrancesOnMap", checked and "1" or "0", "SHOW_DUNGEON_ENTRANCES");
+	elseif (value == "digsites") then
+		SetCVar("digSites", checked and "1" or "0", "SHOW_DIG_SITES");
+	elseif (value == "tamers") then
+		SetCVar("showTamers", checked and "1" or "0", "SHOW_TAMERS");
+	elseif (value == "primaryProfessionsFilter" or value == "secondaryProfessionsFilter") then
+		SetCVar(value, checked and "1" or "0");
+	elseif (value == "worldQuestFilterResources" or value == "worldQuestFilterArtifactPower" or
+			value == "worldQuestFilterProfessionMaterials" or value == "worldQuestFilterGold" or
+			value == "worldQuestFilterEquipment" or value == "worldQuestFilterReputation" or
+			value == "worldQuestFilterAnima") then
+		-- World quest reward filter cvars
+		SetCVar(value, checked and "1" or "0");
+	end
+	self:GetParent():RefreshAllDataProviders();
+end
+
+function WorldMapTrackingOptionsButtonMixin:InitializeDropDown()
+	local function OnSelection(button)
+		self:OnSelection(button.value, button.checked);
+	end
+
+	local info = UIDropDownMenu_CreateInfo();
+
+	info.isTitle = true;
+	info.notCheckable = true;
+	info.text = WORLD_MAP_FILTER_TITLE;
 --	UIDropDownMenu_AddButton(info);
---
---	info.isTitle = nil;
---	info.disabled = nil;
---	info.notCheckable = nil;
---	info.isNotRadio = true;
---	info.keepShownOnClick = true;
---	info.func = OnSelection;
---
---	info.text = SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT;
---	info.value = "quests";
---	info.checked = GetCVarBool("questPOI");
+
+	info.isTitle = nil;
+	info.disabled = nil;
+	info.notCheckable = nil;
+	info.isNotRadio = true;
+	info.keepShownOnClick = true;
+	info.func = OnSelection;
+
+	info.text = SHOW_QUEST_OBJECTIVES_ON_MAP_TEXT;
+	info.value = "quests";
+	info.checked = GetCVarBool("questPOI");
 --	UIDropDownMenu_AddButton(info);
---
---	info.text = SHOW_DUNGEON_ENTRACES_ON_MAP_TEXT;
---	info.value = "dungeon entrances";
---	info.checked = GetCVarBool("showDungeonEntrancesOnMap");
---	UIDropDownMenu_AddButton(info);
---
---	local prof1, prof2, arch, fish, cook, firstAid = GetProfessions();
---	if arch then
---		info.text = ARCHAEOLOGY_SHOW_DIG_SITES;
---		info.value = "digsites";
---		info.checked = GetCVarBool("digSites");
---		UIDropDownMenu_AddButton(info);
---	end
---
---	if CanTrackBattlePets() then
---		info.text = SHOW_PET_BATTLES_ON_MAP_TEXT;
---		info.value = "tamers";
---		info.checked = GetCVarBool("showTamers");
---		UIDropDownMenu_AddButton(info);
---	end
---
---	-- If we aren't on a map which has emissaries don't show the world quest reward filter options.
---	local mapID = self:GetParent():GetMapID();
---	if not mapID or not MapUtil.MapShouldShowWorldQuestFilters(mapID) then
---		return;
---	end
---
---	if prof1 or prof2 then
---		info.text = SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT;
---		info.value = "primaryProfessionsFilter";
---		info.checked = GetCVarBool("primaryProfessionsFilter");
---		UIDropDownMenu_AddButton(info);
---	end
---
---	if fish or cook or firstAid then
---		info.text = SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT;
---		info.value = "secondaryProfessionsFilter";
---		info.checked = GetCVarBool("secondaryProfessionsFilter");
---		UIDropDownMenu_AddButton(info);
---	end
---
---	UIDropDownMenu_AddSeparator();
---
---	info = UIDropDownMenu_CreateInfo();
---	info.isTitle = true;
---	info.notCheckable = true;
---	info.text = WORLD_QUEST_REWARD_FILTERS_TITLE;
---	UIDropDownMenu_AddButton(info);
---	info.text = nil;
---
---	info.isTitle = nil;
---	info.disabled = nil;
---	info.notCheckable = nil;
---	info.isNotRadio = true;
---	info.keepShownOnClick = true;
---	info.func = OnSelection;
---
---	-- TODO:: Further adjustments to more cleanly determine filters per map and make this future-proof.
---	if MapUtil.IsShadowlandsZoneMap(mapID) then
---		info.text = WORLD_QUEST_REWARD_FILTERS_ANIMA;
---		info.value = "worldQuestFilterAnima";
---		info.checked = GetCVarBool("worldQuestFilterAnima");
---		UIDropDownMenu_AddButton(info);
---	else
---		info.text = WORLD_QUEST_REWARD_FILTERS_RESOURCES;
---		info.value = "worldQuestFilterResources";
---		info.checked = GetCVarBool("worldQuestFilterResources");
---		UIDropDownMenu_AddButton(info);
---
---		info.text = WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER;
---		info.value = "worldQuestFilterArtifactPower";
---		info.checked = GetCVarBool("worldQuestFilterArtifactPower");
---		UIDropDownMenu_AddButton(info);
---	end
---
---	info.text = WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS;
---	info.value = "worldQuestFilterProfessionMaterials";
---	info.checked = GetCVarBool("worldQuestFilterProfessionMaterials");
---	UIDropDownMenu_AddButton(info);
---
---	info.text = WORLD_QUEST_REWARD_FILTERS_GOLD;
---	info.value = "worldQuestFilterGold";
---	info.checked = GetCVarBool("worldQuestFilterGold");
---	UIDropDownMenu_AddButton(info);
---
---	info.text = WORLD_QUEST_REWARD_FILTERS_EQUIPMENT;
---	info.value = "worldQuestFilterEquipment";
---	info.checked = GetCVarBool("worldQuestFilterEquipment");
---	UIDropDownMenu_AddButton(info);
---
---	info.text = WORLD_QUEST_REWARD_FILTERS_REPUTATION;
---	info.value = "worldQuestFilterReputation";
---	info.checked = GetCVarBool("worldQuestFilterReputation");
---	UIDropDownMenu_AddButton(info);
---end
---
+
+	info.text = SHOW_DUNGEON_ENTRACES_ON_MAP_TEXT;
+	info.value = "dungeon entrances";
+	info.checked = GetCVarBool("showDungeonEntrancesOnMap");
+	UIDropDownMenu_AddButton(info);
+
+	--local prof1, prof2, arch, fish, cook, firstAid = GetProfessions();
+	--if arch then
+	--	info.text = ARCHAEOLOGY_SHOW_DIG_SITES;
+	--	info.value = "digsites";
+	--	info.checked = GetCVarBool("digSites");
+	--	UIDropDownMenu_AddButton(info);
+	--end
+
+	--if CanTrackBattlePets() then
+	--	info.text = SHOW_PET_BATTLES_ON_MAP_TEXT;
+	--	info.value = "tamers";
+	--	info.checked = GetCVarBool("showTamers");
+	--	UIDropDownMenu_AddButton(info);
+	--end
+
+	---- If we aren't on a map which has emissaries don't show the world quest reward filter options.
+	--local mapID = self:GetParent():GetMapID();
+	--if not mapID or not MapUtil.MapShouldShowWorldQuestFilters(mapID) then
+	--	return;
+	--end
+
+	--if prof1 or prof2 then
+	--	info.text = SHOW_PRIMARY_PROFESSION_ON_MAP_TEXT;
+	--	info.value = "primaryProfessionsFilter";
+	--	info.checked = GetCVarBool("primaryProfessionsFilter");
+	--	UIDropDownMenu_AddButton(info);
+	--end
+
+	--if fish or cook or firstAid then
+	--	info.text = SHOW_SECONDARY_PROFESSION_ON_MAP_TEXT;
+	--	info.value = "secondaryProfessionsFilter";
+	--	info.checked = GetCVarBool("secondaryProfessionsFilter");
+	--	UIDropDownMenu_AddButton(info);
+	--end
+
+	--UIDropDownMenu_AddSeparator();
+	--
+	--info = UIDropDownMenu_CreateInfo();
+	--info.isTitle = true;
+	--info.notCheckable = true;
+	--info.text = WORLD_QUEST_REWARD_FILTERS_TITLE;
+	--UIDropDownMenu_AddButton(info);
+	--info.text = nil;
+	--
+	--info.isTitle = nil;
+	--info.disabled = nil;
+	--info.notCheckable = nil;
+	--info.isNotRadio = true;
+	--info.keepShownOnClick = true;
+	--info.func = OnSelection;
+
+	---- TODO:: Further adjustments to more cleanly determine filters per map and make this future-proof.
+	--if MapUtil.IsShadowlandsZoneMap(mapID) then
+	--	info.text = WORLD_QUEST_REWARD_FILTERS_ANIMA;
+	--	info.value = "worldQuestFilterAnima";
+	--	info.checked = GetCVarBool("worldQuestFilterAnima");
+	--	UIDropDownMenu_AddButton(info);
+	--else
+	--	info.text = WORLD_QUEST_REWARD_FILTERS_RESOURCES;
+	--	info.value = "worldQuestFilterResources";
+	--	info.checked = GetCVarBool("worldQuestFilterResources");
+	--	UIDropDownMenu_AddButton(info);
+	--
+	--	info.text = WORLD_QUEST_REWARD_FILTERS_ARTIFACT_POWER;
+	--	info.value = "worldQuestFilterArtifactPower";
+	--	info.checked = GetCVarBool("worldQuestFilterArtifactPower");
+	--	UIDropDownMenu_AddButton(info);
+	--end
+
+	--info.text = WORLD_QUEST_REWARD_FILTERS_PROFESSION_MATERIALS;
+	--info.value = "worldQuestFilterProfessionMaterials";
+	--info.checked = GetCVarBool("worldQuestFilterProfessionMaterials");
+	--UIDropDownMenu_AddButton(info);
+	--
+	--info.text = WORLD_QUEST_REWARD_FILTERS_GOLD;
+	--info.value = "worldQuestFilterGold";
+	--info.checked = GetCVarBool("worldQuestFilterGold");
+	--UIDropDownMenu_AddButton(info);
+	--
+	--info.text = WORLD_QUEST_REWARD_FILTERS_EQUIPMENT;
+	--info.value = "worldQuestFilterEquipment";
+	--info.checked = GetCVarBool("worldQuestFilterEquipment");
+	--UIDropDownMenu_AddButton(info);
+	--
+	--info.text = WORLD_QUEST_REWARD_FILTERS_REPUTATION;
+	--info.value = "worldQuestFilterReputation";
+	--info.checked = GetCVarBool("worldQuestFilterReputation");
+	--UIDropDownMenu_AddButton(info);
+end
+
 --WorldMapTrackingPinButtonMixin = { };
 --
 --function WorldMapTrackingPinButtonMixin:OnLoad()
@@ -557,3 +586,4 @@ end
 TomCats_WorldMapNavBarMixin = WorldMapNavBarMixin
 TomCats_WorldMapNavBarButtonMixin = WorldMapNavBarButtonMixin
 TomCats_WorldMapSidePanelToggleMixin = WorldMapSidePanelToggleMixin
+TomCats_WorldMapTrackingOptionsButtonMixin = WorldMapTrackingOptionsButtonMixin
