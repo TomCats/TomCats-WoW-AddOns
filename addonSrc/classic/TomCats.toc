@@ -15,8 +15,7 @@ default_saved_variables.lua
 saved_variables.lua
 update.lua
 playerposition.lua
-data\dungeons.lua
-data\mapinfo.lua
+data\maps.lua
 cvar.lua
 c_map.lua
 c_questlog.lua
