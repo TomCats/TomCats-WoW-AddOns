@@ -16,15 +16,23 @@ repositories {
 
 dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.29'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 }
 
 import com.tomcatsaddons.gradle.BuildAddonTask
+import com.tomcatsaddons.gradle.WowToolsDownloadTask
+
+def wowToolsDownloadTask = tasks.register("wowtools-download", WowToolsDownloadTask) { WowToolsDownloadTask task ->
+    group = "data"
+}
 
 def wowdirectory = project.property('com.tomcatsaddons.wowdirectory')
 
 project.property('com.tomcatsaddons.games').split(',').each { String game ->
 
     def buildTask = tasks.register("$game-build", BuildAddonTask) { BuildAddonTask task ->
+        dependsOn wowToolsDownloadTask
         group = "addons"
         task.game = game
         task.includeFrom = project.property("com.tomcatsaddons.games.${game}.includeFrom").split(',')
