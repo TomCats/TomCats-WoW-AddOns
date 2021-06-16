@@ -44,6 +44,8 @@ FrameXML\UIPanelTemplates.lua
 FrameXML\UIPanelTemplates.xml
 FrameXML\TutorialFrame.lua
 FrameXML\MapUtil.lua
+FrameXML\Minimap.lua
+FrameXML\Minimap.xml
 Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua
 Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
 Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua

@@ -1,0 +1,59 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<Frame name="TomCats_MiniMapInstanceDifficulty" parent="MinimapCluster" hidden="true">
+		<Size>
+			<AbsDimension x="38" y="46"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="22" y="-17"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentTexture" file="Interface\Minimap\UI-DungeonDifficulty-Button">
+					<Size>
+						<AbsDimension x="64" y="46"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.0" right="0.25" top="0.0703125" bottom="0.4140625"/>
+				</Texture>
+				<FontString name="$parentText" inherits="GameFontNormalSmall" justifyH="CENTER">
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="-1" y="-7"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+<!--				self:RegisterEvent("PLAYER_DIFFICULTY_CHANGED");-->
+				self:RegisterEvent("INSTANCE_GROUP_SIZE_CHANGED");
+				self:RegisterEvent("UPDATE_INSTANCE_INFO");
+				self:RegisterEvent("GROUP_ROSTER_UPDATE");
+				self:RegisterEvent("PARTY_MEMBER_ENABLE");
+				self:RegisterEvent("PARTY_MEMBER_DISABLE");
+				self:RegisterEvent("PARTY_MEMBER_DISABLE");
+				self:RegisterEvent("NEW_WMO_CHUNK");
+				self:RegisterEvent("ZONE_CHANGED_INDOORS");
+				self:RegisterEvent("ZONE_CHANGED");
+			</OnLoad>
+			<OnEvent function="TomCats_MiniMapInstanceDifficulty_Update" />
+<!--			<OnEnter function="MiniMapInstanceDifficulty_OnEnter"/>-->
+<!--			<OnLeave function="GameTooltip_Hide"/>-->
+		</Scripts>
+	</Frame>
+</Ui>
