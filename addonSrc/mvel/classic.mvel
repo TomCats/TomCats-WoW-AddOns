@@ -1,0 +1,119 @@
+lookup_map_mapid = {:};
+lookup_uimapassignment_uimapid = {:};
+lookup_uimapassignments_mapid = {:};
+
+// Fetch map and uimapassignment to establish the relationship between mapid (instance id) and uimapid and filter out unused mapids
+do {
+	tbl_map = wowtools.getDatabase("tbc-latest").getTable("map").query("select ID, InstanceType, AreaTableID from map where InstanceType = 1 or InstanceType = 2;", wowtools.defaultLocale);
+	for (row : tbl_map) {
+		lookup_map_mapid[row.ID] = row;
+	}
+	tbl_uimapassignment = wowtools.getDatabase("retail-latest").getTable("uimapassignment").query("select distinct UiMapID, MapID from uimapassignment;", wowtools.defaultLocale);
+	for (row : tbl_uimapassignment) {
+		if (lookup_map_mapid[row.MapID] != null) {
+			lookup_uimapassignment_uimapid[row.UiMapID] = row.MapID;
+			uimapassignments = lookup_uimapassignments_mapid[row.MapID];
+			if (uimapassignments == null) {
+				uimapassignments = [];
+				lookup_uimapassignments_mapid[row.MapID] = uimapassignments;
+			}
+			uimapassignments.add(row.UiMapID);
+		}
+	}
+	mapid_diff = new ArrayList(lookup_map_mapid.keySet());
+	mapid_diff.removeAll(lookup_uimapassignments_mapid.keySet());
+	for (mapid : mapid_diff) {
+		lookup_map_mapid.remove(mapid);
+	}
+} while (false);
+
+// Create uimapgroupmember data in Lua
+do {
+	data = [];
+	for (locale : wowtools.getDatabase("retail-latest").getTable("uimapgroupmember").locales) {
+		tbl_uimapgroupmember = wowtools.getDatabase("retail-latest").getTable("uimapgroupmember")
+			.query("select Name_lang, UiMapGroupID, UiMapID from uimapgroupmember order by UiMapGroupID, FloorIndex",locale);
+		d = [];
+		for (row : tbl_uimapgroupmember) {
+			if (lookup_uimapassignment_uimapid[row.UiMapID] != null) {
+				d.add(row.Name_lang);
+				d.add(row.UiMapGroupID);
+				d.add(row.UiMapID);
+			}
+		}
+		row = {:};
+		row.locale = locale;
+		row.data = LuaTools.asString(LuaTools.createContiguousArrayString(d, true), false);
+		data.add(row);
+	}
+	vars = {:};
+	vars.data = data;
+	template.mergeUTF8("uimapgroupmember.lua.mvel", "data/uimapgroupmember.lua", vars);
+} while(false);
+
+// Create table in Lua for support of GetMapArtLayerTextures
+do {
+	tbl_uimapxmapart = wowtools.getDatabase("retail-latest").getTable("uimapxmapart")
+		.query("select distinct UiMapArtID, UiMapID from uimapxmapart order by UiMapID;", wowtools.defaultLocale);
+	lookup_uimapid_uimapartid = {:};
+    for (uimapxmapart : tbl_uimapxmapart) {
+		uiMapID = lookup_uimapid_uimapartid[uimapxmapart.UiMapArtID];
+		// only accept first occurrence
+		if (uiMapID == null) {
+			lookup_uimapid_uimapartid[uimapxmapart.UiMapArtID] = uimapxmapart.UiMapID;
+		}
+	}
+	mapartlayertextures = {:};
+	tbl_uimaparttile = wowtools.getDatabase("retail-latest").getTable("uimaparttile")
+    				.query("select UiMapArtID, FileDataID from uimaparttile order by UiMapArtID, RowIndex, ColIndex" , wowtools.defaultLocale);
+    lastUiMapArtID = 0;
+    uimaparttiles = [];
+    for (uimaparttile : tbl_uimaparttile) {
+		uimapid = lookup_uimapid_uimapartid[uimaparttile.UiMapArtID];
+		if (uimapid != null) {
+			if (lookup_uimapassignment_uimapid[uimapid] != null) {
+				if (lastUiMapArtID != uimaparttile.UiMapArtID) {
+					lastUiMapArtID = uimaparttile.UiMapArtID;
+					uimaparttiles = [];
+					mapartlayertextures[uimapid] = uimaparttiles;
+				}
+				uimaparttiles.add(uimaparttile.FileDataID);
+			}
+		}
+    }
+   	vars = {:};
+   	vars.data = mapartlayertextures;
+    template.mergeUTF8("mapartlayertextures.lua.mvel", "data/mapartlayertextures.lua", vars);
+} while(false);
+
+// Create MapID (instance ID) to default UiMapID lookup
+do {
+	tbl_uimapgroupmember = wowtools.getDatabase("retail-latest").getTable("uimapgroupmember")
+		.query("select UiMapGroupID, UiMapID from uimapgroupmember order by UiMapGroupID, FloorIndex", wowtools.defaultLocale);
+	uimapidlookup = {:};
+	for (row : tbl_uimapgroupmember) {
+		uiMapID = row.UiMapID;
+		mapID = lookup_uimapassignment_uimapid[uiMapID];
+		if (mapID != null && uimapidlookup[mapID] == null) {
+			uimapidlookup[mapID] = uiMapID;
+		}
+	}
+	tbl_uimapassignment = wowtools.getDatabase("retail-latest").getTable("uimapassignment").query("select distinct UiMapID, MapID from uimapassignment;", wowtools.defaultLocale);
+	for (row : tbl_uimapassignment) {
+		mapID = row.MapID;
+		if (lookup_map_mapid[mapID] != null && uimapidlookup[mapID] == null) {
+			uimapidlookup[mapID] = row.UiMapID;
+		}
+	}
+   	vars = {:};
+   	vars.data = uimapidlookup;
+    template.mergeUTF8("uimapidlookup.lua.mvel", "data/uimapidlookup.lua", vars);
+} while(false);
+
+// Create mapInfo source table
+do {
+	tbl_mapinfo = csv.query("data", "select UiMapID, AreaID, ParentUiMapID, InstanceType from tbcdungeons;", "Int,Int,Int,Int");
+   	vars = {:};
+   	vars.data = tbl_mapinfo;
+    template.mergeUTF8("mapinfo.lua.mvel", "data/mapinfo.lua", vars);
+} while(false);

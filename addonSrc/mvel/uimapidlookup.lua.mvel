@@ -1,0 +1,4 @@
+local _, addon = ...
+addon.uimapidlookup = {
+@foreach{ row : data.entrySet() }	[@{row.key}] = @{row.value },
+@end{}}

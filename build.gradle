@@ -36,8 +36,6 @@ project.property('com.tomcatsaddons.games').split(',').each { String game ->
         group = "addons"
         task.game = game
         task.includeFrom = project.property("com.tomcatsaddons.games.${game}.includeFrom").split(',')
-        sourceDir = file("$projectDir/addonSrc/$game")
-        outputDir = file("$buildDir/$game")
     }
 
     project.property("com.tomcatsaddons.games.${game}.targets").split(',').each { String target ->

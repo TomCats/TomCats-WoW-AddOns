@@ -22,8 +22,11 @@ local ToggleDropDownMenu = TomCats_ToggleDropDownMenu;
 local UIDropDownMenu_AddButton = TomCats_UIDropDownMenu_AddButton;
 local UIDropDownMenu_AddSeparator = TomCats_UIDropDownMenu_AddSeparator;
 local UIDropDownMenu_CreateInfo = TomCats_UIDropDownMenu_CreateInfo;
+local UIDropDownMenu_Initialize = TomCats_UIDropDownMenu_Initialize;
 local UIDropDownMenu_SetDisplayMode = TomCats_UIDropDownMenu_SetDisplayMode;
 local UIDropDownMenu_SetInitializeFunction = TomCats_UIDropDownMenu_SetInitializeFunction;
+local UIDropDownMenu_SetSelectedValue = TomCats_UIDropDownMenu_SetSelectedValue;
+local UIDropDownMenu_SetWidth = TomCats_UIDropDownMenu_SetWidth;
 local WORLD = WORLD;
 local WORLD_MAP_FILTER_TITLE = WORLD_MAP_FILTER_TITLE;
 local WORLD_QUEST_REWARD_FILTERS_ANIMA = WORLD_QUEST_REWARD_FILTERS_ANIMA;
@@ -35,56 +38,57 @@ local WORLD_QUEST_REWARD_FILTERS_REPUTATION = WORLD_QUEST_REWARD_FILTERS_REPUTAT
 local WORLD_QUEST_REWARD_FILTERS_RESOURCES = WORLD_QUEST_REWARD_FILTERS_RESOURCES;
 local WORLD_QUEST_REWARD_FILTERS_TITLE = WORLD_QUEST_REWARD_FILTERS_TITLE;
 
+local WorldMapFloorNavigationFrameMixin;
 local WorldMapNavBarMixin;
 local WorldMapNavBarButtonMixin;
 local WorldMapSidePanelToggleMixin;
 local WorldMapTrackingOptionsButtonMixin;
 
---WorldMapFloorNavigationFrameMixin = { }
---
---function WorldMapFloorNavigationFrameMixin:OnLoad()
---	UIDropDownMenu_SetWidth(self, 130);
---end
---
---function WorldMapFloorNavigationFrameMixin:Refresh()
---	local mapID = self:GetParent():GetMapID();
---	local mapGroupID = C_Map.GetMapGroupID(mapID);
---	if mapGroupID then
---		UIDropDownMenu_Initialize(self, self.InitializeDropDown);
---		UIDropDownMenu_SetSelectedValue(self, mapID);
---		self:Show();
---	else
---		self:Hide();
---	end
---end
---
---function WorldMapFloorNavigationFrameMixin:InitializeDropDown()
---	local mapID = self:GetParent():GetMapID();
---
---	local mapGroupID = C_Map.GetMapGroupID(mapID);
---	if not mapGroupID then
---		return;
---	end
---
---	local mapGroupMembersInfo = C_Map.GetMapGroupMembersInfo(mapGroupID);
---	if not mapGroupMembersInfo then
---		return;
---	end
---
---	local function GoToMap(button)
---		self:GetParent():SetMapID(button.value);
---	end
---
---	local info = UIDropDownMenu_CreateInfo();
---	for i, mapGroupMemberInfo in ipairs(mapGroupMembersInfo) do
---		info.text = mapGroupMemberInfo.name;
---		info.value = mapGroupMemberInfo.mapID;
---		info.func = GoToMap;
---		info.checked = (mapID == mapGroupMemberInfo.mapID);
---		UIDropDownMenu_AddButton(info);
---	end
---end
---
+WorldMapFloorNavigationFrameMixin = { }
+
+function WorldMapFloorNavigationFrameMixin:OnLoad()
+	UIDropDownMenu_SetWidth(self, 130);
+end
+
+function WorldMapFloorNavigationFrameMixin:Refresh()
+	local mapID = self:GetParent():GetMapID();
+	local mapGroupID = C_Map.GetMapGroupID(mapID);
+	if mapGroupID then
+		UIDropDownMenu_Initialize(self, self.InitializeDropDown);
+		UIDropDownMenu_SetSelectedValue(self, mapID);
+		self:Show();
+	else
+		self:Hide();
+	end
+end
+
+function WorldMapFloorNavigationFrameMixin:InitializeDropDown()
+	local mapID = self:GetParent():GetMapID();
+
+	local mapGroupID = C_Map.GetMapGroupID(mapID);
+	if not mapGroupID then
+		return;
+	end
+
+	local mapGroupMembersInfo = C_Map.GetMapGroupMembersInfo(mapGroupID);
+	if not mapGroupMembersInfo then
+		return;
+	end
+
+	local function GoToMap(button)
+		self:GetParent():SetMapID(button.value);
+	end
+
+	local info = UIDropDownMenu_CreateInfo();
+	for i, mapGroupMemberInfo in ipairs(mapGroupMembersInfo) do
+		info.text = mapGroupMemberInfo.name;
+		info.value = mapGroupMemberInfo.mapID;
+		info.func = GoToMap;
+		info.checked = (mapID == mapGroupMemberInfo.mapID);
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
 WorldMapTrackingOptionsButtonMixin = { };
 
 function WorldMapTrackingOptionsButtonMixin:OnLoad()
@@ -583,6 +587,7 @@ end
 --	self:GetParent():SetNextMapForThreat();
 --end
 
+TomCats_WorldMapFloorNavigationFrameMixin = WorldMapFloorNavigationFrameMixin
 TomCats_WorldMapNavBarMixin = WorldMapNavBarMixin
 TomCats_WorldMapNavBarButtonMixin = WorldMapNavBarButtonMixin
 TomCats_WorldMapSidePanelToggleMixin = WorldMapSidePanelToggleMixin

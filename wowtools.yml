@@ -1,9 +1,25 @@
-url: https://wow.tools/dbc/api/export/?name=${table}&build=${build}&locale=${locale}
+url-pattern: https://wow.tools/dbc/api/export/?name=${table}&build=${build}&locale=${locale}
 locales: enUS,koKR,frFR,deDE,zhCN,esES,zhTW,enGB,esMX,ruRU,ptBR,itIT,ptPT
-locale-default: enUS
+default-locale: enUS
 databases:
   retail-latest:
     build: 9.1.0.38950
     tables:
       uimapgroupmember:
         locales: all
+        columnTypes: Int,String,Int,Int,Int,Int
+      uimapxmapart:
+        locales: default
+        columnTypes: Int,Int,Int,Int
+      uimaparttile:
+        locales: default
+        columnTypes: Int,Int,Int,Int,Int,Int
+      uimapassignment:
+        locales: default
+        columnTypes: Int,Int,Int,Int,Float,Float,Float,Float,Float,Float,Int,Int,Int,Int,Int,Int,Int
+  tbc-latest:
+    build: 2.5.1.38988
+    tables:
+      map:
+        locales: default
+        columnTypes: Int,String,String,String,String,String,String,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,String,String

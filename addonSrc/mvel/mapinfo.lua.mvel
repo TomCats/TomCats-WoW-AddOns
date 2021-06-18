@@ -1,0 +1,4 @@
+local _, addon = ...
+addon.mapinfobase = {
+@foreach{ row : data }	[@{row.UiMapID}] = { @{row.AreaID}, @{row.ParentUiMapID}, @{row.InstanceType} },
+@end{}}

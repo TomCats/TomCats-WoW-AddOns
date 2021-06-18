@@ -1,12 +1,12 @@
 ## Interface: 20501
 ## Title: TomCat's AddOn Suite
-## Notes: Version 2.3.4 (Classic)
+## Notes: Version 2.3.5 (Classic)
 ## Author: TomCat
-## Version: 2.3.4
+## Version: 2.3.5
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: TomCats_Character
 ## SavedVariables: TomCats_Account
-## X-TomCats-Expiry: 1624661571
+## X-TomCats-Expiry: 1625199215
 
 constants.lua
 event.lua
@@ -15,7 +15,12 @@ default_saved_variables.lua
 saved_variables.lua
 update.lua
 playerposition.lua
-data\maps.lua
+data\uimapgroupmember.lua
+data\uimapgroupmemberindex.lua
+data\mapartlayertextures.lua
+data\uimapidlookup.lua
+data\mapinfo.lua
+data\instanceentrances.lua
 cvar.lua
 c_map.lua
 c_questlog.lua

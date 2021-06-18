@@ -1,3 +1,5 @@
+local _, addon = ...
+
 local BaseMapPoiPinMixin = BaseMapPoiPinMixin
 local C_EncounterJournal = TomCats_C_EncounterJournal
 local CreateFromMixins = CreateFromMixins
@@ -50,7 +52,6 @@ DungeonEntrancePinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DUNGE
 function DungeonEntrancePinMixin:OnAcquired(dungeonEntranceInfo) -- override
 	BaseMapPoiPinMixin.OnAcquired(self, dungeonEntranceInfo);
 	self.journalInstanceID = dungeonEntranceInfo.journalInstanceID;
-	self.uiMapID = dungeonEntranceInfo.uiMapID;
 end
 
 function DungeonEntrancePinMixin:OnMouseClickAction()
@@ -65,8 +66,11 @@ end
 
 -- override by TomCat
 function DungeonEntrancePinMixin:OnClick()
-	if (self.uiMapID) then
-		WorldMapFrame:SetMapID(self.uiMapID)
+	if (self.journalInstanceID) then
+		local uiMapID = addon.uimapidlookup[self.journalInstanceID]
+		if (uiMapID) then
+			WorldMapFrame:SetMapID(uiMapID)
+		end
 	end
 end
 

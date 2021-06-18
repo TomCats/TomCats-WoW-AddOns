@@ -23,42 +23,70 @@ end
 local GetMapArtLayerTextures = C_Map.GetMapArtLayerTextures
 
 function C_Map.GetMapArtLayerTextures(uiMapID, layerIndex)
-	local mapInfo = addon.GetMapInfo(uiMapID)
-	local textures = mapInfo and mapInfo.textures
-	if (not textures) then
-		textures = GetMapArtLayerTextures(uiMapID, layerIndex)
+	local textures = GetMapArtLayerTextures(uiMapID, layerIndex)
+	if (textures and #textures ~= 0) then
+		return textures
 	end
-	return textures
+	return addon.mapartlayertextures[uiMapID]
 end
 
+local battlegroundMaps = {
+	[1459] = { parentMapID = 1424 },
+	[1460] = {
+		Horde = { parentMapID = 1413 },
+		Alliance = { parentMapID = 1440 },
+	},
+	[1461] = { parentMapID = 1417 },
+	[1956] = { parentMapID = 1953 }
+}
+
 function C_Map.GetMapInfo(mapID)
-	local mapInfo = addon.GetMapInfo(mapID)
-	if (not mapInfo) then mapInfo = GetMapInfo(mapID) end
-	local overrides = addon.GetMapInfoOverride(mapID)
-	if (mapInfo and overrides) then
-		Mixin(mapInfo, overrides)
+	local mapInfo = GetMapInfo(mapID)
+	if (not mapInfo) then
+		local mapInfoBase = addon.mapinfobase[mapID]
+		if (not mapInfoBase) then
+			local pos = addon.uimapgroupmemberByMap[mapID]
+			if (pos) then
+				local groupID = addon.uimapgroupmember[pos+1]
+				local groupPos = addon.uimapgroupmemberByMapGroup[groupID]
+				local newMapID = addon.uimapgroupmember[groupPos+2]
+				mapInfoBase = addon.mapinfobase[newMapID]
+			end
+		end
+		if (mapInfoBase) then
+			mapInfo = {
+				["mapID"] = mapID,
+				["name"] = C_Map.GetAreaInfo(mapInfoBase[1]),
+				["mapType"] = 4,
+				["parentMapID"] = mapInfoBase[2]
+			}
+		end
 	end
-	return mapInfo or overrides
+	local battlegroundMap = battlegroundMaps[mapID]
+	if (mapInfo and battlegroundMap) then
+		local faction = UnitFactionGroup("player")
+		battlegroundMap = battlegroundMap[faction] or battlegroundMap
+		mapInfo.parentMapID = battlegroundMap.parentMapID
+	end
+	return mapInfo
 end
 
 function C_Map.IsMapValidForNavBarDropDown(mapID)
+	if (addon.mapinfobase[mapID] or battlegroundMaps[mapID]) then return false end
 	local mapInfo = C_Map.GetMapInfo(mapID);
-	if (addon.IsMapDropDownOverridden(mapID)) then return false end
 	return mapInfo.mapType == Enum.UIMapType.World or mapInfo.mapType == Enum.UIMapType.Continent or mapInfo.mapType == Enum.UIMapType.Zone;
 end
 
 local GetBestMapForUnit = C_Map.GetBestMapForUnit
 
 function C_Map.GetBestMapForUnit(unit)
-	local mapID = GetBestMapForUnit(unit)
-	if ((not mapID) and unit == "player" and IsInInstance()) then
+	local uiMapID = GetBestMapForUnit(unit)
+	if ((not uiMapID) and unit == "player" and IsInInstance()) then
 		local instanceID = select(8, GetInstanceInfo())
-		local mapInfo = addon.GetMapInfoByInstanceID(instanceID)
-		if (mapInfo and mapInfo.enabled) then
-			mapID = mapInfo.mapID
-		end
+		-- todo: guess the current floor (old world dungeons)
+		uiMapID = addon.uimapidlookup[instanceID];
 	end
-	return mapID
+	return uiMapID
 end
 
 C_Map.CloseWorldMapInteraction = nop;
@@ -70,8 +98,34 @@ function C_Map.MapHasArt(uiMapID)
 	if (mapHasArt) then
 		return mapHasArt
 	end
-	local mapInfo = addon.GetMapInfo(uiMapID)
-	return mapInfo and mapInfo.enabled
+	local mapArt = addon.mapartlayertextures[uiMapID]
+	return mapArt and true or false
+end
+
+function C_Map.GetMapGroupID(mapID)
+	local idx = addon.uimapgroupmemberByMap[mapID]
+	if (idx) then
+		return addon.uimapgroupmember[idx+1]
+	end
+end
+
+function C_Map.GetMapGroupMembersInfo(mapGroupID)
+	local idx = addon.uimapgroupmemberByMapGroup[mapGroupID]
+	if (idx) then
+		local UiMapGroupMemberInfos = { }
+		for i = idx, #addon.uimapgroupmember, 3 do
+			if (addon.uimapgroupmember[i+1] == mapGroupID) then
+				table.insert(UiMapGroupMemberInfos, {
+					["mapID"] = addon.uimapgroupmember[i+2],
+					["relativeHeightIndex"] = 0,
+					["name"] = addon.uimapgroupmember[i]
+				})
+			else
+				break
+			end
+		end
+		return UiMapGroupMemberInfos
+	end
 end
 
 TomCats_C_Map = C_Map;

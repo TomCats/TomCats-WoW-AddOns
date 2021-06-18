@@ -1,0 +1,14 @@
+local _, addon = ...
+do
+	local data = {
+@foreach{ row : data }		["@{row.locale}"] = @{row.data},
+@end{}	}
+	local selected
+	if (GetLocale) then
+		selected = data[GetLocale()]
+	end
+	if (not selected) then
+		selected = data["enUS"]
+	end
+	addon.uimapgroupmember = loadstring(selected)()
+end

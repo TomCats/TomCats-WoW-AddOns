@@ -169,6 +169,8 @@ local function MergeWorldMapFrame()
 	end
 	WorldMapFrame:AddDataProvider(CreateFromMixins(DungeonEntranceDataProviderMixin));
 	WorldMapFrame:AddOverlayFrame("TomCats_WorldMapTrackingOptionsButtonTemplate", "DROPDOWNTOGGLEBUTTON", "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -4, -2);
+	WorldMapFrame:AddOverlayFrame("TomCats_WorldMapFloorNavigationFrameTemplate", "FRAME", "TOPLEFT", WorldMapFrame:GetCanvasContainer(), "TOPLEFT", -15, 2);
+
 end
 
 local function OnEvent(event, arg1)
