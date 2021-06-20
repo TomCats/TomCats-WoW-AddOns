@@ -112,7 +112,7 @@
 						TomCats_CloseDropDownMenus(level);
 
 						if self:IsEnabled() then
-							local listFrame = _G["DropDownList"..level];
+							local listFrame = _G["TomCats_DropDownList"..level];
 							if ( not listFrame or not listFrame:IsShown() or select(2, listFrame:GetPoint()) ~= self ) then
 								TomCats_ToggleDropDownMenu(level, self:GetParent().value, nil, nil, nil, nil, self:GetParent().menuList, self);
 							end
@@ -210,7 +210,8 @@
 				end
 				self.showTimer = nil;
 				if ( self:GetID() > 1 ) then
-					self.parent = _G["DropDownList"..(self:GetID() - 1)];
+					print("fired!")
+					self.parent = _G["TomCats_DropDownList"..(self:GetID() - 1)];
 				end
 			</OnShow>
 			<OnHide>

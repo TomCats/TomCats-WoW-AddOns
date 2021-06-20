@@ -55,7 +55,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Frame parentKey="DropDown" inherits="TomCatS_UIDropDownMenuTemplate" clampedToScreen="true" hidden="true"/>
+			<Frame parentKey="DropDown" inherits="TomCats_UIDropDownMenuTemplate" clampedToScreen="true" hidden="true"/>
 		</Frames>
 		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
 		<Scripts>

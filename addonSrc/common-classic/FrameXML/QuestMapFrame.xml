@@ -364,7 +364,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Frame name="TomCats_QuestMapQuestOptionsDropDown" inherits="UIDropDownMenuTemplate" hidden="true">
+			<Frame name="TomCats_QuestMapQuestOptionsDropDown" inherits="TomCats_UIDropDownMenuTemplate" hidden="true">
 				<Scripts>
 					<OnLoad function="TomCats_QuestMapQuestOptionsDropDown_OnLoad" />
 				</Scripts>
