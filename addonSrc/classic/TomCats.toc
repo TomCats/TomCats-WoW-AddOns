@@ -1,16 +1,17 @@
 ## Interface: 20501
 ## Title: TomCat's AddOn Suite
-## Notes: Version 2.3.5 (Classic)
+## Notes: Version @version@ (Classic)
 ## Author: TomCat
-## Version: 2.3.5
+## Version: @version@
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: TomCats_Character
 ## SavedVariables: TomCats_Account
-## X-TomCats-Expiry: 1625199215
+## X-TomCats-Expiry: @expiry14days@
 
 constants.lua
 event.lua
 error.lua
+popup.xml
 default_saved_variables.lua
 saved_variables.lua
 update.lua
