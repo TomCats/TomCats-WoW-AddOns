@@ -1,0 +1,12 @@
+ID,EXT,EXPR,V_RULE,L_RULE,T_RULE
+14,"""Phase"",""Hostile"",""PrevQuestID""","[EXT[0],EXT[1],PREVQUESTID]",arathi,arathi,arathi
+62,"""Phase"",""Hostile"",""VisibleTrackingQuestID"",""PrevQuestID""","[EXT[0],EXT[1],VISIBLETRACKINGQUESTID,PREVQUESTID]",darkshore,default,darkshore
+1355,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
+1462,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
+1525,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
+1527,"""Phase"",""VisibleTrackingQuestID""","[EXT[0],VISIBLETRACKINGQUESTID]",uldum,default,default
+1530,"""Phase"",""VisibleTrackingQuestID""","[EXT[0],VISIBLETRACKINGQUESTID]",vale,default,default
+1533,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
+1536,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
+1543,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
+1565,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default

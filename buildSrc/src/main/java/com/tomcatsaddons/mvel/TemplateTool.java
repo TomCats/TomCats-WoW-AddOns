@@ -36,9 +36,17 @@ public class TemplateTool {
         return (String) TemplateRuntime.eval(template, values);
     }
 
+    public void mergeCP1252(String templateFile, String outputFile, Map<String, Object> values) throws IOException {
+        mergeCP1252(new File(sourceDir, templateFile), new File(outputDir, outputFile), values);
+    }
+
     public static void mergeCP1252(File templatePath, File outputPath, Map<String, Object> values) throws IOException {
         String output = mergeCP1252(templatePath, values);
         FileUtils.writeStringToFile(outputPath, output, "CP1252");
+    }
+
+    public String mergeCP1252(String templateFile, Map<String, Object> values) throws IOException {
+        return mergeCP1252(new File(sourceDir, templateFile), values);
     }
 
     public static String mergeCP1252(File templatePath, Map<String, Object> values) throws IOException {

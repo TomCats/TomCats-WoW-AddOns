@@ -22,6 +22,7 @@ dependencies {
 
 import com.tomcatsaddons.gradle.BuildAddonTask
 import com.tomcatsaddons.gradle.WowToolsDownloadTask
+import org.apache.tools.ant.filters.ReplaceTokens
 
 def wowToolsDownloadTask = tasks.register("wowtools-download", WowToolsDownloadTask) { WowToolsDownloadTask task ->
     group = "data"
@@ -29,11 +30,15 @@ def wowToolsDownloadTask = tasks.register("wowtools-download", WowToolsDownloadT
 
 def wowdirectory = project.property('com.tomcatsaddons.wowdirectory')
 
+def addonProperties = new Properties()
+addonProperties.load(file('addon.properties').newReader())
+
 project.property('com.tomcatsaddons.games').split(',').each { String game ->
 
     def buildTask = tasks.register("$game-build", BuildAddonTask) { BuildAddonTask task ->
         dependsOn wowToolsDownloadTask
         group = "addons"
+        task.tokens = addonProperties
         task.game = game
         task.includeFrom = project.property("com.tomcatsaddons.games.${game}.includeFrom").split(',')
     }
@@ -46,6 +51,13 @@ project.property('com.tomcatsaddons.games').split(',').each { String game ->
                 delete("${wowdirectory}\\${target}\\Interface\\AddOns\\TomCats")
             }
             from("$buildDir/$game") {
+                include '**/*'
+                filesMatching(['**/*.toc', '**/*.xml', '**/*.lua', '**/*.html']) {
+                    filteringCharset = 'UTF-8'
+                    filter(ReplaceTokens, tokens: addonProperties)
+                }
+            }
+            from("$buildDir/${game}-mvel") {
                 include '**/*'
             }
             into "${wowdirectory}\\${target}\\Interface\\AddOns\\TomCats"

@@ -1,0 +1,294 @@
+<!-- See license.txt for license and copyright information -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<ContainedAlertFrame name="TomCatsDiscoveryAlertFrameTemplate" parent="UIParent" hidden="true" frameStrata="DIALOG" inherits="AlertFrameTemplate" virtual="true">
+		<Size x="241" y="81"/>
+		<Anchors>
+			<Anchor point="BOTTOM" x="0" y="170"/>
+		</Anchors>
+		<Animations>
+			<AnimationGroup parentKey="animIn">
+				<Alpha fromAlpha="1" toAlpha="0" duration="0" order="1"/>
+				<Alpha fromAlpha="0" toAlpha="1" duration="0.2" order="2"/>
+			</AnimationGroup>
+			<AnimationGroup parentKey="waitAndAnimOut">
+				<Alpha startDelay="4.05" fromAlpha="1" toAlpha="0" duration="1.5" parentKey="animOut">
+					<Scripts>
+						<OnFinished>
+							self:GetRegionParent():Hide();
+						</OnFinished>
+					</Scripts>
+				</Alpha>
+			</AnimationGroup>
+		</Animations>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Archeology\ArcheologyToast">
+					<Size x="241" y="81"/>
+					<Anchors>
+						<Anchor point="LEFT"/>
+					</Anchors>
+					<TexCoords left="0.00390625" right="0.94531250" top="0.37500000" bottom="0.69140625"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString parentKey="Text" inherits="GameFontWhite">
+					<Anchors>
+						<Anchor point="CENTER" x="28" y="-8"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Title" inherits="GameFontWhiteSmall">
+					<Anchors>
+						<Anchor point="CENTER" x="28" y="13"/>
+					</Anchors>
+				</FontString>
+				<Texture parentKey="Icon" file="Interface\AddOns\TomCats\images\tomcats_toast_icon">
+					<Size x="64" y="64"/>
+					<Anchors>
+						<Anchor point="LEFT" x="10" y="-2"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\AchievementFrame\UI-Achievement-Alert-Glow" alphaMode="ADD" hidden="true" parentKey="glow">
+					<Size x="300" y="162"/>
+					<Anchors>
+						<Anchor point="CENTER" x="0" y="0"/>
+					</Anchors>
+					<Animations>
+						<AnimationGroup parentKey="animIn">
+							<Alpha fromAlpha="0" toAlpha="1" duration="0.2" order="1"/>
+							<Alpha fromAlpha="1" toAlpha="0" duration="0.5" order="2"/>
+							<Scripts>
+								<OnFinished>
+									self:GetParent():Hide();
+								</OnFinished>
+							</Scripts>
+						</AnimationGroup>
+					</Animations>
+					<TexCoords left="0" right="0.78125" top="0" bottom="0.66796875"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-Alert-Glow" alphaMode="ADD" hidden="true" parentKey="shine">
+					<Size x="67" y="80"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="0" y="0"/>
+					</Anchors>
+					<Animations>
+						<AnimationGroup parentKey="animIn">
+							<Alpha fromAlpha="0" toAlpha="1" duration="0.2" order="1"/>
+							<Translation offsetX="200" offsetY="0" duration="0.71" order="2"/>
+							<Alpha startDelay="0.35" fromAlpha="1" toAlpha="0" duration="0.5" order="2"/>
+							<Scripts>
+								<OnFinished>
+									self:GetParent():Hide();
+								</OnFinished>
+							</Scripts>
+						</AnimationGroup>
+					</Animations>
+					<TexCoords left="0.78125" right="0.912109375" top="0" bottom="0.28125"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnEnter>
+				--Overiding the alertFrame onEnter so the this alert animates out even if the player hovers their mouse over it.
+			</OnEnter>
+		</Scripts>
+	</ContainedAlertFrame>
+	<Frame name="TomCats_ConfigDiscoveries" parent="InterfaceOptionsFramePanelContainer" hidden="true">
+		<Frames>
+			<Frame parentKey="Header" parentArray="components">
+				<Size x="80" y="80" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="16" y="-16" />
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture parentKey="Icon" file="Interface\AddOns\TomCats\images\tomcats_logo.blp">
+							<Size x="80" y="80"/>
+							<Anchors>
+								<Anchor point="CENTER" x="0" y="0"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer>
+						<FontString parentKey="Text" font="GameFontNormal" text="TomCat's Tours">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT" y="6" />
+								<Anchor point="RIGHT" relativeKey="$parent.$parent" relativePoint="RIGHT" x="-4" />
+							</Anchors>
+						</FontString>
+						<FontString parentKey="VersionText" font="GameFontNormal" text="Version: @version@">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeKey="$parent.Text" relativePoint="BOTTOMLEFT" />
+								<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="BOTTOMRIGHT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<SimpleHTML parentKey="html" file="Interface\AddOns\TomCats\discoveries.html">
+				<Size x="580" y="1" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Header" relativePoint="BOTTOMLEFT" x="0" y="-10"/>
+					<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT" x="-16" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetHeight(self:GetContentHeight())
+					</OnLoad>
+				</Scripts>
+				<Frames>
+					<Frame parentKey="popup" inherits="BackdropTemplate" hidden="true">
+						<Size x="320" y="116"/>
+						<KeyValues>
+							<KeyValue key="backdropInfo" value="TOOLTIP_BACKDROP_STYLE_DEFAULT" type="global"/>
+							<KeyValue key="backdropColor" value="TOOLTIP_DEFAULT_BACKGROUND_COLOR" type="global"/>
+							<KeyValue key="backdropBorderColor" value="TOOLTIP_DEFAULT_COLOR" type="global"/>
+						</KeyValues>
+						<Anchors>
+							<Anchor point="CENTER" />
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString parentKey="info" inherits="GameFontNormalLarge">
+									<Size x="280" y="32" />
+									<Anchors>
+										<Anchor point="CENTER" relativePoint="CENTER" x="0" y="0" />
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Frames>
+							<EditBox parentKey="editbox" inherits="InputBoxTemplate">
+								<Size x="280" y="32" />
+								<Anchors>
+									<Anchor point="TOP" relativePoint="TOP" x="2.5" y="-16" />
+								</Anchors>
+								<Scripts>
+									<OnKeyUp function="nop" />
+									<OnKeyDown function="nop" />
+									<OnChar>
+										self:SetText(self.text)
+										self:HighlightText()
+									</OnChar>
+									<OnMouseUp>
+										self:HighlightText()
+									</OnMouseUp>
+									<OnEscapePressed>
+										self:GetParent():Hide()
+									</OnEscapePressed>
+								</Scripts>
+							</EditBox>
+							<Button inherits="UIPanelButtonTemplate" text="CLOSE">
+								<Size x="96" y="22"/>
+								<Anchors>
+									<Anchor point="BOTTOM" relativePoint="BOTTOM" x="0" y="16"/>
+								</Anchors>
+								<Scripts>
+									<OnClick>
+										self:GetParent():Hide()
+									</OnClick>
+								</Scripts>
+							</Button>
+						</Frames>
+					</Frame>
+				</Frames>
+				<FontString inherits="GameFontHighlight" justifyH="LEFT" spacing="1" />
+				<FontStringHeader1 inherits="GameFontNormalMed2" justifyH="LEFT" spacing="3"/>
+			</SimpleHTML>
+			<Button parentKey="discoveriesButton" inherits="UIPanelButtonTemplate">
+				<Size x="200" y="22"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.html" relativePoint="BOTTOM" x="-108" y="-16" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetText("Discoveries: 0")
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button parentKey="discoveriesResetCounterButton" inherits="UIPanelButtonTemplate">
+				<Size x="200" y="22"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.html" relativePoint="BOTTOM" x="108" y="-16" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetText("Reset Counter for New")
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<SimpleHTML parentKey="html2" file="Interface\AddOns\TomCats\discoveries2.html">
+				<Size x="580" y="1" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.html" relativePoint="BOTTOMLEFT" x="0" y="-54"/>
+					<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT" x="-16" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetHeight(self:GetContentHeight())
+					</OnLoad>
+				</Scripts>
+				<Frames>
+					<Frame parentKey="popup" inherits="BackdropTemplate" hidden="true">
+						<Size x="320" y="116"/>
+						<KeyValues>
+							<KeyValue key="backdropInfo" value="TOOLTIP_BACKDROP_STYLE_DEFAULT" type="global"/>
+							<KeyValue key="backdropColor" value="TOOLTIP_DEFAULT_BACKGROUND_COLOR" type="global"/>
+							<KeyValue key="backdropBorderColor" value="TOOLTIP_DEFAULT_COLOR" type="global"/>
+						</KeyValues>
+						<Anchors>
+							<Anchor point="CENTER" />
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString parentKey="info" inherits="GameFontNormalLarge">
+									<Size x="280" y="32" />
+									<Anchors>
+										<Anchor point="CENTER" relativePoint="CENTER" x="0" y="0" />
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Frames>
+							<EditBox parentKey="editbox" inherits="InputBoxTemplate">
+								<Size x="280" y="32" />
+								<Anchors>
+									<Anchor point="TOP" relativePoint="TOP" x="2.5" y="-16" />
+								</Anchors>
+								<Scripts>
+									<OnKeyUp function="nop" />
+									<OnKeyDown function="nop" />
+									<OnChar>
+										self:SetText(self.text)
+										self:HighlightText()
+									</OnChar>
+									<OnMouseUp>
+										self:HighlightText()
+									</OnMouseUp>
+									<OnEscapePressed>
+										self:GetParent():Hide()
+									</OnEscapePressed>
+								</Scripts>
+							</EditBox>
+							<Button inherits="UIPanelButtonTemplate" text="CLOSE">
+								<Size x="96" y="22"/>
+								<Anchors>
+									<Anchor point="BOTTOM" relativePoint="BOTTOM" x="0" y="16"/>
+								</Anchors>
+								<Scripts>
+									<OnClick>
+										self:GetParent():Hide()
+									</OnClick>
+								</Scripts>
+							</Button>
+						</Frames>
+					</Frame>
+				</Frames>
+				<FontString inherits="GameFontHighlight" justifyH="LEFT" spacing="1" />
+				<FontStringHeader1 inherits="GameFontNormalMed2" justifyH="LEFT" spacing="3"/>
+			</SimpleHTML>
+		</Frames>
+	</Frame>
+</Ui>

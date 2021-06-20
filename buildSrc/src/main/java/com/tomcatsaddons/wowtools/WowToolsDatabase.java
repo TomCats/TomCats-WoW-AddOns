@@ -31,11 +31,11 @@ public class WowToolsDatabase {
         return tables.values();
     }
 
-    String getBuild() {
+    public String getBuild() {
         return build;
     }
 
-    WowTools getConfiguration() {
+    public WowTools getConfiguration() {
         return configuration;
     }
 

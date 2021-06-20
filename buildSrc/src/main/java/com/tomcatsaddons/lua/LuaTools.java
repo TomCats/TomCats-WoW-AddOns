@@ -12,6 +12,18 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class LuaTools {
 
+    // work-around for HSQL Arrays now being plain strings
+    public static String asInnerString(String arrayString) {
+        if (arrayString == null) {
+            return "";
+        }
+        if (arrayString.startsWith("[")) arrayString = arrayString.substring(1);
+        if (arrayString.endsWith("]")) arrayString = arrayString.substring(0, arrayString.length() - 1);
+        arrayString = arrayString.replace("[","{");
+        arrayString = arrayString.replace("]","}");
+        return arrayString;
+    }
+
     public static String asInnerString(Object[] obj) {
         if (obj == null) {
             return "";

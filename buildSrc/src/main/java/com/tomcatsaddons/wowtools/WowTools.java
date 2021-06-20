@@ -51,7 +51,7 @@ public class WowTools {
         return getDatabase(dbName).getTable(tablename);
     }
 
-    String[] getLocales() {
+    public String[] getLocales() {
         return locales;
     }
 
@@ -63,7 +63,7 @@ public class WowTools {
         return urlPattern;
     }
 
-    File getCacheDirectory() {
+    public File getCacheDirectory() {
         return cacheDirectory;
     }
 

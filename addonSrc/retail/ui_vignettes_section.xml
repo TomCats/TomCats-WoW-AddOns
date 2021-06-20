@@ -1,0 +1,96 @@
+<!-- See license.txt for license and copyright information -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<Frame name="TomCatsVignettesSection" inherits="VerticalLayoutFrame" mixin="TomCatsVignettesSectionMixin">
+		<Size x="1" y="1" />
+		<Scripts>
+			<OnLoad method="OnLoad" />
+		</Scripts>
+		<Frames>
+			<Button parentKey="Header">
+				<KeyValues>
+					<KeyValue key="layoutIndex" value="1" type="number" />
+					<KeyValue key="leftPadding" value="18" type="number" />
+					<KeyValue key="topPadding" value="13" type="number" />
+					<KeyValue key="bottomPadding" value="22" type="number" />
+				</KeyValues>
+				<Size x="20" y="20"/>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture parentKey="Background" file="Interface/AddOns/TomCats/images/VignettesSectionHeader">
+							<Size x="256" y="64"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" x="-16" y="13"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="HIGHLIGHT">
+						<Texture parentKey="HighlightBackground" file="Interface/AddOns/TomCats/images/VignettesSectionHeader" alphaMode="ADD" alpha="0.5">
+							<Size x="256" y="64"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" x="-16" y="13"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				<ButtonText nonspacewrap="true" parentKey="text" justifyH="LEFT" text="Points of Interest">
+					<Size x="234" y="10"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" x="5" y="0"/>
+					</Anchors>
+					<Color r="1" g="1" b="1" />
+				</ButtonText>
+				<NormalFont style="GameFontHighlightMedium"/>
+				<HighlightFont style="GameFontHighlightMedium"/>
+			</Button>
+		</Frames>
+	</Frame>
+	<Button name="TomCatsVignetteTitleTemplate" mixin="TomCatsVignetteTitleMixin" virtual="true" hidden="true">
+		<Size x="255" y="16"/>
+		<KeyValues>
+			<KeyValue key="bottomPadding" value="4" type="number"/>
+		</KeyValues>
+		<Layers>
+			<Layer>
+				<FontString parentKey="Text" inherits="GameFontNormalLeft">
+					<Size x="175" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="31" y="-8"/>
+					</Anchors>
+					<Color r="0.75" g="0.61" b="0"/>
+				</FontString>
+				<Texture parentKey="TaskIcon" atlas="TaskPOI-Icon" useAtlasSize="true" hidden="true">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="TOPLEFT" x="-5" y="4"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="Check" file="Interface\Buttons\UI-CheckBox-Check" hidden="true">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="TOP" relativeKey="$parent.Text" x="0" y="2"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="TagTexture" file="Interface\QuestFrame\QuestTypeIcons" hidden="true">
+					<Size x="18" y="18"/>
+					<Anchors>
+						<Anchor point="TOP" relativeKey="$parent.Text" x="0" y="3"/>
+						<Anchor point="RIGHT" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick method="OnClick" />
+			<OnEnter method="OnEnter" />
+			<OnLeave method="OnLeave" />
+		</Scripts>
+		<ButtonText nonspacewrap="true" parentKey="text">
+			<Size x="0" y="10"/>
+			<Anchors>
+				<Anchor point="LEFT" x="20" y="0"/>
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontHighlightLeft"/>
+		<HighlightFont style="GameFontNormalLeft"/>
+		<DisabledFont style="GameFontHighlightLeft"/>
+	</Button>
+</Ui>

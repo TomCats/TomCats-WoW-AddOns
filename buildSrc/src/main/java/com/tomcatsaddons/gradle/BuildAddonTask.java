@@ -1,7 +1,9 @@
 package com.tomcatsaddons.gradle;
 
+import com.tomcatsaddons.compressiontools.CompressionTools;
 import com.tomcatsaddons.lua.LuaTools;
 import com.tomcatsaddons.mvel.CSVTool;
+import com.tomcatsaddons.mvel.DBTool;
 import com.tomcatsaddons.mvel.TemplateTool;
 import com.tomcatsaddons.wowtools.WowTools;
 import org.apache.commons.io.FileUtils;
@@ -18,14 +20,18 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 public class BuildAddonTask extends DefaultTask {
 
     public String game;
     public String[] includeFrom;
+    public DBTool dbtool;
+    public Properties tokens;
 
     private static ParserContext parserContext;
 
@@ -34,13 +40,15 @@ public class BuildAddonTask extends DefaultTask {
             ParserContext pctx = new ParserContext();
             pctx.addPackageImport("java.util");
             pctx.addImport(LuaTools.class);
+            pctx.addImport(MVEL.class);
+            pctx.addImport(CompressionTools.class);
             parserContext = pctx;
         }
         return parserContext;
     }
 
     @TaskAction
-    public void build() throws IOException {
+    public void build() throws IOException, SQLException, ClassNotFoundException {
         Project project = getProject();
         File outputDir = new File(project.getBuildDir(), game);
         File sourceDir = new File(project.getProjectDir(), "addonSrc/" + game);
@@ -56,7 +64,7 @@ public class BuildAddonTask extends DefaultTask {
         processDir(sourceDir, outputDir);
     }
 
-    private void processMVEL(String mvelBaseName) throws IOException {
+    private void processMVEL(String mvelBaseName) throws IOException, SQLException, ClassNotFoundException {
         Project project = getProject();
         File mvelOutputDir = new File(project.getBuildDir(), mvelBaseName + "-mvel");
         FileUtils.deleteDirectory(mvelOutputDir);
@@ -75,6 +83,10 @@ public class BuildAddonTask extends DefaultTask {
         vars.put("wowtools", wowtools);
         vars.put("outputDir", mvelOutputDir);
         vars.put("csv", new CSVTool(project.getProjectDir()));
+        if (dbtool == null) {
+            dbtool = new DBTool(project.getProjectDir(),"addon.db");
+        }
+        vars.put("db", dbtool);
         File mvelSourceDir = new File(
                 project.getProjectDir(),
                 "addonSrc/mvel"
@@ -88,7 +100,7 @@ public class BuildAddonTask extends DefaultTask {
         String script = FileUtils.readFileToString(mvelSourceFile, StandardCharsets.UTF_8);
         Serializable exp = MVEL.compileExpression(script, getParserContext());
         MVEL.executeExpression(exp, vars);
-        processDir(mvelOutputDir, new File(project.getBuildDir(),game));
+        //processDir(mvelOutputDir, new File(project.getBuildDir(),game), false);
     }
 
     private static void processDir(File srcDir, File outputDir) throws IOException {

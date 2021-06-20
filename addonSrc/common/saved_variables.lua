@@ -2,7 +2,7 @@
 local addonName, addon = ...
 
 local defaultSavedVariables = addon.defaultSavedVariables or { }
-local HINT_ALL = addon.HINT_ALL
+local HINT_ALL = addon.constants.HINT_ALL
 
 local function OverlayVariables(template, overlay)
 	local newVars = { }

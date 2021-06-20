@@ -1,0 +1,14 @@
+## Interface: @retailVersion@
+## Title: TomCat's Tours: Noblegarden
+## Author: TomCat
+## X-Website: https://www.tomcatstours.com
+## Version: @version@
+## DefaultState: enabled
+## SavedVariables: @prefix@_Account
+## SavedVariablesPerCharacter: @prefix@_Character
+## OptionalDeps: TomCats
+## X-Part-Of: TomCat's Tours:
+## X-Category: Achievements, Map, Miscellaneous
+## X-Localizations: enUS, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW
+
+Main.xml

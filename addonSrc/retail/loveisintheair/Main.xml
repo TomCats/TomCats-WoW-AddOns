@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Include file="loveisintheair\eventTime.lua" />
+    <Include file="loveisintheair\assert.lua" />
+    <Include file="loveisintheair\preload.lua" />
+    <Include file="loveisintheair\Libraries.xml" />
+    <Include file="loveisintheair\data\Pages.lua" />
+    <Include file="loveisintheair\data\Chapters.lua" />
+    <Include file="loveisintheair\data\Links.lua" />
+    <Include file="loveisintheair\TourGuideFrame.xml" />
+    <Script file="loveisintheair\Main.lua" />
+    <Script file="loveisintheair\announcements.lua" />
+</Ui>

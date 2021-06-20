@@ -1,0 +1,577 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="TourGuideFrame.lua" />
+    <Texture name="TomCats-LoveIsInTheAirInsetBox" file="Interface\AddOns\TomCats\loveisintheair\images\box.blp" alphaMode="MOD" virtual="true"/>
+    <Texture name="TomCats-LoveIsInTheAirInsetBoxCorner" inherits="TomCats-LoveIsInTheAirInsetBox" virtual="true">
+        <Size x="13" y="14" />
+    </Texture>
+    <Frame name="TomCats-LoveIsInTheAirInsetBoxFrame" virtual="true">
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="topLeft" inherits="TomCats-LoveIsInTheAirInsetBoxCorner">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                    </Anchors>
+                    <TexCoords left="0" top="0" right="0.40625" bottom="0.0546875" />
+                </Texture>
+                <Texture parentKey="topRight" inherits="TomCats-LoveIsInTheAirInsetBoxCorner">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                    </Anchors>
+                    <TexCoords left="0.59375" top="0" right="1" bottom="0.0546875" />
+                </Texture>
+                <Texture parentKey="bottomLeft" inherits="TomCats-LoveIsInTheAirInsetBoxCorner">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                    </Anchors>
+                    <TexCoords left="0" top="0.9453125" right="0.40625" bottom="1" />
+                </Texture>
+                <Texture parentKey="bottomRight" inherits="TomCats-LoveIsInTheAirInsetBoxCorner">
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <TexCoords left="0.59375" top="0.9453125" right="1" bottom="1" />
+                </Texture>
+                <Texture parentKey="left" inherits="TomCats-LoveIsInTheAirInsetBox">
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="LEFT" />
+                    </Anchors>
+                    <TexCoords left="0" top="0.0546875" right="0.40625" bottom="0.9453125" />
+                </Texture>
+                <Texture parentKey="right" inherits="TomCats-LoveIsInTheAirInsetBox">
+                    <Anchors>
+                        <Anchor point="RIGHT" relativePoint="RIGHT" />
+                    </Anchors>
+                    <TexCoords left="0.59375" top="0.0546875" right="1" bottom="0.9453125" />
+                </Texture>
+                <Texture parentKey="top" inherits="TomCats-LoveIsInTheAirInsetBox">
+                    <Anchors>
+                        <Anchor point="TOP" relativePoint="TOP" />
+                    </Anchors>
+                    <TexCoords left="0.40625" top="0" right="0.59375" bottom="0.0546875" />
+                </Texture>
+                <Texture parentKey="bottom" inherits="TomCats-LoveIsInTheAirInsetBox">
+                    <Anchors>
+                        <Anchor point="BOTTOM" relativePoint="BOTTOM" />
+                    </Anchors>
+                    <TexCoords left="0.40625" top="0.9453125" right="0.59375" bottom="1" />
+                </Texture>
+                <Texture parentKey="middle" inherits="TomCats-LoveIsInTheAirInsetBox">
+                    <Anchors>
+                        <Anchor point="CENTER" relativePoint="CENTER" />
+                    </Anchors>
+                    <TexCoords left="0.40625" top="0.0546875" right="0.59375" bottom="0.9453125" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                local sizeX, sizeY = self:GetSize()
+                local midX = sizeX - 26
+                local midY = sizeY - 28
+                self.left:SetSize(13, midY)
+                self.right:SetSize(13, midY)
+                self.top:SetSize(midX, 14)
+                self.bottom:SetSize(midX, 14)
+                self.middle:SetSize(midX, midY)
+            </OnLoad>
+        </Scripts>
+    </Frame>
+    <Frame name="TomCats-LoveIsInTheAirLFDRoleButtonTemplate" virtual="true" inherits="LFGRoleButtonWithBackgroundTemplate" scale="1.0">
+        <Size x="32" y="32"/>
+        <Scripts>
+            <OnLoad>
+                    self.background:SetTexCoord(GetBackgroundTexCoordsForRole(self.role));
+                    self.background:SetAlpha(0.6);
+                    self.checkButton.onClick = LFDFrameRoleCheckButton_OnClick;
+                    self.background:SetSize(53, 53)
+                    LFGRoleButtonTemplate_OnLoad(self);
+            </OnLoad>
+            <OnClick>
+                    self:OnClick()
+            </OnClick>
+        </Scripts>
+    </Frame>
+    <Frame name="TomCats-LoveIsInTheAirTourGuideFrameTemplate" virtual="true" toplevel="true" movable="true" enableMouse="true" hidden="true" parent="UIParent" inherits="ButtonFrameTemplate" mixin="TomCats-LoveIsInTheAirTourGuideFrameMixin" frameStrata="MEDIUM">
+        <Size>
+            <AbsDimension x="550" y="525"/>
+        </Size>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="TomCats-LoveIsInTheAirTourGuidePage1" file="Interface\Spellbook\Spellbook-Page-1" texelSnappingBias="1.0">
+                    <Size x="512" y="512" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="7" y="-25"/>
+                    </Anchors>
+                </Texture>
+                <Texture name="TomCats-LoveIsInTheAirTourGuidePage2" file="Interface\Spellbook\Spellbook-Page-2">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuidePage1" relativePoint="TOPRIGHT" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture file="Interface\AddOns\TomCats\loveisintheair\images\Tour_Guide_Page_Overlay" texelSnappingBias="1.0">
+                    <Size x="256" y="512" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="51" y="-25"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="BACKGROUND" textureSubLevel="2">
+                <Texture alphaMode="MOD">
+                    <Size x="533" y="494" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="7" y="-25"/>
+                    </Anchors>
+                    <Color r="0.7803" g="0.6705" b="0.6117"/>
+                </Texture>
+            </Layer>
+            <Layer level="BACKGROUND" textureSubLevel="3">
+                <Texture file="Interface\AddOns\TomCats\loveisintheair\images\Tour_Guide_Bookmark_Red" texelSnappingBias="1.0">
+                    <Size x="512" y="512" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="7" y="-25"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level = "OVERLAY" textureSubLevel="-2">
+                <Texture name="$parentPortraitBackground" parentKey="portrait">
+                    <Size x="61" y="61" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="-6" y="8" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame setAllPoints="true" parentKey="dungeon">
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="$parentTitle" inherits="QuestTitleFontBlackShadow" justifyH="LEFT" parentKey="title" text="LFG_TYPE_RANDOM_DUNGEON">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="85" y="-60"/>
+                            </Anchors>
+                        </FontString>
+                        <FontString name="$parentDescription" inherits="QuestFont" justifyH="LEFT" parentKey="description">
+                            <Size x="280" y="0"/>
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
+                            </Anchors>
+                            <Color r="1" g="1" b="1" />
+                            <Shadow>
+                                <Offset x="1" y="-1"/>
+                            </Shadow>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Frame setAllPoints="true" parentKey="roles">
+                        <Size x="300" y="100" />
+                        <Anchors>
+                            <Anchor point="TOPLEFT">
+                                <Offset>
+                                    <AbsDimension x="385" y="-65"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Frames>
+                            <Button name="$parentRoleButtonTank" parentKey="tank" inherits="TomCats-LoveIsInTheAirLFDRoleButtonTemplate" id="1">
+                                <KeyValues>
+                                    <KeyValue key="role" value="TANK" type="string"/>
+                                </KeyValues>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" x="0" y="0" />
+                                </Anchors>
+                            </Button>
+                            <Button name="$parentRoleButtonHealer" parentKey="healer" inherits="TomCats-LoveIsInTheAirLFDRoleButtonTemplate" id="2">
+                                <KeyValues>
+                                    <KeyValue key="role" value="HEALER" type="string"/>
+                                </KeyValues>
+                                <Anchors>
+                                    <Anchor point="LEFT" relativeTo="$parentRoleButtonTank" relativePoint="RIGHT" x="10" y="0" />
+                                </Anchors>
+                            </Button>
+                            <Button name="$parentRoleButtonDPS" parentKey="dps" inherits="TomCats-LoveIsInTheAirLFDRoleButtonTemplate" id="3">
+                                <KeyValues>
+                                    <KeyValue key="role" value="DAMAGER" type="string"/>
+                                </KeyValues>
+                                <Anchors>
+                                    <Anchor point="LEFT" relativeTo="$parentRoleButtonHealer" relativePoint="RIGHT" x="10" y="0" />
+                                </Anchors>
+                            </Button>
+                        </Frames>
+                    </Frame>
+                    <Button name="$parentFindGroupButton" parentKey="findGroupButton" inherits="MagicButtonTemplate" text="FIND_A_GROUP" motionScriptsWhileDisabled="true">
+                        <Size>
+                            <AbsDimension x="135" y="22"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="375" y="-100" />
+                        </Anchors>
+                        <Scripts>
+                            <OnClick>
+                                    local mode, subMode = GetLFGMode(LE_LFG_CATEGORY_LFD);
+                                    if ( mode == "queued" or mode == "listed" or mode == "rolecheck" or mode == "suspended" ) then
+                                        LeaveLFG(LE_LFG_CATEGORY_LFD);
+                                    else
+                                        local leader, tank, healer, dps = GetLFGRoles()
+                                        SetLFGRoles(
+                                            false,
+                                            self:GetParent().roles.tank.checkButton:GetChecked(),
+                                            self:GetParent().roles.healer.checkButton:GetChecked(),
+                                            self:GetParent().roles.dps.checkButton:GetChecked()
+                                        ) -- where lead, tank, healer, dps are booleans, may set with role check button clicks
+                                        ClearAllLFGDungeons(LE_LFG_CATEGORY_LFD)
+                                        SetLFGDungeon(LE_LFG_CATEGORY_LFD, 288)
+                                        JoinLFG(LE_LFG_CATEGORY_LFD)
+                                        SetLFGRoles(leader,tank,healer,dps)
+                                    end
+                            </OnClick>
+                            <OnEnter>
+                                    if ( self.tooltip ) then
+                                        GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+                                        GameTooltip:SetText(self.tooltip, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, 1, true);
+                                        GameTooltip:Show();
+                                    end
+                            </OnEnter>
+                            <OnLeave function="GameTooltip_Hide"/>
+                        </Scripts>
+                    </Button>
+                </Frames>
+                <Scripts>
+                    <OnLoad>
+                            local dungeonName, typeID, subtypeID,_,_,_,_,_,_,_,backgroundTexture,difficulty,_,dungeonDescription, isHoliday, bonusRepAmount, _, isTimewalker = GetLFGDungeonInfo(288)
+                            self.title:SetText(dungeonName)
+                            self.description:SetText(dungeonDescription)
+                            LFG_UpdateAvailableRoles(self.roles.tank, self.roles.healer, self.roles.dps)
+                    </OnLoad>
+                </Scripts>
+            </Frame>
+            <Button name="TomCats-LoveIsInTheAirTourGuideTutorialButton" parentKey="MainHelpButton" inherits="MainHelpPlateButton" hidden="true">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideFrame" x="39" y="20" />
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                            SpellBook_ToggleTutorial();
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="TomCats-LoveIsInTheAirTourGuideFrameTabButton1" inherits="SpellBookFrameTabButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Frame name="TomCats-LoveIsInTheAirTourGuidePageNavigationFrame" setAllPoints="true" parentKey="pageNavigationFrame">
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="$parentDescription" inherits="QuestFont" justifyH="LEFT" parentKey="description">
+                            <Size x="415" y="0"/>
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="85" y="-150"/>
+                            </Anchors>
+                            <Color r="1" g="1" b="1" />
+                            <Shadow>
+                                <Offset x="1" y="-1"/>
+                            </Shadow>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Button name="TomCats-LoveIsInTheAirTourGuidePrevPageButton" parentKey="prevPageButton" hidden="true">
+                        <Size>
+                            <AbsDimension x="32" y="32"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="BOTTOMRIGHT" relativeTo="TomCats-LoveIsInTheAirTourGuideFrame">
+                                <Offset>
+                                    <AbsDimension x="-66" y="26"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
+                        <PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down"/>
+                        <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
+                        <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+                    </Button>
+                    <Button name="TomCats-LoveIsInTheAirTourGuideNextPageButton" parentKey="nextPageButton" hidden="true">
+                        <Size>
+                            <AbsDimension x="32" y="32"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="BOTTOMRIGHT">
+                                <Offset>
+                                    <AbsDimension x="-32" y="21"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <NormalTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Up"/>
+                        <PushedTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Down"/>
+                        <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Disabled"/>
+                        <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+                    </Button>
+                </Frames>
+            </Frame>
+            <Frame setAllPoints="true" inherits="TomCats-LoveIsInTheAirInsetBoxFrame" hidden="true">
+                <Size x="442" y="77"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="77" y="-54"/>
+                </Anchors>
+            </Frame>
+            <Frame name="TomCats-LoveIsInTheAirTourGuideSideTabsFrame" parentKey="chapterButtons">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideFrame" relativePoint="TOPLEFT"/>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="TomCats-LoveIsInTheAirTourGuideFrame" relativePoint="BOTTOMRIGHT"/>
+                </Anchors>
+                <Frames>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab1" parentKey="button1" inherits="SpellBookSkillLineTabTemplate" id="1">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-36"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab2" parentKey="button2" inherits="SpellBookSkillLineTabTemplate" id="2">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab1" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-17"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab3" parentKey="button3" inherits="SpellBookSkillLineTabTemplate" id="3">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab2" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-17"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab4" parentKey="button4" inherits="SpellBookSkillLineTabTemplate" id="4">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab3" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-17"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab5" parentKey="button5" inherits="SpellBookSkillLineTabTemplate" id="5">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab4" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-17"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab6" parentKey="button6" inherits="SpellBookSkillLineTabTemplate" id="6">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab5" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-17"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab7" parentKey="button7" inherits="SpellBookSkillLineTabTemplate" id="7">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab6" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-17"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <CheckButton name="TomCats-LoveIsInTheAirTourGuideSkillLineTab8" parentKey="button8" inherits="SpellBookSkillLineTabTemplate" id="8">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab7" relativePoint="BOTTOMLEFT">
+                                <Offset>
+                                    <AbsDimension x="0" y="-17"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                    </CheckButton>
+                    <Frame name="TomCats-LoveIsInTheAirTourGuideTabFlashFrame" hidden="true">
+                        <Size>
+                            <AbsDimension x="10" y="10"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab1">
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab1Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab1"/>
+                                    </Anchors>
+                                </Texture>
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab2Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab2"/>
+                                    </Anchors>
+                                </Texture>
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab3Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab3"/>
+                                    </Anchors>
+                                </Texture>
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab4Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab4"/>
+                                    </Anchors>
+                                </Texture>
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab5Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab5"/>
+                                    </Anchors>
+                                </Texture>
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab6Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab6"/>
+                                    </Anchors>
+                                </Texture>
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab7Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab7"/>
+                                    </Anchors>
+                                </Texture>
+                                <Texture name="TomCats-LoveIsInTheAirTourGuideSkillLineTab8Flash" file="Interface\Buttons\CheckButtonGlow" alphaMode="ADD" hidden="true">
+                                    <Size>
+                                        <AbsDimension x="64" y="64"/>
+                                    </Size>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="TomCats-LoveIsInTheAirTourGuideSkillLineTab8"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                    </Frame>
+                </Frames>
+            </Frame>
+        </Frames>
+        <Scripts>
+            <OnLoad>
+                    self:OnLoad()
+            </OnLoad>
+            <OnShow>
+                    PlaySound(SOUNDKIT.IG_SPELLBOOK_OPEN, "SFX", false)
+                    self:OnShow()
+            </OnShow>
+            <OnHide>
+                    PlaySound(SOUNDKIT.IG_SPELLBOOK_CLOSE, "SFX", false)
+            </OnHide>
+        </Scripts>
+    </Frame>
+    <Button name="TomCats-LoveIsInTheAirCharacterListEntryTemplate" registerForClicks="LeftButtonUp, RightButtonUp" virtual="true">
+        <Size x="140" y="20"/>
+        <Layers>
+            <Layer level="OVERLAY">
+                <Texture atlas="Capacitance-General-WorkOrderCheckmark" hidden="true" parentKey="Complete">
+                    <Size x="16" y="16"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="4" y="-2"/>
+                    </Anchors>
+                </Texture>
+                <Texture file="Interface\DialogFrame\DialogIcon-AlertNew-16" hidden="true" parentKey="Alert">
+                    <Size x="16" y="16"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="4" y="-2"/>
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="CharacterFactionAlliance" file="Interface\WORLDSTATEFRAME\AllianceIcon" hidden="true">
+                    <Size x="20" y="20"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="22" y="0"/>
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="CharacterFactionHorde" file="Interface\WORLDSTATEFRAME\HordeIcon" hidden="true">
+                    <Size x="20" y="20"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="22" y="0"/>
+                    </Anchors>
+                </Texture>
+                <FontString parentKey="Bracelets" inherits="GameFontNormalSmall" wordwrap="false">
+                    <Size x="23" y="0"/>
+                    <Anchors>
+                        <Anchor point="RIGHT" relativePoint="RIGHT" x="-4" y="0"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="Charms" inherits="GameFontNormalSmall" wordwrap="false">
+                    <Size x="36" y="0"/>
+                    <Anchors>
+                        <Anchor point="RIGHT" relativeKey="$parent.Bracelets" relativePoint="LEFT" x="-4" y="0"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="Tokens" inherits="GameFontNormalSmall" wordwrap="false">
+                    <Size x="30" y="0"/>
+                    <Anchors>
+                        <Anchor point="RIGHT" relativeKey="$parent.Charms" relativePoint="LEFT" x="-4" y="0"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="CharacterLevel" inherits="GameFontNormalSmall" wordwrap="false">
+                    <Size x="22" y="0"/>
+                    <Anchors>
+                        <Anchor point="RIGHT" relativeKey="$parent.Tokens" relativePoint="LEFT" x="-4" y="0"/>
+                    </Anchors>
+                </FontString>
+                <Texture parentKey="CharacterClass" file="Interface\WORLDSTATEFRAME\Icons-Classes" alpha="0.8">
+                    <Size x="16" y="16"/>
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="LEFT" x="44" y="0"/>
+                    </Anchors>
+                </Texture>
+                <FontString parentKey="CharacterName" inherits="GameFontNormalSmallLeft" wordwrap="false">
+                    <Size x="90" y="20"/>
+                    <Anchors>
+                        <Anchor point="LEFT" relativePoint="LEFT" x="66" y="-1"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="CharacterRealm" inherits="GameFontNormalSmallLeft" wordwrap="false">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeKey="$parent.CharacterName" relativePoint="RIGHT" x="4" />
+                        <Anchor point="RIGHT" relativeKey="$parent.CharacterLevel" relativePoint="LEFT" x="-4" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <NormalTexture setAllPoints="true" file="Interface\GuildFrame\GuildFrame">
+            <TexCoords left="0.36230469" right="0.38183594" top="0.95898438" bottom="0.99804688"/>
+        </NormalTexture>
+        <HighlightTexture file="Interface\FriendsFrame\UI-FriendsFrame-HighlightBar" alphaMode="ADD" setAllPoints="true"/>
+    </Button>
+</Ui>

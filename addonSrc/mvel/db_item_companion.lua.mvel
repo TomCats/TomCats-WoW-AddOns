@@ -1,0 +1,4 @@
+local _, addon = ...
+addon.item_companion = {
+@foreach{itemCompanion : itemCompanions}	[@{itemCompanion.ITEMID}] = @{itemCompanion.SPECIESID},
+@end{}}

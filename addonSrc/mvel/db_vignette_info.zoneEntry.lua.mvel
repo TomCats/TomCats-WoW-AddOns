@@ -1,0 +1,5 @@
+local _ = nil return {
+	{"ID","Atlas","Locations","Items",@{vignetteZone.EXT}},
+	{@foreach{vignetteInfo : vignetteInfos}{@{vignetteInfo.ID},"@{vignetteInfo.ATLASNAME}",{@{vignetteInfo.LOCATIONS}},@{vignetteInfo.ITEMS},@{vignetteInfo.EXT}},@end{}},
+	{"@{vignetteZone.V_RULE}","@{vignetteZone.L_RULE}","@{vignetteZone.T_RULE}"}
+}

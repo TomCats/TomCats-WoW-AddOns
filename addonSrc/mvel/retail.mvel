@@ -1,0 +1,98 @@
+retaildb = "retail-37988";
+
+db.loadCSV("data/retailvignetteinfo.csv","Int,Int,String,String,String");
+db.loadCSV("data/retailvignettezones.csv","Int,String,String,String,String,String");
+db.loadCSV(wowtools.getDatabase(retaildb).getTable("vignette"));
+db.loadCSV(wowtools.getDatabase(retaildb).getTable("questfeedbackeffect"));
+db.loadCSV(wowtools.getDatabase(retaildb).getTable("uitextureatlasmember"));
+db.loadCSV(wowtools.getDatabase(retaildb).getTable("playercondition"));
+
+do {
+	vars = {:};
+	itemCompanions = csv.query("data", "select ITEMID, SPECIESID from retailitemcompanion;", "Int,Int");
+	vars.put("itemCompanions", itemCompanions);
+    template.mergeUTF8("db_item_companion.lua.mvel", "db_item_companion.lua", vars);
+} while(false);
+
+do {
+	vars = {:};
+	zones = {:};
+	locales = {:};
+	vars.zones = zones;
+	vignetteInfo = {:};
+	vars.vignetteInfo = vignetteInfo;
+	vignetteZones = db.query("select ID, EXT, EXPR, V_RULE, L_RULE, T_RULE from retailvignettezones order by ID;");
+	for(lang : wowtools.locales) {
+		locales[lang] = {:};
+	}
+
+	for(vignetteZone : vignetteZones) {
+		zones[vignetteZone.ID] = {:};
+		zones[vignetteZone.ID]["vignetteZone"] = vignetteZone;
+		zones[vignetteZone.ID]["vignetteInfos"] = db.query(
+			"SELECT A.ID, LOCATIONS, ITEMS, EXT, VISIBLETRACKINGQUESTID, PREVQUESTID0, PREVQUESTID1, PREVQUESTID2, PREVQUESTID3, T.COMMITTEDNAME AS ATLASNAME FROM retailvignetteinfo AS A
+				JOIN VIGNETTE_" + wowtools.defaultLocale + " AS B ON A.ID = B.ID
+				JOIN QUESTFEEDBACKEFFECT AS Q ON B.QUESTFEEDBACKEFFECTID = Q.ID
+				JOIN UITEXTUREATLASMEMBER AS T ON Q.MINIMAPATLASMEMBERID = T.ID
+				LEFT JOIN PLAYERCONDITION AS C ON B.PLAYERCONDITIONID = C.ID
+				WHERE A.MAPID = " + vignetteZone.ID + " ORDER BY A.ID");
+		for(vignetteInfo : zones[vignetteZone.ID]["vignetteInfos"]) {
+			vignetteInfo.LOCATIONS = LuaTools.asInnerString(vignetteInfo.LOCATIONS);
+			vignetteInfo.ITEMS = LuaTools.asInnerString(vignetteInfo.ITEMS);
+			if (vignetteInfo.ITEMS == "") {
+				vignetteInfo.ITEMS = "_";
+			} else {
+				vignetteInfo.ITEMS = "{" + vignetteInfo.ITEMS + "}";
+			}
+			vignetteInfo.PREVQUESTID = [vignetteInfo.PREVQUESTID0, vignetteInfo.PREVQUESTID1, vignetteInfo.PREVQUESTID2, vignetteInfo.PREVQUESTID3];
+			vignetteInfo.remove("PREVQUESTID0");
+			vignetteInfo.remove("PREVQUESTID1");
+			vignetteInfo.remove("PREVQUESTID2");
+			vignetteInfo.remove("PREVQUESTID3");
+			vignetteInfo.EXT = MVEL.eval(vignetteInfo.EXT);
+			vignetteInfo.EXT = LuaTools.asInnerString(MVEL.eval(vignetteZone.EXPR, vignetteInfo));
+		}
+		val = template.mergeCP1252("db_vignette_info.zoneEntry.lua.mvel", zones[vignetteZone.ID]);
+		vignetteInfo[vignetteZone.ID] = val;
+	}
+	model = CompressionTools.buildModel(vignetteInfo.values().toArray());
+	vars.put("model",model);
+	template.mergeUTF8("db_vignette_info.lua.mvel", "db_vignette_info_uncompressed.lua", vars);
+	for(vignetteZone : vignetteZones) {
+		vignetteInfo[vignetteZone.ID] = CompressionTools.compress(model, vignetteInfo[vignetteZone.ID].getBytes());
+	}
+	template.mergeCP1252("db_vignette_info.lua.mvel", "db_vignette_info.lua", vars);
+} while(false);
+
+do {
+	vars = {:};
+	vars.put("languages", wowtools.locales);
+	locales = {:};
+	vars.put("locales",locales);
+	models = {:};
+	vars.put("models",models);
+	vignetteZones = db.query("SELECT ID, EXT, EXPR FROM retailvignettezones ORDER BY ID");
+	for(lang : wowtools.locales) {
+		locales[lang] = {:};
+		for(vignetteZone : vignetteZones) {
+			names = LuaTools.createContiguousArrayString(db.queryForStringList(
+				"SELECT B.NAME_lang FROM retailvignetteinfo AS A
+					JOIN VIGNETTE_" + lang + " AS B ON A.ID = B.ID
+					WHERE A.MAPID = " + vignetteZone.ID + " ORDER BY A.ID"), true);
+			//gzipped = GzipTools.gzip(names);
+			//escaped = LuaTools.bytesAsUTF8String(gzipped);
+			//locales[lang].put(vignetteZone.ID, LuaTools.asString(names, true));
+			locales[lang].put(vignetteZone.ID, names);
+		}
+		model = CompressionTools.buildModel(locales[lang].values().toArray());
+		models.put(lang, model);
+	}
+	template.mergeUTF8("db_vignette_names.lua.mvel", "db_vignette_names_uncompressed.lua", vars);
+	for (lang : wowtools.locales) {
+		model = models.get(lang);
+		for(vignetteZone : vignetteZones) {
+			locales[lang].put(vignetteZone.ID, CompressionTools.compress(model, locales[lang].get(vignetteZone.ID).getBytes("UTF-8")));
+		}
+	}
+	template.mergeCP1252("db_vignette_names.lua.mvel", "db_vignette_names.lua", vars);
+} while(false);

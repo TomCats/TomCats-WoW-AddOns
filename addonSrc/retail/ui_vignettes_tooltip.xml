@@ -1,0 +1,143 @@
+<!-- See license.txt for license and copyright information -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<FontString name="TomCatsGameTooltipText" inherits="GameTooltipText" parentArray="Text" justifyH="LEFT" virtual="true" hidden="true" />
+
+	<Frame name="TomCatsLootCategoryIconTemplate" virtual="true" scale="0.9">
+		<Size x="21" y="21" />
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="BOTTOMRIGHT" x="-3" y="7" />
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Background">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<Color r="0" g="0" b="0" a="1" />
+				</Texture>
+				<MaskTexture file="Interface\CharacterFrame\TempPortraitAlphaMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Icon" x="1" y="-1"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Icon" x="-1" y="1"/>
+					</Anchors>
+					<MaskedTextures>
+						<MaskedTexture childKey="Background"/>
+					</MaskedTextures>
+				</MaskTexture>
+			</Layer>
+			<Layer>
+				<Texture parentKey="Icon">
+					<Size x="20" y="20"/>
+					<Anchors>
+						<Anchor point="CENTER" x="0" y="0.2"/>
+					</Anchors>
+				</Texture>
+				<MaskTexture parentKey="CircleMask" file="Interface\CharacterFrame\TempPortraitAlphaMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Icon" x="0.5" y="-0.5"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Icon" x="-0.5" y="0.5"/>
+					</Anchors>
+					<MaskedTextures>
+						<MaskedTexture childKey="Icon"/>
+					</MaskedTextures>
+				</MaskTexture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="IconBorder" atlas="auctionhouse-itemicon-border-white">
+					<Size x="30" y="30"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="TomCatsCompositeLootLabelTemplate" parentArray="Loot" hidden="true" virtual="true">
+		<Size x="43" y="43" />
+		<Layers>
+			<Layer>
+				<Texture parentKey="Icon">
+					<Size x="37.5" y="37.5"/>
+					<Anchors>
+						<Anchor point="CENTER" x="0" y="0.5"/>
+					</Anchors>
+				</Texture>
+				<MaskTexture file="Interface\CharacterFrame\TempPortraitAlphaMask" hWrapMode="CLAMPTOBLACKADDITIVE" vWrapMode="CLAMPTOBLACKADDITIVE">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Icon" x="1.2" y="-1.2"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Icon" x="-1.2" y="1.2"/>
+					</Anchors>
+					<MaskedTextures>
+						<MaskedTexture childKey="Icon"/>
+					</MaskedTextures>
+				</MaskTexture>
+				<FontString inherits="TomCatsGameTooltipText" font="Game12Font">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="16" y="-5" />
+						<Anchor point="RIGHT" relativeKey="$parent.$parent" relativePoint="RIGHT" x="-10" y="0" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="TomCatsGameTooltipText" font="Game11Font">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="24" y="-9" />
+						<Anchor point="RIGHT" relativeKey="$parent.$parent" relativePoint="RIGHT" x="-10" y="0" />
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="IconBorder" atlas="auctionhouse-itemicon-border-white">
+					<Size x="54" y="54"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame parentKey="CategoryIcon" inherits="TomCatsLootCategoryIconTemplate" />
+		</Frames>
+	</Frame>
+
+	<Frame name="TomCatsVignetteTooltip" parent="UIParent" clampedToScreen="true" frameStrata="TOOLTIP" inherits="TooltipBackdropTemplate" mixin="TomCatsVignetteTooltipMixin" hidden="true">
+		<Size x="230" y="1" />
+		<Layers>
+			<Layer>
+				<FontString inherits="TomCatsGameTooltipText" font="GameTooltipHeaderText" />
+				<FontString inherits="TomCatsGameTooltipText" font="GameTooltipText">
+					<KeyValues>
+						<KeyValue key="topPadding" value="2" />
+					</KeyValues>
+				</FontString>
+				<FontString inherits="TomCatsGameTooltipText" font="GameTooltipText">
+					<KeyValues>
+						<KeyValue key="topPadding" value="14" />
+					</KeyValues>
+				</FontString>
+				<FontString inherits="TomCatsGameTooltipText" font="GameTooltipText">
+					<KeyValues>
+						<KeyValue key="topPadding" value="14" />
+					</KeyValues>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+			<Frame inherits="TomCatsCompositeLootLabelTemplate" />
+		</Frames>
+		<Scripts>
+			<OnLoad method="OnLoad" inherit="append" />
+			<OnEvent method="OnEvent" />
+			<OnUpdate method="OnUpdate" inherit="append"/>
+		</Scripts>
+	</Frame>
+</Ui>

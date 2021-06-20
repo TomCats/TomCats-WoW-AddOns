@@ -1,0 +1,258 @@
+<!-- See license.txt for license and copyright information -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Frame name="TomCats_Config" parent="InterfaceOptionsFramePanelContainer" hidden="true">
+		<Frames>
+			<Frame parentKey="Header" parentArray="components">
+				<Size x="80" y="80" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="16" y="-16" />
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture parentKey="Icon" file="Interface\AddOns\TomCats\images\tomcats_logo.blp">
+							<Size x="80" y="80"/>
+							<Anchors>
+								<Anchor point="CENTER" x="0" y="0"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer>
+						<FontString parentKey="Text" font="GameFontNormal" text="TomCat's Tours">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT" y="6" />
+								<Anchor point="RIGHT" relativeKey="$parent.$parent" relativePoint="RIGHT" x="-4" />
+							</Anchors>
+						</FontString>
+						<FontString parentKey="VersionText" font="GameFontNormal" text="Version: @version@">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeKey="$parent.Text" relativePoint="BOTTOMLEFT" />
+								<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="BOTTOMRIGHT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<SimpleHTML parentKey="html1" file="Interface\AddOns\TomCats\configuration1.html">
+				<Size x="580" y="1" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Header" relativePoint="BOTTOMLEFT" x="0" y="-10"/>
+					<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT" x="-16" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetHeight(self:GetContentHeight())
+					</OnLoad>
+				</Scripts>
+				<Frames>
+					<Frame parentKey="popup" inherits="BackdropTemplate" hidden="true">
+						<Size x="320" y="116"/>
+						<KeyValues>
+							<KeyValue key="backdropInfo" value="TOOLTIP_BACKDROP_STYLE_DEFAULT" type="global"/>
+							<KeyValue key="backdropColor" value="TOOLTIP_DEFAULT_BACKGROUND_COLOR" type="global"/>
+							<KeyValue key="backdropBorderColor" value="TOOLTIP_DEFAULT_COLOR" type="global"/>
+						</KeyValues>
+						<Anchors>
+							<Anchor point="CENTER" />
+						</Anchors>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<FontString parentKey="info" inherits="GameFontNormalLarge">
+									<Size x="280" y="32" />
+									<Anchors>
+										<Anchor point="CENTER" relativePoint="CENTER" x="0" y="0" />
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+						<Frames>
+							<EditBox parentKey="editbox" inherits="InputBoxTemplate">
+								<Size x="280" y="32" />
+								<Anchors>
+									<Anchor point="TOP" relativePoint="TOP" x="2.5" y="-16" />
+								</Anchors>
+								<Scripts>
+									<OnChar>
+										self:SetText(self.text)
+										self:HighlightText()
+									</OnChar>
+									<OnMouseUp>
+										self:HighlightText()
+									</OnMouseUp>
+									<OnEscapePressed>
+										self:GetParent():Hide()
+									</OnEscapePressed>
+								</Scripts>
+							</EditBox>
+							<Button inherits="UIPanelButtonTemplate" text="CLOSE">
+								<Size x="96" y="22"/>
+								<Anchors>
+									<Anchor point="BOTTOM" relativePoint="BOTTOM" x="0" y="16"/>
+								</Anchors>
+								<Scripts>
+									<OnClick>
+										self:GetParent():Hide()
+									</OnClick>
+								</Scripts>
+							</Button>
+						</Frames>
+					</Frame>
+				</Frames>
+				<FontString inherits="GameFontHighlight" justifyH="LEFT" spacing="1" />
+				<FontStringHeader1 inherits="GameFontNormalMed2" justifyH="LEFT" spacing="3"/>
+			</SimpleHTML>
+			<Button parentKey="discoveriesButton" inherits="UIPanelButtonTemplate">
+				<Size x="200" y="22"/>
+				<Scripts>
+					<OnLoad>
+						local parent = self:GetParent()
+						local regions = { parent.html1:GetRegions() }
+						for k, v in ipairs(regions) do
+							if (v.GetText) then
+								local text = v:GetText()
+								if (string.find(text, "|c00000001|r")) then
+									self:ClearAllPoints()
+									self:SetPoint("RIGHT", v, "RIGHT", 0, -3)
+									self:SetText("Discoveries: 0")
+								end
+							end
+						end
+					</OnLoad>
+					<OnClick>
+						InterfaceOptionsFrame_OpenToCategory(_G["TomCats_ConfigDiscoveries"])
+					</OnClick>
+				</Scripts>
+			</Button>
+			<CheckButton parentKey="checkBox_betaFeatures" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.html1" relativePoint="BOTTOMLEFT" x="0" y="-4"/>
+				</Anchors>
+			</CheckButton>
+			<CheckButton parentKey="checkBox_minimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.html1" relativePoint="BOTTOMLEFT" x="290" y="-4"/>
+				</Anchors>
+			</CheckButton>
+			<CheckButton parentKey="checkBox_mapIconAnimation" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_betaFeatures" relativePoint="BOTTOMLEFT" x="0" y="-8"/>
+				</Anchors>
+			</CheckButton>
+			<Frame parentKey="IconSizeSliderLabel">
+				<Size x="1" y="1" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_minimapButton" relativePoint="BOTTOMLEFT" x="2" y="-14"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString parentKey="Text" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Slider name="$parentIconSizeSlider" inherits="OptionsSliderTemplate" minValue="0.5" maxValue="2.0" valueStep="0.05" obeyStepOnDrag="true" defaultValue="1.0">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.IconSizeSliderLabel.Text" relativePoint="RIGHT" x="8" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnValueChanged>
+						self:SetValue(value)
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
+			<SimpleHTML parentKey="html2" file="Interface\AddOns\TomCats\configuration2.html">
+				<Size x="580" y="1" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation" relativePoint="BOTTOMLEFT" x="0" y="-8"/>
+					<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT" x="-16" y="0" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetHeight(self:GetContentHeight())
+					</OnLoad>
+				</Scripts>
+				<FontString inherits="GameFontHighlight" justifyH="LEFT" spacing="1" />
+				<FontStringHeader1 inherits="GameFontNormalMed2" justifyH="LEFT" spacing="3"/>
+			</SimpleHTML>
+		</Frames>
+		<Scripts>
+			<OnHide>
+				self.html1.popup:Hide()
+			</OnHide>
+		</Scripts>
+	</Frame>
+
+	<Frame name="TomCats_Config_HeaderTemplate" parentArray="components" virtual="true">
+		<Size x="1" y="20" />
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString parentKey="text" inherits="GameFontNormalMed2" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+					</Anchors>
+				</FontString>
+				<Texture name="$parentDisplayHeaderUnderline">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.text" relativePoint="BOTTOMLEFT" x="0" y="-3" />
+					</Anchors>
+					<Size x="580" y="1"/>
+					<Color r="1" g="1" b="1" a="0.2"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				self.text:SetText(self:GetAttribute("title"))
+				local componentCount = #self:GetParent().components
+				if (componentCount == 1) then
+				self:SetPoint("TOPLEFT", self:GetParent(), "BOTTOMLEFT", 0, -16)
+				else
+				self:SetPoint("TOPLEFT", self:GetParent().components[componentCount - 1], "BOTTOMLEFT", 0, -16)
+				end
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Frame name="TomCats_Config_MapIcons" parent="InterfaceOptionsFramePanelContainer" hidden="true">
+		<Frames>
+			<Frame parentKey="Header" parentArray="components">
+				<Size x="80" y="80" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="16" y="-16" />
+				</Anchors>
+				<Layers>
+					<Layer>
+						<Texture parentKey="Icon" file="Interface\AddOns\TomCats\images\tomcats_logo.blp">
+							<Size x="80" y="80"/>
+							<Anchors>
+								<Anchor point="CENTER" x="0" y="0"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer>
+						<FontString parentKey="Text" font="GameFontNormal" text="TomCat's Tours">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT" y="6" />
+								<Anchor point="RIGHT" relativeKey="$parent.$parent" relativePoint="RIGHT" x="-4" />
+							</Anchors>
+						</FontString>
+						<FontString parentKey="VersionText" font="GameFontNormal" text="Version: @version@">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeKey="$parent.Text" relativePoint="BOTTOMLEFT" />
+								<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="BOTTOMRIGHT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame parentKey="mapIconsOptionsHeader" inherits="TomCats_Config_HeaderTemplate">
+				<Attributes>
+					<Attribute name="title" value="Map Icons" />
+				</Attributes>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>

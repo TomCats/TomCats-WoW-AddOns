@@ -66,4 +66,7 @@ public class WowToolsTable {
         return QueryTool.query(this, locale, query);
     }
 
+    public String getName() {
+        return name;
+    }
 }
