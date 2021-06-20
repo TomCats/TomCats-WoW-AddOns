@@ -210,7 +210,6 @@
 				end
 				self.showTimer = nil;
 				if ( self:GetID() > 1 ) then
-					print("fired!")
 					self.parent = _G["TomCats_DropDownList"..(self:GetID() - 1)];
 				end
 			</OnShow>
