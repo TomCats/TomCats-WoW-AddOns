@@ -225,7 +225,8 @@ public class LuaTools {
                 luaRaw.append(result).append(",");
             }
         }
-        luaRaw.deleteCharAt(luaRaw.length() - 1);
+        if (luaRaw.length() > 8)
+            luaRaw.deleteCharAt(luaRaw.length() - 1);
         luaRaw.append("}");
         return luaRaw.toString();
     }
