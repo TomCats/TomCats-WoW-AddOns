@@ -276,6 +276,17 @@ do
 		["SmallQuestBang"] = true, -- from discord dump
 		["WarMode-Broker-32x32"] = true, -- from discord dump 3/15
 		["Vehicle-Air-Occupied"] = true, -- from discord dump 3/15
+		["Embercourt-Guest-DromanAliothe"] = true, -- from discord dump
+		["Embercourt-Guest-CryptkeeperKassir"] = true, -- from discord dump
+		["Embercourt-Guest-Kleia"] = true, -- from discord dump
+		["Embercourt-Guest-Pelagos"] = true, -- from discord dump
+		["Embercourt-Guest-GrandmasterVole"] = true, -- from discord dump
+		["Islands-AzeriteChest"] = true, -- from discord dump
+		["Islands-QuestBang"] = true, -- from discord dump
+		["Islands-HordeBoat"] = true, -- from discord dump
+		["Embercourt-Guest-HuntCaptainKorayn"] = true, -- from discord dump
+		["EmberCourt-32x32"] = true, -- from discord dump
+		["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- from discord dump
 	}
 	for k in pairs(tmp1) do
 		atlasNameExclusions[string.lower(k)] = true
