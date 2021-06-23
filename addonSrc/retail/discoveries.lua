@@ -25,10 +25,10 @@ local TomCatsDiscoveryAlertSystem
 local TomCats_Config = TomCats_Config
 local TomCats_ConfigDiscoveries = TomCats_ConfigDiscoveries
 
-local atlasNameBlackList = { }
-local atlasNameWhiteList = { }
+local atlasNameExclusions = { }
+local atlasNameInclusions = { }
 
-local vignetteIDBlackList = {
+local vignetteIDExclusions = {
 	[4435] = true, --[[
 		The Winter Wolf vignette belongs to NPC Gwynceirw <The Winter Wolf>, who is non-hostile.
 		This is part of the encounter involving Rotbriar Boggart, who is the actual rare.
@@ -41,7 +41,7 @@ local vignetteIDBlackList = {
 		The quest ID for the encounter is 60258 (same quest ID for both NPCs)
 
 		Dev: Swap out Rotbriar Boggart for The Winter Wolf as the tracked vignette so that the spawned icon may
-			appear before the encounter is started.  Put Rotbriar on the vignetteIDBlackList
+			appear before the encounter is started.  Put Rotbriar on the vignetteIDExclusions
 	]]
 	--[[
 		Dev notes for anima conductor related rares:
@@ -278,7 +278,7 @@ do
 		["Vehicle-Air-Occupied"] = true, -- from discord dump 3/15
 	}
 	for k in pairs(tmp1) do
-		atlasNameBlackList[string.lower(k)] = true
+		atlasNameExclusions[string.lower(k)] = true
 	end
 	local tmp2 = {
 		["Warfront-NeutralHero"] = true, -- special events in the maw
@@ -286,7 +286,7 @@ do
 		["VignetteKill"] = true, -- star icon (bfa)
 	}
 	for k in pairs(tmp2) do
-		atlasNameWhiteList[string.lower(k)] = true
+		atlasNameInclusions[string.lower(k)] = true
 	end
 	TomCats_ConfigDiscoveries.name = "Discoveries"
 	TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
@@ -442,17 +442,17 @@ local function OnUpdate(_, elapsed)
 					if (not checkedVignetteGUIDs[v]) then
 						checkedVignetteGUIDs[v] = true
 						local vignetteInfo = C_VignetteInfo.GetVignetteInfo(v)
-						if (vignetteInfo and not vignetteIDBlackList[vignetteInfo.vignetteID]) then
+						if (vignetteInfo and not vignetteIDExclusions[vignetteInfo.vignetteID]) then
 							local vignette = vignettes[vignetteInfo.vignetteID]
 							if (vignetteInfo.type == 0) then
 								local atlasName = string.lower(vignetteInfo.atlasName)
-								if (atlasNameWhiteList[atlasName] and not vignette) then
+								if (atlasNameInclusions[atlasName] and not vignette) then
 									if (not discoveredVignettes[vignetteInfo.vignetteID]) then
 										discoveredVignettes[vignetteInfo.vignetteID] = GetExtendedVignetteInfo(vignetteInfo, mapID)
 										updateDiscoveryCount(1)
 										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
-								elseif (not atlasNameBlackList[atlasName] and not atlasNameWhiteList[atlasName]) then
+								elseif (not atlasNameExclusions[atlasName] and not atlasNameInclusions[atlasName]) then
 									if (not discoveredVignetteAtlases[vignetteInfo.atlasName]) then
 										discoveredVignetteAtlases[vignetteInfo.atlasName] = GetExtendedVignetteInfo(vignetteInfo, mapID)
 										updateDiscoveryCount(1)
