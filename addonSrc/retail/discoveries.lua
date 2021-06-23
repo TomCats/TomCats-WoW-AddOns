@@ -430,7 +430,6 @@ local function OnUpdate(_, elapsed)
 	if (mapID ~= lastVignetteMapID) then
 		lastVignetteMapID = mapID
 		vignettes = addon.getVignettes(lastVignetteMapID)
-		if (not vignettes and mapID == 1961) then vignettes = { } end
 		checkedVignetteGUIDs = { }
 		timeSinceLastUpdate = 0
 	end
@@ -450,14 +449,12 @@ local function OnUpdate(_, elapsed)
 								if (atlasNameWhiteList[atlasName] and not vignette) then
 									if (not discoveredVignettes[vignetteInfo.vignetteID]) then
 										discoveredVignettes[vignetteInfo.vignetteID] = GetExtendedVignetteInfo(vignetteInfo, mapID)
-										print("New Vignette:",vignetteInfo.name, vignetteInfo.x, vignetteInfo.y)
 										updateDiscoveryCount(1)
 										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
 								elseif (not atlasNameBlackList[atlasName] and not atlasNameWhiteList[atlasName]) then
 									if (not discoveredVignetteAtlases[vignetteInfo.atlasName]) then
 										discoveredVignetteAtlases[vignetteInfo.atlasName] = GetExtendedVignetteInfo(vignetteInfo, mapID)
-										print("New Map Icon:",vignetteInfo.atlasName, vignetteInfo.name, vignetteInfo.x, vignetteInfo.y)
 										updateDiscoveryCount(1)
 										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
