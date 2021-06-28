@@ -287,6 +287,10 @@ local vignetteIDExclusions = {
 	]]
 }
 
+for _, v in ipairs(addon.vignettes_known) do
+	vignetteIDExclusions[v] = true
+end
+
 do
 	local tmp1 = {
 		["poi-nzothpylon"] = true, -- minor n'zoth vision
