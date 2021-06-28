@@ -73,8 +73,10 @@ local function RefreshVignetteSection(section)
 		local lookupByName = { }
 		for _, v in pairs(state.vignettes) do
 			local name = v["Name"]
-			table.insert(rareNames, name)
-			lookupByName[name] = v
+			if (not lookupByName[name]) then
+				table.insert(rareNames, name)
+				lookupByName[name] = v
+			end
 		end
 		table.sort(rareNames)
 		for _, v in ipairs(rareNames) do
