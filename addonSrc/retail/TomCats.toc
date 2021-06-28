@@ -1,4 +1,4 @@
-## Interface: 90005
+## Interface: 90100
 ## Title: TomCat's Tours
 ## Notes: See license.txt for license and copyright information
 ## Author: TomCat
