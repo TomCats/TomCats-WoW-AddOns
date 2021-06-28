@@ -29,6 +29,7 @@ compression.lua
 db_vignette_names.lua
 db_vignette_info.lua
 db_item_companion.lua
+db_vignettes_known.lua
 dao_vignettes.lua
 dao_loot.lua
 proxy.lua
