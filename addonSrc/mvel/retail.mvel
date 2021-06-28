@@ -1,4 +1,4 @@
-retaildb = "retail-37988";
+retaildb = "retail-latest";
 
 db.loadCSV("data/retailvignetteinfo.csv","Int,Int,String,String,String");
 db.loadCSV("data/retailvignettezones.csv","Int,String,String,String,String,String");
@@ -11,7 +11,7 @@ do {
 	vars = {:};
 	itemCompanions = csv.query("data", "select ITEMID, SPECIESID from retailitemcompanion;", "Int,Int");
 	vars.put("itemCompanions", itemCompanions);
-    template.mergeUTF8("db_item_companion.lua.mvel", "db_item_companion.lua", vars);
+    template.mergeCP1252("db_item_companion.lua.mvel", "db_item_companion.lua", vars);
 } while(false);
 
 do {
@@ -95,4 +95,11 @@ do {
 		}
 	}
 	template.mergeCP1252("db_vignette_names.lua.mvel", "db_vignette_names.lua", vars);
+} while(false);
+
+do {
+	knownVignettes = db.query("SELECT ID FROM retailvignetteinfo;");
+	vars = {:};
+	vars.put("knownVignettes",knownVignettes);
+	template.mergeCP1252("db_vignettes_known.lua.mvel", "db_vignettes_known.lua", vars);
 } while(false);

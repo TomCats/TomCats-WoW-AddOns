@@ -3,7 +3,7 @@ locales: enUS,koKR,frFR,deDE,zhCN,esES,zhTW,enGB,esMX,ruRU,ptBR,itIT,ptPT
 default-locale: enUS
 databases:
   retail-latest:
-    build: 9.1.0.38950
+    build: 9.1.0.39172
     tables:
       uimapgroupmember:
         locales: all
@@ -17,9 +17,6 @@ databases:
       uimapassignment:
         locales: default
         columnTypes: Int,Int,Int,Int,Float,Float,Float,Float,Float,Float,Int,Int,Int,Int,Int,Int,Int
-  retail-37988:
-    build: 9.0.5.37988
-    tables:
       vignette:
         locales: all
         columnTypes: Int,String,Int,Int,Int,Int,Int,Int,Int,Int,Int
@@ -33,7 +30,7 @@ databases:
         locales: default
         columnTypes: String,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int
   tbc-latest:
-    build: 2.5.1.38988
+    build: 2.5.1.39170
     tables:
       map:
         locales: default
