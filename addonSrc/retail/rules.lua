@@ -17,11 +17,6 @@ local timeSinceLastUpdate = 0
 local mapActivationRules = {
 	[14] = loadstring(rulePrepend .. "return g.arathiVisible"),
 	[62] = loadstring(rulePrepend .. "return g.darkshoreVisible"),
-	[1533] = loadstring(rulePrepend .. "return g.betaEnabled"),
-	[1565] = loadstring(rulePrepend .. "return g.betaEnabled"),
-	[1525] = loadstring(rulePrepend .. "return g.betaEnabled"),
-	[1536] = loadstring(rulePrepend .. "return g.betaEnabled"),
-	[1543] = loadstring(rulePrepend .. "return g.betaEnabled")
 }
 
 local visibilityRules = {
