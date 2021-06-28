@@ -29,6 +29,39 @@ local atlasNameExclusions = { }
 local atlasNameInclusions = { }
 
 local vignetteIDExclusions = {
+	--[[ === Permanent Exclusions === ]]
+	--[[ Bordering Vale of the Eternal Blossom or in Zidormi's historical phase ]]
+	[112] = true,
+	[143] = true,
+	[154] = true,
+	[156] = true,
+
+	--[[ Rares that exist in the lesser vision instances but are being attributed to the parent zone ]]
+	[4029] = true,
+	[4031] = true,
+	[4034] = true,
+
+	--[[ === Requires Handling/Updating Data === ]]
+	[4255] = true, --[[
+		Ritual of Accusation, part of the Ember Court: Atoning Rituals event (Venthyr)
+		Larger star icon which is already visible on the world map.
+		No coordinates
+	]]
+	[4319] = true, --[[
+		Concert Kick-Off - unknown event, possibly in the ember court
+		Larger star icon which is already visible on the world map.
+		No coordinates
+	]]
+	[4489] = true, --[[
+		Mingle with Guests - unknown event, possibly in the ember court
+		Larger star icon which is already visible on the world map.
+		No coordinates
+	]]
+	[4550] = true, --[[
+		It's Raining Anima - unknown event, possibly in the ember court
+		Larger star icon which is already visible on the world map.
+		No coordinates
+	]]
 	[4435] = true, --[[
 		The Winter Wolf vignette belongs to NPC Gwynceirw <The Winter Wolf>, who is non-hostile.
 		This is part of the encounter involving Rotbriar Boggart, who is the actual rare.
