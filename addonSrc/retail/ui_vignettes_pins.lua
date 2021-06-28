@@ -276,6 +276,45 @@ local function setupMapProvider(map, iconScale)
 	end
 end
 
+local trackedVignettePins = { }
+
+local vignettePinOverridesIDs = { }
+
+for _, v in ipairs(addon.vignettes_known) do
+	vignettePinOverridesIDs[v] = true
+end
+
+--todo: Determine if this will create any performance issue when more rares are added to the overrides lookup (currently OK)
+local function Hook_Pin_Show(self)
+	if (self:IsShown() and self.vignetteID and vignettePinOverridesIDs[self.vignetteID]) then
+		self:Hide()
+	end
+end
+
+local function trackVignettePins(mapFrame)
+	local pinPool = mapFrame.pinPools[_G.VignetteDataProviderMixin:GetPinTemplate()]
+	if (pinPool) then
+		for pin in pinPool:EnumerateActive() do
+			if (not trackedVignettePins[pin]) then
+				trackedVignettePins[pin] = true
+				hooksecurefunc(pin, "Show", Hook_Pin_Show)
+				Hook_Pin_Show(pin)
+			end
+		end
+	end
+end
+
+local function Hook_AcquirePin(self, pinTemplate, ...)
+	if (pinTemplate == _G.VignetteDataProviderMixin:GetPinTemplate() or pinTemplate == "AreaPOIPinTemplate") then
+		trackVignettePins(self)
+	end
+end
+
+local function setupVignettePinOverride(mapFrame)
+	hooksecurefunc(mapFrame, "AcquirePin", Hook_AcquirePin)
+	trackVignettePins(mapFrame)
+end
+
 local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
@@ -285,10 +324,12 @@ local function OnEvent(event, arg1)
 		if (not WorldMapFrame and _G["WorldMapFrame"]) then
 			WorldMapFrame = addon.GetProxy(_G["WorldMapFrame"])
 			setupMapProvider(WorldMapFrame, 0.7)
+			setupVignettePinOverride(_G["WorldMapFrame"])
 		end
 		if (not BattlefieldMapFrame and _G["BattlefieldMapFrame"]) then
 			BattlefieldMapFrame = addon.GetProxy(_G["BattlefieldMapFrame"])
 			setupMapProvider(BattlefieldMapFrame, 0.8)
+			setupVignettePinOverride(_G["BattlefieldMapFrame"])
 		end
 	end
 end
