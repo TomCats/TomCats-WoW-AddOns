@@ -29,6 +29,7 @@ rules.lua
 bit32.lua
 base64.lua
 compression.lua
+vignette_descriptions.lua
 db_vignette_names.lua
 db_vignette_info.lua
 db_item_companion.lua

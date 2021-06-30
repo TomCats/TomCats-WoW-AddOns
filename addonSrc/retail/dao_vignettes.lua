@@ -71,6 +71,15 @@ function addon.getVignettes(mapID)
 				setmetatable(row, metatable)
 				tbl[row["ID"]] = row
 			end
+			local aliasKey = keys["Alias"]
+			if (aliasKey) then
+				for _, v in pairs(tbl) do
+					if (v.Alias) then
+						local vignette = rawget(v,2)
+						vignette[aliasKey] = tbl[v.Alias]
+					end
+				end
+			end
 			cache.add(mapID, tbl)
 		end
 	end

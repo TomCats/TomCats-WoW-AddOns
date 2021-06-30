@@ -21,6 +21,8 @@ public class LuaTools {
         if (arrayString.endsWith("]")) arrayString = arrayString.substring(0, arrayString.length() - 1);
         arrayString = arrayString.replace("[","{");
         arrayString = arrayString.replace("]","}");
+        arrayString = arrayString.replace(", ",",");
+        arrayString = arrayString.replace("null","_");
         return arrayString;
     }
 

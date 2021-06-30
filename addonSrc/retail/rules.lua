@@ -7,8 +7,19 @@ local C_TaskQuest = C_TaskQuest
 local CreateFrame = CreateFrame
 local UnitFactionGroup = UnitFactionGroup
 
-local rulePrepend = "local g, o, c = ... "
+local rulePrepend = "local g, o, c, f = ... "
 local warfrontStates = { 1, 1, 2, 2 }
+
+local functions = {
+	["containsAny"] = function(tbl1, tbl2)
+		DEBUGTABLE1, DEBUGTABLE2 = tbl1, tbl2
+		for _, v in ipairs(tbl2) do
+			if (tbl1[v]) then return true end
+		end
+		return false
+	end
+}
+
 addon.ruleListeners = { }
 
 local interval, minInterval, maxInterval = 1/15, 1/15, 1.0
@@ -25,7 +36,12 @@ local visibilityRules = {
 	["darkshore"] = loadstring(rulePrepend .. "return g.darkshorePhase and (o.Phase == 3 or o.Phase == g.darkshorePhase) and (o.Hostile == 3 or o.Hostile == g.playerFaction)"),
 	["uldum"] = loadstring(rulePrepend .. "return g.uldumPhase and bit.band(o.Phase, g.uldumPhase) == g.uldumPhase"),
 	["vale"] = loadstring(rulePrepend .. "return g.valePhase and bit.band(o.Phase, g.valePhase) == g.valePhase"),
-	["shadowlands"] = loadstring(rulePrepend .. "return c.visibilityTypes.ALL")
+	-- priority: Spawned rare > default rare
+	--[[
+		If the VignetteID has coordinates, display it on the map
+			unless it has related vignettes and at least one of them is visible (g.vignettes)
+	]]
+	["shadowlands"] = loadstring(rulePrepend .. "if (o.Locations and o.Related and f.containsAny(g.vignettes, o.Related) and not g.vignettes[o.ID]) then return c.visibilityTypes.LIST end return c.visibilityTypes.ALL")
 }
 
 local locationRules = {
@@ -40,7 +56,7 @@ local trackingRules = {
 }
 
 local function executeRule(ruleSet, ruleName, obj)
-	return ruleSet[ruleName](addon.globals, obj, addon.constants)
+	return ruleSet[ruleName](addon.globals, obj, addon.constants, functions)
 end
 
 function addon.executeVisibilityRule(ruleName, obj)
@@ -108,6 +124,32 @@ local function OnUpdate(_, elapsed)
 			addon.globals.valePhase = 0
 		end
 		addon.globals.betaEnabled = addon.IsBetaEnabled and addon.IsBetaEnabled()
+		addon.globals.vignettes = addon.globals.vignettes or { }
+		local vignettesChanged = false
+		if (addon.vignetteGUIDsByVignetteID) then
+			for k in pairs(addon.vignetteGUIDsByVignetteID) do
+				if (not addon.globals.vignettes[k]) then
+					addon.globals.vignettes[k] = true
+					vignettesChanged = true
+				end
+			end
+			local removals
+			for k in pairs(addon.globals.vignettes) do
+				if (not addon.vignetteGUIDsByVignetteID[k]) then
+					removals = removals or { }
+					table.insert(removals,k)
+				end
+			end
+			if (removals) then
+				vignettesChanged = true
+				for _, v in ipairs(removals) do
+					addon.globals.vignettes[v] = nil
+				end
+			end
+			if (vignettesChanged) then
+				rawset(addon.globals,"changed", true)
+			end
+		end
 	end
 	NotifyRuleListeners()
 end

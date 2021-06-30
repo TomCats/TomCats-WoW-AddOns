@@ -195,6 +195,7 @@ local function OnUpdate(_, elapsed)
 					end
 				end
 			end
+			addon.vignetteGUIDsByVignetteID = vignetteGUIDsByVignetteID
 			for vignetteID in pairs(affectedMaps[1].pins) do
 				local vignetteGUIDs = vignetteGUIDsByVignetteID and vignetteGUIDsByVignetteID[vignetteID]
 				for _, mapInfo in ipairs(affectedMaps) do
@@ -217,7 +218,12 @@ local function OnUpdate(_, elapsed)
 								pin.isSpawned = false
 								updateVignettePin(pin)
 							end
-							pin:SetPosition(pin.vignette:GetLocation())
+							local x, y = pin.vignette:GetLocation()
+							if (not x) then
+								x = -100
+								y = -100
+							end
+							pin:SetPosition(x, y)
 						end
 					end
 				end

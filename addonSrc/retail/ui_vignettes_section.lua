@@ -175,7 +175,12 @@ function TomCatsVignetteTitleMixin:OnClick()
 		addon.VignetteArrow:ClearTarget()
 		addon.VignetteArrow.vignetteID = nil
 	else
-		local x, y = self.vignette:GetLocation()
+		local x, y
+		if (not self.vignette["Alias"]) then
+			x, y = self.vignette:GetLocation()
+		else
+			x, y = self.vignette["Alias"]:GetLocation()
+		end
 		addon.VignetteArrow:SetTarget(x, y, WorldMapFrame:GetMapID())
 		addon.VignetteArrow.vignetteID = self.vignette.ID
 	end

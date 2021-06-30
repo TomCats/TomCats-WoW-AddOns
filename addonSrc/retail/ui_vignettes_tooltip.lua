@@ -42,14 +42,31 @@ function TomCatsVignetteTooltipMixin:SetOwner(owner)
 	end
 	self:ClearAllPoints()
 	self.owner = owner
+	local alias = owner.vignette["Alias"]
 	self:SetPoint("BOTTOMLEFT",owner,"TOPRIGHT", -4, -8)
 	self.Text[1]:SetText(("|cff0070dd%s|r"):format(owner.vignette["Name"]))
 	self.Text[1]:Show()
 	-- Elite / Rare Elite line
 	self.Text[2]:Hide()
 	-- Description lines
-	self.Text[3]:Hide()
-	local loot = addon.getLootDisplayInfo(owner.vignette["Items"])
+	local description
+	if (not alias) then
+		description = addon.vignetteDescriptions[owner.vignette.ID]
+	else
+		description = addon.vignetteDescriptions[alias.ID]
+	end
+	if (description) then
+		self.Text[3]:SetText(description)
+		self.Text[3]:Show()
+	else
+		self.Text[3]:Hide()
+	end
+	local loot
+	if (not alias) then
+		loot = addon.getLootDisplayInfo(owner.vignette["Items"])
+	else
+		loot = addon.getLootDisplayInfo(alias["Items"])
+	end
 	if (#loot == 0) then
 		self.Text[4]:Hide()
 	else
