@@ -92,7 +92,7 @@ local function RefreshVignetteSection(section)
 	local lastShown
 	local titleIndex = 1
 	for _, vignette in ipairs(state.vignettesSorted) do
-		if (vignette.isVisible) then
+		if (vignette.isListed) then
 			local button = state.titles[titleIndex]
 			titleIndex = titleIndex + 1
 			button.text:SetText(vignette["Name"])

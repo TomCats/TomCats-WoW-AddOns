@@ -215,7 +215,7 @@ function TomCatsMapCanvasDataProviderMixin:RefreshAllData()
 		local vignetteInfo = addon.getVignettes(mapFrame:GetMapID())
 		if (vignetteInfo) then
 			for vignetteID, vignette in pairs(vignetteInfo) do
-				if (vignette.isVisible) then
+				if (vignette.isPinned) then
 					if (not mapData.pins[vignetteID]) then
 						ShowHide(mapFrame:AcquirePin("TomCatsMapPinTemplate", vignette), not self.hideAll)
 					end

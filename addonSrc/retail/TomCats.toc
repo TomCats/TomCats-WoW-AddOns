@@ -9,12 +9,15 @@
 ## SavedVariablesPerCharacter: TomCats_Character
 ## X-Category: Achievements, Map, Miscellaneous
 ## X-Localizations: enUS, enGB, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
+## X-TomCats-Expiry: @expiry14days@
 
 constants.lua
 slashcommands.lua
 event.lua
+popup.xml
 default_saved_variables.lua
 saved_variables.lua
+update.lua
 version_info.lua
 legacy.lua
 constants.lua

@@ -7,7 +7,7 @@ local C_TaskQuest = C_TaskQuest
 local CreateFrame = CreateFrame
 local UnitFactionGroup = UnitFactionGroup
 
-local rulePrepend = "local g, o = ... "
+local rulePrepend = "local g, o, c = ... "
 local warfrontStates = { 1, 1, 2, 2 }
 addon.ruleListeners = { }
 
@@ -25,6 +25,7 @@ local visibilityRules = {
 	["darkshore"] = loadstring(rulePrepend .. "return g.darkshorePhase and (o.Phase == 3 or o.Phase == g.darkshorePhase) and (o.Hostile == 3 or o.Hostile == g.playerFaction)"),
 	["uldum"] = loadstring(rulePrepend .. "return g.uldumPhase and bit.band(o.Phase, g.uldumPhase) == g.uldumPhase"),
 	["vale"] = loadstring(rulePrepend .. "return g.valePhase and bit.band(o.Phase, g.valePhase) == g.valePhase"),
+	["shadowlands"] = loadstring(rulePrepend .. "return c.visibilityTypes.ALL")
 }
 
 local locationRules = {
@@ -39,7 +40,7 @@ local trackingRules = {
 }
 
 local function executeRule(ruleSet, ruleName, obj)
-	return ruleSet[ruleName](addon.globals, obj)
+	return ruleSet[ruleName](addon.globals, obj, addon.constants)
 end
 
 function addon.executeVisibilityRule(ruleName, obj)

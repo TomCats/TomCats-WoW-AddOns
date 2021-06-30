@@ -1,5 +1,6 @@
 --[[ See license.txt for license and copyright information ]]
 local _, addon = ...
+local visibilityTypes = addon.constants.visibilityTypes
 local cache = addon.newCache(600, 30)
 
 local exceptions = {
@@ -37,8 +38,15 @@ function addon.getVignettes(mapID)
 					if (key == "Name") then
 						return names[k]
 					end
-					if (key == "isVisible") then
-						return addon.executeVisibilityRule(v_rule, self)
+					if (key == "isPinned") then
+						local visibility = addon.executeVisibilityRule(v_rule, self)
+						if (visibility == true or visibility == false) then return visibility end
+						return visibility == visibilityTypes.ALL or visibility == visibilityTypes.PIN
+					end
+					if (key == "isListed") then
+						local visibility = addon.executeVisibilityRule(v_rule, self)
+						if (visibility == true or visibility == false) then return visibility end
+						return visibility == visibilityTypes.ALL or visibility == visibilityTypes.LIST
 					end
 					if (key == "GetLocation") then
 						return GetLocation
@@ -56,6 +64,7 @@ function addon.getVignettes(mapID)
 				local row
 				local function GetLocation()
 					local location = addon.executeLocationRule(l_rule, row)
+					if (not location) then return nil end
 					return location[1] / 100000, location[2] / 100000
 				end
 				row = { k, v, GetLocation}

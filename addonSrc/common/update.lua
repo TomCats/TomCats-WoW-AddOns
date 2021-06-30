@@ -1,7 +1,7 @@
 --[[ See license.txt for license and copyright information ]]
 local addonName, addon = ...
 
-local outdatedText = "TomCat's AddOn Suite is outdated.\nPlease update via CurseForge."
+local outdatedText = "TomCat's AddOn Suite is outdated:\n\nPlease update via the CurseForge app"
 local ACCEPT_ALT = ACCEPT_ALT
 local GetAddOnMetadata = GetAddOnMetadata
 local GetServerTime = GetServerTime

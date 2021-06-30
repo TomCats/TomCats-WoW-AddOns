@@ -13,7 +13,7 @@
 		</Anchors>
 		<Layers>
 			<Layer level="BACKGROUND">
-				<FontString parentKey="Text" inherits="GameFontNormal" justifyH="LEFT">
+				<FontString parentKey="Text" inherits="GameFontNormal" justifyH="CENTER">
 					<Size>
 						<AbsDimension x="280" y="64"/>
 					</Size>

@@ -3,6 +3,7 @@ local _, addon = ...
 
 addon.defaultSavedVariables = {
 	TomCats_Account = {
+		lastExpirationWarning = 0,
 		preferences = {
 			["TomCats-MinimapButton"] = {
 				position = -2.888,

@@ -11,3 +11,10 @@ addon.constants.lootTypes = {
 	COMPANION_PET = 2,
 	TOY = 3
 }
+
+addon.constants.visibilityTypes = {
+	NONE = 0,
+	LIST = 1,
+	PIN = 2,
+	ALL = 3
+}

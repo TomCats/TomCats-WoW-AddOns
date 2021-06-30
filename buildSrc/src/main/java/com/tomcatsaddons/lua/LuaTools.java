@@ -153,7 +153,9 @@ public class LuaTools {
 
     public static String asString(Object obj, boolean stripOuterBraces) {
         StringBuilder sb = new StringBuilder();
-        if (obj instanceof Object[]) {
+        if (obj == null) {
+            sb.append("_");
+        } else if (obj instanceof Object[]) {
             if (!stripOuterBraces) sb.append("{");
             for (Object o : (Object[]) obj) {
                 sb.append(asString(o,false));
