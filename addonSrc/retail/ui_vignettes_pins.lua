@@ -390,7 +390,12 @@ function TomCatsMapCanvasPinMixin:OnAcquired(vignette)
 	self.vignette = vignette
 	local mapData = maps[self:GetMap()]
 	mapData.pins[vignette.ID] = self
-	self:SetPosition(vignette:GetLocation())
+	local x, y = vignette:GetLocation()
+	if (not x) then
+		x = -100
+		y = -100
+	end
+	self:SetPosition(x,y)
 	updateVignettePin(self)
 	rescale(self)
 	self:ApplyCurrentScale()
