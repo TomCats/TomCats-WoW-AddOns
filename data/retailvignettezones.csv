@@ -10,4 +10,4 @@ ID,EXT,EXPR,V_RULE,L_RULE,T_RULE
 1536,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
 1543,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
 1565,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
-1961,"""Related"",""VisibleTrackingQuestID""","[(EXT.size() > 0 ? EXT[0] : null),VISIBLETRACKINGQUESTID]",shadowlands,default,default
+1961,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default

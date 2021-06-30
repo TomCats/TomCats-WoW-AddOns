@@ -31,7 +31,7 @@
 				</Texture>
 			</Layer>
 			<Layer level="HIGHLIGHT">
-				<Texture parentKey="HighlightTexture" alphaMode="ADD">
+				<Texture parentKey="HighlightTexture" alphaMode="ADD" >
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeKey="$parent.Texture"/>
 						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Texture"/>

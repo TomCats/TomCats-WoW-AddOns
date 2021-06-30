@@ -13,7 +13,8 @@ addon.defaultSavedVariables = {
 				iconAnimationEnabled = true,
 				iconScale = 1.0
 			},
-			betaEnabled = false
+			betaEnabled = false,
+			defaultVignetteIcon = "default"
 		},
 		lastVersionSeen = "NONE",
 		discoveriesVersion = "0",

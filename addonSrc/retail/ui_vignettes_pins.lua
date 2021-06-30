@@ -19,6 +19,7 @@ local TomCatsVignetteTooltip = TomCatsVignetteTooltip
 local maps = { }
 local atlasSizes = { }
 local interval, minInterval, maxInterval = 1, 1/15, 1
+local imagePath = ("Interface\\AddOns\\%s\\images\\"):format(addonName)
 local timeSinceLastUpdate = 0
 local vignetteInfoCache = { }
 local activeEncounters = { }
@@ -52,6 +53,9 @@ end
 
 local function rescale(pin)
 	local atlasName = pin.Texture:GetAtlas()
+	if (not atlasName) then
+		atlasName = pin.Texture:GetTexture()
+	end
 	if (atlasName) then
 		if (not atlasSizes[atlasName]) then
 			atlasSizes[atlasName] = { pin.Texture:GetSize() }
@@ -68,17 +72,46 @@ local function rescale(pin)
 	end
 end
 
+local customVignetteIconOverrides = {
+	["vignetteevent"] = true,
+	["vignettekill"] = true
+}
+
 local function setPinIcon(pin, status)
 	local atlas = (status <= PIN_STATUS.SPAWNED) and pin.vignette["Atlas"] or "Capacitance-General-WorkOrderCheckmark"
-	pin.Texture:SetAtlas(atlas, true)
-	pin.HighlightTexture:SetAtlas(atlas, true)
-	pin.scaleFactor = atlasTweaks[atlas] and atlasTweaks[atlas].scaleFactor or 1
+	local override = false
+	if (customVignetteIconOverrides[atlas] and _G.TomCats_Account.preferences.defaultVignetteIcon ~= "default") then
+		override = _G.TomCats_Account.preferences.defaultVignetteIcon
+	end
+	if (override) then
+		pin.Texture:SetAtlas(nil)
+		pin.Texture:SetTexture(imagePath .. "icon-" .. override)
+		pin.Texture:SetSize(32,32)
+		pin.HighlightTexture:SetAtlas(nil)
+		pin.HighlightTexture:SetTexture(imagePath .. "icon-" .. override)
+		pin.scaleFactor = 0.75
+	else
+		--pin.Texture:ClearAllPoints()
+		pin.Texture:SetTexture(nil)
+		pin.Texture:SetAtlas(atlas, true)
+		--pin.HighlightTexture:ClearAllPoints()
+		pin.HighlightTexture:SetTexture(nil)
+		pin.HighlightTexture:SetAtlas(atlas, true)
+		pin.scaleFactor = atlasTweaks[atlas] and atlasTweaks[atlas].scaleFactor or 1
+	end
 	if (status == PIN_STATUS.SPAWNED) then
 		activeEncounters[pin] = true
 		pin.Texture:SetVertexColor(1, 0, 0, 1)
 		pin.BackHighlight:Show()
 		pin.Expand:SetTexCoord(0, 1, 0, 1);
-		pin.Expand:SetAtlas(atlas, TextureKitConstants.IgnoreAtlasSize);
+		if (override) then
+			pin.Expand:SetAtlas(nil);
+			pin.Expand:SetTexture(imagePath .. "icon-" .. override);
+		else
+			pin.Expand:SetTexture(nil)
+			pin.Expand:SetAtlas(atlas, TextureKitConstants.IgnoreAtlasSize);
+		end
+
 		if (iconAnimationEnabled) then
 			pin.Expand:Show()
 			pin.ExpandAndFade:Play()
