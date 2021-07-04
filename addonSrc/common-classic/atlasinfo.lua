@@ -1,4 +1,6 @@
 --[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 local atlasInfo = {
     ["!UI-Frame-Metal-EdgeLeft"] = {
         ["rightTexCoord"] = 0.2587890625,
