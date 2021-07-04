@@ -1,6 +1,7 @@
-local _, addon = ...
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 
-addon.instanceEntrances = {
+instanceEntrances = {
 	[1412]={{43,0.79426068067551,0.17949755489826}},
 	[1413]={{43,0.45942574739456,0.37005665898323},{47,0.42329394817352,0.89940249919891}},
 	[1418]={{70,0.42032164335251,0.1147603392601}},

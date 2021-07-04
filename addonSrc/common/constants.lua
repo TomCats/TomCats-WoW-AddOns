@@ -1,6 +1,5 @@
 --[[ See license.txt for license and copyright information ]]
-local _, addon = ...
-addon.SetupGlobalFacade()
+select(2, ...).SetupGlobalFacade()
 
 HINT_ALL = { }
 

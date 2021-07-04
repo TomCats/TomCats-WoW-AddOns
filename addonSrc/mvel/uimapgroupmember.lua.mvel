@@ -1,4 +1,5 @@
-local _, addon = ...
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 do
 	local data = {
 @foreach{ row : data }		["@{row.locale}"] = @{row.data},
@@ -10,5 +11,5 @@ do
 	if (not selected) then
 		selected = data["enUS"]
 	end
-	addon.uimapgroupmember = loadstring(selected)()
+	uimapgroupmember = loadstring(selected)()
 end

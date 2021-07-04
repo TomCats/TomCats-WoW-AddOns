@@ -1,7 +1,12 @@
+--[[ See license.txt for license and copyright information ]]
 local addonName, addon = ...
 local renamedVariablePattern = addonName .. "_%s"
 
-local globalFacade = { }
+local globalFacade = {
+	addonName = addonName,
+	addon = addon
+}
+
 local allowedGlobals = { }
 
 globalFacade._G = globalFacade
@@ -36,12 +41,12 @@ end
 
 local function AddAllowedGlobal(variableName, newName)
 	if (allowedGlobals[variableName]) then
-		error("Duplicate variable name")
+		error(("Duplicate variable name: %s"):format(variableName))
 	end
 	allowedGlobals[variableName] = newName
 end
 
-function addon.AddAllowedGlobals(variableNameOrNames)
+function globalFacade.AddAllowedGlobals(variableNameOrNames)
 	if (type(variableNameOrNames) == "table") then
 		for _, v in ipairs(variableNameOrNames) do
 			AddAllowedGlobal(v, v)
@@ -51,7 +56,7 @@ function addon.AddAllowedGlobals(variableNameOrNames)
 	end
 end
 
-function addon.AddRenamedGlobals(variableNameOrNames)
+function globalFacade.AddRenamedGlobals(variableNameOrNames)
 	if (type(variableNameOrNames) == "table") then
 		for _, v in ipairs(variableNameOrNames) do
 			AddAllowedGlobal(v, renamedVariablePattern:format(v))

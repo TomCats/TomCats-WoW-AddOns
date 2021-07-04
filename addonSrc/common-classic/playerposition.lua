@@ -1,7 +1,5 @@
-local addonName, addon = ...
+select(2, ...).SetupGlobalFacade()
 
-local CreateFrame = CreateFrame
-local UnitPosition = UnitPosition
 local lastPlayerPosition
 
 local function OnUpdate()
@@ -12,7 +10,7 @@ local function OnUpdate()
 	end
 end
 
-function addon:GetLastPlayerPosition()
+function GetLastPlayerPosition()
 	return lastPlayerPosition.x, lastPlayerPosition.y
 end
 
@@ -20,10 +18,10 @@ local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
 			local frame = CreateFrame("Frame")
-			lastPlayerPosition = _G.TomCats_Character.lastPlayerPosition
+			lastPlayerPosition = TomCats_Character.lastPlayerPosition
 			frame:SetScript("OnUpdate", OnUpdate)
 		end
 	end
 end
 
-addon.RegisterEvent("ADDON_LOADED", OnEvent)
+RegisterEvent("ADDON_LOADED", OnEvent)

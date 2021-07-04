@@ -1,13 +1,7 @@
 --[[ See license.txt for license and copyright information ]]
-local addonName, addon = ...
+select(2, ...).SetupGlobalFacade()
 
 local outdatedText = "TomCat's AddOn Suite is outdated:\n\nPlease update via the CurseForge app"
-local ACCEPT_ALT = ACCEPT_ALT
-local GetAddOnMetadata = GetAddOnMetadata
-local GetServerTime = GetServerTime
-local StaticPopup_Show = StaticPopup_Show
-local StaticPopupDialogs = StaticPopupDialogs
-
 local expiration = tonumber(GetAddOnMetadata("TomCats", "X-TomCats-Expiry"))
 
 local function Isxpired()
@@ -33,19 +27,19 @@ end
 local function OnEvent(event, arg1, arg2)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
-			addon.UnregisterEvent("ADDON_LOADED", OnEvent)
+			UnregisterEvent("ADDON_LOADED", OnEvent)
 			if (Isxpired()) then
 				local localTime = GetServerTime()
-				if (_G.TomCats_Account.lastExpirationWarning + 86400 <= localTime) then
-					_G.TomCats_Account.lastExpirationWarning = localTime
+				if (TomCats_Account.lastExpirationWarning + 86400 <= localTime) then
+					TomCats_Account.lastExpirationWarning = localTime
 					ShowExpirationPopup()
 				end
 			else
-				_G.TomCats_Account.lastExpirationWarning = 0
+				TomCats_Account.lastExpirationWarning = 0
 			end
 		end
 		return
 	end
 end
 
-addon.RegisterEvent("ADDON_LOADED", OnEvent)
+RegisterEvent("ADDON_LOADED", OnEvent)

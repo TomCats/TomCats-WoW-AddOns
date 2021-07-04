@@ -1,9 +1,9 @@
-local _, addon = ...
-local uimapgroupmember = addon.uimapgroupmember
-local uimapgroupmemberByMap = { }
-local uimapgroupmemberByMapGroup = { }
-addon.uimapgroupmemberByMap = uimapgroupmemberByMap
-addon.uimapgroupmemberByMapGroup = uimapgroupmemberByMapGroup
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
+uimapgroupmemberByMap = { }
+uimapgroupmemberByMapGroup = { }
+
 local lastMapGroupID = 0
 for i = 1, #uimapgroupmember, 3 do
 	uimapgroupmemberByMap[uimapgroupmember[i+2]] = i

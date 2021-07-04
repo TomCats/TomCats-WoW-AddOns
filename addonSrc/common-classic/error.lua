@@ -1,5 +1,5 @@
 --[[ See license.txt for license and copyright information ]]
-local addonName, addon = ...
+select(2, ...).SetupGlobalFacade()
 
 local errorLoadingPrefix1 = "Error loading Interface\\AddOns\\TomCats\\"
 local errorLoadingPrefix2 = "Couldn't open Interface\\AddOns\\TomCats\\"
@@ -25,9 +25,9 @@ end
 local function OnEvent(event, arg1, arg2)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
-			addon.UnregisterEvent("ADDON_LOADED", OnEvent)
+			UnregisterEvent("ADDON_LOADED", OnEvent)
 			C_Timer.NewTimer(0, function()
-				addon.UnregisterEvent("LUA_WARNING", OnEvent)
+				UnregisterEvent("LUA_WARNING", OnEvent)
 			end)
 		end
 		return
@@ -44,5 +44,5 @@ local function OnEvent(event, arg1, arg2)
 	end
 end
 
-addon.RegisterEvent("LUA_WARNING", OnEvent)
-addon.RegisterEvent("ADDON_LOADED", OnEvent)
+RegisterEvent("LUA_WARNING", OnEvent)
+RegisterEvent("ADDON_LOADED", OnEvent)

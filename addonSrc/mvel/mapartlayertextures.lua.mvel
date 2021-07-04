@@ -1,4 +1,6 @@
-local _, addon = ...
-addon.mapartlayertextures = {
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
+mapartlayertextures = {
 @foreach{ row : data.entrySet() }	[@{row.key}] = {@foreach{ val : row.value }@{ val},@end{} },
 @end{}}

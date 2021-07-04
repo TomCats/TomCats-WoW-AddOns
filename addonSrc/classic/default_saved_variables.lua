@@ -1,7 +1,7 @@
 --[[ See license.txt for license and copyright information ]]
-local _, addon = ...
+select(2, ...).SetupGlobalFacade()
 
-addon.defaultSavedVariables = {
+defaultSavedVariables = {
 	TomCats_Account = {
 		lastExpirationWarning = 0
 	},
@@ -16,7 +16,7 @@ addon.defaultSavedVariables = {
 	}
 }
 
-addon.cvarsAsSavedVariables = {
+cvarsAsSavedVariables = {
 	miniWorldMap = "TomCats_Character",
 	showDungeonEntrancesOnMap = "TomCats_Character"
 }
