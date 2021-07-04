@@ -39,6 +39,9 @@ public class BuildAddonTask extends DefaultTask {
         if (parserContext == null) {
             ParserContext pctx = new ParserContext();
             pctx.addPackageImport("java.util");
+            pctx.addPackageImport("java.io");
+            pctx.addImport(StandardCharsets.class);
+            pctx.addImport(FileUtils.class);
             pctx.addImport(LuaTools.class);
             pctx.addImport(MVEL.class);
             pctx.addImport(CompressionTools.class);

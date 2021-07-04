@@ -1,3 +1,5 @@
+db.loadCSV("data/retailtotbcexport.csv","String");
+
 lookup_map_mapid = {:};
 lookup_uimapassignment_uimapid = {:};
 lookup_uimapassignments_mapid = {:};
@@ -116,4 +118,15 @@ do {
    	vars = {:};
    	vars.data = tbl_mapinfo;
     template.mergeUTF8("mapinfo.lua.mvel", "data/mapinfo.lua", vars);
+} while(false);
+
+// Migrate retail UI files
+do {
+	retailSourceDir = new File("C:\\Projects\\Blizzard Sources\\BlizzardInterfaceCode-Retail\\Interface");
+	tbl_retailtotbcexport = db.query("select SOURCE from retailtotbcexport;");
+	for (row : tbl_retailtotbcexport) {
+	   	vars = {:};
+   		vars.sourcecode = FileUtils.readFileToString(new File(retailSourceDir, row.SOURCE), StandardCharsets.UTF_8);
+		template.mergeUTF8("imported_sources_header.lua.mvel", row.SOURCE, vars);
+	}
 } while(false);
