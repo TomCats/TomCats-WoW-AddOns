@@ -15,11 +15,13 @@ AddAllowedGlobals({
 
 -- Blizzard-owned variables
 AddAllowedGlobals({
-	"UnitFactionGroup",
 	"ACCEPT_ALT",
 	"C_Timer",
+	"CALENDAR_TYPE_DUNGEON",
+	"CALENDAR_TYPE_RAID",
 	"CreateFrame",
 	"CreateFromMixins",
+	"CreateVector2D",
 	"Enum",
 	"GetAddOnMetadata",
 	"GetInstanceInfo",
@@ -28,6 +30,7 @@ AddAllowedGlobals({
 	"nop",
 	"StaticPopup_Show",
 	"StaticPopupDialogs",
+	"UnitFactionGroup",
 	"UnitPosition",
 })
 
