@@ -1,8 +1,8 @@
 --[[ See license.txt for license and copyright information ]]
 local addonName, addon = ...
+addon.SetupGlobalFacade()
 
 local defaultSavedVariables = addon.defaultSavedVariables or { }
-local HINT_ALL = addon.constants.HINT_ALL
 
 local function OverlayVariables(template, overlay)
 	local newVars = { }
@@ -24,6 +24,7 @@ local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
 			for k, v in pairs(defaultSavedVariables) do
+				addon.AddAllowedGlobals(k)
 				_G[k] = OverlayVariables(v, _G[k] or { })
 			end
 			addon.UnregisterEvent("ADDON_LOADED", OnEvent)
