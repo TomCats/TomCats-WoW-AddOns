@@ -8,6 +8,8 @@
 ## SavedVariables: TomCats_Account
 ## X-TomCats-Expiry: @expiry14days@
 
+globalfacade.lua
+globalfacadeconfig.lua
 constants.lua
 event.lua
 error.lua
