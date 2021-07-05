@@ -1,3 +1,4 @@
 SOURCE,AUGMENT
 "SharedXML/CallbackRegistry.lua",""
 "SharedXML/NineSlice.lua","lines:25+"
+"SharedXML/SharedUIPanelTemplates.lua","lines:121-132||lines:803-873"
