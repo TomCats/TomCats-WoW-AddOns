@@ -31,6 +31,7 @@ c_supertrack.lua
 c_texture.lua
 c_encounterjournal.lua
 atlasinfo.lua
+atlas.lua
 minimap.lua
 SharedXML\CallbackRegistry.lua
 SharedXML\NineSlice.lua
