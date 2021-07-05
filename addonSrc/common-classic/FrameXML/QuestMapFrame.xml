@@ -42,31 +42,31 @@
 		</Scripts>
 	</Button>
 
-<!--	<Button name="QuestLogHeaderCodeTemplate" mixin="QuestLogHeaderCodeMixin" registerForClicks="LeftButtonUp" virtual="true">-->
-<!--		<Scripts>-->
-<!--			<OnClick method="OnClick"/>-->
-<!--			<OnEnter method="OnEnter"/>-->
-<!--			<OnLeave method="OnLeave"/>-->
-<!--		</Scripts>-->
-<!--	</Button>-->
+	<Button name="TomCats_QuestLogHeaderCodeTemplate" mixin="TomCats_QuestLogHeaderCodeMixin" registerForClicks="LeftButtonUp" virtual="true">
+		<Scripts>
+			<OnClick method="OnClick"/>
+			<OnEnter method="OnEnter"/>
+			<OnLeave method="OnLeave"/>
+		</Scripts>
+	</Button>
 
-<!--	<Button name="QuestLogHeaderTemplate" inherits="QuestLogHeaderCodeTemplate" mixin="QuestLogHeaderMixin" virtual="true">-->
-<!--		<Size x="20" y="20"/>-->
-<!--		<KeyValues>-->
-<!--			<KeyValue key="leftPadding" value="4" type="number"/>-->
-<!--		</KeyValues>-->
-<!--		<ButtonText nonspacewrap="true" parentKey="ButtonText" justifyH="LEFT">-->
-<!--			<Size x="234" y="10"/>-->
-<!--			<Anchors>-->
-<!--				<Anchor point="LEFT" relativePoint="RIGHT" x="5" y="0"/>-->
-<!--			</Anchors>-->
-<!--		</ButtonText>-->
-<!--		<NormalFont style="GameFontNormalMed3"/>-->
-<!--		<HighlightFont style="GameFontHighlightMedium"/>-->
-<!--		<Scripts>-->
-<!--			<OnLoad method="OnLoad"/>-->
-<!--		</Scripts>-->
-<!--	</Button>-->
+	<Button name="TomCats_QuestLogHeaderTemplate" inherits="TomCats_QuestLogHeaderCodeTemplate" mixin="TomCats_QuestLogHeaderMixin" virtual="true">
+		<Size x="20" y="20"/>
+		<KeyValues>
+			<KeyValue key="leftPadding" value="4" type="number"/>
+		</KeyValues>
+		<ButtonText nonspacewrap="true" parentKey="ButtonText" justifyH="LEFT">
+			<Size x="234" y="10"/>
+			<Anchors>
+				<Anchor point="LEFT" relativePoint="RIGHT" x="5" y="0"/>
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontNormalMed3"/>
+		<HighlightFont style="GameFontHighlightMedium"/>
+		<Scripts>
+			<OnLoad method="OnLoad"/>
+		</Scripts>
+	</Button>
 
 <!--	<Button name="CovenantCallingsHeaderTemplate" inherits="QuestLogHeaderTemplate" mixin="CovenantCallingsHeaderMixin" virtual="true">-->
 <!--		<KeyValues>-->
@@ -117,61 +117,61 @@
 <!--		</Scripts>-->
 <!--	</Button>-->
 
-<!--	<Button name="QuestLogTitleTemplate" virtual="true">-->
-<!--		<Size x="255" y="16"/>-->
-<!--		<Layers>-->
-<!--			<Layer level="ARTWORK">-->
-<!--				<FontString parentKey="Text" inherits="GameFontNormalLeft">-->
-<!--					<Size x="175" y="0"/>-->
-<!--					<Anchors>-->
-<!--						<Anchor point="TOPLEFT" x="31" y="-8"/>-->
-<!--					</Anchors>-->
-<!--					<Color r="0.75" g="0.61" b="0"/>-->
-<!--				</FontString>-->
-<!--				<Texture parentKey="TaskIcon" atlas="TaskPOI-Icon" useAtlasSize="true" hidden="true">-->
-<!--					<Anchors>-->
-<!--						<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="TOPLEFT" x="-5" y="4"/>-->
-<!--					</Anchors>-->
-<!--				</Texture>-->
-<!--				<Texture parentKey="Check" file="Interface\Buttons\UI-CheckBox-Check" hidden="true">-->
-<!--					<Size x="16" y="16"/>-->
-<!--					<Anchors>-->
-<!--						<Anchor point="TOP" relativeKey="$parent.Text" x="0" y="2"/>-->
-<!--					</Anchors>-->
-<!--				</Texture>-->
-<!--				<Texture parentKey="TagTexture" file="Interface\QuestFrame\QuestTypeIcons" hidden="true">-->
-<!--					<Size x="18" y="18"/>-->
-<!--					<Anchors>-->
-<!--						<Anchor point="TOP" relativeKey="$parent.Text" x="0" y="3"/>-->
-<!--						<Anchor point="RIGHT" x="0" y="0"/>-->
-<!--					</Anchors>-->
-<!--				</Texture>-->
-<!--			</Layer>-->
-<!--		</Layers>-->
-<!--		<Scripts>-->
-<!--			<OnLoad>-->
-<!--				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");-->
-<!--				&#45;&#45;QuestLogTitleButton_OnLoad(self);-->
-<!--			</OnLoad>-->
-<!--			<OnEvent>-->
-<!--				&#45;&#45;QuestLogTitleButton_OnEvent(self, event, ...);-->
-<!--			</OnEvent>-->
-<!--			<OnClick function="QuestMapLogTitleButton_OnClick"/>-->
-<!--			<OnEnter function="QuestMapLogTitleButton_OnEnter"/>-->
-<!--			<OnLeave function="QuestMapLogTitleButton_OnLeave"/>-->
-<!--			<OnMouseDown function="QuestMapLogTitleButton_OnMouseDown"/>-->
-<!--			<OnMouseUp function="QuestMapLogTitleButton_OnMouseUp"/>-->
-<!--		</Scripts>-->
-<!--		<ButtonText nonspacewrap="true" parentKey="ButtonText">-->
-<!--			<Size x="0" y="10"/>-->
-<!--			<Anchors>-->
-<!--				<Anchor point="LEFT" x="20" y="0"/>-->
-<!--			</Anchors>-->
-<!--		</ButtonText>-->
-<!--		<NormalFont style="GameFontNormalLeft"/>-->
-<!--		<HighlightFont style="GameFontHighlightLeft"/>-->
-<!--		<DisabledFont style="GameFontHighlightLeft"/>-->
-<!--	</Button>-->
+	<Button name="TomCats_QuestLogTitleTemplate" virtual="true">
+		<Size x="255" y="16"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString parentKey="Text" inherits="GameFontNormalLeft">
+					<Size x="175" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="31" y="-8"/>
+					</Anchors>
+					<Color r="0.75" g="0.61" b="0"/>
+				</FontString>
+				<Texture parentKey="TaskIcon" atlas="TaskPOI-Icon" useAtlasSize="true" hidden="true">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="TOPLEFT" x="-5" y="4"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="Check" file="Interface\Buttons\UI-CheckBox-Check" hidden="true">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="TOP" relativeKey="$parent.Text" x="0" y="2"/>
+					</Anchors>
+				</Texture>
+				<Texture parentKey="TagTexture" file="Interface\QuestFrame\QuestTypeIcons" hidden="true">
+					<Size x="18" y="18"/>
+					<Anchors>
+						<Anchor point="TOP" relativeKey="$parent.Text" x="0" y="3"/>
+						<Anchor point="RIGHT" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+				--QuestLogTitleButton_OnLoad(self);
+			</OnLoad>
+			<OnEvent>
+				--QuestLogTitleButton_OnEvent(self, event, ...);
+			</OnEvent>
+			<OnClick function="TomCats_QuestMapLogTitleButton_OnClick"/>
+			<OnEnter function="TomCats_QuestMapLogTitleButton_OnEnter"/>
+			<OnLeave function="TomCats_QuestMapLogTitleButton_OnLeave"/>
+			<OnMouseDown function="TomCats_QuestMapLogTitleButton_OnMouseDown"/>
+			<OnMouseUp function="TomCats_QuestMapLogTitleButton_OnMouseUp"/>
+		</Scripts>
+		<ButtonText nonspacewrap="true" parentKey="ButtonText">
+			<Size x="0" y="10"/>
+			<Anchors>
+				<Anchor point="LEFT" x="20" y="0"/>
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontNormalLeft"/>
+		<HighlightFont style="GameFontHighlightLeft"/>
+		<DisabledFont style="GameFontHighlightLeft"/>
+	</Button>
 <!--	<Frame name="QuestLogObjectiveTemplate" virtual="true">-->
 <!--		<Size x="220" y="16"/>-->
 <!--		<Layers>-->

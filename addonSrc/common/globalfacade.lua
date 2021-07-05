@@ -21,14 +21,16 @@ end
 
 setmetatable(globalFacade, {
 	__index = function(self, key)
-		if (allowedGlobals[key]) then
-			return _G[key]
+		local allowedGlobal = allowedGlobals[key]
+		if (allowedGlobal) then
+			return _G[allowedGlobal]
 		end
 		return rawget(self, key)
 	end,
 	__newindex = function(self, key, value)
-		if (allowedGlobals[key]) then
-			_G[key] = value
+		local allowedGlobal = allowedGlobals[key]
+		if (allowedGlobal) then
+			_G[allowedGlobal] = value
 		else
 			rawset(self, key, value)
 		end
