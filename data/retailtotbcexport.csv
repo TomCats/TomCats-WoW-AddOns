@@ -1,2 +1,3 @@
-SOURCE
-"SharedXML/CallbackRegistry.lua"
+SOURCE,AUGMENT
+"SharedXML/CallbackRegistry.lua",""
+"SharedXML/NineSlice.lua","lines:25+"

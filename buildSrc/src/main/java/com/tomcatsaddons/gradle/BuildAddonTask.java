@@ -4,6 +4,7 @@ import com.tomcatsaddons.compressiontools.CompressionTools;
 import com.tomcatsaddons.lua.LuaTools;
 import com.tomcatsaddons.mvel.CSVTool;
 import com.tomcatsaddons.mvel.DBTool;
+import com.tomcatsaddons.mvel.StringTool;
 import com.tomcatsaddons.mvel.TemplateTool;
 import com.tomcatsaddons.wowtools.WowTools;
 import org.apache.commons.io.FileUtils;
@@ -44,6 +45,7 @@ public class BuildAddonTask extends DefaultTask {
             pctx.addImport(FileUtils.class);
             pctx.addImport(LuaTools.class);
             pctx.addImport(MVEL.class);
+            pctx.addImport(StringTool.class);
             pctx.addImport(CompressionTools.class);
             parserContext = pctx;
         }
@@ -96,6 +98,7 @@ public class BuildAddonTask extends DefaultTask {
         );
         vars.put("sourceDir", mvelSourceDir);
         vars.put("template", new TemplateTool(mvelSourceDir, mvelOutputDir));
+        vars.put("blizzardSourceDir", new File(project.getProjectDir(),"addonSrc\\blizzard-sources"));
         File mvelSourceFile = new File(
                 mvelSourceDir,
                 mvelBaseName + ".mvel"

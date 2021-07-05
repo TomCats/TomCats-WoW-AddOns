@@ -1,32 +1,26 @@
-local C_Texture = TomCats_C_Texture;
-local GetFinalNameFromTextureKit = GetFinalNameFromTextureKit;
+---------------
+--NOTE - Please do not change this section without talking to Dan
+local _, tbl = ...;
+if tbl then
+	tbl.SecureCapsuleGet = SecureCapsuleGet;
 
-local NineSliceUtil;
-local NineSlicePanelMixin;
+	local function Import(name)
+		tbl[name] = tbl.SecureCapsuleGet(name);
+	end
 
------------------
-----NOTE - Please do not change this section without talking to Dan
---local _, tbl = ...;
---if tbl then
---	tbl.SecureCapsuleGet = SecureCapsuleGet;
---
---	local function Import(name)
---		tbl[name] = tbl.SecureCapsuleGet(name);
---	end
---
---	Import("IsOnGlueScreen");
---
---	if ( tbl.IsOnGlueScreen() ) then
---		tbl._G = _G;	--Allow us to explicitly access the global environment at the glue screens
---	end
---
---	setfenv(1, tbl);
---
---	Import("ipairs");
---	Import("GetFinalNameFromTextureKit");
---	Import("C_Texture");
---end
------------------
+	Import("IsOnGlueScreen");
+
+	if ( tbl.IsOnGlueScreen() ) then
+		tbl._G = _G;	--Allow us to explicitly access the global environment at the glue screens
+	end
+
+	setfenv(1, tbl);
+
+	Import("ipairs");
+	Import("GetFinalNameFromTextureKit");
+	Import("C_Texture");
+end
+---------------
 
 --[[
 	Nine-slice utility for creating themed background frames without rewriting a lot of boilerplate code.
@@ -118,17 +112,9 @@ local function SetupPieceVisuals(piece, setupInfo, pieceLayout, textureKit)
 	-- textureKit is optional, that's fine; but if it's nil the caller should ensure that there are no format specifiers in .atlas
 	local atlasName = GetFinalNameFromTextureKit(pieceLayout.atlas, textureKit);
 	local info = C_Texture.GetAtlasInfo(atlasName);
-	if (C_Texture.IsOverridden(atlasName)) then
-		piece:SetTexture("Interface/AddOns/TomCats/BlizzardInterfaceArt/" .. info.file)
-		piece:SetTexCoord(info.leftTexCoord, info.rightTexCoord, info.topTexCoord, info.bottomTexCoord)
-		piece:SetSize(info.width * (info.scale or 1), info.height * (info.scale or 1))
-		piece:SetHorizTile(info.tilesHorizontally)
-		piece:SetVertTile(info.tilesVertically)
-	else
-		piece:SetHorizTile(info and info.tilesHorizontally or false);
-		piece:SetVertTile(info and info.tilesVertically or false);
-		piece:SetAtlas(atlasName, true);
-	end
+	piece:SetHorizTile(info and info.tilesHorizontally or false);
+	piece:SetVertTile(info and info.tilesVertically or false);
+	piece:SetAtlas(atlasName, true);
 end
 
 local function SetupCorner(container, piece, setupInfo, pieceLayout)
@@ -394,8 +380,8 @@ local layouts =
 		["Center"] = { atlas = "%s-NineSlice-Center" },
 	};
 };
-----------------------------------------------------
----- NINE SLICE UTILS
+--------------------------------------------------
+-- NINE SLICE UTILS
 NineSliceUtil = {};
 
 function NineSliceUtil.ApplyUniqueCornersLayout(self, textureKit)
@@ -452,7 +438,7 @@ end
 
 --------------------------------------------------
 -- NINE SLICE PANEL MIXIN
-NineSlicePanelMixin = {};
+ NineSlicePanelMixin = {};
 
 function NineSlicePanelMixin:GetFrameLayoutType()
 	return self.layoutType or self:GetParent().layoutType;
@@ -464,6 +450,3 @@ function NineSlicePanelMixin:OnLoad()
 		NineSliceUtil.ApplyLayout(self, layout, self.layoutTextureKit);
 	end
 end
-
-TomCats_NineSliceUtil = NineSliceUtil;
-TomCats_NineSlicePanelMixin = NineSlicePanelMixin

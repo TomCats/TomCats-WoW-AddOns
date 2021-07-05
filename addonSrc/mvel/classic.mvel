@@ -1,4 +1,4 @@
-db.loadCSV("data/retailtotbcexport.csv","String");
+db.loadCSV("data/retailtotbcexport.csv","String,String");
 
 lookup_map_mapid = {:};
 lookup_uimapassignment_uimapid = {:};
@@ -122,11 +122,15 @@ do {
 
 // Migrate retail UI files
 do {
-	retailSourceDir = new File("C:\\Projects\\Blizzard Sources\\BlizzardInterfaceCode-Retail\\Interface");
-	tbl_retailtotbcexport = db.query("select SOURCE from retailtotbcexport;");
+	retailSourceDir = new File(blizzardSourceDir,"retail");
+	tbl_retailtotbcexport = db.query("select SOURCE, AUGMENT from retailtotbcexport;");
 	for (row : tbl_retailtotbcexport) {
 	   	vars = {:};
-   		vars.sourcecode = FileUtils.readFileToString(new File(retailSourceDir, row.SOURCE), StandardCharsets.UTF_8);
+	   	sourcecode = FileUtils.readFileToString(new File(retailSourceDir, row.SOURCE), StandardCharsets.UTF_8);
+	   	if (row.AUGMENT != "") {
+	   		sourcecode = StringTool.augment(sourcecode, row.AUGMENT);
+	   	}
+   		vars.sourcecode = sourcecode;
 		template.mergeUTF8("imported_sources_header.lua.mvel", row.SOURCE, vars);
 	}
 } while(false);
