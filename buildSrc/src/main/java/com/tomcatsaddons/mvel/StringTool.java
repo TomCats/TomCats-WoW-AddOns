@@ -14,7 +14,9 @@ public class StringTool {
                     start = Integer.parseInt(step.substring(6,step.length() - 1)) - 1;
                     end = lines.length;
                 } else if (step.contains("-")) {
-                    //todo: implement
+                    String[] range = step.substring(6).split("-");
+                    start = Integer.parseInt(range[0]) - 1;
+                    end = Integer.parseInt(range[1]);
                 } else {
                     //todo: implement
                 }
