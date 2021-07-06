@@ -1,7 +1,7 @@
 --[[ See license.txt for license and copyright information ]]
 select(2, ...).SetupGlobalFacade()
 
-local C_Texture = CreateFromMixins(getglobal("C_Texture"))
+C_Texture = CreateFromMixins(getglobal("C_Texture"))
 
 local atlasInfoOverrides = {
 	["NoQuestsBackground"] = {["rightTexCoord"]=0.28125,["topTexCoord"]=0.0009765625,["width"]=287,["leftTexCoord"]=0.0009765625,["tilesHorizontally"]=false,["height"]=510,["file"]=904010,["bottomTexCoord"]=0.4990234375,["tilesVertically"]=false},

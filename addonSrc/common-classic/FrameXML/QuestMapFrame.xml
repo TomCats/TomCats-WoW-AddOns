@@ -364,11 +364,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Frame name="TomCats_QuestMapQuestOptionsDropDown" inherits="TomCats_UIDropDownMenuTemplate" hidden="true">
-				<Scripts>
-					<OnLoad function="TomCats_QuestMapQuestOptionsDropDown_OnLoad" />
-				</Scripts>
-			</Frame>
+			<Frame name="TomCats_QuestMapQuestOptionsDropDown" inherits="TomCats_UIDropDownMenuTemplate" hidden="true" />
 			<ScrollFrame parentKey="QuestsFrame" name="TomCats_QuestScrollFrame" inherits="UIPanelScrollFrameCodeTemplate">
 				<!-- NOTE: See QuestMapFrame_UpdateQuestSessionState for anchor updates, these are default -->
 				<Anchors>

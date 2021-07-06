@@ -2,6 +2,7 @@
 select(2, ...).SetupGlobalFacade()
 
 local allowedFramePools = {
+	["MapCanvasDetailLayerTemplate"] = "TomCats_MapCanvasDetailLayerTemplate",
 	["QuestLogHeaderTemplate"] = "TomCats_QuestLogHeaderTemplate",
 	["QuestLogObjectiveTemplate"] = "TomCats_QuestLogObjectiveTemplate",
 	["QuestLogTitleTemplate"] = "TomCats_QuestLogTitleTemplate",
