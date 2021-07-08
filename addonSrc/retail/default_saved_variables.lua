@@ -1,6 +1,5 @@
 --[[ See license.txt for license and copyright information ]]
 local _, addon = ...
-addon.SetupGlobalFacade()
 
 addon.defaultSavedVariables = {
 	TomCats_Account = {
@@ -21,13 +20,13 @@ addon.defaultSavedVariables = {
 		discoveriesVersion = "0",
 		discoveriesResetCount = 0,
 		discoveries = {
-			vignettes = HINT_ALL,
-			vignetteAtlases = HINT_ALL
+			vignettes = addon.constants.HINT_ALL,
+			vignetteAtlases = addon.constants.HINT_ALL
 		}
 	},
 	TomCats_Character = {
 		loveisintheair = {
-			preferences = HINT_ALL
+			preferences = addon.constants.HINT_ALL
 		}
 	}
 }

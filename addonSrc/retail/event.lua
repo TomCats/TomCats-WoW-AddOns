@@ -1,5 +1,5 @@
 --[[ See license.txt for license and copyright information ]]
-select(2, ...).SetupGlobalFacade()
+local _, addon = ...
 
 local eventHandlers = { }
 
@@ -14,7 +14,7 @@ local function OnEvent(_, event, ...)
 	end
 end
 
-function RegisterEvent(event, handler)
+function addon.RegisterEvent(event, handler)
 	eventHandlers[event] = eventHandlers[event] or { }
 	local handlers = eventHandlers[event]
 	if (#handlers == 0) then
@@ -23,7 +23,7 @@ function RegisterEvent(event, handler)
 	table.insert(handlers, handler)
 end
 
-function UnregisterEvent(event, handler)
+function addon.UnregisterEvent(event, handler)
 	local handlers = eventHandlers[event]
 	if (handlers) then
 		local newHandlers = { }

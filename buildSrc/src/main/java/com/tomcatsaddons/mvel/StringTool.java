@@ -18,7 +18,8 @@ public class StringTool {
                     start = Integer.parseInt(range[0]) - 1;
                     end = Integer.parseInt(range[1]);
                 } else {
-                    //todo: implement
+                    end = Integer.parseInt(step.substring(6));
+                    start = end - 1;
                 }
                 for (int i = start; i < end; i++) {
                     sb.append(lines[i]).append("\r\n");

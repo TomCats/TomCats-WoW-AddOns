@@ -1,16 +1,18 @@
 --[[ See license.txt for license and copyright information ]]
-select(2, ...).SetupGlobalFacade()
+local _, addon = ...
 
-HINT_ALL = { }
+addon.constants = { }
 
-LOOT_TYPE = {
+addon.constants.HINT_ALL = { }
+
+addon.constants.lootTypes = {
 	UNKNOWN = 0,
 	MOUNT = 1,
 	COMPANION_PET = 2,
 	TOY = 3
 }
 
-VISIBILITY_TYPE = {
+addon.constants.visibilityTypes = {
 	NONE = 0,
 	LIST = 1,
 	PIN = 2,
