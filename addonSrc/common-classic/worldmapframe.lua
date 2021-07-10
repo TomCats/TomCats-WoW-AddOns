@@ -1,11 +1,5 @@
-local addonName, addon = ...
-
-local nop = nop
-local CreateFromMixins = CreateFromMixins
-local DungeonEntranceDataProviderMixin = TomCats_DungeonEntranceDataProviderMixin
-local TomCats_WorldMapFrame = TomCats_WorldMapFrame
-local UIParent = UIParent
-local WorldMapFrame = WorldMapFrame
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 
 local function CollectAnchors(obj)
 	local anchors = { }
@@ -98,8 +92,8 @@ local function MergeWorldMapFrame()
 	TomCats_WorldMapFrame.QuestLog = nil
 	ReattachAnchors(WorldMapFrame.QuestLog, TomCats_WorldMapFrame, WorldMapFrame, questLogAnchors)
 
-	local worldMapFrameBgAnchors = CollectAnchors(_G.TomCats_WorldMapFrameBg)
-	ReattachAnchors(_G.TomCats_WorldMapFrameBg, TomCats_WorldMapFrame, WorldMapFrame, worldMapFrameBgAnchors)
+	local worldMapFrameBgAnchors = CollectAnchors(TomCats_WorldMapFrameBg)
+	ReattachAnchors(TomCats_WorldMapFrameBg, TomCats_WorldMapFrame, WorldMapFrame, worldMapFrameBgAnchors)
 
 	WorldMapFrame:SetIgnoreParentScale(false)
 	WorldMapFrame:ClearAllPoints()
@@ -135,22 +129,22 @@ local function MergeWorldMapFrame()
 	WorldMapFrame.NavBar = WorldMapFrame:AddOverlayFrame("TomCats_WorldMapNavBarTemplate", "FRAME");
 	WorldMapFrame.NavBar:SetPoint("TOPLEFT", WorldMapFrame.TitleCanvasSpacerFrame, "TOPLEFT", 64, -25);
 	WorldMapFrame.NavBar:SetPoint("BOTTOMRIGHT", WorldMapFrame.TitleCanvasSpacerFrame, "BOTTOMRIGHT", -4, 9);
-	--WorldMapFrame.SidePanelToggle = WorldMapFrame:AddOverlayFrame("TomCats_WorldMapSidePanelToggleTemplate", "BUTTON", "BOTTOMRIGHT", WorldMapFrame:GetCanvasContainer(), "BOTTOMRIGHT", -2, 1);
+	WorldMapFrame.SidePanelToggle = WorldMapFrame:AddOverlayFrame("TomCats_WorldMapSidePanelToggleTemplate", "BUTTON", "BOTTOMRIGHT", WorldMapFrame:GetCanvasContainer(), "BOTTOMRIGHT", -2, 1);
 
 	WorldMapFrame:SetupMinimizeMaximizeButton()
 
-	_G.WorldMapContinentDropDown:Hide()
-	_G.WorldMapZoneDropDown:Hide()
-	_G.WorldMapZoneMinimapDropDown:Hide()
-	_G.WorldMapZoomOutButton:Hide()
-	_G.WorldMapMagnifyingGlassButton:Hide()
-	_G.WorldMapContinentDropDown:SetParent(nil)
-	_G.WorldMapZoneDropDown:SetParent(nil)
-	_G.WorldMapZoneMinimapDropDown:SetParent(nil)
-	_G.WorldMapZoomOutButton:SetParent(nil)
-	_G.WorldMapMagnifyingGlassButton:SetParent(nil)
+	WorldMapContinentDropDown:Hide()
+	WorldMapZoneDropDown:Hide()
+	WorldMapZoneMinimapDropDown:Hide()
+	WorldMapZoomOutButton:Hide()
+	WorldMapMagnifyingGlassButton:Hide()
+	WorldMapContinentDropDown:SetParent(nil)
+	WorldMapZoneDropDown:SetParent(nil)
+	WorldMapZoneMinimapDropDown:SetParent(nil)
+	WorldMapZoomOutButton:SetParent(nil)
+	WorldMapMagnifyingGlassButton:SetParent(nil)
 
-	WorldMapFrame.CloseButton = _G.WorldMapFrameCloseButton
+	WorldMapFrame.CloseButton = WorldMapFrameCloseButton
 	WorldMapFrame.CloseButton:ClearAllPoints()
 	WorldMapFrame.CloseButton:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", 5.6, 5)
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame:ClearAllPoints()
@@ -167,18 +161,19 @@ local function MergeWorldMapFrame()
 			break;
 		end
 	end
-	WorldMapFrame:AddDataProvider(CreateFromMixins(DungeonEntranceDataProviderMixin));
+
+	--WorldMapFrame:AddDataProvider(CreateFromMixins(DungeonEntranceDataProviderMixin));
 	WorldMapFrame:AddOverlayFrame("TomCats_WorldMapTrackingOptionsButtonTemplate", "DROPDOWNTOGGLEBUTTON", "TOPRIGHT", WorldMapFrame:GetCanvasContainer(), "TOPRIGHT", -4, -2);
 	WorldMapFrame:AddOverlayFrame("TomCats_WorldMapFloorNavigationFrameTemplate", "FRAME", "TOPLEFT", WorldMapFrame:GetCanvasContainer(), "TOPLEFT", -15, 2);
-
+	QuestMapFrame.Background.SetAtlas = SetAtlas
 end
 
 local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
-			MergeWorldMapFrame()
+			--MergeWorldMapFrame()
 		end
 	end
 end
 
-addon.RegisterEvent("ADDON_LOADED", OnEvent)
+RegisterEvent("ADDON_LOADED", OnEvent)

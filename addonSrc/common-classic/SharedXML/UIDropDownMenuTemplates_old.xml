@@ -1,47 +1,12 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 <!--	<Include file="UIDropDownMenuTemplates.lua"/>-->
-	<Frame name="TomCats_UIDropDownCustomMenuEntryTemplate" enableMouse="true" hidden="true" mixin="TomCats_UIDropDownCustomMenuEntryMixin" virtual="true"/>
-
-	<Button name="TomCats_ColorSwatchTemplate" virtual="true">
-		<Size x="16" y="16"/>
-		<Layers>
-			<Layer level="BACKGROUND" textureSubLevel="-3">
-				<Texture name="$parentSwatchBg" parentKey="SwatchBg" texelSnappingBias="0.0" snapToPixelGrid="false">
-					<Size x="14" y="14"/>
-					<Anchors>
-						<Anchor point="CENTER"/>
-					</Anchors>
-					<Color color="HIGHLIGHT_FONT_COLOR"/>
-				</Texture>
-			</Layer>
-			<Layer level="BACKGROUND" textureSubLevel="-2">
-				<Texture parentKey="InnerBorder" texelSnappingBias="0.0" snapToPixelGrid="false">
-					<Size x="12" y="12"/>
-					<Anchors>
-						<Anchor point="CENTER"/>
-					</Anchors>
-					<Color color="BLACK_FONT_COLOR"/>
-				</Texture>
-			</Layer>
-			<Layer level="BACKGROUND" textureSubLevel="-1">
-				<Texture parentKey="Color" texelSnappingBias="0.0" snapToPixelGrid="false">
-					<Size x="10" y="10"/>
-					<Anchors>
-						<Anchor point="CENTER"/>
-					</Anchors>
-					<Color color="HIGHLIGHT_FONT_COLOR"/>
-				</Texture>
-			</Layer>
-		</Layers>
+	<Frame name="TomCats_UIDropDownCustomMenuEntryTemplate" enableMouse="true" hidden="true" mixin="TomCats_UIDropDownCustomMenuEntryMixin" virtual="true">
 		<Scripts>
-			<OnShow inherit="prepend">
-				PixelUtil.SetSize(self.SwatchBg, 14, 14);
-				PixelUtil.SetSize(self.InnerBorder, 12, 12);
-				PixelUtil.SetSize(self.Color, 10, 10);
-			</OnShow>
+			<OnEnter method="OnEnter"/>
+			<OnLeave method="OnLeave"/>
 		</Scripts>
-	</Button>
+	</Frame>
 
 	<Button name="TomCats_UIDropDownMenuButtonTemplate" virtual="true">
 		<Size x="100" y="16"/>
@@ -81,25 +46,52 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Button name="$parentColorSwatch" inherits="TomCats_ColorSwatchTemplate" hidden="true">
+			<Button name="$parentColorSwatch" hidden="true">
+				<Size>
+					<AbsDimension x="16" y="16"/>
+				</Size>
 				<Anchors>
-					<Anchor point="RIGHT" x="-6" y="0"/>
+					<Anchor point="RIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="0"/>
+						</Offset>
+					</Anchor>
 				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentSwatchBg">
+							<Size>
+								<AbsDimension x="14" y="14"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="1.0" g="1.0" b="1.0"/>
+						</Texture>
+					</Layer>
+				</Layers>
 				<Scripts>
 					<OnClick>
-						TomCats_CloseMenus();
+						CloseMenus();
 						TomCats_UIDropDownMenuButton_OpenColorPicker(self:GetParent());
 					</OnClick>
 					<OnEnter>
 						TomCats_CloseDropDownMenus(self:GetParent():GetParent():GetID() + 1);
 						_G[self:GetName().."SwatchBg"]:SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+						TomCats_UIDropDownMenu_StopCounting(self:GetParent():GetParent());
 					</OnEnter>
 					<OnLeave>
 						_G[self:GetName().."SwatchBg"]:SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+						TomCats_UIDropDownMenu_StartCounting(self:GetParent():GetParent());
 					</OnLeave>
 				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
 			</Button>
-			<DropDownToggleButton name="$parentExpandArrow" mixin="TomCats_DropDownExpandArrowMixin" hidden="true" motionScriptsWhileDisabled="true">
+			<Button name="$parentExpandArrow" hidden="true" motionScriptsWhileDisabled="true">
 				<Size>
 					<AbsDimension x="16" y="16"/>
 				</Size>
@@ -111,11 +103,29 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnMouseDown method="OnMouseDown"/>
-					<OnEnter method="OnEnter"/>
+					<OnClick>
+						TomCats_ToggleDropDownMenu(self:GetParent():GetParent():GetID() + 1, self:GetParent().value, nil, nil, nil, nil, self:GetParent().menuList, self);
+					</OnClick>
+					<OnEnter>
+						local level =  self:GetParent():GetParent():GetID() + 1;
+
+						TomCats_CloseDropDownMenus(level);
+
+						if self:IsEnabled() then
+							local listFrame = _G["TomCats_DropDownList"..level];
+							if ( not listFrame or not listFrame:IsShown() or select(2, listFrame:GetPoint()) ~= self ) then
+								TomCats_ToggleDropDownMenu(level, self:GetParent().value, nil, nil, nil, nil, self:GetParent().menuList, self);
+							end
+						end
+
+						TomCats_UIDropDownMenu_StopCounting(self:GetParent():GetParent());
+					</OnEnter>
+					<OnLeave>
+						TomCats_UIDropDownMenu_StartCounting(self:GetParent():GetParent());
+					</OnLeave>
 				</Scripts>
 				<NormalTexture file="Interface\ChatFrame\ChatFrameExpandArrow"/>
-			</DropDownToggleButton>
+			</Button>
 			<Button name="$parentInvisibleButton" hidden="true" parentKey="invisibleButton">
 				<Anchors>
 					<Anchor point="TOPLEFT"/>
@@ -161,34 +171,53 @@
 	</Button>
 	<Button name="TomCats_UIDropDownListTemplate" hidden="true" frameStrata="DIALOG" enableMouse="true" virtual="true">
 		<Frames>
-			<Frame name="$parentBackdrop" parentKey="Border" inherits="DialogBorderDarkTemplate"/>
-			<Frame name="$parentMenuBackdrop" setAllPoints="true" inherits="TooltipBackdropTemplate"/>
+			<Frame name="$parentBackdrop" inherits="BackdropTemplate" setAllPoints="true">
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DARK_DIALOG_32_32" type="global"/>
+				</KeyValues>
+			</Frame>
+			<Frame name="$parentMenuBackdrop" inherits="TooltipBackdropTemplate" setAllPoints="true"/>
 			<Button name="$parentButton1" inherits="TomCats_UIDropDownMenuButtonTemplate" id="1"/>
+			<Button name="$parentButton2" inherits="TomCats_UIDropDownMenuButtonTemplate" id="2"/>
+			<Button name="$parentButton3" inherits="TomCats_UIDropDownMenuButtonTemplate" id="3"/>
+			<Button name="$parentButton4" inherits="TomCats_UIDropDownMenuButtonTemplate" id="4"/>
+			<Button name="$parentButton5" inherits="TomCats_UIDropDownMenuButtonTemplate" id="5"/>
+			<Button name="$parentButton6" inherits="TomCats_UIDropDownMenuButtonTemplate" id="6"/>
+			<Button name="$parentButton7" inherits="TomCats_UIDropDownMenuButtonTemplate" id="7"/>
+			<Button name="$parentButton8" inherits="TomCats_UIDropDownMenuButtonTemplate" id="8"/>
 		</Frames>
 		<Scripts>
 			<OnClick>
 				self:Hide();
 			</OnClick>
+			<OnEnter>
+				TomCats_UIDropDownMenu_StopCounting(self, motion);
+			</OnEnter>
+			<OnLeave>
+				TomCats_UIDropDownMenu_StartCounting(self, motion);
+			</OnLeave>
 			<OnUpdate>
 				TomCats_UIDropDownMenu_OnUpdate(self, elapsed);
 			</OnUpdate>
 			<OnShow>
-				TomCats_UIDropDownMenu_OnShow(self);
+				for i=1, TomCats_UIDROPDOWNMENU_MAXBUTTONS do
+					if (not self.noResize) then
+						_G[self:GetName().."Button"..i]:SetWidth(self.maxWidth);
+					end
+				end
+				if (not self.noResize) then
+					self:SetWidth(self.maxWidth+25);
+				end
+				self.showTimer = nil;
+				if ( self:GetID() > 1 ) then
+					self.parent = _G["TomCats_DropDownList"..(self:GetID() - 1)];
+				end
 			</OnShow>
 			<OnHide>
 				TomCats_UIDropDownMenu_OnHide(self);
 			</OnHide>
 		</Scripts>
 	</Button>
-
-	<DropDownToggleButton name="TomCats_UIDropDownMenuButtonScriptTemplate" mixin="TomCats_DropDownMenuButtonMixin" virtual="true">
-		<Scripts>
-			<OnEnter method="OnEnter"/>
-			<OnLeave method="OnLeave"/>
-			<OnMouseDown method="OnMouseDown"/>
-		</Scripts>
-	</DropDownToggleButton>
-
 	<Frame name="TomCats_UIDropDownMenuTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="40" y="32"/>
@@ -253,7 +282,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<DropDownToggleButton parentKey="Button" name="$parentButton" inherits="TomCats_UIDropDownMenuButtonScriptTemplate" motionScriptsWhileDisabled="true" >
+			<Button parentKey="Button" name="$parentButton" motionScriptsWhileDisabled="true" >
 				<Size>
 					<AbsDimension x="24" y="24"/>
 				</Size>
@@ -264,6 +293,26 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnEnter>
+						local parent = self:GetParent();
+						local myscript = parent:GetScript("OnEnter");
+						if(myscript ~= nil) then
+							myscript(parent);
+						end
+					</OnEnter>
+					<OnLeave>
+						local parent = self:GetParent();
+						local myscript = parent:GetScript("OnLeave");
+						if(myscript ~= nil) then
+							myscript(parent);
+						end
+					</OnLeave>
+					<OnClick>
+						TomCats_ToggleDropDownMenu(nil, nil, self:GetParent());
+						PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+					</OnClick>
+				</Scripts>
 				<NormalTexture name="$parentNormalTexture" parentKey="NormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up">
 					<Size>
 						<AbsDimension x="24" y="24"/>
@@ -296,79 +345,8 @@
 						<Anchor point="RIGHT"/>
 					</Anchors>
 				</HighlightTexture>
-			</DropDownToggleButton>
+			</Button>
 		</Frames>
-		<Scripts>
-			<OnHide>
-				TomCats_CloseDropDownMenus();
-			</OnHide>
-		</Scripts>
-	</Frame>
-
-	<Frame name="TomCats_LargeUIDropDownMenuTemplate" virtual="true">
-		<Frames>
-			<DropDownToggleButton parentKey="Button" mixin="TomCats_LargeDropDownMenuButtonMixin" inherits="TomCats_UIDropDownMenuButtonScriptTemplate" motionScriptsWhileDisabled="true">
-				<Size x="27" y="26"/>
-				<Anchors>
-					<Anchor point="RIGHT" x="-3" y="2"/>
-				</Anchors>
-				<NormalTexture parentKey="NormalTexture" atlas="auctionhouse-ui-dropdown-arrow-up" useAtlasSize="true">
-					<Anchors>
-						<Anchor point="RIGHT"/>
-					</Anchors>
-				</NormalTexture>
-				<PushedTexture parentKey="PushedTexture" atlas="auctionhouse-ui-dropdown-arrow-down" useAtlasSize="true">
-					<Anchors>
-						<Anchor point="RIGHT"/>
-					</Anchors>
-				</PushedTexture>
-				<DisabledTexture parentKey="DisabledTexture" atlas="auctionhouse-ui-dropdown-arrow-disabled" useAtlasSize="true">
-					<Anchors>
-						<Anchor point="RIGHT"/>
-					</Anchors>
-				</DisabledTexture>
-				<HighlightTexture parentKey="HighlightTexture" file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD">
-					<Size x="33" y="32"/>
-					<Anchors>
-						<Anchor point="CENTER" relativeKey="$parent.NormalTexture" relativePoint="CENTER"/>
-					</Anchors>
-				</HighlightTexture>
-			</DropDownToggleButton>
-		</Frames>
-		<Layers>
-			<Layer level="ARTWORK">
-				<Texture parentKey="Left" atlas="auctionhouse-ui-dropdown-left" useAtlasSize="true">
-					<Anchors>
-						<Anchor point="LEFT"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="Right" atlas="auctionhouse-ui-dropdown-right" useAtlasSize="true">
-					<Anchors>
-						<Anchor point="RIGHT"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="Middle" atlas="auctionhouse-ui-dropdown-middle">
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeKey="$parent.Left" relativePoint="TOPRIGHT"/>
-						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Right" relativePoint="BOTTOMLEFT"/>
-					</Anchors>
-				</Texture>
-				<FontString parentKey="Text" inherits="NumberFont_Small" wordwrap="false" justifyH="RIGHT">
-					<Size x="0" y="10"/>
-					<Anchors>
-						<Anchor point="RIGHT" relativeKey="$parent.Button" relativePoint="LEFT" x="-4" y="1"/>
-					</Anchors>
-				</FontString>
-			</Layer>
-			<Layer level="OVERLAY">
-				<Texture parentKey="Icon" hidden="true">
-					<Size x="16" y="16"/>
-					<Anchors>
-						<Anchor point="LEFT" x="30" y="2"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-		</Layers>
 		<Scripts>
 			<OnHide>
 				TomCats_CloseDropDownMenus();

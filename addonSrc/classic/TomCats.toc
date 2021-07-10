@@ -1,5 +1,5 @@
 ## Interface: 20501
-## Title: TomCat's AddOn Suite
+## Title: TomCat's Tours
 ## Notes: Version @version@ (Classic)
 ## Author: TomCat
 ## Version: @version@
@@ -10,6 +10,8 @@
 
 globalfacade.lua
 globalfacadeconfig.lua
+createframe.lua
+securecall.lua
 constants.lua
 event.lua
 error.lua
@@ -33,38 +35,43 @@ c_encounterjournal.lua
 atlasinfo.lua
 atlas.lua
 minimap.lua
-SharedXML\CallbackRegistry.lua
+pools.lua
+# SharedXML\CallbackRegistry.lua
 SharedXML\NineSlice.lua
+overrides\NineSlice.lua
 SharedXML\SharedUIPanelTemplates.lua
 SharedXML\PortraitFrame.lua
 SharedXML\SharedUIPanelTemplates.xml
-FrameXML\UIDropDownMenu.lua
-FrameXML\UIDropDownMenuTemplates.lua
-FrameXML\UIDropDownMenuTemplates.xml
-FrameXML\UIDropDownMenu.xml
-FrameXML\NavigationBar.lua
-FrameXML\NavigationBar.xml
-FrameXML\QuestUtils.lua
-FrameXML\QuestFrameTemplates.xml
-FrameXML\QuestMapFrame.lua
-FrameXML\QuestMapFrame.xml
-FrameXML\QuestLogOwnerMixin.lua
-FrameXML\UIPanelTemplates.lua
-FrameXML\UIPanelTemplates.xml
-FrameXML\TutorialFrame.lua
-FrameXML\MapUtil.lua
-FrameXML\Minimap.lua
-FrameXML\Minimap.xml
-Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua
-Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
-Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
-Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
-Blizzard_MapCanvas\Blizzard_MapCanvas.lua
-Blizzard_MapCanvas\Blizzard_MapCanvas.xml
-Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.lua
-Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.xml
-Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
-Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
-Blizzard_WorldMap\Blizzard_WorldMap.lua
-Blizzard_WorldMap\Blizzard_WorldMap.xml
-worldmapframe.lua
+# SharedXML\UIDropDownMenu.lua
+# SharedXML\UIDropDownMenuTemplates.lua
+# SharedXML\UIDropDownMenuTemplates.xml
+# SharedXML\UIDropDownMenu.xml
+# FrameXML\NavigationBar.lua
+# FrameXML\NavigationBar.xml
+# FrameXML\QuestUtils.lua
+# FrameXML\QuestFrameTemplates.xml
+# FrameXML\QuestMapFrame.lua
+# FrameXML\QuestMapFrame.xml
+# FrameXML\QuestLogOwnerMixin.lua
+# FrameXML\UIPanelTemplates.lua
+# FrameXML\UIPanelTemplates.xml
+# FrameXML\TutorialFrame.lua
+# FrameXML\MapUtil.lua
+# FrameXML\Minimap.lua
+# FrameXML\Minimap.xml
+# AddOns\Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua
+# AddOns\Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
+# AddOns\Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
+# AddOns\Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
+# AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.lua
+# AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.xml
+# AddOns\Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.lua
+# AddOns\Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.xml
+# AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
+# AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
+# AddOns\Blizzard_WorldMap\Blizzard_WorldMap.lua
+# AddOns\Blizzard_WorldMap\Blizzard_WorldMap.xml
+proxy.lua
+proxy_worldmapframe.lua
+worldmapframe.xml
+# worldmapframe.lua

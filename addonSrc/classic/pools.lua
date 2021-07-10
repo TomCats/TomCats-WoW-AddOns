@@ -1,11 +1,14 @@
 --[[ See license.txt for license and copyright information ]]
 select(2, ...).SetupGlobalFacade()
 
+local renamedVariablePattern = addonName .. "_%s"
+
 local allowedFramePools = {
-	["MapCanvasDetailLayerTemplate"] = "TomCats_MapCanvasDetailLayerTemplate",
-	["QuestLogHeaderTemplate"] = "TomCats_QuestLogHeaderTemplate",
-	["QuestLogObjectiveTemplate"] = "TomCats_QuestLogObjectiveTemplate",
-	["QuestLogTitleTemplate"] = "TomCats_QuestLogTitleTemplate",
+	["DungeonEntrancePinTemplate"] = renamedVariablePattern:format("DungeonEntrancePinTemplate"),
+	["MapCanvasDetailLayerTemplate"] = renamedVariablePattern:format("MapCanvasDetailLayerTemplate"),
+	["QuestLogHeaderTemplate"] = renamedVariablePattern:format("QuestLogHeaderTemplate"),
+	["QuestLogObjectiveTemplate"] = renamedVariablePattern:format("QuestLogObjectiveTemplate"),
+	["QuestLogTitleTemplate"] = renamedVariablePattern:format("QuestLogTitleTemplate"),
 }
 
 function CreateFramePool(arg1, arg2, arg3, arg4)

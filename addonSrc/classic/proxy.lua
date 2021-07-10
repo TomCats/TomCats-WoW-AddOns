@@ -1,11 +1,9 @@
 --[[ See license.txt for license and copyright information ]]
-local _, addon = ...
-
-local CreateFromMixins = CreateFromMixins
+select(2, ...).SetupGlobalFacade()
 
 local proxies = { }
 
-function addon.AddProxy(target, mixin, initFunction, ...)
+function AddProxy(target, mixin, initFunction, ...)
 	assert(mixin)
 	if (target) then
 		local proxy = proxies[target]
@@ -25,7 +23,7 @@ function addon.AddProxy(target, mixin, initFunction, ...)
 	end
 end
 
-function addon.CreateProxyMixinFunctions(mixin, proxyFunctionNames, passthruFunctionNames)
+function CreateProxyMixinFunctions(mixin, proxyFunctionNames, passthruFunctionNames)
 	if (proxyFunctionNames) then
 		for _, functionName in ipairs(proxyFunctionNames) do
 			mixin[functionName] = function(self, ...)
@@ -42,7 +40,7 @@ function addon.CreateProxyMixinFunctions(mixin, proxyFunctionNames, passthruFunc
 	end
 end
 
-function addon.GetProxy(target)
+function GetProxy(target)
 	assert(target)
 	return proxies[target]
 end
