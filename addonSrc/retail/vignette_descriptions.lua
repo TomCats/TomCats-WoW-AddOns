@@ -1,7 +1,7 @@
 local _, addon = ...
 
 addon.vignetteDescriptions = {
-	[4783] = "Speak to Caretaker Kah-Kay at Keeper's Respite (60.6, 23.2) to gain the Sharp-eyed buff.  Follow the purple footsteps and then click on the pile of bones to spawn Mailbog.",
+	[4783] = "Go to Keeper's Respite and wait for Caretaker Kah-Kay to spawn (60.6, 23.2).  Speak to him to gain the Sharp-eyed buff.  Follow the purple footsteps and then click on the pile of bones to spawn Mailbog.",
 	[4798] = "A Mawsworn Portal may appear after killing any other rares in Korthia.  After several waves of mobs, Towering Exterminator will spawn.",
 	[4793] = "Before attacking, wait for Consumption to reach 40 stacks of the Anima Gorged buff.  This is when it will become a rare elite",
 	[4800] = "A Devouring Tear (portal) may appear after killing any other rares in Korthia.  After several waves of mobs, Konthrogz the Obliterator will spawn.",
