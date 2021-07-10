@@ -36,6 +36,7 @@ atlasinfo.lua
 atlas.lua
 minimap.lua
 pools.lua
+proxy.lua
 # SharedXML\CallbackRegistry.lua
 SharedXML\NineSlice.lua
 overrides\NineSlice.lua
@@ -70,8 +71,7 @@ SharedXML\SharedUIPanelTemplates.xml
 # AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
 # AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
 # AddOns\Blizzard_WorldMap\Blizzard_WorldMap.lua
+overrides\Blizzard_WorldMap.lua
 # AddOns\Blizzard_WorldMap\Blizzard_WorldMap.xml
-proxy.lua
-proxy_worldmapframe.lua
-worldmapframe.xml
+overrides\Blizzard_WorldMap.xml
 # worldmapframe.lua
