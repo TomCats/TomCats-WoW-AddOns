@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 <!--	<Include file="UIDropDownMenuTemplates.lua"/>-->
-	<Frame name="TomCats_UIDropDownCustomMenuEntryTemplate" enableMouse="true" hidden="true" mixin="TomCats_UIDropDownCustomMenuEntryMixin" virtual="true"/>
+<!--	<Frame name="TomCats_UIDropDownCustomMenuEntryTemplate" enableMouse="true" hidden="true" mixin="TomCats_UIDropDownCustomMenuEntryMixin" virtual="true"/>-->
 
 	<Button name="TomCats_ColorSwatchTemplate" virtual="true">
 		<Size x="16" y="16"/>

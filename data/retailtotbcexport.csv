@@ -7,7 +7,7 @@ SOURCE,AUGMENT
 "SharedXML/UIDropDownMenuTemplates.lua",""
 "FrameXML/NavigationBar.lua",""
 "FrameXML/QuestUtils.lua",""
-"FrameXML/QuestMapFrame.lua","lines:1-106||lines:108||lines:110-112||lines:114-121||lines:123-748||lines:752+"
+"FrameXML/QuestMapFrame.lua","lines:1-106||lines:108||lines:110-112||lines:114-121||lines:123-432||lines:439-440||lines:442-748||lines:752-1357||lines:1360-1364||lines:1367-1368||lines:1375+"
 "FrameXML/QuestLogOwnerMixin.lua",""
 "FrameXML/TutorialFrame.lua",""
 "FrameXML/MapUtil.lua",""

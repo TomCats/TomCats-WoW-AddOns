@@ -8,18 +8,18 @@ local mappedFrameNames = {
 }
 
 local matchedFrameNames = {
-	--["^DropDownList[0-9]+.*$"] = renamedVariablePattern,
+	["^DropDownList[0-9]+.*$"] = renamedVariablePattern,
 }
 
 local mappedTemplateNames = {
-	--["NavButtonTemplate"] = renamedVariablePattern:format("NavButtonTemplate"),
-	--["UIDropDownMenuTemplate"] = renamedVariablePattern:format("UIDropDownMenuTemplate"),
-	--["UIDropDownMenuButtonTemplate"] = renamedVariablePattern:format("UIDropDownMenuButtonTemplate"),
+	["NavButtonTemplate"] = renamedVariablePattern:format("NavButtonTemplate"),
+	["UIDropDownMenuTemplate"] = renamedVariablePattern:format("UIDropDownMenuTemplate"),
+	["UIDropDownMenuButtonTemplate"] = renamedVariablePattern:format("UIDropDownMenuButtonTemplate"),
 	["WorldMapFrameBorderFrameTemplate"] = renamedVariablePattern:format("WorldMapFrameBorderFrameTemplate")
 }
 
 local matchedTemplateNames = {
-	--["^TomCats_.*$"] = "%s"
+	["^TomCats_.*$"] = "%s"
 }
 
 function CreateFrame(frameType, frameName, parentFrame, inheritsFrame)

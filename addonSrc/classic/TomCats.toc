@@ -37,40 +37,41 @@ atlas.lua
 minimap.lua
 pools.lua
 proxy.lua
-# SharedXML\CallbackRegistry.lua
+misc.lua
+SharedXML\CallbackRegistry.lua
 SharedXML\NineSlice.lua
 overrides\NineSlice.lua
 SharedXML\SharedUIPanelTemplates.lua
 SharedXML\PortraitFrame.lua
 SharedXML\SharedUIPanelTemplates.xml
-# SharedXML\UIDropDownMenu.lua
-# SharedXML\UIDropDownMenuTemplates.lua
-# SharedXML\UIDropDownMenuTemplates.xml
-# SharedXML\UIDropDownMenu.xml
-# FrameXML\NavigationBar.lua
-# FrameXML\NavigationBar.xml
-# FrameXML\QuestUtils.lua
-# FrameXML\QuestFrameTemplates.xml
-# FrameXML\QuestMapFrame.lua
-# FrameXML\QuestMapFrame.xml
-# FrameXML\QuestLogOwnerMixin.lua
-# FrameXML\UIPanelTemplates.lua
-# FrameXML\UIPanelTemplates.xml
-# FrameXML\TutorialFrame.lua
-# FrameXML\MapUtil.lua
+SharedXML\UIDropDownMenu.lua
+SharedXML\UIDropDownMenuTemplates.lua
+SharedXML\UIDropDownMenuTemplates.xml
+SharedXML\UIDropDownMenu.xml
+FrameXML\NavigationBar.lua
+FrameXML\NavigationBar.xml
+FrameXML\QuestUtils.lua
+FrameXML\QuestFrameTemplates.xml
+FrameXML\QuestMapFrame.lua
+FrameXML\QuestMapFrame.xml
+FrameXML\QuestLogOwnerMixin.lua
+FrameXML\UIPanelTemplates.lua
+FrameXML\UIPanelTemplates.xml
+FrameXML\TutorialFrame.lua
+FrameXML\MapUtil.lua
 # FrameXML\Minimap.lua
 # FrameXML\Minimap.xml
 # AddOns\Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua
 # AddOns\Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
 # AddOns\Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
-# AddOns\Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
-# AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.lua
+AddOns\Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
+AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.lua
 # AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.xml
 # AddOns\Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.lua
 # AddOns\Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.xml
-# AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
-# AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
-# AddOns\Blizzard_WorldMap\Blizzard_WorldMap.lua
+AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua
+AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.xml
+AddOns\Blizzard_WorldMap\Blizzard_WorldMap.lua
 overrides\Blizzard_WorldMap.lua
 # AddOns\Blizzard_WorldMap\Blizzard_WorldMap.xml
 overrides\Blizzard_WorldMap.xml
