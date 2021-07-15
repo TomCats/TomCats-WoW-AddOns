@@ -27,31 +27,41 @@ end
 --	return GetMaxNumQuestsCanAccept()
 --end
 
---function C_QuestLog.GetInfo(questLogIndex)
---	local questLogTitleText, level, questTag, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory, isHidden, isScaling = GetQuestLogTitle(questLogIndex);
---	return {
---		title = questLogTitleText,
---		questLogIndex = questLogIndex,
---		questID = questID,
---		level = level,
---		difficultyLevel = 1,
---		suggestedGroup = 1,
---		frequency = frequency,
---		isHeader = isHeader,
---		isCollapsed = isCollapsed,
---		startEvent = startEvent,
---		isTask = isTask,
---		isBounty = isBounty,
---		isStory = isStory,
---		isScaling = isScaling,
---		isOnMap = isOnMap,
---		hasLocalPOI = hasLocalPOI,
---		isHidden = isHidden,
---		isAutoComplete = isComplete,
---		overridesSortOrder = false,
---		readyForTranslation = false
---	}
---end
+QuestInfoCache = { }
+
+function C_QuestLog.GetInfo(questLogIndex)
+	local questLogTitleText, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isBounty, isStory, isHidden, isScaling = GetQuestLogTitle(questLogIndex);
+	local questInfo = {
+		title = questLogTitleText,
+		questLogIndex = questLogIndex,
+		questID = questID,
+		level = level,
+		difficultyLevel = 1,
+		suggestedGroup = 1,
+		frequency = frequency,
+		isHeader = isHeader,
+		isCollapsed = isCollapsed,
+		startEvent = startEvent,
+		isTask = isTask,
+		isBounty = isBounty,
+		isStory = isStory,
+		isScaling = isScaling,
+		isOnMap = isOnMap,
+		hasLocalPOI = hasLocalPOI,
+		isHidden = isHidden,
+		isAutoComplete = isComplete,
+		overridesSortOrder = false,
+		readyForTranslation = false,
+		shouldDisplay = isHeader
+	}
+	QuestInfoCache[questID] = questInfo
+	return questInfo
+end
+
+function C_QuestLog.GetQuestTagInfo(questID)
+	-- cannot implement without a quest database
+	return nil
+end
 
 --function C_QuestLog.GetNumQuestLogEntries()
 --	return GetNumQuestLogEntries()
@@ -67,6 +77,11 @@ end
 --	print("C_QuestLog.GetQuestWatchType not implemented")
 --	return nil
 --end
+
+function C_QuestLog.GetRequiredMoney(questID)
+	-- cannot determine this without a quest database
+	return 0
+end
 
 function C_QuestLog.GetSelectedQuest()
 --	print("C_QuestLog.GetSelectedQuest not implemented")
@@ -86,13 +101,17 @@ function C_QuestLog.GetQuestWatchType()
 	return ""
 end
 
+function C_QuestLog.IsComplete(questID)
+	return C_QuestLog.IsQuestFlaggedCompleted(questID)
+end
+
 function C_QuestLog.IsPushableQuest()
 --	print("C_QuestLog.IsPushableQuest not implemented")
 	return true
 end
 
 function C_QuestLog.GetNumQuestLogEntries()
-	return 0
+	return GetNumQuestLogEntries()
 end
 
 function C_QuestLog.GetZoneStoryInfo()
@@ -110,10 +129,18 @@ end
 --	return false
 --end
 
---function C_QuestLog.IsQuestCalling(questID)
---	print("C_QuestLog.IsQuestCalling not implemented")
---	return false
---end
+function C_QuestLog.IsFailed(questID)
+	local questInfo = QuestInfoCache[questID]
+	return questInfo and questInfo.isAutoComplete and questInfo.isAutoComplete < 0
+end
+
+function C_QuestLog.IsQuestCalling(questID)
+	return false
+end
+
+function C_QuestLog.IsQuestReplayable()
+	return false
+end
 
 --local IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 --function C_QuestLog.IsQuestFlaggedCompleted(...)

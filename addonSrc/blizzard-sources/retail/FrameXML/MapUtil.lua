@@ -1,3 +1,5 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 
 local SHADOWLANDS_CONTINENT_MAP_ID = 1550;
 local ORIBOS_UI_MAP_IDS = { 1670, 1671, 1672, 1673 };

@@ -1,3 +1,6 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 QUEST_TAG_DUNGEON_TYPES = {
 	[Enum.QuestTag.Raid] = true,
 	[Enum.QuestTag.Dungeon] = true,

@@ -1,26 +1,29 @@
---------------------------------------------------
---NOTE - Please do not change this section without understanding the full implications of the secure environment
-local _, tbl = ...;
-if tbl then
-	tbl.SecureCapsuleGet = SecureCapsuleGet;
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 
-	local function Import(name)
-		tbl[name] = tbl.SecureCapsuleGet(name);
-	end
-
-	Import("IsOnGlueScreen");
-
-	if ( tbl.IsOnGlueScreen() ) then
-		tbl._G = _G;	--Allow us to explicitly access the global environment at the glue screens
-		Import("C_StoreGlue");
-	end
-
-	setfenv(1, tbl);
-	
-	Import("SetPortraitToTexture");
-	Import("SetPortraitTexture");
-end
---------------------------------------------------
+----------------------------------------------------
+----NOTE - Please do not change this section without understanding the full implications of the secure environment
+--local _, tbl = ...;
+--if tbl then
+--	tbl.SecureCapsuleGet = SecureCapsuleGet;
+--
+--	local function Import(name)
+--		tbl[name] = tbl.SecureCapsuleGet(name);
+--	end
+--
+--	Import("IsOnGlueScreen");
+--
+--	if ( tbl.IsOnGlueScreen() ) then
+--		tbl._G = _G;	--Allow us to explicitly access the global environment at the glue screens
+--		Import("C_StoreGlue");
+--	end
+--
+--	setfenv(1, tbl);
+--
+--	Import("SetPortraitToTexture");
+--	Import("SetPortraitTexture");
+--end
+----------------------------------------------------
 
 PortraitFrameMixin = {};
 

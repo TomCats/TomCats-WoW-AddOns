@@ -1,5 +1,7 @@
 --[[ See license.txt for license and copyright information ]]
-select(2, ...).SetupGlobalFacade()
+local addonName, addon = ...
+if (addon.SetupGlobalFacade) then addon.SetupGlobalFacade() end
+local eventFrame = CreateFrame("FRAME")
 
 local errorLoadingPrefix1 = "Error loading Interface\\AddOns\\TomCats\\"
 local errorLoadingPrefix2 = "Couldn't open Interface\\AddOns\\TomCats\\"
@@ -22,12 +24,12 @@ local function ShowErrorLoadingPopup()
 	end
 end
 
-local function OnEvent(event, arg1, arg2)
+local function OnEvent(self, event, arg1, arg2)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
-			UnregisterEvent("ADDON_LOADED", OnEvent)
+			eventFrame:UnregisterEvent("ADDON_LOADED", OnEvent)
 			C_Timer.NewTimer(0, function()
-				UnregisterEvent("LUA_WARNING", OnEvent)
+				eventFrame:UnregisterEvent("LUA_WARNING", OnEvent)
 			end)
 		end
 		return
@@ -44,5 +46,6 @@ local function OnEvent(event, arg1, arg2)
 	end
 end
 
-RegisterEvent("LUA_WARNING", OnEvent)
-RegisterEvent("ADDON_LOADED", OnEvent)
+eventFrame:SetScript("OnEvent",OnEvent)
+eventFrame:RegisterEvent("LUA_WARNING")
+eventFrame:RegisterEvent("ADDON_LOADED")

@@ -9,6 +9,7 @@ local function SetupWorldMapFrame()
 	WorldMapFrame.BorderFrame:Hide()
 	WorldMapFrame.BorderFrame = CreateFrame("Frame", nil, WorldMapFrame, "WorldMapFrameBorderFrameTemplate")
 	-- WorldMapFrame.BorderFrame.onCloseCallback = function() print("Closecallback") HideParentPanel(self) end; --todo: is this needed?
+	WorldMapFrame:SetFrameStrata("MEDIUM")
 	WorldMapContinentDropDown:Hide()
 	WorldMapZoneDropDown:Hide()
 	WorldMapZoneMinimapDropDown:Hide()
@@ -59,10 +60,13 @@ local function SetupWorldMapFrame()
 	WorldMapFrame.NavBar:SetPoint("TOPLEFT", WorldMapFrame.TitleCanvasSpacerFrame, "TOPLEFT", 64, -25);
 	WorldMapFrame.NavBar:SetPoint("BOTTOMRIGHT", WorldMapFrame.TitleCanvasSpacerFrame, "BOTTOMRIGHT", -4, 9);
 	WorldMapFrame.SidePanelToggle = WorldMapFrame:AddOverlayFrame("TomCats_WorldMapSidePanelToggleTemplate", "BUTTON", "BOTTOMRIGHT", WorldMapFrame:GetCanvasContainer(), "BOTTOMRIGHT", -2, 1);
-	WorldMapFrame:UpdateSpacerFrameAnchoring()
+	UIPanelWindows["WorldMapFrame"].maximizePoint = "TOP"
+	WorldMapMixin.OnLoad(WorldMapFrame)
 	WorldMapFrame:SetIgnoreParentScale(false)
-	WorldMapFrame:SetupMinimizeMaximizeButton()
-	WorldMapFrame:AttachQuestLog()
+	WorldMapFrameBg:SetTexture(("Interface/AddOns/%s/images/374155.BLP"):format(addonName))
+	QuestMapFrame.Background.SetAtlas = SetAtlas
+	-- todo: the next line can be removed after we are sure that the player doesn't need the original questlog anymore
+	getglobal("QuestLog_UpdateQuestDetails")()
 end
 
 local function OnEvent(event, arg1)

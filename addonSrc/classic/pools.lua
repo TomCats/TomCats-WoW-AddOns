@@ -14,7 +14,7 @@ local allowedFramePools = {
 function CreateFramePool(arg1, arg2, arg3, arg4)
 	local allowedFramePool = allowedFramePools[arg3]
 	if (allowedFramePool) then
-		return getglobal("CreateFramePool")(arg1, arg2, arg3, arg4)
+		return getglobal("CreateFramePool")(arg1, arg2, allowedFramePool, arg4)
 	end
 	error(("Frame pool not allowed: %s"):format(arg3))
 end

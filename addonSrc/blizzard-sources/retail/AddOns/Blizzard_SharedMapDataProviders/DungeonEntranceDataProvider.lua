@@ -1,3 +1,6 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 DungeonEntranceDataProviderMixin = CreateFromMixins(CVarMapCanvasDataProviderMixin);
 DungeonEntranceDataProviderMixin:Init("showDungeonEntrancesOnMap", "SHOW_DUNGEON_ENTRANCES");
 

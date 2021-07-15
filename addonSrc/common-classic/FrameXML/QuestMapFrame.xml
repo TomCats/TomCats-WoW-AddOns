@@ -64,7 +64,10 @@
 		<NormalFont style="GameFontNormalMed3"/>
 		<HighlightFont style="GameFontHighlightMedium"/>
 		<Scripts>
-			<OnLoad method="OnLoad"/>
+			<OnLoad>
+				TomCats_OverrideButtonAtlases(self);
+				self:OnLoad();
+			</OnLoad>
 		</Scripts>
 	</Button>
 
@@ -172,25 +175,25 @@
 		<HighlightFont style="GameFontHighlightLeft"/>
 		<DisabledFont style="GameFontHighlightLeft"/>
 	</Button>
-<!--	<Frame name="QuestLogObjectiveTemplate" virtual="true">-->
-<!--		<Size x="220" y="16"/>-->
-<!--		<Layers>-->
-<!--			<Layer level="ARTWORK">-->
-<!--				<FontString parentKey="Dash" inherits="ObjectiveFont" text="QUEST_DASH">-->
-<!--					<Size x="0" y="16"/>-->
-<!--					<Anchors>-->
-<!--						<Anchor point="TOPLEFT" x="0" y="0"/>-->
-<!--					</Anchors>-->
-<!--				</FontString>-->
-<!--				<FontString parentKey="Text" inherits="ObjectiveFont">-->
-<!--					<Size x="205" y="0"/>-->
-<!--					<Anchors>-->
-<!--						<Anchor point="TOPLEFT" relativeKey="$parent.Dash" relativePoint="TOPRIGHT"/>-->
-<!--					</Anchors>-->
-<!--				</FontString>-->
-<!--			</Layer>-->
-<!--		</Layers>-->
-<!--	</Frame>-->
+	<Frame name="TomCats_QuestLogObjectiveTemplate" virtual="true">
+		<Size x="220" y="16"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString parentKey="Dash" inherits="ObjectiveFont" text="QUEST_DASH">
+					<Size x="0" y="16"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Text" inherits="ObjectiveFont">
+					<Size x="205" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.Dash" relativePoint="TOPRIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
 <!--	<Button name="QuestDetailsButtonTemplate" virtual="true">-->
 <!--		<Size x="32" y="32"/>-->
 <!--		<NormalTexture atlas="UI-SquareButtonBrown-Up"/>-->

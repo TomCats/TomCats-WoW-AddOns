@@ -1,26 +1,29 @@
----------------
---NOTE - Please do not change this section without talking to Dan
-local _, tbl = ...;
-if tbl then
-	tbl.SecureCapsuleGet = SecureCapsuleGet;
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 
-	local function Import(name)
-		tbl[name] = tbl.SecureCapsuleGet(name);
-	end
-
-	Import("IsOnGlueScreen");
-
-	if ( tbl.IsOnGlueScreen() ) then
-		tbl._G = _G;	--Allow us to explicitly access the global environment at the glue screens
-	end
-
-	setfenv(1, tbl);
-
-	Import("ipairs");
-	Import("GetFinalNameFromTextureKit");
-	Import("C_Texture");
-end
----------------
+-----------------
+----NOTE - Please do not change this section without talking to Dan
+--local _, tbl = ...;
+--if tbl then
+--	tbl.SecureCapsuleGet = SecureCapsuleGet;
+--
+--	local function Import(name)
+--		tbl[name] = tbl.SecureCapsuleGet(name);
+--	end
+--
+--	Import("IsOnGlueScreen");
+--
+--	if ( tbl.IsOnGlueScreen() ) then
+--		tbl._G = _G;	--Allow us to explicitly access the global environment at the glue screens
+--	end
+--
+--	setfenv(1, tbl);
+--
+--	Import("ipairs");
+--	Import("GetFinalNameFromTextureKit");
+--	Import("C_Texture");
+--end
+-----------------
 
 --[[
 	Nine-slice utility for creating themed background frames without rewriting a lot of boilerplate code.

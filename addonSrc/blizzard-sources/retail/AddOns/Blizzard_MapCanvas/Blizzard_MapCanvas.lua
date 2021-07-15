@@ -1,28 +1,31 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 MapCanvasMixin = CreateFromMixins(CallbackRegistryMixin);
 
 MapCanvasMixin.MouseAction = { Up = 1, Down = 2, Click = 3 };
 
 function MapCanvasMixin:OnLoad()
 	CallbackRegistryMixin.OnLoad(self);
-	self:SetUndefinedEventsAllowed(true);
-
-	self.detailLayerPool = CreateFramePool("FRAME", self:GetCanvas(), "MapCanvasDetailLayerTemplate");
-	self.dataProviders = {};
-	self.dataProviderEventsCount = {};
-	self.pinPools = {};
-	self.pinTemplateTypes = {};
-	self.activeAreaTriggers = {};
-	self.lockReasons = {};
-	self.pinsToNudge = {};
-	self.pinFrameLevelsManager = CreateFromMixins(MapCanvasPinFrameLevelsManagerMixin);
-	self.pinFrameLevelsManager:Initialize();
-	self.mouseClickHandlers = {};
+	--self:SetUndefinedEventsAllowed(true);
+	--
+	--self.detailLayerPool = CreateFramePool("FRAME", self:GetCanvas(), "MapCanvasDetailLayerTemplate");
+	--self.dataProviders = {};
+	--self.dataProviderEventsCount = {};
+	--self.pinPools = {};
+	--self.pinTemplateTypes = {};
+	--self.activeAreaTriggers = {};
+	--self.lockReasons = {};
+	--self.pinsToNudge = {};
+	--self.pinFrameLevelsManager = CreateFromMixins(MapCanvasPinFrameLevelsManagerMixin);
+	--self.pinFrameLevelsManager:Initialize();
+	--self.mouseClickHandlers = {};
 	self.globalPinMouseActionHandlers = {};
 	self.cursorHandlers = {};
-
-	self:EvaluateLockReasons();
-
-	self.debugAreaTriggers = false;
+	--
+	--self:EvaluateLockReasons();
+	--
+	--self.debugAreaTriggers = false;
 end
 
 function MapCanvasMixin:OnUpdate()

@@ -1,3 +1,5 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 
 local MIN_STORY_TOOLTIP_WIDTH = 240;
 
@@ -104,13 +106,13 @@ end
 
 function QuestMapFrame_OnLoad(self)
 	self:RegisterEvent("QUEST_LOG_UPDATE");
-	self:RegisterEvent("QUEST_LOG_CRITERIA_UPDATE");
+--  self:RegisterEvent("QUEST_LOG_CRITERIA_UPDATE");
 	self:RegisterEvent("QUEST_WATCH_LIST_CHANGED");
-	self:RegisterEvent("SUPER_TRACKING_CHANGED");
+--	self:RegisterEvent("SUPER_TRACKING_CHANGED");
 	self:RegisterEvent("GROUP_ROSTER_UPDATE");
 	self:RegisterEvent("PARTY_MEMBER_ENABLE");
 	self:RegisterEvent("PARTY_MEMBER_DISABLE");
-	self:RegisterEvent("QUEST_POI_UPDATE");
+--	self:RegisterEvent("QUEST_POI_UPDATE");
 	self:RegisterEvent("QUEST_WATCH_UPDATE");
 	self:RegisterEvent("QUEST_ACCEPTED");
 	self:RegisterEvent("UNIT_QUEST_LOG_CHANGED");
@@ -119,7 +121,7 @@ function QuestMapFrame_OnLoad(self)
 	self:RegisterEvent("CVAR_UPDATE");
 
 	self.completedCriteria = {};
-	QuestPOI_Initialize(QuestScrollFrame.Contents);
+--	QuestPOI_Initialize(QuestScrollFrame.Contents);
 	QuestMapQuestOptionsDropDown.questID = 0;		-- for QuestMapQuestOptionsDropDown_Initialize
 	UIDropDownMenu_SetInitializeFunction(QuestMapQuestOptionsDropDown, QuestMapQuestOptionsDropDown_Initialize);
 	UIDropDownMenu_SetDisplayMode(QuestMapQuestOptionsDropDown, "MENU");
@@ -430,15 +432,15 @@ function QuestSessionManagement_OnLeave(self)
 end
 
 function QuestMapFrame_UpdateQuestSessionState(self)
-	self.QuestSessionManagement:UpdateVisibility();
-	self.QuestSessionManagement:UpdateTooltip();
-	if self.QuestSessionManagement:IsShown() then
-		self.QuestsFrame.DetailFrame.BottomDetail:SetAtlas("QuestSharing-QuestLog-BottomDetail");
-		self.QuestsFrame:SetPoint("BOTTOMRIGHT", self.QuestSessionManagement, "TOPRIGHT", -27, 0);
-	else
+--	self.QuestSessionManagement:UpdateVisibility();
+--	self.QuestSessionManagement:UpdateTooltip();
+--	if self.QuestSessionManagement:IsShown() then
+--		self.QuestsFrame.DetailFrame.BottomDetail:SetAtlas("QuestSharing-QuestLog-BottomDetail");
+--		self.QuestsFrame:SetPoint("BOTTOMRIGHT", self.QuestSessionManagement, "TOPRIGHT", -27, 0);
+--	else
 		self.QuestsFrame.DetailFrame.BottomDetail:SetAtlas("QuestLog_BottomDetail");
 		self.QuestsFrame:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -27, 0);
-	end
+--	end
 end
 
 function QuestMapFrame_OnShow(self)
@@ -746,9 +748,9 @@ function QuestsFrame_OnLoad(self)
 
 	self.objectiveFramePool = CreateFramePool("FRAME", QuestMapFrame.QuestsFrame.Contents, "QuestLogObjectiveTemplate");
 	self.headerFramePool = CreateFramePool("BUTTON", QuestMapFrame.QuestsFrame.Contents, "QuestLogHeaderTemplate");
-	self.campaignHeaderFramePool = CreateFramePool("FRAME", QuestMapFrame.QuestsFrame.Contents, "CampaignHeaderTemplate");
-	self.covenantCallingsHeaderFramePool = CreateFramePool("BUTTON", QuestMapFrame.QuestsFrame.Contents, "CovenantCallingsHeaderTemplate");
-	self.CampaignTooltip = CreateFrame("Frame", nil, UIParent, "CampaignTooltipTemplate");
+--	self.campaignHeaderFramePool = CreateFramePool("FRAME", QuestMapFrame.QuestsFrame.Contents, "CampaignHeaderTemplate");
+--	self.covenantCallingsHeaderFramePool = CreateFramePool("BUTTON", QuestMapFrame.QuestsFrame.Contents, "CovenantCallingsHeaderTemplate");
+--	self.CampaignTooltip = CreateFrame("Frame", nil, UIParent, "CampaignTooltipTemplate");
 end
 
 -- *****************************************************************************************************
@@ -919,7 +921,7 @@ local function QuestLogQuests_BuildSingleQuestInfo(questLogIndex, questInfoConta
 		lastHeader = info;
 
 		local isCampaign = info.campaignID ~= nil;
-		info.shouldDisplay = isCampaign; -- Always display campaign headers, the rest start as hidden
+--		info.shouldDisplay = isCampaign; -- Always display campaign headers, the rest start as hidden
 	else
 		info.isCalling = C_QuestLog.IsQuestCalling(info.questID);
 
@@ -1018,29 +1020,29 @@ local function QuestLogQuests_GetBestTagID(questID, info, isComplete)
 		return "FAILED";
 	end
 
-	if info.isCalling then
-		local secondsRemaining = C_TaskQuest.GetQuestTimeLeftSeconds(questID);
-		if secondsRemaining then
-			if secondsRemaining < 3600 then -- 1 hour
-				return "EXPIRING_SOON";
-			elseif secondsRemaining < 18000 then -- 5 hours
-				return "EXPIRING";
-			end
-		end
-	end
-
-	local tagInfo = C_QuestLog.GetQuestTagInfo(questID);
-	local questTagID = tagInfo and tagInfo.tagID;
-
-	if questTagID == Enum.QuestTag.Account then
-		local factionGroup = GetQuestFactionGroup(questID);
-		if factionGroup then
-			return factionGroup == LE_QUEST_FACTION_HORDE and "HORDE" or "ALLIANCE";
-		else
-			return Enum.QuestTag.Account;
-		end
-	end
-
+--	if info.isCalling then
+--		local secondsRemaining = C_TaskQuest.GetQuestTimeLeftSeconds(questID);
+--		if secondsRemaining then
+--			if secondsRemaining < 3600 then -- 1 hour
+--				return "EXPIRING_SOON";
+--			elseif secondsRemaining < 18000 then -- 5 hours
+--				return "EXPIRING";
+--			end
+--		end
+--	end
+--
+--	local tagInfo = C_QuestLog.GetQuestTagInfo(questID);
+--	local questTagID = tagInfo and tagInfo.tagID;
+--
+--	if questTagID == Enum.QuestTag.Account then
+--		local factionGroup = GetQuestFactionGroup(questID);
+--		if factionGroup then
+--			return factionGroup == LE_QUEST_FACTION_HORDE and "HORDE" or "ALLIANCE";
+--		else
+--			return Enum.QuestTag.Account;
+--		end
+--	end
+--
 	if info.frequency == Enum.QuestFrequency.Daily then
 		return "DAILY";
 	end
@@ -1048,11 +1050,11 @@ local function QuestLogQuests_GetBestTagID(questID, info, isComplete)
 	if info.frequency == Enum.QuestFrequency.Weekly then
 		return "WEEKLY";
 	end
-
-	if questTagID then
-		return questTagID;
-	end
-
+--
+--	if questTagID then
+--		return questTagID;
+--	end
+--
 	return nil;
 end
 
@@ -1355,23 +1357,23 @@ function QuestLogQuests_Update(poiTable)
 	QuestScrollFrame.titleFramePool:ReleaseAll();
 	QuestScrollFrame.objectiveFramePool:ReleaseAll();
 	QuestScrollFrame.headerFramePool:ReleaseAll();
-	QuestScrollFrame.campaignHeaderFramePool:ReleaseAll();
-	QuestScrollFrame.covenantCallingsHeaderFramePool:ReleaseAll();
+--	QuestScrollFrame.campaignHeaderFramePool:ReleaseAll();
+--	QuestScrollFrame.covenantCallingsHeaderFramePool:ReleaseAll();
 	QuestPOI_ResetUsage(QuestScrollFrame.Contents);
 	QuestMapFrame:ResetLayoutIndex();
 
 	-- Build the info table, to determine what needs to be displayed
 	local questInfoContainer = QuestLogQuests_BuildQuestInfoContainer();
-	local campaignInfos = QuestLogQuests_GetCampaignInfos(questInfoContainer);
-	local covenantCallingsInfos = QuestLogQuests_GetCovenantCallingsInfos(questInfoContainer);
+--	local campaignInfos = QuestLogQuests_GetCampaignInfos(questInfoContainer);
+--	local covenantCallingsInfos = QuestLogQuests_GetCovenantCallingsInfos(questInfoContainer);
 	local questInfos = QuestLogQuests_GetQuestInfos(questInfoContainer);
 	local displayState = QuestLogQuests_BuildInitialDisplayState(poiTable, questInfoContainer);
-
-	-- Display all campaigns
-	QuestLogQuests_DisplayQuestsFromIndices(displayState, campaignInfos);
-	QuestLogQuests_DisplayQuestsFromIndices(displayState, covenantCallingsInfos);
-
-	-- Display the zone story stuff if appropriate, updating separators as necessary...TODO: Refactor this out as well
+--
+--	-- Display all campaigns
+--	QuestLogQuests_DisplayQuestsFromIndices(displayState, campaignInfos);
+--	QuestLogQuests_DisplayQuestsFromIndices(displayState, covenantCallingsInfos);
+--
+--	-- Display the zone story stuff if appropriate, updating separators as necessary...TODO: Refactor this out as well
 	local mapID = QuestMapFrame:GetParent():GetMapID();
 	local storyAchievementID, storyMapID = C_QuestLog.GetZoneStoryInfo(mapID);
 
@@ -1508,7 +1510,7 @@ function QuestMapLogTitleButton_OnEnter(self)
 		QuestUtils_AddQuestTagLineToTooltip(GameTooltip, tagName, overrideQuestTag, tagInfo.worldQuestType, NORMAL_FONT_COLOR);
 	end
 
-	GameTooltip_CheckAddQuestTimeToTooltip(GameTooltip, questID);
+--	GameTooltip_CheckAddQuestTimeToTooltip(GameTooltip, questID);
 
 	if ( info.frequency == Enum.QuestFrequency.Daily ) then
 		QuestUtils_AddQuestTagLineToTooltip(GameTooltip, DAILY, "DAILY", nil, NORMAL_FONT_COLOR);

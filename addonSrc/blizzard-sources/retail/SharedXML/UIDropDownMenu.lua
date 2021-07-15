@@ -1,3 +1,6 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 UIDROPDOWNMENU_MAXBUTTONS = 1;
 UIDROPDOWNMENU_MAXLEVELS = 2;
 UIDROPDOWNMENU_BUTTON_HEIGHT = 16;

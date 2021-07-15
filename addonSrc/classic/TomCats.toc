@@ -32,6 +32,7 @@ c_questlog.lua
 c_supertrack.lua
 c_texture.lua
 c_encounterjournal.lua
+c_playerinfo.lua
 atlasinfo.lua
 atlas.lua
 minimap.lua
@@ -59,6 +60,7 @@ FrameXML\UIPanelTemplates.lua
 FrameXML\UIPanelTemplates.xml
 FrameXML\TutorialFrame.lua
 FrameXML\MapUtil.lua
+FrameXML\UIParent.lua
 # FrameXML\Minimap.lua
 # FrameXML\Minimap.xml
 # AddOns\Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua

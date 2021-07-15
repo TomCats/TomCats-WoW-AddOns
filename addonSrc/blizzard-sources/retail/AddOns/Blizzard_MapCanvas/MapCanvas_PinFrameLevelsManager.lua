@@ -1,3 +1,6 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 MapCanvasPinFrameLevelsManagerMixin = {};
 
 local MAP_CANVAS_PIN_FRAME_LEVEL_DEFAULT = 2000;

@@ -126,11 +126,13 @@ do {
 	tbl_retailtotbcexport = db.query("select SOURCE, AUGMENT from retailtotbcexport;");
 	for (row : tbl_retailtotbcexport) {
 	   	vars = {:};
-	   	sourcecode = FileUtils.readFileToString(new File(retailSourceDir, row.SOURCE), StandardCharsets.UTF_8);
-	   	if (row.AUGMENT != "") {
-	   		sourcecode = StringTool.augment(sourcecode, row.AUGMENT);
-	   	}
-   		vars.sourcecode = sourcecode;
-		template.mergeUTF8("imported_sources_header.lua.mvel", row.SOURCE, vars);
+	   	if (!row.SOURCE.startsWith("#")) {
+			sourcecode = FileUtils.readFileToString(new File(retailSourceDir, row.SOURCE), StandardCharsets.UTF_8);
+			if (row.AUGMENT != "") {
+				sourcecode = StringTool.augment(sourcecode, row.AUGMENT);
+			}
+			vars.sourcecode = sourcecode;
+			template.mergeUTF8("imported_sources_header.lua.mvel", row.SOURCE, vars);
+		}
 	}
 } while(false);

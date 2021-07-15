@@ -1,3 +1,6 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 local MAX_TUTORIAL_VERTICAL_TILE = 30;
 local MAX_TUTORIAL_IMAGES = 3;
 local MAX_TUTORIAL_KEYS = 4;

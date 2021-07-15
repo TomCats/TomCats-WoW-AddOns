@@ -1,3 +1,6 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 -- Custom dropdown buttons are instantiated by some external system.
 -- When calling UIDropDownMenu_AddButton that system sets info.customFrame to the instance of the frame it wants to place on the menu.
 -- The dropdown menu creates its button for the entry as it normally would, but hides all elements.  The custom frame is then anchored

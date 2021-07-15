@@ -1,3 +1,6 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
+
 -- Provides a basic interface for something that manages the adding, updating, and removing of data like icons, blobs or text to the map canvas
 MapCanvasDataProviderMixin = {};
 

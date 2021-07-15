@@ -1,3 +1,5 @@
+--[[ See license.txt for license and copyright information ]]
+select(2, ...).SetupGlobalFacade()
 
 local DISPLAY_STATE_CLOSED = 1;
 local DISPLAY_STATE_OPEN_MINIMIZED_NO_LOG = 2;
