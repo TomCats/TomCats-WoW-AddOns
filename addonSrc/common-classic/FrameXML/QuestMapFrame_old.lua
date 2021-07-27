@@ -1777,7 +1777,7 @@ function QuestMapLogTitleButton_OnEnter(self)
 
 		local omitTitle = true;
 		local ignoreActivePlayer = true;
-		GameTooltip:SetQuestPartyProgress(questID, omitTitle, ignoreActivePlayer);
+--		GameTooltip:SetQuestPartyProgress(questID, omitTitle, ignoreActivePlayer);
 	end
 
 	GameTooltip:Show();

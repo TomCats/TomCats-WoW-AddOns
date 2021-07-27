@@ -2,6 +2,7 @@
 select(2, ...).SetupGlobalFacade()
 
 local renamedVariablePattern = addonName .. "_%s"
+local passthruVariablePattern = "%s"
 
 local mappedFrameNames = {
 
@@ -9,10 +10,12 @@ local mappedFrameNames = {
 
 local matchedFrameNames = {
 	["^DropDownList[0-9]+.*$"] = renamedVariablePattern,
+	["^\$parent.*$"] = passthruVariablePattern
 }
 
 local mappedTemplateNames = {
 	["NavButtonTemplate"] = renamedVariablePattern:format("NavButtonTemplate"),
+	["SmallQuestRewardItemButtonTemplate"] = "TomCats_SmallQuestRewardItemButtonTemplate",
 	["UIDropDownMenuTemplate"] = renamedVariablePattern:format("UIDropDownMenuTemplate"),
 	["UIDropDownMenuButtonTemplate"] = renamedVariablePattern:format("UIDropDownMenuButtonTemplate"),
 	["WorldMapFrameBorderFrameTemplate"] = renamedVariablePattern:format("WorldMapFrameBorderFrameTemplate")

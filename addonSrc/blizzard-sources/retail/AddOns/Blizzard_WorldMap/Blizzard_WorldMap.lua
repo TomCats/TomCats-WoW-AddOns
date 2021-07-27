@@ -275,7 +275,7 @@ function WorldMapMixin:OnHide()
 	PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE);
 
 	PlayerMovementFrameFader.RemoveFrame(self);
-	self.BorderFrame.Tutorial:CheckAndHideHelpInfo();
+--	self.BorderFrame.Tutorial:CheckAndHideHelpInfo();
 
 	self:OnUIClose();
 	self:TriggerEvent("WorldMapOnHide");

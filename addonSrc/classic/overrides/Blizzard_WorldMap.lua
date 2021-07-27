@@ -37,8 +37,8 @@ local function SetupWorldMapFrame()
 			WorldMapFrame.ScrollContainer[k] = v
 		end
 	end
-	WorldMapFrame.AddMaskableTexture = MapCanvasMixin.AddMaskableTexture
-	WorldMapFrame.GetMaskTexture = MapCanvasMixin.GetMaskTexture
+	--WorldMapFrame.AddMaskableTexture = MapCanvasMixin.AddMaskableTexture
+	--WorldMapFrame.GetMaskTexture = MapCanvasMixin.GetMaskTexture
 	WorldMapFrame.UpdateSpacerFrameAnchoring = WorldMapMixin.UpdateSpacerFrameAnchoring
 	--WorldMapMixin:OnLoad(WorldMapFrame) --todo: handle everything in the OnLoad
 	WorldMapFrame:ClearAllPoints()
@@ -46,6 +46,11 @@ local function SetupWorldMapFrame()
 	WorldMapFrame:SetScript("OnShow", WorldMapMixin.OnShow)
 	WorldMapFrame:SetScript("OnEvent", WorldMapMixin.OnEvent)
 	WorldMapFrame:SetScript("OnHide", WorldMapMixin.OnHide)
+	for k, v in pairs(MapCanvasMixin) do
+		if (type(v) == "function") then
+			WorldMapFrame[k] = v
+		end
+	end
 	for k, v in pairs(QuestLogOwnerMixin) do
 		if (type(v) == "function") then
 			WorldMapFrame[k] = v
@@ -66,6 +71,7 @@ local function SetupWorldMapFrame()
 	WorldMapFrameBg:SetTexture(("Interface/AddOns/%s/images/374155.BLP"):format(addonName))
 	QuestMapFrame.Background.SetAtlas = SetAtlas
 	-- todo: the next line can be removed after we are sure that the player doesn't need the original questlog anymore
+	WorldMapFrame.BlackoutFrame:SetFrameStrata("LOW")
 	getglobal("QuestLog_UpdateQuestDetails")()
 end
 

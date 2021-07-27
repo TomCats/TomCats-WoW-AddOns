@@ -9,7 +9,7 @@ function MapCanvasMixin:OnLoad()
 	CallbackRegistryMixin.OnLoad(self);
 	--self:SetUndefinedEventsAllowed(true);
 	--
-	--self.detailLayerPool = CreateFramePool("FRAME", self:GetCanvas(), "MapCanvasDetailLayerTemplate");
+	self.detailLayerPool = CreateFramePool("FRAME", self:GetCanvas(), "MapCanvasDetailLayerTemplate");
 	--self.dataProviders = {};
 	--self.dataProviderEventsCount = {};
 	--self.pinPools = {};
@@ -34,20 +34,20 @@ function MapCanvasMixin:OnUpdate()
 end
 
 function MapCanvasMixin:SetMapID(mapID)
-	if Kiosk.IsEnabled() and KioskFrame:HasWhitelistedMaps() then
-		local mapIDs = KioskFrame:GetWhitelistedMapIDs();
-		if not tContains(mapIDs, mapID) then
-			if not self.mapID then
-				-- Initialize to an allowed map and assert. Using whitelisted maps is only
-				-- suitable if we know exactly the maps the player should be in.
-				assert(false, "Map ID "..mapID.." is not amongst the whitelisted maps.");
-				mapID = mapIDs[1];
-			else
-				-- Not in our list, so don't change the map.
-				return;
-			end;
-		end
-	end
+	--if Kiosk.IsEnabled() and KioskFrame:HasWhitelistedMaps() then
+	--	local mapIDs = KioskFrame:GetWhitelistedMapIDs();
+	--	if not tContains(mapIDs, mapID) then
+	--		if not self.mapID then
+	--			-- Initialize to an allowed map and assert. Using whitelisted maps is only
+	--			-- suitable if we know exactly the maps the player should be in.
+	--			assert(false, "Map ID "..mapID.." is not amongst the whitelisted maps.");
+	--			mapID = mapIDs[1];
+	--		else
+	--			-- Not in our list, so don't change the map.
+	--			return;
+	--		end;
+	--	end
+	--end
 
 	local mapArtID = C_Map.GetMapArtID(mapID) -- phased map art may be different for the same mapID
 	if self.mapID ~= mapID or self.mapArtID ~= mapArtID then

@@ -119,7 +119,7 @@ select(2, ...).SetupGlobalFacade()
 --	end
 --	return frame:GetAttribute("UIPanelLayout-"..name);
 --end
---
+
 --function SetUIPanelAttribute(frame, name, value)
 --	local attributes = UIPanelWindows[frame:GetName()];
 --	if not attributes then
@@ -2651,7 +2651,7 @@ select(2, ...).SetupGlobalFacade()
 --
 --local FramePositionDelegate = CreateFrame("FRAME");
 --FramePositionDelegate:SetScript("OnAttributeChanged", FramePositionDelegate_OnAttributeChanged);
---
+
 --function FramePositionDelegate:ShowUIPanel(frame, force)
 --	local frameArea, framePushable;
 --	frameArea = GetUIPanelAttribute(frame, "area");
@@ -3723,7 +3723,7 @@ select(2, ...).SetupGlobalFacade()
 --	FramePositionDelegate:SetAttribute("panel-frame", currentFrame)
 --	FramePositionDelegate:SetAttribute("panel-maximize", true);
 --end
---
+
 --function RestoreUIPanelArea(currentFrame)
 --	FramePositionDelegate:SetAttribute("panel-frame", currentFrame)
 --	FramePositionDelegate:SetAttribute("panel-restore", true);

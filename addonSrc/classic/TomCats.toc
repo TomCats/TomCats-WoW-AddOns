@@ -30,6 +30,7 @@ cvar.lua
 c_map.lua
 c_questlog.lua
 c_supertrack.lua
+c_taskquest.lua
 c_texture.lua
 c_encounterjournal.lua
 c_playerinfo.lua
@@ -42,6 +43,8 @@ misc.lua
 SharedXML\CallbackRegistry.lua
 SharedXML\NineSlice.lua
 overrides\NineSlice.lua
+SharedXML\SecureUIPanelTemplates.lua
+SharedXML\SecureUIPanelTemplates.xml
 SharedXML\SharedUIPanelTemplates.lua
 SharedXML\PortraitFrame.lua
 SharedXML\SharedUIPanelTemplates.xml
@@ -51,12 +54,17 @@ SharedXML\UIDropDownMenuTemplates.xml
 SharedXML\UIDropDownMenu.xml
 FrameXML\NavigationBar.lua
 FrameXML\NavigationBar.xml
+FrameXML\ObjectAPI\AsyncCallbackSystem.lua
+FrameXML\ObjectAPI\ObjectCache.lua
+FrameXML\ObjectAPI\Quest.lua
+FrameXML\ObjectAPI\Item.lua
 FrameXML\QuestUtils.lua
 FrameXML\QuestFrameTemplates.xml
 FrameXML\QuestMapFrame.lua
 FrameXML\QuestMapFrame.xml
+FrameXML\QuestInfo.lua
+FrameXML\QuestInfo.xml
 FrameXML\QuestLogOwnerMixin.lua
-FrameXML\UIPanelTemplates.lua
 FrameXML\UIPanelTemplates.xml
 FrameXML\TutorialFrame.lua
 FrameXML\MapUtil.lua
@@ -65,10 +73,10 @@ FrameXML\UIParent.lua
 # FrameXML\Minimap.xml
 # AddOns\Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua
 # AddOns\Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
-# AddOns\Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
+AddOns\Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
 AddOns\Blizzard_MapCanvas\MapCanvas_ScrollContainerMixin.lua
 AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.lua
-# AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.xml
+AddOns\Blizzard_MapCanvas\Blizzard_MapCanvas.xml
 # AddOns\Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.lua
 # AddOns\Blizzard_SharedMapDataProviders\DungeonEntranceDataProvider.xml
 AddOns\Blizzard_WorldMap\Blizzard_WorldMapTemplates.lua

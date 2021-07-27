@@ -154,10 +154,10 @@
 		<Scripts>
 			<OnLoad>
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
-				--QuestLogTitleButton_OnLoad(self);
+				-- QuestLogTitleButton_OnLoad(self);
 			</OnLoad>
 			<OnEvent>
-				--QuestLogTitleButton_OnEvent(self, event, ...);
+				-- QuestLogTitleButton_OnEvent(self, event, ...);
 			</OnEvent>
 			<OnClick function="TomCats_QuestMapLogTitleButton_OnClick"/>
 			<OnEnter function="TomCats_QuestMapLogTitleButton_OnEnter"/>
@@ -368,7 +368,7 @@
 		</Layers>
 		<Frames>
 			<Frame name="TomCats_QuestMapQuestOptionsDropDown" inherits="TomCats_UIDropDownMenuTemplate" hidden="true" />
-			<ScrollFrame parentKey="QuestsFrame" name="TomCats_QuestScrollFrame" inherits="UIPanelScrollFrameCodeTemplate">
+			<ScrollFrame parentKey="QuestsFrame" name="TomCats_QuestScrollFrame" inherits="TomCats_UIPanelScrollFrameCodeTemplate">
 				<!-- NOTE: See QuestMapFrame_UpdateQuestSessionState for anchor updates, these are default -->
 				<Anchors>
 					<Anchor point="TOPLEFT"/>
@@ -662,7 +662,7 @@
 						<Scripts>
 							<OnClick>
 								PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
-								QuestMapFrame_ReturnFromQuestDetails();
+								TomCats_QuestMapFrame_ReturnFromQuestDetails();
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -716,7 +716,7 @@
 							</Layer>
 						</Layers>
 					</Frame>
-					<ScrollFrame parentKey="ScrollFrame" name="TomCats_QuestMapDetailsScrollFrame" inherits="UIPanelScrollFrameCodeTemplate">
+					<ScrollFrame parentKey="ScrollFrame" name="TomCats_QuestMapDetailsScrollFrame" inherits="TomCats_UIPanelScrollFrameCodeTemplate">
 						<Size x="258" y="0"/>
 						<Anchors>
 							<Anchor point="TOPLEFT" x="5" y="0"/>
@@ -745,8 +745,8 @@
 								ScrollFrame_OnLoad(self);
 							</OnLoad>
 							<OnScrollRangeChanged>
-								ScrollFrame_OnScrollRangeChanged(self, xrange, yrange);
-								QuestMapFrame_AdjustPathButtons();
+								TomCats_ScrollFrame_OnScrollRangeChanged(self, xrange, yrange);
+								TomCats_QuestMapFrame_AdjustPathButtons();
 							</OnScrollRangeChanged>
 						</Scripts>
 					</ScrollFrame>
@@ -760,7 +760,7 @@
 								self:RegisterForClicks("RightButtonUp");
 							</OnLoad>
 							<OnClick>
-								QuestMapFrame_ReturnFromQuestDetails();
+								TomCats_QuestMapFrame_ReturnFromQuestDetails();
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -811,8 +811,8 @@
 								</Layers>
 								<Scripts>
 									<OnClick>
-										ShowQuestComplete(C_QuestLog.GetSelectedQuest());
-										AutoQuestPopupTracker_RemovePopUp(QuestMapFrame.DetailsFrame.questID);
+										TomCats_ShowQuestComplete(C_QuestLog.GetSelectedQuest());
+										TomCats_AutoQuestPopupTracker_RemovePopUp(QuestMapFrame.DetailsFrame.questID);
 									</OnClick>
 									<OnShow>
 										UIFrameFlash(self.Flash, 0.75, 0.75, -1, nil);
@@ -831,7 +831,7 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								QuestMapQuestOptions_AbandonQuest(QuestMapFrame_GetDetailQuestID())
+								TomCats_QuestMapQuestOptions_AbandonQuest(TomCats_QuestMapFrame_GetDetailQuestID())
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -856,7 +856,7 @@
 						</Layers>
 						<Scripts>
 							<OnClick>
-								QuestMapQuestOptions_ShareQuest(QuestMapFrame_GetDetailQuestID())
+								TomCats_QuestMapQuestOptions_ShareQuest(TomCats_QuestMapFrame_GetDetailQuestID())
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -868,7 +868,7 @@
 						<Scripts>
 							<OnClick>
 								PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
-								QuestMapQuestOptions_TrackQuest(QuestMapFrame_GetDetailQuestID())
+								TomCats_QuestMapQuestOptions_TrackQuest(TomCats_QuestMapFrame_GetDetailQuestID())
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -887,7 +887,7 @@
 		</Frames>
 		<Scripts>
 			<OnLoad function="TomCats_QuestMapFrame_OnLoad"/>
-<!--			<OnEvent function="TomCats_QuestMapFrame_OnEvent"/>-->
+			<OnEvent function="TomCats_QuestMapFrame_OnEvent"/>
 			<OnShow function="TomCats_QuestMapFrame_OnShow"/>
 			<OnHide function="TomCats_QuestMapFrame_OnHide"/>
 		</Scripts>
