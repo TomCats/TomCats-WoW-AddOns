@@ -6,6 +6,9 @@ local cache = addon.newCache(600, 30)
 local exceptions = {
 	[4529] = {
 		["Atlas"] = "vignetteevent"
+	},
+	[4476] = {
+		["Atlas"] = "vignettekill"
 	}
 }
 

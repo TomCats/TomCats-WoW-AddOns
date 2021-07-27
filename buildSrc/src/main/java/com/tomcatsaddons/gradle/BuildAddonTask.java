@@ -2,10 +2,7 @@ package com.tomcatsaddons.gradle;
 
 import com.tomcatsaddons.compressiontools.CompressionTools;
 import com.tomcatsaddons.lua.LuaTools;
-import com.tomcatsaddons.mvel.CSVTool;
-import com.tomcatsaddons.mvel.DBTool;
-import com.tomcatsaddons.mvel.StringTool;
-import com.tomcatsaddons.mvel.TemplateTool;
+import com.tomcatsaddons.mvel.*;
 import com.tomcatsaddons.wowtools.WowTools;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.DefaultTask;
@@ -42,6 +39,7 @@ public class BuildAddonTask extends DefaultTask {
             pctx.addPackageImport("java.util");
             pctx.addPackageImport("java.io");
             pctx.addImport(StandardCharsets.class);
+            pctx.addImport(NullSafeArrayList.class);
             pctx.addImport(FileUtils.class);
             pctx.addImport(LuaTools.class);
             pctx.addImport(MVEL.class);

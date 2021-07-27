@@ -6,8 +6,8 @@ ID,EXT,EXPR,V_RULE,L_RULE,T_RULE
 1525,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
 1527,"""Phase"",""VisibleTrackingQuestID""","[EXT[0],VISIBLETRACKINGQUESTID]",uldum,default,default
 1530,"""Phase"",""VisibleTrackingQuestID""","[EXT[0],VISIBLETRACKINGQUESTID]",vale,default,default
-1533,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
+1533,"""Related"",""Alias"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],VISIBLETRACKINGQUESTID]",shadowlands,default,default
 1536,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
 1543,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
 1565,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
-1961,"""Related"",""Alias"",""VisibleTrackingQuestID""","[(EXT.size() > 0 ? EXT[0] : null),(EXT.size() > 1 ? EXT[1] : null),VISIBLETRACKINGQUESTID]",shadowlands,default,default
+1961,"""Related"",""Alias"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],VISIBLETRACKINGQUESTID]",shadowlands,default,default
