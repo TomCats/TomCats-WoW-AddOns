@@ -1,7 +1,7 @@
 --[[ See license.txt for license and copyright information ]]
 select(2, ...).SetupGlobalFacade()
 
-local outdatedText = "TomCat's AddOn Suite is outdated:\n\nPlease update via the CurseForge app"
+local outdatedText = "TomCat's Tours is outdated:\n\nPlease update via the CurseForge app"
 local expiration = tonumber(GetAddOnMetadata("TomCats", "X-TomCats-Expiry"))
 
 local function Isxpired()

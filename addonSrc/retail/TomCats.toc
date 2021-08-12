@@ -54,4 +54,6 @@ minimap_icon.lua
 discoveries.xml
 discoveries.lua
 beta.lua
-noblegarden/Main.xml
+#noblegarden/Main.xml
+beta/maelie.xml
+beta/maelie.lua

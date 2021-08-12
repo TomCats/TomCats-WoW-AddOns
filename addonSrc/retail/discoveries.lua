@@ -324,6 +324,7 @@ do
 		["Embercourt-Guest-HuntCaptainKorayn"] = true, -- from discord dump
 		["EmberCourt-32x32"] = true, -- from discord dump
 		["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- from discord dump
+		["Tormentors-Boss"] = true,
 	}
 	for k in pairs(tmp1) do
 		atlasNameExclusions[string.lower(k)] = true
