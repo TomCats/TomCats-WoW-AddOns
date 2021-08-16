@@ -1,5 +1,5 @@
 ## Interface: 20501
-## Title: TomCat's AddOn Suite
+## Title: TomCat's Tours
 ## Notes: Version @version@ (Classic)
 ## Author: TomCat
 ## Version: @version@
