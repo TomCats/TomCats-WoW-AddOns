@@ -69,8 +69,8 @@ FrameXML\UIPanelTemplates.xml
 FrameXML\TutorialFrame.lua
 FrameXML\MapUtil.lua
 FrameXML\UIParent.lua
-# FrameXML\Minimap.lua
-# FrameXML\Minimap.xml
+FrameXML\Minimap.lua
+FrameXML\Minimap.xml
 # AddOns\Blizzard_MapCanvas\MapCanvas_DataProviderBase.lua
 # AddOns\Blizzard_MapCanvas\MapCanvas_PinFrameLevelsManager.lua
 AddOns\Blizzard_MapCanvas\Blizzard_MapCanvasDetailLayer.lua
@@ -85,4 +85,4 @@ AddOns\Blizzard_WorldMap\Blizzard_WorldMap.lua
 overrides\Blizzard_WorldMap.lua
 # AddOns\Blizzard_WorldMap\Blizzard_WorldMap.xml
 overrides\Blizzard_WorldMap.xml
-# worldmapframe.lua
+worldmapframe.lua
