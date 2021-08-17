@@ -3,7 +3,8 @@ select(2, ...).SetupGlobalFacade()
 
 defaultSavedVariables = {
 	TomCats_Account = {
-		lastExpirationWarning = 0
+		lastExpirationWarning = 0,
+		minimapInstanceDifficultyAnchorOverride = HINT_ALL,
 	},
 	TomCats_Character = {
 		miniWorldMap = "1",

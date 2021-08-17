@@ -172,6 +172,12 @@ local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
 			--MergeWorldMapFrame()
+			if (TomCats_Account.minimapInstanceDifficultyAnchorOverride[1]) then
+				TomCats_MiniMapInstanceDifficulty:ClearAllPoints()
+				local override1, override2, override3, override4 = unpack(TomCats_Account.minimapInstanceDifficultyAnchorOverride)
+				override3 = getglobal(overrides3)
+				TomCats_MiniMapInstanceDifficulty:SetPoint(override1, override2, override3, override4)
+			end
 		end
 	end
 end
