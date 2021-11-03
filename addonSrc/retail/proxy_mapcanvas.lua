@@ -18,7 +18,7 @@ addon.CreateProxyMixinFunctions(
 			"AcquirePin",
 			"ApplyPinPosition",
 			"CallMethodOnPinsAndDataProviders",
-			"EnumerateAllPins",
+			"ExecuteOnAllPins",
 			"IsShown",
 			"RemovePin",
 			"SetPinPosition",
