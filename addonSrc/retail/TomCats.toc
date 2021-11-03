@@ -56,6 +56,4 @@ discoveries.lua
 beta.lua
 #noblegarden/Main.xml
 beta/maelie.xml
-#beta/maelie.lua
-beta/relicgatherer.lua
-beta/relicgorger.lua
+beta/maelie.lua
