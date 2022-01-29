@@ -45,8 +45,8 @@ ui_vignettes_section.lua
 ui_vignettes_section.xml
 ui_vignettes_pins.lua
 ui_vignettes_pins.xml
-#lunarfestival/Main.xml
-#loveisintheair/Main.xml
+lunarfestival/Main.xml
+loveisintheair/Main.xml
 configuration.xml
 configuration.lua
 minimap_icon.xml

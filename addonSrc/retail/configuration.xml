@@ -48,7 +48,7 @@
 					<Frame parentKey="popup" inherits="BackdropTemplate" hidden="true">
 						<Size x="320" y="116"/>
 						<KeyValues>
-							<KeyValue key="backdropInfo" value="TOOLTIP_BACKDROP_STYLE_DEFAULT" type="global"/>
+							<KeyValue key="backdropInfo" value="TOMCATS_TOOLTIP_BACKDROP_STYLE_DEFAULT" type="global"/>
 							<KeyValue key="backdropColor" value="TOOLTIP_DEFAULT_BACKGROUND_COLOR" type="global"/>
 							<KeyValue key="backdropBorderColor" value="TOOLTIP_DEFAULT_COLOR" type="global"/>
 						</KeyValues>

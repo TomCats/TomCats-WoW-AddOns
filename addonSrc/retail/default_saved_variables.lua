@@ -22,7 +22,9 @@ addon.defaultSavedVariables = {
 		discoveries = {
 			vignettes = addon.constants.HINT_ALL,
 			vignetteAtlases = addon.constants.HINT_ALL
-		}
+		},
+		loveisintheair = addon.constants.HINT_ALL,
+		lunarfestival = addon.constants.HINT_ALL
 	},
 	TomCats_Character = {
 		loveisintheair = {
