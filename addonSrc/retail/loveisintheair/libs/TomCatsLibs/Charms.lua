@@ -79,7 +79,7 @@ function addon.loveisintheair.Charms.Create(buttonInfo)
         _G[name .. "Icon"]:SetTexture(buttonInfo.iconTexture)
     end
     if (buttonInfo.name) then
-        local scope = TomCats_Account.loveisintheair.preferences
+        local scope = TomCats_Account.preferences
         if (scope[name]) then
             frame:SetPreferences(scope[name])
         else

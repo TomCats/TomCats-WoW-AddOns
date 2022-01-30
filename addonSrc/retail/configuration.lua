@@ -128,6 +128,34 @@ do
 		addon.SetIconScale(value)
 	end
 	BlizzardOptionsPanel_RegisterControl(slider, TomCats_Config);
+	Setup_CheckBox({
+		component = TomCats_Config.checkBox_lunarFestivalMinimapButton,
+		label = "Lunar Festival Minimap Button",
+		tooltip = "Displays the Lunar Festival minimap button",
+		defaultValue = "1",
+		preferenceTable = "TomCats-LunarFestivalMinimapButton",
+		preferenceKey = "hidden",
+		inverseValue = true,
+		SetValue = function(_, value)
+			if (addon.loveisintheair:IsEventActive()) then
+				addon.lunarfestival.charm:SetEnabled(value == "1")
+			end
+		end
+	})
+	Setup_CheckBox({
+		component = TomCats_Config.checkBox_loveIsInTheAirMinimapButton,
+		label = "Love is in the Air Minimap Button",
+		tooltip = "Displays the Love is in the Air minimap button",
+		defaultValue = "1",
+		preferenceTable = "TomCats-LoveIsInTheAirMinimapButton",
+		preferenceKey = "hidden",
+		inverseValue = true,
+		SetValue = function(_, value)
+			if (addon.loveisintheair:IsEventActive()) then
+				addon.loveisintheair.charm:SetEnabled(value == "1")
+			end
+		end
+	})
 	BackdropTemplateMixin.OnBackdropLoaded(slider);
 	TomCats_Config.html1:SetScript("OnHyperlinkClick", OnHyperlinkClick)
 	TomCats_Config.html1:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
