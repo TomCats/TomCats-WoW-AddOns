@@ -137,7 +137,7 @@ do
 		preferenceKey = "hidden",
 		inverseValue = true,
 		SetValue = function(_, value)
-			if (addon.loveisintheair:IsEventActive()) then
+			if (addon.lunarfestival:IsEventActive()) then
 				addon.lunarfestival.charm:SetEnabled(value == "1")
 			end
 		end
