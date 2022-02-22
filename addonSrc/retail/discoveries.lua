@@ -301,7 +301,7 @@ do
 		["PortalRed"] = true, -- chaotic riftstone (maw)
 		["PortalBlue"] = true, -- animaflow teleporter (maw)
 		["poi-soulspiritghost"] = true, -- souls in the maw
-		["VignetteKillElite"] = true, -- Beastwarrens in the maw
+		-- ["VignetteKillElite"] = true,
 		["Profession"] = true, -- Soulsteel Anvil in the maw
 		["poi-graveyard-neutral"] = true, -- player's corpse location in the maw
 		["TeleportationNetwork-32x32"] = true, -- from discord dump
@@ -326,6 +326,7 @@ do
 		["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- from discord dump
 		["Tormentors-Boss"] = true,
 	}
+	tmp1 = { }
 	for k in pairs(tmp1) do
 		atlasNameExclusions[string.lower(k)] = true
 	end
@@ -333,6 +334,9 @@ do
 		["Warfront-NeutralHero"] = true, -- special events in the maw
 		["VignetteEvent"] = true, -- star icon (sl)
 		["VignetteKill"] = true, -- star icon (bfa)
+		["VignetteKillElite"] = true,
+		["VignetteLoot"] = true,
+		["VignetteLootElite"] = true,
 	}
 	for k in pairs(tmp2) do
 		atlasNameInclusions[string.lower(k)] = true
@@ -478,9 +482,12 @@ local function OnUpdate(_, elapsed)
 	local mapID = C_Map.GetBestMapForUnit("player")
 	if (mapID ~= lastVignetteMapID) then
 		lastVignetteMapID = mapID
-		vignettes = addon.getVignettes(lastVignetteMapID)
+		vignettes = nil
 		checkedVignetteGUIDs = { }
 		timeSinceLastUpdate = 0
+		if (mapID == 1970) then -- only scan for new discoveries in ZM for now
+			vignettes = addon.getVignettes(lastVignetteMapID)
+		end
 	end
 	if (timeSinceLastUpdate >= interval) then
 		timeSinceLastUpdate = 0
@@ -494,16 +501,19 @@ local function OnUpdate(_, elapsed)
 						if (vignetteInfo and not vignetteIDExclusions[vignetteInfo.vignetteID]) then
 							local vignette = vignettes[vignetteInfo.vignetteID]
 							if (vignetteInfo.type == 0) then
+
 								local atlasName = string.lower(vignetteInfo.atlasName)
 								if (atlasNameInclusions[atlasName] and not vignette) then
 									if (not discoveredVignettes[vignetteInfo.vignetteID]) then
 										discoveredVignettes[vignetteInfo.vignetteID] = GetExtendedVignetteInfo(vignetteInfo, mapID)
+										print("|cffffff00Discovered Vignette (please let TomCat know!):|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
 										updateDiscoveryCount(1)
 										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
 								elseif (not atlasNameExclusions[atlasName] and not atlasNameInclusions[atlasName]) then
 									if (not discoveredVignetteAtlases[vignetteInfo.atlasName]) then
 										discoveredVignetteAtlases[vignetteInfo.atlasName] = GetExtendedVignetteInfo(vignetteInfo, mapID)
+										print("|cffff0000Discovered Icon:|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
 										updateDiscoveryCount(1)
 										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
