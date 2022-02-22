@@ -506,14 +506,14 @@ local function OnUpdate(_, elapsed)
 								if (atlasNameInclusions[atlasName] and not vignette) then
 									if (not discoveredVignettes[vignetteInfo.vignetteID]) then
 										discoveredVignettes[vignetteInfo.vignetteID] = GetExtendedVignetteInfo(vignetteInfo, mapID)
-										print("|cffffff00Discovered Vignette (please let TomCat know!):|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
+										ChatFrame1:AddMessage("|cffffff00Discovered Vignette (please let TomCat know!):|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
 										updateDiscoveryCount(1)
 										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
 								elseif (not atlasNameExclusions[atlasName] and not atlasNameInclusions[atlasName]) then
 									if (not discoveredVignetteAtlases[vignetteInfo.atlasName]) then
 										discoveredVignetteAtlases[vignetteInfo.atlasName] = GetExtendedVignetteInfo(vignetteInfo, mapID)
-										print("|cffff0000Discovered Icon:|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
+										ChatFrame1:AddMessage("|cffff0000Discovered Icon:|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
 										updateDiscoveryCount(1)
 										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
