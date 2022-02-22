@@ -10,6 +10,9 @@ local exceptions = {
 	[4476] = {
 		["Atlas"] = "vignettekill"
 	},
+	[4950] = {
+		["Atlas"] = "vignettekill"
+	}
 }
 for i = 5024, 5031 do
 	exceptions[i] = {
