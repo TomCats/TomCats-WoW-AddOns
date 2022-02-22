@@ -11,3 +11,4 @@ ID,EXT,EXPR,V_RULE,L_RULE,T_RULE
 1543,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
 1565,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default
 1961,"""Related"",""Alias"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],VISIBLETRACKINGQUESTID]",shadowlands,default,default
+1970,"""Related"",""Alias"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],VISIBLETRACKINGQUESTID]",shadowlands,default,default

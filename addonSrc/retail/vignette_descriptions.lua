@@ -18,5 +18,16 @@ addon.vignetteDescriptions = {
 	[4862] = "Use a Teleporter Repair Kit to repair the Ancient Teleporter.  Once repaired, anyone can enter and access Xyraxz the Unknowable's chamber.",
 	[4863] = "Located at the back of the cave.",
 	[4864] = "Interact with the Uncorrupted Razorwing Egg to draw Reliwik the Defiant over.",
-	[4866] = "The Abandoned Veilstaff may appear in any of several caves throughout Korthia.  Interact with it to spawn Ve'rayn.  Answer their questions until they become hostile and attack you."
+	[4866] = "The Abandoned Veilstaff may appear in any of several caves throughout Korthia.  Interact with it to spawn Ve'rayn.  Answer their questions until they become hostile and attack you.",
+-- Zereth Mortis Rares
+	[4742] = "Pull all 5 of the Bulging Roots in the area to activate the Gluttonous Overgrowth.",
+	[4770] = "Keep killing the Overgrown Helicid until Orixal spawns",
+	[4893] = "Collect three Energizing Leporids from the area and feed them to the nearby Hungry Nestlings to activate Garudeon.",
+	[4933] = "Help The Matriarch to spawn The Engulfer",
+	[4940] = "Aggro the nearby Menacing Vespoid Workers so that they will cast Paralytic Sting on you. Zatojin will come down to attack you once you have reached 20 stacks and have become Paralyzed!",
+	[4941] = "Kill the two elite Mawsworn Binders that are channeling Otaris the Provoked to start the encounter.",
+	[4945] = "Aggro Xy'azam or Xy'kina to activate the Corrupted Architect.",
+	[4949] = "Find the three Empowered Keys in the area and use them to open the Suspiciously Angry Vault to spawn Furidian.",
+	[4988] = "Find the nearby matching Mysterious Sigils (out of 4) for each of the Barrier Control Console(s) to unlock them.  This may require two people if the symbols on each console are different",
+	[4984] = "Requires fishing with an Aurelid Lure to spawn Hirukon",
 }
