@@ -285,6 +285,8 @@ local vignetteIDExclusions = {
 		that ultimately spawns the amalgamation.  See posts on Wowhead regarding the event as it is described for this
 		NPC.
 	]]
+	-- Zereth Mortis
+	[5019] = true, -- Torn Ethereal Drape
 }
 
 for _, v in ipairs(addon.vignettes_known) do
