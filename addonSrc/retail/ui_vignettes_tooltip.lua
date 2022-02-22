@@ -126,7 +126,8 @@ function TomCatsVignetteTooltipMixin:SetOwner(owner)
 		end
 	end
 	self.resize = true
-	if (not self.yielding) then
+	if (not GameTooltip:IsShown()) then
+		self.yielding = nil
 		self:Show()
 	end
 end
