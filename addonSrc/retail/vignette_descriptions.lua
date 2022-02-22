@@ -22,7 +22,9 @@ addon.vignetteDescriptions = {
 -- Zereth Mortis Rares
 	[4742] = "Pull all 5 of the Bulging Roots in the area to activate the Gluttonous Overgrowth.",
 	[4770] = "Keep killing the Overgrown Helicid until Orixal spawns",
+	[4877] = "Pickup the nearby Dangerous Orb of Power (59.4, 76.9) and carry it to the Forgotten Pump (58.6, 72.9) to cause the Submerged Chest to surface. If the Forgotten Pump is not interactable, you may need to wait up to 30 minutes for its cooldown.",
 	[4893] = "Collect three Energizing Leporids from the area and feed them to the nearby Hungry Nestlings to activate Garudeon.",
+	[4923] = "Enter the cave (58.96, 81.88) and click on the tablet on the ground near the West wall to unlock the Library Vault.  (you can ignore the other three tablets)",
 	[4933] = "Help The Matriarch to spawn The Engulfer",
 	[4940] = "Aggro the nearby Menacing Vespoid Workers so that they will cast Paralytic Sting on you. Zatojin will come down to attack you once you have reached 20 stacks and have become Paralyzed!",
 	[4941] = "Kill the two elite Mawsworn Binders that are channeling Otaris the Provoked to start the encounter.",
