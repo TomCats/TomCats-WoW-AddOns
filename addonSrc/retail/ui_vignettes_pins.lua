@@ -17,7 +17,9 @@ local TomCatsMapCanvasPinMixin = TomCatsMapCanvasPinMixin
 local TomCatsVignetteTooltip = TomCatsVignetteTooltip
 
 local maps = { }
-local atlasSizes = { }
+local atlasSizes = {
+	["poi-workorders"] = { 20, 20 }
+}
 local interval, minInterval, maxInterval = 1, 1/15, 1
 local imagePath = ("Interface\\AddOns\\%s\\images\\"):format(addonName)
 local timeSinceLastUpdate = 0
