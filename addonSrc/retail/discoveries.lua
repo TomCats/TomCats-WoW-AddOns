@@ -286,7 +286,9 @@ local vignetteIDExclusions = {
 		NPC.
 	]]
 	-- Zereth Mortis
+	[5000] = true,
 	[5019] = true, -- Torn Ethereal Drape
+	[5020] = true,
 }
 
 for _, v in ipairs(addon.vignettes_known) do
@@ -328,7 +330,10 @@ do
 		["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- from discord dump
 		["Tormentors-Boss"] = true,
 	}
-	tmp1 = { }
+	-- found in Zereth Mortis
+	tmp1 = {
+
+	}
 	for k in pairs(tmp1) do
 		atlasNameExclusions[string.lower(k)] = true
 	end
@@ -339,6 +344,9 @@ do
 		["VignetteKillElite"] = true,
 		["VignetteLoot"] = true,
 		["VignetteLootElite"] = true,
+
+		["mechagon-projects"] = true,
+		["poi-scrapper"] = true,
 	}
 	for k in pairs(tmp2) do
 		atlasNameInclusions[string.lower(k)] = true
