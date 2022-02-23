@@ -258,7 +258,11 @@ function TomCatsMapCanvasDataProviderMixin:RefreshAllData()
 			for vignetteID, vignette in pairs(vignetteInfo) do
 				if (vignette.isPinned) then
 					if (not mapData.pins[vignetteID]) then
-						ShowHide(mapFrame:AcquirePin("TomCatsMapPinTemplate", vignette), not self.hideAll)
+						local completed = vignette.isCompleted
+						ShowHide(
+								mapFrame:AcquirePin("TomCatsMapPinTemplate", vignette),
+								(not self.hideAll) and ((not completed) or (completed and vignette.isVisibleWhenCompleted))
+						)
 					end
 				end
 			end

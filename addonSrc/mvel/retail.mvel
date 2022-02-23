@@ -21,7 +21,7 @@ do {
 	vars.zones = zones;
 	vignetteInfo = {:};
 	vars.vignetteInfo = vignetteInfo;
-	vignetteZones = db.query("select ID, EXT, EXPR, V_RULE, L_RULE, T_RULE from retailvignettezones order by ID;");
+	vignetteZones = db.query("select ID, EXT, EXPR, V_RULE, L_RULE, T_RULE, CV_RULE from retailvignettezones order by ID;");
 	for(lang : wowtools.locales) {
 		locales[lang] = {:};
 	}

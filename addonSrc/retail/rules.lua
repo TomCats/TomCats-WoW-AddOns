@@ -55,6 +55,11 @@ local trackingRules = {
 	["darkshore"] = loadstring(rulePrepend .. "return C_QuestLog.IsQuestFlaggedCompleted(o.VisibleTrackingQuestID) or C_QuestLog.IsQuestFlaggedCompleted(o.PrevQuestID[(o.Hostile == 3 and g.playerFaction) or 1])")
 }
 
+local completedVisibilityRules = {
+	["default"] = loadstring(rulePrepend .. "return true"),
+	["zerethmortis"] = loadstring(rulePrepend .. "return not o.Once"),
+}
+
 local function executeRule(ruleSet, ruleName, obj)
 	return ruleSet[ruleName](addon.globals, obj, addon.constants, functions)
 end
@@ -69,6 +74,10 @@ end
 
 function addon.executeTrackingRule(ruleName, obj)
 	return executeRule(trackingRules, ruleName, obj)
+end
+
+function addon.executeCompletedVisibilityRule(ruleName, obj)
+	return executeRule(completedVisibilityRules, ruleName, obj)
 end
 
 function addon.executeMapActivationRule(mapID)
