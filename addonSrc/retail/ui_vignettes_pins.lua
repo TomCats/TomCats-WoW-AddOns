@@ -261,7 +261,7 @@ function TomCatsMapCanvasDataProviderMixin:RefreshAllData()
 						local completed = vignette.isCompleted
 						ShowHide(
 								mapFrame:AcquirePin("TomCatsMapPinTemplate", vignette),
-								(not self.hideAll) and ((not completed) or (completed and vignette.isVisibleWhenCompleted))
+								not completed or vignette.isVisibleWhenCompleted
 						)
 					end
 				end
@@ -292,12 +292,15 @@ function TomCatsMapCanvasDataProviderMixin:OnMapChanged()
 	self:RefreshAllData()
 end
 
-local function setQuestFocus(_, questID)
+local function setQuestFocus()
 	local mapFrame = WorldMapFrame
 	local mapData = maps[mapFrame]
-	WorldMapFrame.hideAll = questID ~= nil
 	for _, pin in pairs(mapData.pins) do
-		ShowHide(pin, not WorldMapFrame.hideAll)
+		local completed = pin.vignette.isCompleted
+		ShowHide(
+				pin,
+				not completed or pin.vignette.isVisibleWhenCompleted
+		)
 	end
 end
 
