@@ -286,7 +286,10 @@ local vignetteIDExclusions = {
 		NPC.
 	]]
 	-- Zereth Mortis
+	[4991] = true, -- Requisites Originator
 	[5000] = true,
+	[5003] = true, -- Rondure Cache
+	[5013] = true, -- Prototype Schematic
 	[5019] = true, -- Torn Ethereal Drape
 	[5020] = true,
 }
@@ -571,6 +574,7 @@ local function OnEvent(event, arg1)
 			if (_G["TomCats_Account"].discoveriesVersion ~= "@version@") then
 				_G["TomCats_Account"].discoveries.vignettes = { }
 				_G["TomCats_Account"].discoveries.vignetteAtlases = { }
+				_G["TomCats_Account"].discoveries.version = "@version@"
 				_G["TomCats_Account"].discoveriesResetCount = 0
 				_G["TomCats_Account"].discoveriesVersion = "@version@"
 			end
