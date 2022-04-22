@@ -22,10 +22,10 @@ local function setupGlobalEventTimes(val, euOffset, naOffset, krOffset, cnOffset
 	return times
 end
 
--- 4/5/2021 10:00am CET in EU
-local eventStarts = setupGlobalEventTimes(1617613200, 0, 32400, -28800, -25200, -25200)
--- 4/12/2021 10:00am CET in EU
-local eventEnds = setupGlobalEventTimes(1618218000, 0, 32400, -28800, -25200, -25200)
+-- 4/18/2022 10:00am CET in EU
+local eventStarts = setupGlobalEventTimes(1650294000, 0, 32400, -28800, -25200, -25200)
+-- 4/25/2022 10:00am CET in EU
+local eventEnds = setupGlobalEventTimes(1650898800, 0, 32400, -28800, -25200, -25200)
 
 function component.getCurrentOffsetMinutes()
 	if (currentOffsetMinutes) then return currentOffsetMinutes end
