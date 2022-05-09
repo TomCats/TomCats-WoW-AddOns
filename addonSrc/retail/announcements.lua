@@ -12,4 +12,4 @@ local function ADDON_LOADED(_, _, addonName)
 	end
 end
 eventFrame:SetScript("OnEvent", ADDON_LOADED)
-eventFrame:RegisterEvent("ADDON_LOADED")
+--eventFrame:RegisterEvent("ADDON_LOADED")
