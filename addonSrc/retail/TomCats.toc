@@ -47,6 +47,7 @@ ui_vignettes_pins.lua
 ui_vignettes_pins.xml
 lunarfestival/Main.xml
 loveisintheair/Main.xml
+hallowsend/Main.xml
 announcements.lua
 configuration.xml
 configuration.lua

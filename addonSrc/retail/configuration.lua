@@ -156,6 +156,20 @@ do
 			end
 		end
 	})
+	Setup_CheckBox({
+		component = TomCats_Config.checkBox_hallowsEndMinimapButton,
+		label = "Hallow's End Minimap Button",
+		tooltip = "Displays the Hallow's End minimap button",
+		defaultValue = "1",
+		preferenceTable = "TomCats-HallowsEndMinimapButton",
+		preferenceKey = "hidden",
+		inverseValue = true,
+		SetValue = function(_, value)
+			if (addon.hallowsend:IsEventActive()) then
+				addon.hallowsend.charm:SetEnabled(value == "1")
+			end
+		end
+	})
 	BackdropTemplateMixin.OnBackdropLoaded(slider);
 	TomCats_Config.html1:SetScript("OnHyperlinkClick", OnHyperlinkClick)
 	TomCats_Config.html1:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
