@@ -375,23 +375,27 @@ do
 	for k in pairs(tmp2) do
 		atlasNameInclusions[string.lower(k)] = true
 	end
-	TomCats_ConfigDiscoveries.name = "Discoveries"
-	TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
-	TomCats_ConfigDiscoveries.controls = { }
-	TomCats_ConfigDiscoveries.Header.Text:SetFont(TomCats_ConfigDiscoveries.Header.Text:GetFont(), 64)
-	BlizzardOptionsPanel_OnLoad(
-			TomCats_ConfigDiscoveries,
-			function(self)
-				for _, v in ipairs(self.controls) do
-					if (v.okay) then v:okay() end
-				end
-			end,
-			InterfaceOptionsPanel_Cancel,
-			InterfaceOptionsPanel_Default,
-			InterfaceOptionsPanel_Refresh
-	)
-	InterfaceOptions_AddCategory(TomCats_ConfigDiscoveries)
-	InterfaceAddOnsList_Update()
+
+	--todo: Create a new discoveries configuration panel
+	if (BlizzardOptionsPanel_OnLoad) then
+		TomCats_ConfigDiscoveries.name = "Discoveries"
+		TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
+		TomCats_ConfigDiscoveries.controls = { }
+		TomCats_ConfigDiscoveries.Header.Text:SetFont(TomCats_ConfigDiscoveries.Header.Text:GetFont(), 64)
+		BlizzardOptionsPanel_OnLoad(
+				TomCats_ConfigDiscoveries,
+				function(self)
+					for _, v in ipairs(self.controls) do
+						if (v.okay) then v:okay() end
+					end
+				end,
+				InterfaceOptionsPanel_Cancel,
+				InterfaceOptionsPanel_Default,
+				InterfaceOptionsPanel_Refresh
+		)
+		InterfaceOptions_AddCategory(TomCats_ConfigDiscoveries)
+		InterfaceAddOnsList_Update()
+	end
 end
 
 local function serializeTable(val, key)

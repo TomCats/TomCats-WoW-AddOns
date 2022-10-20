@@ -1,6 +1,8 @@
 --[[ See license.txt for license and copyright information ]]
 local _, addon = ...
 
+if (BlizzardOptionsPanel_RegisterControl) then
+
 local BackdropTemplateMixin = BackdropTemplateMixin
 local BlizzardOptionsPanel_RegisterControl = BlizzardOptionsPanel_RegisterControl
 local CONTROLTYPE_CHECKBOX = CONTROLTYPE_CHECKBOX
@@ -176,4 +178,5 @@ do
 	TomCats_Config.html1:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)
 	InterfaceOptionsPanel_OnLoad(TomCats_Config)
 	InterfaceAddOnsList_Update()
+end
 end

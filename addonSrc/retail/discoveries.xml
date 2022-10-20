@@ -95,7 +95,7 @@
 			</OnEnter>
 		</Scripts>
 	</ContainedAlertFrame>
-	<Frame name="TomCats_ConfigDiscoveries" parent="InterfaceOptionsFramePanelContainer" hidden="true">
+	<Frame name="TomCats_ConfigDiscoveries" parent="TomCats_InterfaceOptionsFramePanelContainer" hidden="true">
 		<Frames>
 			<Frame parentKey="Header" parentArray="components">
 				<Size x="80" y="80" />

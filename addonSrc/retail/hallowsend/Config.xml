@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-    <Frame name="TomCats-HallowsEndInterfaceOptionsPanel" parent="InterfaceOptionsFramePanelContainer">
+    <Frame name="TomCats-HallowsEndInterfaceOptionsPanel" parent="TomCats_InterfaceOptionsFramePanelContainer">
         <Layers>
             <Layer>
                 <FontString name="$parentTitle" text="Hallow's End" inherits="GameFontNormalLarge" justifyH="LEFT" justifyV="TOP">

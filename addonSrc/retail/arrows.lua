@@ -217,8 +217,13 @@ function addon.CreateArrow(r, g, b)
     rotationAnim:SetOrder(1)
     local scaleAnim = ping.animation:CreateAnimation("Scale")
     scaleAnim:SetTarget(ping.expandingRing)
-    scaleAnim:SetFromScale(0.1, 0.1)
-    scaleAnim:SetToScale(1.5, 1.5)
+    if (scaleAnim.SetFromScale) then
+        scaleAnim:SetFromScale(0.1, 0.1)
+        scaleAnim:SetToScale(1.5, 1.5)
+    else
+        scaleAnim:SetScaleFrom(0.1, 0.1)
+        scaleAnim:SetScaleTo(1.5, 1.5)
+    end
     scaleAnim:SetDuration(0.8)
     scaleAnim:SetOrder(1)
     return arrow
