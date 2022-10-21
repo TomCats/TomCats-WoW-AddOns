@@ -161,8 +161,8 @@
         </Layers>
         <Scripts>
             <OnLoad>
+                    self:RegisterForClicks("RightButtonUp", "LeftButtonUp")
                     self:RegisterForDrag("LeftButton")
-                    self:RegisterForClicks("RightButtonDown", "LeftButtonDown")
                     local name = self:GetName()
                     local isDragging = false
                     local tooltipIsShowing = false
