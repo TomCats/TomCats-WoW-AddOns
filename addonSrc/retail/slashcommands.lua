@@ -1,5 +1,13 @@
 --[[ See license.txt for license and copyright information ]]
 
+local InterfaceOptionsFrame_OpenToCategory = InterfaceOptionsFrame_OpenToCategory
+local _, _, _, tocversion = GetBuildInfo()
+if (tocversion >= 100000) then
+	InterfaceOptionsFrame_OpenToCategory = function(frame)
+		Settings.OpenToCategory(frame.category:GetID())
+	end
+end
+
 local function split (inputstr, sep)
 	if sep == nil then
 		sep = "%s"

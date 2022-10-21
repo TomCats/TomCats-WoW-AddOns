@@ -1,14 +1,37 @@
 --[[ See license.txt for license and copyright information ]]
 local _, addon = ...
 
-if (BlizzardOptionsPanel_RegisterControl) then
+local _, _, _, tocversion = GetBuildInfo()
 
 local BackdropTemplateMixin = BackdropTemplateMixin
 local BlizzardOptionsPanel_RegisterControl = BlizzardOptionsPanel_RegisterControl
-local CONTROLTYPE_CHECKBOX = CONTROLTYPE_CHECKBOX
-local CONTROLTYPE_SLIDER = CONTROLTYPE_SLIDER
 local InterfaceAddOnsList_Update = InterfaceAddOnsList_Update
 local InterfaceOptionsPanel_OnLoad = InterfaceOptionsPanel_OnLoad
+
+if (tocversion >= 100000) then
+	local controls = { }
+	BlizzardOptionsPanel_RegisterControl = function(control, frame)
+		table.insert(controls, control)
+	end
+	InterfaceAddOnsList_Update = nop
+	InterfaceOptionsPanel_OnLoad = function(frame)
+		local category, layout = Settings.RegisterCanvasLayoutCategory(frame, frame.name);
+		frame.category = category
+		Settings.RegisterAddOnCategory(category);
+		function frame:OnCommit(...)
+		end
+		function frame:OnDefault(...)
+		end
+		function frame:OnRefresh(...)
+			for _, control in ipairs(controls) do
+				control:SetValue(control:GetValue())
+			end
+		end
+	end
+end
+
+local CONTROLTYPE_CHECKBOX = CONTROLTYPE_CHECKBOX
+local CONTROLTYPE_SLIDER = CONTROLTYPE_SLIDER
 
 local TomCats_Config = TomCats_Config
 local TomCats_ConfigIconSizeSlider = TomCats_ConfigIconSizeSlider
@@ -58,6 +81,7 @@ end
 do
 	TomCats_Config.name = "TomCat's Tours"
 	TomCats_Config.controls = { }
+	InterfaceOptionsPanel_OnLoad(TomCats_Config)
 	TomCats_Config.Header.Text:SetFont(TomCats_Config.Header.Text:GetFont(), 64)
 	local function Setup_CheckBox(checkBoxInfo)
 		local checkBox = checkBoxInfo.component
@@ -65,7 +89,7 @@ do
 		checkBox.Text:SetText(checkBoxInfo.label)
 		checkBox.tooltipText = checkBoxInfo.tooltip
 		checkBox.defaultValue = checkBoxInfo.defaultValue
-		checkBox.GetValue = function()
+		checkBox.GetValue = function(self)
 			local prefsBase = _G["TomCats_Account"].preferences
 			local preferenceTable = checkBoxInfo.preferenceTable and prefsBase[checkBoxInfo.preferenceTable] or prefsBase
 			local currentValue
@@ -77,6 +101,15 @@ do
 			return currentValue
 		end
 		checkBox.SetValue = checkBoxInfo.SetValue
+		if (tocversion >= 100000) then
+			checkBox.SetValue = function(self, value)
+				checkBox:SetChecked(value == "1")
+				checkBoxInfo.SetValue(self, value)
+			end
+			checkBox:SetScript("OnClick", function()
+				checkBox:SetValue(checkBox:GetChecked() and "1" or "0")
+			end)
+		end
 		BlizzardOptionsPanel_RegisterControl(checkBox, TomCats_Config)
 	end
 	Setup_CheckBox({
@@ -176,7 +209,5 @@ do
 	TomCats_Config.html1:SetScript("OnHyperlinkClick", OnHyperlinkClick)
 	TomCats_Config.html1:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
 	TomCats_Config.html1:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)
-	InterfaceOptionsPanel_OnLoad(TomCats_Config)
 	InterfaceAddOnsList_Update()
-end
 end

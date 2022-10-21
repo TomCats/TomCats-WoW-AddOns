@@ -120,7 +120,12 @@
 						end
 					</OnLoad>
 					<OnClick>
-						InterfaceOptionsFrame_OpenToCategory(_G["TomCats_ConfigDiscoveries"])
+						local _, _, _, tocversion = GetBuildInfo()
+						if (tocversion >= 100000) then
+							SettingsPanel:SelectCategory(TomCats_ConfigDiscoveries.category)
+						else
+							InterfaceOptionsFrame_OpenToCategory(_G["TomCats_ConfigDiscoveries"])
+						end
 					</OnClick>
 				</Scripts>
 			</Button>

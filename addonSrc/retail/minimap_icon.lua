@@ -12,6 +12,13 @@ local PlaySound = PlaySound
 local SOUNDKIT = SOUNDKIT
 local UIParent = UIParent
 
+local _, _, _, tocversion = GetBuildInfo()
+if (tocversion >= 100000) then
+	InterfaceOptionsFrame_OpenToCategory = function(frame)
+		Settings.OpenToCategory(frame.category:GetID())
+	end
+end
+
 local seqNum = 1
 
 local function GetMinimapShape()

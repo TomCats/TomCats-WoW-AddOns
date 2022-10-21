@@ -1,6 +1,8 @@
 --[[ See license.txt for license and copyright information ]]
 local addonName, addon = ...
 
+local _, _, _, tocversion = GetBuildInfo()
+
 local AlertFrame = AlertFrame
 local BlizzardOptionsPanel_OnLoad = BlizzardOptionsPanel_OnLoad
 local C_Map = C_Map
@@ -24,6 +26,16 @@ local vignettes
 local TomCatsDiscoveryAlertSystem
 local TomCats_Config = TomCats_Config
 local TomCats_ConfigDiscoveries = TomCats_ConfigDiscoveries
+
+
+if (tocversion >= 100000) then
+	InterfaceOptions_AddCategory = function(frame)
+		local subcategory, layout = Settings.RegisterCanvasLayoutSubcategory(TomCats_Config.category, frame, frame.name);
+		frame.category = subcategory
+	end
+	BlizzardOptionsPanel_OnLoad = nop
+	InterfaceAddOnsList_Update = nop
+end
 
 local atlasNameExclusions = { }
 local atlasNameInclusions = { }
@@ -376,26 +388,23 @@ do
 		atlasNameInclusions[string.lower(k)] = true
 	end
 
-	--todo: Create a new discoveries configuration panel
-	if (BlizzardOptionsPanel_OnLoad) then
-		TomCats_ConfigDiscoveries.name = "Discoveries"
-		TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
-		TomCats_ConfigDiscoveries.controls = { }
-		TomCats_ConfigDiscoveries.Header.Text:SetFont(TomCats_ConfigDiscoveries.Header.Text:GetFont(), 64)
-		BlizzardOptionsPanel_OnLoad(
-				TomCats_ConfigDiscoveries,
-				function(self)
-					for _, v in ipairs(self.controls) do
-						if (v.okay) then v:okay() end
-					end
-				end,
-				InterfaceOptionsPanel_Cancel,
-				InterfaceOptionsPanel_Default,
-				InterfaceOptionsPanel_Refresh
-		)
-		InterfaceOptions_AddCategory(TomCats_ConfigDiscoveries)
-		InterfaceAddOnsList_Update()
-	end
+	TomCats_ConfigDiscoveries.name = "Discoveries"
+	TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
+	TomCats_ConfigDiscoveries.controls = { }
+	TomCats_ConfigDiscoveries.Header.Text:SetFont(TomCats_ConfigDiscoveries.Header.Text:GetFont(), 64)
+	BlizzardOptionsPanel_OnLoad(
+			TomCats_ConfigDiscoveries,
+			function(self)
+				for _, v in ipairs(self.controls) do
+					if (v.okay) then v:okay() end
+				end
+			end,
+			InterfaceOptionsPanel_Cancel,
+			InterfaceOptionsPanel_Default,
+			InterfaceOptionsPanel_Refresh
+	)
+	InterfaceOptions_AddCategory(TomCats_ConfigDiscoveries)
+	InterfaceAddOnsList_Update()
 end
 
 local function serializeTable(val, key)
