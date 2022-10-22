@@ -38,6 +38,10 @@ local TomCats_ConfigIconSizeSlider = TomCats_ConfigIconSizeSlider
 local TomCats_ConfigIconSizeSliderLow = TomCats_ConfigIconSizeSliderLow
 local TomCats_ConfigIconSizeSliderHigh = TomCats_ConfigIconSizeSliderHigh
 
+local TomCats_ConfigHEIconSizeSlider = TomCats_ConfigHEIconSizeSlider
+local TomCats_ConfigHEIconSizeSliderLow = TomCats_ConfigHEIconSizeSliderLow
+local TomCats_ConfigHEIconSizeSliderHigh = TomCats_ConfigHEIconSizeSliderHigh
+
 local function OnHyperlinkClick(self, link)
 	link = "https://" .. link
 	if (self.popup:IsShown() and link == self.popup.text) then
@@ -145,24 +149,49 @@ do
 			addon.SetIconAnimationEnabled(value == "1")
 		end
 	})
-	local slider = TomCats_ConfigIconSizeSlider
-	slider.type = CONTROLTYPE_SLIDER
-	slider.tooltipText = "Sets the size of the encounter icons which are displayed on the world map and battlefield map"
-	TomCats_ConfigIconSizeSliderLow:SetText("-")
-	TomCats_ConfigIconSizeSliderHigh:SetText("+")
-	TomCats_Config.IconSizeSliderLabel.Text:SetText("Map Icon Size");
-	slider.SetDisplayValue = slider.SetValue;
-	slider.GetValue = function()
-		return _G["TomCats_Account"].preferences.MapOptions.iconScale
+	do
+		local slider = TomCats_ConfigIconSizeSlider
+		slider.type = CONTROLTYPE_SLIDER
+		slider.tooltipText = "Sets the size of the encounter icons which are displayed on the world map and battlefield map"
+		TomCats_ConfigIconSizeSliderLow:SetText("-")
+		TomCats_ConfigIconSizeSliderHigh:SetText("+")
+		TomCats_Config.IconSizeSliderLabel.Text:SetText("Map Icon Size");
+		slider.SetDisplayValue = slider.SetValue;
+		slider.GetValue = function()
+			return _G["TomCats_Account"].preferences.MapOptions.iconScale
+		end
+		slider.GetCurrentValue = slider.GetValue
+		slider.SetValue = function (self, value)
+			self:SetDisplayValue(value);
+			self.value = value;
+			_G["TomCats_Account"].preferences.MapOptions.iconScale = value
+			addon.SetIconScale(value)
+		end
+		BlizzardOptionsPanel_RegisterControl(slider, TomCats_Config);
+		BackdropTemplateMixin.OnBackdropLoaded(slider);
 	end
-	slider.GetCurrentValue = slider.GetValue
-	slider.SetValue = function (self, value)
-		self:SetDisplayValue(value);
-		self.value = value;
-		_G["TomCats_Account"].preferences.MapOptions.iconScale = value
-		addon.SetIconScale(value)
+	if (addon.hallowsend.IsEventActive()) then
+		local slider = TomCats_ConfigHEIconSizeSlider
+		TomCats_Config.HEIconSizeSliderLabel:Show()
+		TomCats_ConfigHEIconSizeSlider:Show()
+		slider.type = CONTROLTYPE_SLIDER
+		slider.tooltipText = "Sets the size of the pumpkin icons"
+		TomCats_ConfigHEIconSizeSliderLow:SetText("-")
+		TomCats_ConfigHEIconSizeSliderHigh:SetText("+")
+		TomCats_Config.HEIconSizeSliderLabel.Text:SetText("Pumpkin Icon Size");
+		slider.SetDisplayValue = slider.SetValue;
+		slider.GetValue = function()
+			return _G["TomCats_Account"].hallowsend.iconScale
+		end
+		slider.GetCurrentValue = slider.GetValue
+		slider.SetValue = function (self, value)
+			self:SetDisplayValue(value);
+			self.value = value;
+			_G["TomCats_Account"].hallowsend.iconScale = value
+			addon.hallowsend.SetIconScale(value)
+		end
+		BlizzardOptionsPanel_RegisterControl(slider, TomCats_Config);
 	end
-	BlizzardOptionsPanel_RegisterControl(slider, TomCats_Config);
 	Setup_CheckBox({
 		component = TomCats_Config.checkBox_lunarFestivalMinimapButton,
 		label = "Lunar Festival Minimap Button",
@@ -205,7 +234,6 @@ do
 			end
 		end
 	})
-	BackdropTemplateMixin.OnBackdropLoaded(slider);
 	TomCats_Config.html1:SetScript("OnHyperlinkClick", OnHyperlinkClick)
 	TomCats_Config.html1:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
 	TomCats_Config.html1:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)

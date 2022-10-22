@@ -179,6 +179,31 @@
 					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation" relativePoint="BOTTOMLEFT" x="290" y="2"/>
 				</Anchors>
 			</CheckButton>
+			<Frame parentKey="HEIconSizeSliderLabel" hidden="true">
+				<Size x="1" y="1" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_loveIsInTheAirMinimapButton" relativePoint="BOTTOMLEFT" x="2" y="-4"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString parentKey="Text" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Slider name="$parentHEIconSizeSlider" inherits="OptionsSliderTemplate" minValue="0.5" maxValue="2.0" valueStep="0.05" obeyStepOnDrag="true" defaultValue="1.0" hidden="true">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.HEIconSizeSliderLabel.Text" relativePoint="RIGHT" x="8" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnValueChanged>
+						self:SetValue(value)
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
 			<CheckButton parentKey="checkBox_hallowsEndMinimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_lunarFestivalMinimapButton" relativePoint="BOTTOMLEFT" x="0" y="2"/>

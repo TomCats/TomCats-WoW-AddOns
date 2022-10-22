@@ -16,6 +16,15 @@ local IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 
 local WorldMapTooltip = TomCatsHallowsEndGameTooltip
 
+local function rescale(pin)
+    local scale = TomCats_Account.hallowsend.iconScale
+    local sizeX = 64 * scale
+    local sizeY = 64 * scale
+    pin.iconDefault:SetSize(sizeX, sizeY)
+    pin.iconHighlighted:SetSize(sizeX, sizeY)
+    pin:SetSize(sizeX, sizeY)
+end
+
 local function ShowHide(element, condition)
     if (condition) then
         element:Show()
@@ -311,6 +320,7 @@ TomCatsHallowsEndAreaPOIPinMixin = CreateFromMixins(AreaPOIPinMixin)
 function TomCatsHallowsEndAreaPOIPinMixin:OnAcquired(pinInfo)
     AreaPOIPinMixin.OnAcquired(self, pinInfo)
     ShowHide(self, enabled)
+    rescale(self)
 end
 
 --TomCatsHallowsEndPinMixin = CreateFromMixins(MapCanvasPinMixin)
@@ -366,6 +376,7 @@ function TomCatsHallowsEndPinMixin:OnCanvasScaleChanged()
     if (uiMapID == 12 or uiMapID == 13 or uiMapID == 113) then scaleBase = 0.35 end
     self:SetScale(scaleBase * self:GetMap():GetGlobalPinScale() / self:GetParent():GetScale())
     self:SetPosition(self.pinInfo.location.x, self.pinInfo.location.y)
+    rescale(self)
 end
 
 TomCatsHallowsEndPinMixin.OnLoad = nop
@@ -497,3 +508,9 @@ local function OnUpdate()
 end
 
 CreateFrame("FRAME"):SetScript("OnUpdate",OnUpdate)
+
+function addon.hallowsend.SetIconScale()
+    for pin in pairs(allPins) do
+        rescale(pin)
+    end
+end
