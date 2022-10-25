@@ -3,7 +3,6 @@
     <Include file="hallowsend\eventTime.lua" />
     <Include file="hallowsend\preload.lua" />
     <Include file="hallowsend\Libraries.xml" />
-<!--    <Include file="hallowsend\Config.xml" /> -->
     <Script file="hallowsend\data\Locations.lua" />
     <Script file="hallowsend\data\LocationGroups.lua" />
     <Script file="hallowsend\data\Tours.lua" />
@@ -17,5 +16,4 @@
     <Include file="hallowsend\TomCatsHallowsEndDataProvider.xml" />
     <Script file="hallowsend\Main.lua" />
     <Script file="hallowsend\MainRoute.lua" />
-<!--    <Script file="hallowsend\AutoComplete.lua" /> -->
 </Ui>

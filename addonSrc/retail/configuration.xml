@@ -2,7 +2,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-	<Frame name="TomCats_Config" parent="TomCats_InterfaceOptionsFramePanelContainer" hidden="true">
+	<Frame name="TomCats_Config" hidden="true">
 		<Frames>
 			<Frame parentKey="Header" parentArray="components">
 				<Size x="80" y="80" />
@@ -262,43 +262,4 @@
 		</Scripts>
 	</Frame>
 
-	<Frame name="TomCats_Config_MapIcons" parent="TomCats_InterfaceOptionsFramePanelContainer" hidden="true">
-		<Frames>
-			<Frame parentKey="Header" parentArray="components">
-				<Size x="80" y="80" />
-				<Anchors>
-					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="16" y="-16" />
-				</Anchors>
-				<Layers>
-					<Layer>
-						<Texture parentKey="Icon" file="Interface\AddOns\TomCats\images\tomcats_logo.blp">
-							<Size x="80" y="80"/>
-							<Anchors>
-								<Anchor point="CENTER" x="0" y="0"/>
-							</Anchors>
-						</Texture>
-					</Layer>
-					<Layer>
-						<FontString parentKey="Text" font="GameFontNormal" text="TomCat's Tours">
-							<Anchors>
-								<Anchor point="LEFT" relativePoint="RIGHT" y="6" />
-								<Anchor point="RIGHT" relativeKey="$parent.$parent" relativePoint="RIGHT" x="-4" />
-							</Anchors>
-						</FontString>
-						<FontString parentKey="VersionText" font="GameFontNormal" text="Version: @version@">
-							<Anchors>
-								<Anchor point="TOPLEFT" relativeKey="$parent.Text" relativePoint="BOTTOMLEFT" />
-								<Anchor point="TOPRIGHT" relativeKey="$parent.Text" relativePoint="BOTTOMRIGHT" />
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-			</Frame>
-			<Frame parentKey="mapIconsOptionsHeader" inherits="TomCats_Config_HeaderTemplate">
-				<Attributes>
-					<Attribute name="title" value="Map Icons" />
-				</Attributes>
-			</Frame>
-		</Frames>
-	</Frame>
 </Ui>

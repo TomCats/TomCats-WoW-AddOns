@@ -3,7 +3,6 @@
     <Include file="lunarfestival\eventTime.lua" />
     <Include file="lunarfestival\preload.lua" />
     <Include file="lunarfestival\Libraries.xml" />
-<!--    <Include file="lunarfestival\Config.xml" /> -->
     <Script file="lunarfestival\data\Quests.lua" />
     <Script file="lunarfestival\data\Quests.CreatureName.lua" />
     <Script file="lunarfestival\data\QuestLookups.lua" />

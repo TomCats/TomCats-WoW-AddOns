@@ -4,31 +4,6 @@ local _, addon = ...
 local _, _, _, tocversion = GetBuildInfo()
 
 local BackdropTemplateMixin = BackdropTemplateMixin
-local BlizzardOptionsPanel_RegisterControl = BlizzardOptionsPanel_RegisterControl
-local InterfaceAddOnsList_Update = InterfaceAddOnsList_Update
-local InterfaceOptionsPanel_OnLoad = InterfaceOptionsPanel_OnLoad
-
-if (tocversion >= 100000) then
-	local controls = { }
-	BlizzardOptionsPanel_RegisterControl = function(control, frame)
-		table.insert(controls, control)
-	end
-	InterfaceAddOnsList_Update = nop
-	InterfaceOptionsPanel_OnLoad = function(frame)
-		local category, layout = Settings.RegisterCanvasLayoutCategory(frame, frame.name);
-		frame.category = category
-		Settings.RegisterAddOnCategory(category);
-		function frame:OnCommit(...)
-		end
-		function frame:OnDefault(...)
-		end
-		function frame:OnRefresh(...)
-			for _, control in ipairs(controls) do
-				control:SetValue(control:GetValue())
-			end
-		end
-	end
-end
 
 local CONTROLTYPE_CHECKBOX = CONTROLTYPE_CHECKBOX
 local CONTROLTYPE_SLIDER = CONTROLTYPE_SLIDER
@@ -83,9 +58,18 @@ local function OnHyperlinkLeave(self)
 end
 
 do
+	local controls = { }
 	TomCats_Config.name = "TomCat's Tours"
-	TomCats_Config.controls = { }
-	InterfaceOptionsPanel_OnLoad(TomCats_Config)
+	local category = Settings.RegisterCanvasLayoutCategory(TomCats_Config, TomCats_Config.name);
+	TomCats_Config.category = category
+	Settings.RegisterAddOnCategory(category);
+	TomCats_Config.OnCommit = nop
+	TomCats_Config.nDefault = nop
+	function TomCats_Config:OnRefresh(...)
+		for _, control in ipairs(controls) do
+			control:SetValue(control:GetValue())
+		end
+	end
 	TomCats_Config.Header.Text:SetFont(TomCats_Config.Header.Text:GetFont(), 64)
 	local function Setup_CheckBox(checkBoxInfo)
 		local checkBox = checkBoxInfo.component
@@ -114,7 +98,7 @@ do
 				checkBox:SetValue(checkBox:GetChecked() and "1" or "0")
 			end)
 		end
-		BlizzardOptionsPanel_RegisterControl(checkBox, TomCats_Config)
+		table.insert(controls, checkBox)
 	end
 	Setup_CheckBox({
 		component = TomCats_Config.checkBox_minimapButton,
@@ -167,7 +151,7 @@ do
 			_G["TomCats_Account"].preferences.MapOptions.iconScale = value
 			addon.SetIconScale(value)
 		end
-		BlizzardOptionsPanel_RegisterControl(slider, TomCats_Config);
+		table.insert(controls, slider);
 		BackdropTemplateMixin.OnBackdropLoaded(slider);
 	end
 	if (addon.hallowsend.IsEventActive()) then
@@ -190,7 +174,7 @@ do
 			_G["TomCats_Account"].hallowsend.iconScale = value
 			addon.hallowsend.SetIconScale(value)
 		end
-		BlizzardOptionsPanel_RegisterControl(slider, TomCats_Config);
+		table.insert(controls, slider);
 	end
 	Setup_CheckBox({
 		component = TomCats_Config.checkBox_lunarFestivalMinimapButton,
@@ -237,5 +221,4 @@ do
 	TomCats_Config.html1:SetScript("OnHyperlinkClick", OnHyperlinkClick)
 	TomCats_Config.html1:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
 	TomCats_Config.html1:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)
-	InterfaceAddOnsList_Update()
 end

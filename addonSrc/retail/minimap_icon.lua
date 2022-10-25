@@ -4,20 +4,12 @@ local addonName, addon = ...
 local CreateFrame = CreateFrame
 local GameTooltip = GameTooltip
 local GetCursorPosition = GetCursorPosition
-local InterfaceOptionsFrame_OpenToCategory = InterfaceOptionsFrame_OpenToCategory
 local Minimap = Minimap
 local MinimapCluster = MinimapCluster
 local MinimapZoneTextButton = MinimapZoneTextButton
 local PlaySound = PlaySound
 local SOUNDKIT = SOUNDKIT
 local UIParent = UIParent
-
-local _, _, _, tocversion = GetBuildInfo()
-if (tocversion >= 100000) then
-	InterfaceOptionsFrame_OpenToCategory = function(frame)
-		Settings.OpenToCategory(frame.category:GetID())
-	end
-end
 
 local seqNum = 1
 
@@ -241,7 +233,7 @@ end
 
 local function OpenControlPanel()
 	if (not _G["TomCats_Config"]:IsVisible()) then
-		InterfaceOptionsFrame_OpenToCategory(_G["TomCats_Config"])
+		Settings.OpenToCategory((_G["TomCats_Config"]).category:GetID())
 	end
 end
 

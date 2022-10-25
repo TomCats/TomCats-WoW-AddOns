@@ -415,16 +415,18 @@ end
 TomCatsMapCanvasPinMixin.OnLoad = nop
 
 function TomCatsMapCanvasPinMixin:OnMouseClickAction()
-	if (not addon.VignetteArrow) then
-		addon.VignetteArrow = addon.CreateArrow(0.0, 1.0, 0.0)
-	end
-	if (addon.VignetteArrow.vignetteID and addon.VignetteArrow.vignetteID == self.vignette.ID) then
-		addon.VignetteArrow:ClearTarget()
-		addon.VignetteArrow.vignetteID = nil
-	else
-		local x, y = self.vignette:GetLocation()
-		addon.VignetteArrow:SetTarget(x, y, self:GetMap():GetMapID())
-		addon.VignetteArrow.vignetteID = self.vignette.ID
+	if (addon.IsBetaEnabled()) then
+		if (not addon.VignetteArrow) then
+			addon.VignetteArrow = addon.CreateArrow(0.0, 1.0, 0.0)
+		end
+		if (addon.VignetteArrow.vignetteID and addon.VignetteArrow.vignetteID == self.vignette.ID) then
+			addon.VignetteArrow:ClearTarget()
+			addon.VignetteArrow.vignetteID = nil
+		else
+			local x, y = self.vignette:GetLocation()
+			addon.VignetteArrow:SetTarget(x, y, self:GetMap():GetMapID())
+			addon.VignetteArrow.vignetteID = self.vignette.ID
+		end
 	end
 end
 

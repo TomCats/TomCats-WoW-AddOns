@@ -4,15 +4,9 @@ local addonName, addon = ...
 local _, _, _, tocversion = GetBuildInfo()
 
 local AlertFrame = AlertFrame
-local BlizzardOptionsPanel_OnLoad = BlizzardOptionsPanel_OnLoad
 local C_Map = C_Map
 local C_VignetteInfo = C_VignetteInfo
 local CreateFrame = CreateFrame
-local InterfaceAddOnsList_Update = InterfaceAddOnsList_Update
-local InterfaceOptions_AddCategory = InterfaceOptions_AddCategory
-local InterfaceOptionsPanel_Cancel = InterfaceOptionsPanel_Cancel
-local InterfaceOptionsPanel_Default = InterfaceOptionsPanel_Default
-local InterfaceOptionsPanel_Refresh = InterfaceOptionsPanel_Refresh
 local PlaySound = PlaySound
 local SOUNDKIT = SOUNDKIT
 
@@ -26,16 +20,6 @@ local vignettes
 local TomCatsDiscoveryAlertSystem
 local TomCats_Config = TomCats_Config
 local TomCats_ConfigDiscoveries = TomCats_ConfigDiscoveries
-
-
-if (tocversion >= 100000) then
-	InterfaceOptions_AddCategory = function(frame)
-		local subcategory, layout = Settings.RegisterCanvasLayoutSubcategory(TomCats_Config.category, frame, frame.name);
-		frame.category = subcategory
-	end
-	BlizzardOptionsPanel_OnLoad = nop
-	InterfaceAddOnsList_Update = nop
-end
 
 local atlasNameExclusions = { }
 local atlasNameInclusions = { }
@@ -392,19 +376,8 @@ do
 	TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
 	TomCats_ConfigDiscoveries.controls = { }
 	TomCats_ConfigDiscoveries.Header.Text:SetFont(TomCats_ConfigDiscoveries.Header.Text:GetFont(), 64)
-	BlizzardOptionsPanel_OnLoad(
-			TomCats_ConfigDiscoveries,
-			function(self)
-				for _, v in ipairs(self.controls) do
-					if (v.okay) then v:okay() end
-				end
-			end,
-			InterfaceOptionsPanel_Cancel,
-			InterfaceOptionsPanel_Default,
-			InterfaceOptionsPanel_Refresh
-	)
-	InterfaceOptions_AddCategory(TomCats_ConfigDiscoveries)
-	InterfaceAddOnsList_Update()
+	local subcategory = Settings.RegisterCanvasLayoutSubcategory(TomCats_Config.category, TomCats_ConfigDiscoveries, TomCats_ConfigDiscoveries.name);
+	TomCats_ConfigDiscoveries.category = subcategory
 end
 
 local function serializeTable(val, key)

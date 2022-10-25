@@ -10,9 +10,6 @@ end
 function addon.SetBetaEnabled(enable)
 	betaEnabled = enable or false
 	TomCats_Account.preferences.betaEnabled = enable or false
-	if (addon.EnableArrows) then
-		addon.EnableArrows(enable)
-	end
 end
 
 local function OnEvent(event, arg1)

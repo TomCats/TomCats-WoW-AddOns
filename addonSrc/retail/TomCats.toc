@@ -1,5 +1,5 @@
 # See license.txt for license and copyright information
-## Interface: 90207
+## Interface: 100000
 ## Title: TomCat's Tours
 ## Notes: Version: @version@
 ## Author: TomCat
@@ -10,9 +10,8 @@
 ## SavedVariablesPerCharacter: TomCats_Character
 ## X-Category: Achievements, Map, Miscellaneous
 ## X-Localizations: enUS, enGB, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
-## X-TomCats-Expiry: @expiry7days@
+## X-TomCats-Expiry: @expiry14days@
 
-compat.lua
 constants.lua
 slashcommands.lua
 event.lua

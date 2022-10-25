@@ -1,24 +1,5 @@
 --[[ See license.txt for license and copyright information ]]
 
-local InterfaceOptionsFrame_OpenToCategory = InterfaceOptionsFrame_OpenToCategory
-local _, _, _, tocversion = GetBuildInfo()
-if (tocversion >= 100000) then
-	InterfaceOptionsFrame_OpenToCategory = function(frame)
-		Settings.OpenToCategory(frame.category:GetID())
-	end
-end
-
-local function split (inputstr, sep)
-	if sep == nil then
-		sep = "%s"
-	end
-	local t={}
-	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-		table.insert(t, str)
-	end
-	return t
-end
-
 local function setDefaultVignetteIcon(iconname)
 	print("Setting default vignette icon to: " .. iconname .. "\ntype /reload to take effect")
 	TomCats_Account.preferences.defaultVignetteIcon = iconname
@@ -26,7 +7,7 @@ end
 
 local function handleSlashCommand(msg)
 	if (msg == "") then
-		InterfaceOptionsFrame_OpenToCategory(TomCats_Config)
+		Settings.OpenToCategory(TomCats_Config.category:GetID())
 	else
 		local t={}
 		for str in string.gmatch(msg, "([^ ]+)") do
