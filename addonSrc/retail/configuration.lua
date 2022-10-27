@@ -78,8 +78,8 @@ do
 		checkBox.tooltipText = checkBoxInfo.tooltip
 		checkBox.defaultValue = checkBoxInfo.defaultValue
 		checkBox.GetValue = function(self)
-			local prefsBase = _G["TomCats_Account"].preferences
-			local preferenceTable = checkBoxInfo.preferenceTable and prefsBase[checkBoxInfo.preferenceTable] or prefsBase
+			local prefsBase = (checkBoxInfo.prefsBase and _G["TomCats_Account"][checkBoxInfo.prefsBase]) or _G["TomCats_Account"].preferences
+			local preferenceTable = (checkBoxInfo.preferenceTable and prefsBase[checkBoxInfo.preferenceTable]) or prefsBase
 			local currentValue
 			if (checkBoxInfo.inverseValue) then
 				currentValue = preferenceTable and preferenceTable[checkBoxInfo.preferenceKey] and "0" or "1"
@@ -154,7 +154,83 @@ do
 		table.insert(controls, slider);
 		BackdropTemplateMixin.OnBackdropLoaded(slider);
 	end
-	if (addon.hallowsend.IsEventActive()) then
+	if (addon.lunarfestival:IsEventActive()) then
+		TomCats_Config.checkBox_lunarFestivalMinimapButton:Show()
+		Setup_CheckBox({
+			component = TomCats_Config.checkBox_lunarFestivalMinimapButton,
+			label = "Lunar Festival Minimap Button",
+			tooltip = "Displays the Lunar Festival minimap button",
+			defaultValue = "1",
+			preferenceTable = "TomCats-LunarFestivalMinimapButton",
+			preferenceKey = "hidden",
+			SetValue = function(_, value)
+				if (addon.lunarfestival:IsEventActive()) then
+					addon.lunarfestival.charm:SetEnabled(value == "1")
+				end
+			end
+		})
+	end
+	if (addon.loveisintheair:IsEventActive()) then
+		TomCats_Config.checkBox_loveIsInTheAirMinimapButton:Show()
+		Setup_CheckBox({
+			component = TomCats_Config.checkBox_loveIsInTheAirMinimapButton,
+			label = "Love is in the Air Minimap Button",
+			tooltip = "Displays the Love is in the Air minimap button",
+			defaultValue = "1",
+			preferenceTable = "TomCats-LoveIsInTheAirMinimapButton",
+			preferenceKey = "hidden",
+			SetValue = function(_, value)
+				if (addon.loveisintheair:IsEventActive()) then
+					addon.loveisintheair.charm:SetEnabled(value == "1")
+				end
+			end
+		})
+	end
+	if (addon.hallowsend:IsEventActive()) then
+		TomCats_Config.checkBox_hallowsEndMinimapButton:Show()
+		Setup_CheckBox({
+			component = TomCats_Config.checkBox_hallowsEndMinimapButton,
+			label = "Hallow's End Minimap Button",
+			tooltip = "Displays the Hallow's End minimap button",
+			defaultValue = "1",
+			preferenceTable = "TomCats-HallowsEndMinimapButton",
+			preferenceKey = "hidden",
+			inverseValue = true,
+			SetValue = function(_, value)
+				if (addon.hallowsend:IsEventActive()) then
+					addon.hallowsend.charm:SetEnabled(value == "1")
+				end
+			end
+		})
+		TomCats_Config.checkBox_hallowsEndArrow:Show()
+		Setup_CheckBox({
+			component = TomCats_Config.checkBox_hallowsEndArrow,
+			label = "Hallow's End Arrow",
+			tooltip = "Displays the Hallow's End arrow on the minimap",
+			defaultValue = "1",
+			prefsBase = "hallowsend",
+			preferenceKey = "arrowsEnabled",
+			SetValue = function(_, value)
+				if (addon.hallowsend:IsEventActive()) then
+					_G["TomCats_Account"].hallowsend.arrowsEnabled = (value == "1")
+					TomCats_HallowsEnd_SetupArrow()
+				end
+			end
+		})
+		TomCats_Config.checkBox_hallowsEndAutomated:Show()
+		Setup_CheckBox({
+			component = TomCats_Config.checkBox_hallowsEndAutomated,
+			label = "Hallow's End Automatic Features",
+			tooltip = "Enables the Hallow's End automatic features",
+			defaultValue = "1",
+			prefsBase = "hallowsend",
+			preferenceKey = "autoEnabled",
+			SetValue = function(_, value)
+				if (addon.hallowsend:IsEventActive()) then
+					_G["TomCats_Account"].hallowsend.autoEnabled = (value == "1")
+				end
+			end
+		})
 		local slider = TomCats_ConfigHEIconSizeSlider
 		TomCats_Config.HEIconSizeSliderLabel:Show()
 		TomCats_ConfigHEIconSizeSlider:Show()
@@ -162,7 +238,7 @@ do
 		slider.tooltipText = "Sets the size of the pumpkin icons"
 		TomCats_ConfigHEIconSizeSliderLow:SetText("-")
 		TomCats_ConfigHEIconSizeSliderHigh:SetText("+")
-		TomCats_Config.HEIconSizeSliderLabel.Text:SetText("Pumpkin Icon Size");
+		TomCats_Config.HEIconSizeSliderLabel.Text:SetText("Hallow's End Icon Size");
 		slider.SetDisplayValue = slider.SetValue;
 		slider.GetValue = function()
 			return _G["TomCats_Account"].hallowsend.iconScale
@@ -176,48 +252,6 @@ do
 		end
 		table.insert(controls, slider);
 	end
-	Setup_CheckBox({
-		component = TomCats_Config.checkBox_lunarFestivalMinimapButton,
-		label = "Lunar Festival Minimap Button",
-		tooltip = "Displays the Lunar Festival minimap button",
-		defaultValue = "1",
-		preferenceTable = "TomCats-LunarFestivalMinimapButton",
-		preferenceKey = "hidden",
-		inverseValue = true,
-		SetValue = function(_, value)
-			if (addon.lunarfestival:IsEventActive()) then
-				addon.lunarfestival.charm:SetEnabled(value == "1")
-			end
-		end
-	})
-	Setup_CheckBox({
-		component = TomCats_Config.checkBox_loveIsInTheAirMinimapButton,
-		label = "Love is in the Air Minimap Button",
-		tooltip = "Displays the Love is in the Air minimap button",
-		defaultValue = "1",
-		preferenceTable = "TomCats-LoveIsInTheAirMinimapButton",
-		preferenceKey = "hidden",
-		inverseValue = true,
-		SetValue = function(_, value)
-			if (addon.loveisintheair:IsEventActive()) then
-				addon.loveisintheair.charm:SetEnabled(value == "1")
-			end
-		end
-	})
-	Setup_CheckBox({
-		component = TomCats_Config.checkBox_hallowsEndMinimapButton,
-		label = "Hallow's End Minimap Button",
-		tooltip = "Displays the Hallow's End minimap button",
-		defaultValue = "1",
-		preferenceTable = "TomCats-HallowsEndMinimapButton",
-		preferenceKey = "hidden",
-		inverseValue = true,
-		SetValue = function(_, value)
-			if (addon.hallowsend:IsEventActive()) then
-				addon.hallowsend.charm:SetEnabled(value == "1")
-			end
-		end
-	})
 	TomCats_Config.html1:SetScript("OnHyperlinkClick", OnHyperlinkClick)
 	TomCats_Config.html1:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
 	TomCats_Config.html1:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)

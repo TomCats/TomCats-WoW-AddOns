@@ -136,7 +136,7 @@
 			</CheckButton>
 			<CheckButton parentKey="checkBox_minimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent.html1" relativePoint="BOTTOMLEFT" x="290" y="-4"/>
+					<Anchor point="LEFT" relativeKey="$parent.checkBox_betaFeatures" relativePoint="LEFT" x="290" y="0"/>
 				</Anchors>
 			</CheckButton>
 			<CheckButton parentKey="checkBox_mapIconAnimation" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
@@ -147,11 +147,11 @@
 			<Frame parentKey="IconSizeSliderLabel">
 				<Size x="1" y="1" />
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_minimapButton" relativePoint="BOTTOMLEFT" x="2" y="-4"/>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation.Text" relativePoint="TOPLEFT" x="270" y="0"/>
 				</Anchors>
 				<Layers>
 					<Layer level="ARTWORK">
-						<FontString parentKey="Text" inherits="GameFontHighlight">
+						<FontString parentKey="Text" inherits="GameFontHighlightSmall">
 							<Anchors>
 								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
 							</Anchors>
@@ -169,24 +169,39 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<CheckButton parentKey="checkBox_lunarFestivalMinimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
+			<CheckButton parentKey="checkBox_lunarFestivalMinimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate" hidden="true">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation" relativePoint="BOTTOMLEFT" x="0" y="2"/>
 				</Anchors>
 			</CheckButton>
-			<CheckButton parentKey="checkBox_loveIsInTheAirMinimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
+			<CheckButton parentKey="checkBox_loveIsInTheAirMinimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate" hidden="true">
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation" relativePoint="BOTTOMLEFT" x="290" y="2"/>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation" relativePoint="BOTTOMLEFT" x="290" y="0"/>
+				</Anchors>
+			</CheckButton>
+			<CheckButton parentKey="checkBox_hallowsEndMinimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation" relativePoint="BOTTOMLEFT" x="0" y="2"/>
+				</Anchors>
+			</CheckButton>
+			<CheckButton parentKey="checkBox_hallowsEndArrow" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_hallowsEndMinimapButton" relativePoint="BOTTOMLEFT" x="0" y="2"/>
+				</Anchors>
+			</CheckButton>
+			<CheckButton parentKey="checkBox_hallowsEndAutomated" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_hallowsEndArrow" relativePoint="TOPLEFT" x="290" y="0"/>
 				</Anchors>
 			</CheckButton>
 			<Frame parentKey="HEIconSizeSliderLabel" hidden="true">
 				<Size x="1" y="1" />
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_loveIsInTheAirMinimapButton" relativePoint="BOTTOMLEFT" x="2" y="-4"/>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_hallowsEndMinimapButton.Text" relativePoint="TOPLEFT" x="270" y="0"/>
 				</Anchors>
 				<Layers>
 					<Layer level="ARTWORK">
-						<FontString parentKey="Text" inherits="GameFontHighlight">
+						<FontString parentKey="Text" inherits="GameFontHighlightSmall">
 							<Anchors>
 								<Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
 							</Anchors>
@@ -204,15 +219,10 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<CheckButton parentKey="checkBox_hallowsEndMinimapButton" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_lunarFestivalMinimapButton" relativePoint="BOTTOMLEFT" x="0" y="2"/>
-				</Anchors>
-			</CheckButton>
 			<SimpleHTML parentKey="html2" file="Interface\AddOns\TomCats\configuration2.html">
 				<Size x="580" y="1" />
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_hallowsEndMinimapButton" relativePoint="BOTTOMLEFT" x="0" y="-8"/>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="16" y="16" />
 					<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT" x="-16" y="0" />
 				</Anchors>
 				<Scripts>

@@ -45,6 +45,7 @@ local function ADDON_LOADED(_, arg1)
     if (addonName == arg1) then
         TomCats_Account.hallowsend.autoEnabled = TomCats_Account.hallowsend.autoEnabled == nil and true or TomCats_Account.hallowsend.autoEnabled
         TomCats_Account.hallowsend.iconsEnabled = TomCats_Account.hallowsend.iconsEnabled == nil and true or TomCats_Account.hallowsend.iconsEnabled
+        TomCats_Account.hallowsend.arrowEnabled = TomCats_Account.hallowsend.arrowEnabled == nil and true or TomCats_Account.hallowsend.arrowEnabled
         TomCats_Account.hallowsend.iconScale = TomCats_Account.hallowsend.iconScale == nil and 0.8 or TomCats_Account.hallowsend.iconScale
         addon.hallowsend.charm = addon.hallowsend.Charms.Create({
             name = "TomCats-HallowsEndMinimapButton",

@@ -97,6 +97,12 @@ local function switchTour(newGroupID)
 end
 
 local function setupArrow(location)
+    if (not TomCats_Account.hallowsend.arrowsEnabled) then
+        if (arrow) then
+            arrow:ClearTarget()
+        end
+        return
+    end
     if (arrow and (not tour)) then
         arrow:ClearTarget()
         return
@@ -117,6 +123,10 @@ local function setupArrow(location)
         arrow:SetTarget(tour[1]["Group Position"].x, tour[1]["Group Position"].y, groupID)
 --        arrow:SetTarget(tour[1]["Group Position"], groupID)
     end
+end
+
+function TomCats_HallowsEnd_SetupArrow()
+    setupArrow()
 end
 
 local function zoneChanged()
