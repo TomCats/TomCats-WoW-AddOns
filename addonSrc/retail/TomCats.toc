@@ -58,5 +58,3 @@ discoveries.xml
 discoveries.lua
 beta.lua
 noblegarden/Main.xml
-beta/maelie.xml
-beta/maelie.lua
