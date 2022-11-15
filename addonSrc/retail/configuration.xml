@@ -144,6 +144,11 @@
 					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_betaFeatures" relativePoint="BOTTOMLEFT" x="0" y="2"/>
 				</Anchors>
 			</CheckButton>
+			<CheckButton parentKey="checkBox_primalStorms" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.checkBox_mapIconAnimation" relativePoint="BOTTOMLEFT" x="0" y="2"/>
+				</Anchors>
+			</CheckButton>
 			<Frame parentKey="IconSizeSliderLabel">
 				<Size x="1" y="1" />
 				<Anchors>

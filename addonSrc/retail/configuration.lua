@@ -133,6 +133,18 @@ do
 			addon.SetIconAnimationEnabled(value == "1")
 		end
 	})
+	Setup_CheckBox({
+		component = TomCats_Config.checkBox_primalStorms,
+		label = "Primal Storms",
+		tooltip = "Displays a status window for tracking the Primal Storms event",
+		defaultValue = "1",
+		prefsBase = "primalstorms",
+		preferenceTable = "preferences",
+		preferenceKey = "enabled",
+		SetValue = function(_, value)
+			addon.PrimalStorms.SetEnabled(value == "1")
+		end
+	})
 	do
 		local slider = TomCats_ConfigIconSizeSlider
 		slider.type = CONTROLTYPE_SLIDER

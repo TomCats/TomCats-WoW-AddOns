@@ -38,6 +38,9 @@ addon.defaultSavedVariables = {
 		loveisintheair = addon.constants.HINT_ALL,
 		lunarfestival = addon.constants.HINT_ALL,
 		hallowsend = addon.constants.HINT_ALL,
+		primalstorms = {
+			preferences = addon.constants.HINT_ALL,
+		}
 	},
 	TomCats_Character = {
 		lunarfestival = {
