@@ -135,7 +135,7 @@ do
 	})
 	Setup_CheckBox({
 		component = TomCats_Config.checkBox_primalStorms,
-		label = "Primal Storms",
+		label = "Primal Storms (Account-wide Primeval Essence and transmog tracker for the event coming with the next update!)",
 		tooltip = "Displays a status window for tracking the Primal Storms event",
 		defaultValue = "1",
 		prefsBase = "primalstorms",

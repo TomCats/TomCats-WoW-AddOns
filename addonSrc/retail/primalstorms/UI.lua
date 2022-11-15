@@ -22,12 +22,15 @@ end
 function addon.PrimalStorms.CreateUI()
 	Elements = addon.PrimalStorms.Elements
 	ZoneEncounters = addon.PrimalStorms.ZoneEncounters
-    local ENCOUNTER_NONE = { element = { label = "None" }}
+	local ENCOUNTER_NONE = { element = { label = "None" }}
 	local interval, timeSinceLastUpdate = 1, 0
-
+	local dataRefreshInterval, timeSinceLastDataRefresh = 30, 0
 	local isDirty = true
 	local function OnUpdate(self, elapsed)
-		if (isDirty) then
+		timeSinceLastDataRefresh = timeSinceLastDataRefresh + elapsed
+		if (isDirty or timeSinceLastDataRefresh > dataRefreshInterval) then
+			initialized = true
+			timeSinceLastDataRefresh = 0
 			isDirty = nil
 			local now = GetServerTime()
 			for _, zone in ipairs(ZoneEncounters) do
@@ -58,10 +61,11 @@ function addon.PrimalStorms.CreateUI()
 		end
 		timeSinceLastUpdate = timeSinceLastUpdate + elapsed
 		if (timeSinceLastUpdate > interval) then
+			timeSinceLastUpdate = 0
 			local now = GetServerTime()
 			for idx, zone in ipairs(ZoneEncounters) do
 				local timeRemaining
-				if (zone.ends and zone.ends > 0 ) then
+				if (zone.ends and zone.ends - now > 0 ) then
 					timeRemaining = FormatRemainingTime(zone.ends - now)
 				end
 				local encounter = self.encounters[idx]
@@ -127,6 +131,7 @@ function addon.PrimalStorms.CreateUI()
 		encounter.zoneName = frame:CreateFontString(nil, "ARTWORK", "GameFontWhite")
 		encounter.zoneName:SetJustifyH("LEFT")
 		encounter.zoneName:SetText(zone.name)
+		encounter.zoneName:SetAlpha(0.5)
 		maxZoneNameSize = math.max(maxZoneNameSize, encounter.zoneName:GetStringWidth())
 		if (idx == 1) then
 			encounter.zoneName:SetPoint("TOPLEFT", frame, "TOPLEFT", 30, -30) -- -10
@@ -137,10 +142,10 @@ function addon.PrimalStorms.CreateUI()
 		encounter.zoneName:Show()
 		encounter.timeRemaining = frame:CreateFontString(nil, "ARTWORK", "GameFontWhite")
 		encounter.timeRemaining:SetJustifyH("RIGHT")
-		encounter.timeRemaining:SetText("2h14m")
+		encounter.timeRemaining:SetText("---")
 		encounter.timeRemaining:SetPoint("TOP", encounter.zoneName, "TOP")
 		encounter.timeRemaining:SetPoint("RIGHT", frame, "RIGHT", -14, 0)
-		encounter.timeRemaining:Hide()
+		encounter.timeRemaining:SetAlpha(0.5)
 		encounter.icons = { }
 		for _, v in pairs(Elements) do
 			encounter.icons[v.label] = frame:CreateTexture(nil, "ARTWORK")
@@ -181,8 +186,6 @@ function addon.PrimalStorms.CreateUI()
 	frame.icon.Border:SetTexture("Interface/Minimap/MiniMap-TrackingBorder")
 	frame.icon.Border:SetPoint("TOPLEFT")
 	frame.icon.Border:SetDesaturated(1)
-
-
 	frame:SetSize(maxZoneNameSize + 110, frameHeight + 22 + 20)
 	frame:SetShown(TomCats_Account.primalstorms.preferences.enabled ~= false)
 	frame:RegisterEvent("AREA_POIS_UPDATED")
