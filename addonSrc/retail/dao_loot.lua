@@ -8,9 +8,9 @@ local C_ToyBox = C_ToyBox
 local GetItemInfo = GetItemInfo
 local PlayerHasToy = PlayerHasToy
 local ITEM_SPELL_KNOWN = ITEM_SPELL_KNOWN
-local LE_ITEM_CLASS_MISCELLANEOUS = LE_ITEM_CLASS_MISCELLANEOUS
-local LE_ITEM_MISCELLANEOUS_COMPANION_PET = LE_ITEM_MISCELLANEOUS_COMPANION_PET
-local LE_ITEM_MISCELLANEOUS_MOUNT = LE_ITEM_MISCELLANEOUS_MOUNT
+local LE_ITEM_CLASS_MISCELLANEOUS = Enum.ItemClass.Miscellaneous
+local LE_ITEM_MISCELLANEOUS_COMPANION_PET = Enum.ItemMiscellaneousSubclass.CompanionPet
+local LE_ITEM_MISCELLANEOUS_MOUNT = Enum.ItemMiscellaneousSubclass.Mount
 
 local KNOWN = "|cffff2020" .. ITEM_SPELL_KNOWN .. "|r"
 local LOOT_TYPE = addon.constants.lootTypes
