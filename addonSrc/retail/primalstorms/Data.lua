@@ -2,20 +2,32 @@ local addonName, addon = ...
 
 addon.PrimalStorms.Elements = {
 	FIRE = {
-		label = "Fire",
+		label = "Primal Elementals: Fire",
 		icon = "elementalstorm-lesser-fire",
+		dimmedIcon = "Interface/icons/inv_10_elementalcombinedfoozles_fire",
+		dimmedItem = 199836,
+		dimmedName = "Dimmed Primeval Fire",
 	},
 	WATER = {
-		label = "Water",
+		label = "Primal Elementals: Water",
 		icon = "elementalstorm-lesser-water",
+		dimmedIcon = "Interface/icons/inv_10_elementalcombinedfoozles_water",
+		dimmedItem = 199839,
+		dimmedName = "Dimmed Primeval Water",
 	},
 	AIR = {
-		label = "Air",
+		label = "Primal Elementals: Air (Storm)",
 		icon = "elementalstorm-lesser-air",
+		dimmedIcon = "Interface/icons/inv_10_elementalcombinedfoozles_lightning",
+		dimmedItem = 199838,
+		dimmedName = "Dimmed Primeval Storm",
 	},
 	EARTH = {
-		label = "Earth",
+		label = "Primal Elementals: Earth",
 		icon = "elementalstorm-lesser-earth",
+		dimmedIcon = "Interface/icons/Inv_10_elementalcombinedfoozles_earth",
+		dimmedItem = 199837,
+		dimmedName = "Dimmed Primeval Earth",
 	},
 }
 
