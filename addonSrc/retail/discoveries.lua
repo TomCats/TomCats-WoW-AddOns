@@ -528,14 +528,14 @@ local function OnUpdate(_, elapsed)
 										discoveredVignettes[vignetteInfo.vignetteID] = GetExtendedVignetteInfo(vignetteInfo, mapID)
 										ChatFrame1:AddMessage("|cffffff00Discovered Vignette (please let TomCat know!):|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
 										updateDiscoveryCount(1)
-										TomCatsDiscoveryAlertSystem:AddAlert()
+										--TomCatsDiscoveryAlertSystem:AddAlert()
 									end
 								elseif (not atlasNameExclusions[atlasName] and not atlasNameInclusions[atlasName]) then
 									if (not discoveredVignetteAtlases[vignetteInfo.atlasName]) then
 										discoveredVignetteAtlases[vignetteInfo.atlasName] = GetExtendedVignetteInfo(vignetteInfo, mapID)
 										ChatFrame1:AddMessage("|cffff0000Discovered Icon:|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
 										updateDiscoveryCount(1)
-										TomCatsDiscoveryAlertSystem:AddAlert()
+										--TomCatsDiscoveryAlertSystem:AddAlert()
 									end
 								end
 							end
@@ -556,7 +556,7 @@ end
 local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
-			TomCatsDiscoveryAlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("TomCatsDiscoveryAlertFrameTemplate", TomCatsDiscoveryAlertFrame_SetUp);
+			--TomCatsDiscoveryAlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("TomCatsDiscoveryAlertFrameTemplate", TomCatsDiscoveryAlertFrame_SetUp);
 			if (_G["TomCats_Account"].discoveriesVersion ~= "@version@") then
 				_G["TomCats_Account"].discoveries.vignettes = { }
 				_G["TomCats_Account"].discoveries.vignetteAtlases = { }
