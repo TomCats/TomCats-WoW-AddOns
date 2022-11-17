@@ -34,6 +34,10 @@ function addon.PrimalStorms.CreateUI()
 	local function OnUpdate(self, elapsed)
 		timeSinceLastDataRefresh = timeSinceLastDataRefresh + elapsed
 		if (isDirty or timeSinceLastDataRefresh > dataRefreshInterval) then
+			if (UnitLevel("player") >= 60) then
+				local _, _, classIndex = UnitClass("player")
+				TomCats_Account.primalstorms.preferences.eligibleClasses[classIndex] = true
+			end
 			initialized = true
 			timeSinceLastDataRefresh = 0
 			isDirty = nil
@@ -358,6 +362,7 @@ function addon.PrimalStorms.CreateUI()
 	frame:SetShown(TomCats_Account.primalstorms.preferences.enabled ~= false)
 	frame:RegisterEvent("AREA_POIS_UPDATED")
 	frame:RegisterEvent("BAG_UPDATE")
+	frame:RegisterEvent("PLAYER_LEVEL_UP")
 	-- event for learning or unlearning transmog
 	-- event for when a toy is learned / collection updated?
 	-- event for when adding an heirloom
