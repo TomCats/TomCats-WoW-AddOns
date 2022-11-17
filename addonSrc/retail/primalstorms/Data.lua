@@ -1,33 +1,32 @@
-local addonName, addon = ...
+local _, addon = ...
+local L = addon.PrimalStorms.L
+
+local labelFormat = "%s: %s"
 
 addon.PrimalStorms.Elements = {
 	FIRE = {
-		label = "Primal Elementals: Fire",
+		label = labelFormat:format(L["Primal Elements"], L["Fire"]),
 		icon = "elementalstorm-lesser-fire",
 		dimmedIcon = "Interface/icons/inv_10_elementalcombinedfoozles_fire",
-		dimmedItem = 199836,
-		dimmedName = "Dimmed Primeval Fire",
+		dimmedItem = 199836
 	},
 	WATER = {
-		label = "Primal Elementals: Water",
+		label = labelFormat:format(L["Primal Elements"], L["Water"]),
 		icon = "elementalstorm-lesser-water",
 		dimmedIcon = "Interface/icons/inv_10_elementalcombinedfoozles_water",
-		dimmedItem = 199839,
-		dimmedName = "Dimmed Primeval Water",
+		dimmedItem = 199839
 	},
 	AIR = {
-		label = "Primal Elementals: Air (Storm)",
+		label = labelFormat:format(L["Primal Elements"], L["Air (Storm)"]),
 		icon = "elementalstorm-lesser-air",
 		dimmedIcon = "Interface/icons/inv_10_elementalcombinedfoozles_lightning",
-		dimmedItem = 199838,
-		dimmedName = "Dimmed Primeval Storm",
+		dimmedItem = 199838
 	},
 	EARTH = {
-		label = "Primal Elementals: Earth",
+		label = labelFormat:format(L["Primal Elements"], L["Earth"]),
 		icon = "elementalstorm-lesser-earth",
 		dimmedIcon = "Interface/icons/Inv_10_elementalcombinedfoozles_earth",
-		dimmedItem = 199837,
-		dimmedName = "Dimmed Primeval Earth",
+		dimmedItem = 199837
 	},
 }
 
@@ -35,7 +34,6 @@ local Elements = addon.PrimalStorms.Elements
 
 addon.PrimalStorms.ZoneEncounters = {
 	{
-		name = "Badlands",
 		mapID = 15,
 		{
 			element = Elements.FIRE,
@@ -59,7 +57,6 @@ addon.PrimalStorms.ZoneEncounters = {
 		}
 	},
 	{
-		name = "Northern Barrens",
 		mapID = 10,
 		{
 			element = Elements.FIRE,
@@ -83,7 +80,6 @@ addon.PrimalStorms.ZoneEncounters = {
 		}
 	},
 	{
-		name = "Tirisfal Glades",
 		mapID = 2070,
 		{
 			element = Elements.FIRE,
@@ -107,7 +103,6 @@ addon.PrimalStorms.ZoneEncounters = {
 		}
 	},
 	{
-		name = "Un'Goro Crater",
 		mapID = 78,
 		{
 			element = Elements.FIRE,

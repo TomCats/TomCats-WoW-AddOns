@@ -1,6 +1,11 @@
 local addonName, addon = ...
 
+local L = addon.PrimalStorms.L
+
 local Elements, ZoneEncounters
+
+local GetMapName = addon.PrimalStorms.Names.GetMapName
+local GetItemName = addon.PrimalStorms.Names.GetItemName
 
 local FORMAT_GT_1HOUR = (HOUR_ONELETTER_ABBR .. MINUTE_ONELETTER_ABBR):gsub("%s+", "")
 local FORMAT_GT_1MIN =  MINUTE_ONELETTER_ABBR:gsub("%s+", "")
@@ -22,7 +27,7 @@ end
 function addon.PrimalStorms.CreateUI()
 	Elements = addon.PrimalStorms.Elements
 	ZoneEncounters = addon.PrimalStorms.ZoneEncounters
-	local ENCOUNTER_NONE = { element = { label = "None" }}
+	local ENCOUNTER_NONE = { element = { label = L["None"] }}
 	local interval, timeSinceLastUpdate = 1, 0
 	local dataRefreshInterval, timeSinceLastDataRefresh = 30, 0
 	local isDirty = true
@@ -83,6 +88,7 @@ function addon.PrimalStorms.CreateUI()
 		if (timeSinceLastUpdate > interval) then
 			timeSinceLastUpdate = 0
 			local now = GetServerTime()
+			local maxZoneNameSize = 0
 			for idx, zone in ipairs(ZoneEncounters) do
 				local timeRemaining
 				if (zone.ends and zone.ends - now > 0 ) then
@@ -93,11 +99,14 @@ function addon.PrimalStorms.CreateUI()
 					icon:SetShown(elementType == zone.encounter.element.label)
 				end
 				encounter.zone = zone
+				encounter.zoneName:SetText(GetMapName(zone.mapID))
+				maxZoneNameSize = math.max(maxZoneNameSize, encounter.zoneName:GetStringWidth())
 				encounter.timeRemaining:SetText(timeRemaining or "---")
 				encounter.timeRemaining:Show()
 				encounter.zoneName:SetAlpha(timeRemaining and 1.0 or 0.5)
 				encounter.timeRemaining:SetAlpha(timeRemaining and 1.0 or 0.5)
 			end
+			self:SetWidth(maxZoneNameSize + 125)
 		end
 	end
 	local function OnEvent(_, event)
@@ -151,7 +160,7 @@ function addon.PrimalStorms.CreateUI()
 		local encounter = frame.encounters[idx]
 		encounter.zoneName = frame:CreateFontString(nil, "ARTWORK", "GameFontWhite")
 		encounter.zoneName:SetJustifyH("LEFT")
-		encounter.zoneName:SetText(zone.name)
+		encounter.zoneName:SetText(GetMapName(zone.mapID))
 		encounter.zoneName:SetAlpha(0.5)
 		maxZoneNameSize = math.max(maxZoneNameSize, encounter.zoneName:GetStringWidth())
 		if (idx == 1) then
@@ -230,14 +239,14 @@ function addon.PrimalStorms.CreateUI()
 	frame.currency:SetScript("OnEnter", function(self)
 		GameTooltip:ClearLines()
 		GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-		GameTooltip:SetText("Primeval Essence:", 1, 1, 1)
+		GameTooltip:SetText(GetItemName(199211) .. ":", 1, 1, 1)
 
 		local playerName = UnitName("player")
 		local realmName = GetRealmName()
 		local currencyAmount = GetItemCount(199211, true)
 		local playerKey = ("%s-%s"):format(playerName, realmName)
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("Current Character:",1,1,1)
+		GameTooltip:AddLine(L["Current Character"] .. ":",1,1,1)
 		GameTooltip:AddLine(("%s: %d"):format(playerKey, currencyAmount))
 		local owners = { }
 		for player, amount in pairs(TomCats_Account.primalstorms.preferences.currency) do
@@ -248,13 +257,13 @@ function addon.PrimalStorms.CreateUI()
 		table.sort(owners, function(a, b) return a[2] > b[2] end)
 		if (#owners > 0) then
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddLine("Other Characters:",1,1,1)
+			GameTooltip:AddLine(L["Other Characters"] .. ":",1,1,1)
 		end
 		for i = 1, math.min(#owners, 9) do
 			GameTooltip:AddLine(("%s: %d"):format(owners[i][1], owners[i][2]))
 		end
 		if (#owners > 9) then
-			GameTooltip:AddLine(("... and %d more"):format(#owners - 9))
+			GameTooltip:AddLine(("... %d %s"):format(#owners - 9, L["more"]))
 		end
 		GameTooltip:Show()
 	end)
@@ -273,7 +282,7 @@ function addon.PrimalStorms.CreateUI()
 		frame.elementIcons[elementKey]:SetScript("OnEnter", function(self)
 			GameTooltip:ClearLines()
 			GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-			GameTooltip:SetText(("%s:"):format(element.dimmedName), 1, 1, 1)
+			GameTooltip:SetText(("%s:"):format(GetItemName(element.dimmedItem)), 1, 1, 1)
 			local owned = false
 			local playerName = UnitName("player")
 			local realmName = GetRealmName()
@@ -284,7 +293,7 @@ function addon.PrimalStorms.CreateUI()
 				if (not owned) then
 					owned = (dimmedItems_[elementKey] > 0)
 					if (owned) then
-						GameTooltip:AddLine("Owned by:",1,1,1)
+						GameTooltip:AddLine(L["Owned by"] .. ":",1,1,1)
 					end
 				end
 				if (dimmedItems_[elementKey] > 0) then
@@ -299,10 +308,10 @@ function addon.PrimalStorms.CreateUI()
 				GameTooltip:AddLine(ownedBy[i])
 			end
 			if (#ownedBy > 10) then
-				GameTooltip:AddLine(("... and %d more"):format(#ownedBy - 10))
+				GameTooltip:AddLine(("... %d %s"):format(#ownedBy - 10, L["more"]))
 			end
 			if (not owned) then
-				GameTooltip:AddLine("You don't own any")
+				GameTooltip:AddLine(L["You don't own any"])
 			end
 			GameTooltip:Show()
 		end)
@@ -324,7 +333,7 @@ function addon.PrimalStorms.CreateUI()
 	end
 	frame.title = frame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 	frame.title:SetPoint("TOP", frame, "TOP", 0, -8)
-	frame.title:SetText("Primal Storms")
+	frame.title:SetText(L["Primal Storms"])
 	frame.icon = CreateFrame("Frame", nil, frame)
 	frame.icon:SetSize(32, 32)
 	frame.icon:SetPoint("TOPLEFT", frame, "TOPLEFT", -1, 3)
@@ -345,7 +354,7 @@ function addon.PrimalStorms.CreateUI()
 	frame.icon.Border:SetTexture("Interface/Minimap/MiniMap-TrackingBorder")
 	frame.icon.Border:SetPoint("TOPLEFT")
 	frame.icon.Border:SetDesaturated(1)
-	frame:SetSize(maxZoneNameSize + 110, frameHeight + 42 + 20)
+	frame:SetSize(maxZoneNameSize + 125, frameHeight + 42 + 20)
 	frame:SetShown(TomCats_Account.primalstorms.preferences.enabled ~= false)
 	frame:RegisterEvent("AREA_POIS_UPDATED")
 	frame:RegisterEvent("BAG_UPDATE")

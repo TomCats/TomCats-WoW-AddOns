@@ -1,8 +1,23 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 	<Include file="primalstorms\Init.lua" />
+
+	<Include file="primalstorms\lang\default.lua"/>
+	<Include file="primalstorms\lang\deDE.lua"/>
+	<Include file="primalstorms\lang\esES.lua"/>
+	<Include file="primalstorms\lang\esMX.lua"/>
+	<Include file="primalstorms\lang\frFR.lua"/>
+	<Include file="primalstorms\lang\itIT.lua"/>
+	<Include file="primalstorms\lang\koKR.lua"/>
+	<Include file="primalstorms\lang\ptBR.lua"/>
+	<Include file="primalstorms\lang\ruRU.lua"/>
+	<Include file="primalstorms\lang\zhCN.lua"/>
+	<Include file="primalstorms\lang\zhTW.lua"/>
+
+	<Include file="primalstorms\Names.lua" />
 	<Include file="primalstorms\UI.lua" />
 	<Include file="primalstorms\Data.lua" />
+
 <!--
 	<Include file="lunarfestival\eventTime.lua" />
 	<Include file="lunarfestival\preload.lua" />
