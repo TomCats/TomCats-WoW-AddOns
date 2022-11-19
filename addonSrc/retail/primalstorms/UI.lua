@@ -181,6 +181,11 @@ function addon.PrimalStorms.CreateUI()
 			DEBUGZONE = encounter
 			GameTooltip:SetText(("%s:"):format(encounter.zoneName:GetText()), 1, 1, 1)
 			GameTooltip:AddLine(("%s"):format(encounter.zone.encounter.element.label))
+			print(encounter.zone.mapID, encounter.zone.encounter.element.label, L["None"])
+			if (encounter.zone.mapID == 18 and encounter.zone.encounter.element.label == L["None"]) then
+				GameTooltip:AddLine(" ")
+				GameTooltip:AddLine("We don't know if Tirisfal Glades will ever become active for the Primal Storms, but will continue to watch for it just in case!", 1, 1, 1, true)
+			end
 			GameTooltip:Show()
 		end)
 		encounter.zoneName:SetScript("OnLeave", function(self)
