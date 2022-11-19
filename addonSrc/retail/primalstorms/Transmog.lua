@@ -1,6 +1,7 @@
 local addonName, addon = ...
 
 local L = addon.PrimalStorms.L
+local Names = addon.PrimalStorms.Names
 
 local transmogVendorUI
 local initialized = false
@@ -28,13 +29,11 @@ local function BuyItemFromVendor(itemID)
 		end
 	end
 	SetMerchantFilter(filter)
-	--transmogVendorUI.isDirty = true
 end
 
 local function AddItem()
 	local itemLabel = transmogVendorUI:CreateFontString(nil, "ARTWORK", "GameFontWhite")
 	itemLabel:SetJustifyH("LEFT")
-	itemLabel:SetText("Text goes here")
 	itemLabel:Hide()
 	local idx = #transmogVendorUI.items + 1
 	if (idx == 1) then
@@ -75,8 +74,8 @@ end
 
 local function OnUpdate(self)
 	if (self.isDirty) then
-		ShowUI()
 		self.isDirty = false
+		ShowUI()
 	end
 end
 
@@ -157,8 +156,10 @@ function ShowUI()
 			if (not transmogVendorUI.items[idx]) then
 				AddItem()
 			end
-			local itemName, itemLink = GetItemInfo(transmogItem[1])
-			-- todo: care for item name not cached
+			local itemName = Names.GetItemName(transmogItem[1])
+			if (itemName == "...") then
+				transmogVendorUI.isDirty = true
+			end
 			transmogVendorUI.items[idx].itemLabel:SetText(itemName)
 			local hasTransmog = C_TransmogCollection.PlayerHasTransmogByItemInfo(transmogItem[1])
 			transmogVendorUI.items[idx].itemLabel:SetAlpha( hasTransmog and 0.5 or 1.0)
@@ -176,10 +177,10 @@ function ShowUI()
 				transmogVendorUI.items[idx].button:SetText("|A:Capacitance-General-WorkOrderCheckmark:16:16|a")
 				transmogVendorUI.items[idx].button:SetAlpha(0.5)
 				transmogVendorUI.items[idx].button:Disable()
-				end
-				transmogVendorUI.items[idx].button:Show()
-				maxWidth = math.max(maxWidth, transmogVendorUI.items[idx].itemLabel:GetStringWidth())
 			end
+			transmogVendorUI.items[idx].button:Show()
+			maxWidth = math.max(maxWidth, transmogVendorUI.items[idx].itemLabel:GetStringWidth())
+		end
 	end
 	transmogVendorUI:SetSize(maxWidth + 90, idx * 24 + 40)
 	transmogVendorUI:Show()

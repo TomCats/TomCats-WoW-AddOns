@@ -6,6 +6,7 @@ local Elements, ZoneEncounters
 
 local GetMapName = addon.PrimalStorms.Names.GetMapName
 local GetItemName = addon.PrimalStorms.Names.GetItemName
+local deferredEnableMouse = { }
 
 local FORMAT_GT_1HOUR = (HOUR_ONELETTER_ABBR .. MINUTE_ONELETTER_ABBR):gsub("%s+", "")
 local FORMAT_GT_1MIN =  MINUTE_ONELETTER_ABBR:gsub("%s+", "")
@@ -78,6 +79,12 @@ function addon.PrimalStorms.CreateUI()
 			end
 			self.currency:SetText(("%d (%d)"):format(currencyAmount, totalAmount))
 			TomCats_Account.primalstorms.preferences.dimmedItems[playerKey] = TomCats_Account.primalstorms.preferences.dimmedItems[playerKey] or { }
+			if (#deferredEnableMouse > 0) then
+				for _, v in ipairs(deferredEnableMouse) do
+					v:EnableMouse(true)
+				end
+				deferredEnableMouse = { }
+			end
 		end
 		timeSinceLastUpdate = timeSinceLastUpdate + elapsed
 		if (timeSinceLastUpdate > interval) then
@@ -173,15 +180,12 @@ function addon.PrimalStorms.CreateUI()
 		encounter.timeRemaining:SetPoint("RIGHT", frame, "RIGHT", -14, 0)
 		encounter.timeRemaining:SetAlpha(0.5)
 		encounter.icons = { }
-
-		encounter.zoneName:EnableMouse(true)
+		table.insert(deferredEnableMouse, encounter.zoneName)
 		encounter.zoneName:SetScript("OnEnter", function(self)
 			GameTooltip:ClearLines()
 			GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-			DEBUGZONE = encounter
 			GameTooltip:SetText(("%s:"):format(encounter.zoneName:GetText()), 1, 1, 1)
 			GameTooltip:AddLine(("%s"):format(encounter.zone.encounter.element.label))
-			print(encounter.zone.mapID, encounter.zone.encounter.element.label, L["None"])
 			if (encounter.zone.mapID == 18 and encounter.zone.encounter.element.label == L["None"]) then
 				GameTooltip:AddLine(" ")
 				GameTooltip:AddLine("We don't know if Tirisfal Glades will ever become active for the Primal Storms, but will continue to watch for it just in case!", 1, 1, 1, true)
@@ -200,11 +204,11 @@ function addon.PrimalStorms.CreateUI()
 			encounter.icons[v.label]:Hide()
 			encounter.icons[v.label]:SetScript("OnEnter", encounter.zoneName:GetScript("OnEnter"))
 			encounter.icons[v.label]:SetScript("OnLeave", encounter.zoneName:GetScript("OnLeave"))
-			encounter.icons[v.label]:EnableMouse(true)
+			table.insert(deferredEnableMouse, encounter.icons[v.label])
 		end
 		encounter.timeRemaining:SetScript("OnEnter", encounter.zoneName:GetScript("OnEnter"))
 		encounter.timeRemaining:SetScript("OnLeave", encounter.zoneName:GetScript("OnLeave"))
-		encounter.timeRemaining:EnableMouse(true)
+		table.insert(deferredEnableMouse, encounter.timeRemaining)
 	end
 	frame.headerBar = frame:CreateTexture(nil, "BACKGROUND")
 	frame.headerBar:SetDrawLayer("BACKGROUND", 2)
@@ -236,7 +240,7 @@ function addon.PrimalStorms.CreateUI()
 	frame.currency:SetJustifyH("LEFT")
 	frame.currency:SetText("---")
 	frame.currency:SetPoint("LEFT", frame.footerBar, "LEFT", 20, 0)
-	frame.currency:EnableMouse(true)
+	table.insert(deferredEnableMouse, frame.currency)
 	frame.currency:SetScript("OnEnter", function(self)
 		GameTooltip:ClearLines()
 		GameTooltip:SetOwner(self, "ANCHOR_LEFT")
@@ -271,12 +275,12 @@ function addon.PrimalStorms.CreateUI()
 	frame.currency:SetScript("OnLeave", function(self)
 		GameTooltip:Hide()
 	end)
-	frame.currencyIcon:EnableMouse(true)
+	table.insert(deferredEnableMouse, frame.currencyIcon)
 	frame.currencyIcon:SetScript("OnEnter", frame.currency:GetScript("OnEnter"))
 	frame.currencyIcon:SetScript("OnLeave", frame.currency:GetScript("OnLeave"))
 
 	frame.trinketIcon = frame:CreateTexture(nil, "ARTWORK")
-	frame.trinketIcon:EnableMouse(true)
+	table.insert(deferredEnableMouse, frame.trinketIcon)
 	frame.trinketIcon:SetSize(16, 16)
 	frame.trinketIcon:SetTexture("Interface/Icons/inv_misc_enggizmos_19")
 	frame.trinketIcon:SetPoint("RIGHT", frame.footerBar, "RIGHT", -2, 0)
@@ -306,12 +310,12 @@ function addon.PrimalStorms.CreateUI()
 				local ownedBy = { }
 				for player, dimmedItems_ in pairs(TomCats_Account.primalstorms.preferences.dimmedItems) do
 					if (not owned) then
-						owned = (dimmedItems_[elementKey] > 0)
+						owned = (dimmedItems_[elementKey] and dimmedItems_[elementKey] > 0)
 						if (owned) then
 							GameTooltip:AddLine(L["Owned by"] .. ":",1,1,1)
 						end
 					end
-					if (dimmedItems_[elementKey] > 0) then
+					if (dimmedItems_[elementKey] and dimmedItems_[elementKey] > 0) then
 						if (player == playerKey) then
 							table.insert(ownedBy, 1, player)
 						else
@@ -337,7 +341,7 @@ function addon.PrimalStorms.CreateUI()
 	end)
 
 	frame.battlePetIcon = frame:CreateTexture(nil, "ARTWORK")
-	frame.battlePetIcon:EnableMouse(true)
+	table.insert(deferredEnableMouse, frame.battlePetIcon)
 	frame.battlePetIcon:SetSize(16, 16)
 	frame.battlePetIcon:SetAtlas("WildBattlePetCapturable")
 	frame.battlePetIcon:SetPoint("RIGHT", frame.trinketIcon, "LEFT", -4, 0)
@@ -352,7 +356,7 @@ function addon.PrimalStorms.CreateUI()
 	end)
 
 	frame.toyIcon = frame:CreateTexture(nil, "ARTWORK")
-	frame.toyIcon:EnableMouse(true)
+	table.insert(deferredEnableMouse, frame.toyIcon)
 	frame.toyIcon:SetSize(16, 16)
 	frame.toyIcon:SetTexture(237429)
 	frame.toyIcon:SetPoint("RIGHT", frame.battlePetIcon, "LEFT", -4, 0)
