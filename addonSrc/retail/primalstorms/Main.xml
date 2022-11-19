@@ -17,6 +17,8 @@
 	<Include file="primalstorms\Names.lua" />
 	<Include file="primalstorms\UI.lua" />
 	<Include file="primalstorms\Data.lua" />
+	<Include file="primalstorms\Transmog.lua" />
+	<Include file="primalstorms\TransmogData.lua" />
 
 <!--
 	<Include file="lunarfestival\eventTime.lua" />

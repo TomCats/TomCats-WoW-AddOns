@@ -363,6 +363,8 @@ function addon.PrimalStorms.CreateUI()
 	frame:RegisterEvent("AREA_POIS_UPDATED")
 	frame:RegisterEvent("BAG_UPDATE")
 	frame:RegisterEvent("PLAYER_LEVEL_UP")
+	frame:RegisterEvent("HEIRLOOMS_UPDATED");
+	frame:RegisterEvent("HEIRLOOM_UPGRADE_TARGETING_CHANGED");
 	-- event for learning or unlearning transmog
 	-- event for when a toy is learned / collection updated?
 	-- event for when adding an heirloom

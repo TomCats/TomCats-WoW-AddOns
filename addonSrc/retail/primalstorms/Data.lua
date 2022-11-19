@@ -126,3 +126,10 @@ addon.PrimalStorms.ZoneEncounters = {
 		}
 	}
 }
+
+addon.PrimalStorms.StormVendors = {
+	[195899] = true,
+	[195912] = true
+}
+
+
