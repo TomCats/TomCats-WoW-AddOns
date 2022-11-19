@@ -29,7 +29,7 @@ function addon.PrimalStorms.CreateUI()
 	Elements = addon.PrimalStorms.Elements
 	ZoneEncounters = addon.PrimalStorms.ZoneEncounters
 	local ENCOUNTER_NONE = { element = { label = L["None"] }}
-	local interval, timeSinceLastUpdate = 1, 0
+	local interval, timeSinceLastUpdate = 1, 1
 	local dataRefreshInterval, timeSinceLastDataRefresh = 30, 0
 	local isDirty = true
 	local function OnUpdate(self, elapsed)
@@ -87,7 +87,7 @@ function addon.PrimalStorms.CreateUI()
 			end
 		end
 		timeSinceLastUpdate = timeSinceLastUpdate + elapsed
-		if (timeSinceLastUpdate > interval) then
+		if (timeSinceLastUpdate >= interval) then
 			timeSinceLastUpdate = 0
 			local now = GetServerTime()
 			local maxZoneNameSize = 0
