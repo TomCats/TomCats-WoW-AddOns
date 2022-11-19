@@ -168,7 +168,7 @@ function ShowUI()
 			if (not hasTransmog) then
 				transmogVendorUI.items[idx].button:SetText(("%d |TInterface/icons/Inv_enchant_essencecosmicgreater:12:12:0:-1:64:64:4:60:4:60|t"):format(transmogItem[3]))
 				transmogVendorUI.items[idx].button:SetAlpha(1.0)
-				if (currencyOwned >= transmogItem[3]) then
+				if (currencyOwned >= transmogItem[3] and UnitLevel("player") >= 60) then
 					transmogVendorUI.items[idx].button:Enable()
 				else
 					transmogVendorUI.items[idx].button:Disable()

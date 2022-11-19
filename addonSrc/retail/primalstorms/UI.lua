@@ -109,7 +109,7 @@ function addon.PrimalStorms.CreateUI()
 				encounter.timeRemaining:SetAlpha(timeRemaining and 1.0 or 0.5)
 			end
 			maxZoneNameSize = math.max(maxZoneNameSize, self.collectionsTitle:GetStringWidth() + 50)
-			self:SetWidth(maxZoneNameSize + 125)
+			self:SetWidth(maxZoneNameSize + 145)
 		end
 	end
 	local function OnEvent(_, event)
@@ -375,9 +375,49 @@ function addon.PrimalStorms.CreateUI()
 		EmbeddedItemTooltip:Hide()
 	end)
 
+	frame.transmogIcon = frame:CreateTexture(nil, "ARTWORK")
+	table.insert(deferredEnableMouse, frame.transmogIcon)
+	frame.transmogIcon:SetSize(16, 16)
+	frame.transmogIcon:SetTexture("Interface/Icons/inv_chest_cloth_17")
+	frame.transmogIcon:SetPoint("RIGHT", frame.toyIcon, "LEFT", -4, 0)
+	local transmogMask = frame:CreateMaskTexture()
+	transmogMask:SetSize(14, 14)
+	transmogMask:SetTexture("Interface/Masks/CircleMask","CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+	transmogMask:SetPoint("CENTER", frame.transmogIcon, "CENTER", 0, 0)
+	frame.transmogIcon:AddMaskTexture(transmogMask)
+	frame.transmogIcon:Show()
+	frame.transmogIcon:SetScript("OnEnter", function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT", 30, 30)
+		local appearances = { }
+		for i = 1, 13 do
+			local className, classType = GetClassInfo(i)
+			appearances[classType] = { className, 0, 0 }
+		end
+		local acquired = 0
+		for _, transmogItem in ipairs(addon.PrimalStorms.TransmogItems) do
+			local hasTransmog = C_TransmogCollection.PlayerHasTransmogByItemInfo(transmogItem[1])
+			if (hasTransmog) then acquired = acquired + 1 end
+			for classType, appearance in pairs(appearances) do
+				if (addon.PrimalStorms.PlayerClassItemTypes[classType][transmogItem[2]]) then
+					if (hasTransmog) then appearance[2] = appearance[2] + 1 end
+					appearance[3] = appearance[3] + 1
+				end
+			end
+		end
+		GameTooltip:SetText(("%s: %d/%d"):format(WARDROBE, acquired, #addon.PrimalStorms.TransmogItems), 1, 1, 1)
+		GameTooltip:AddLine(" ")
+		for classType, appearance in pairs(appearances) do
+			GameTooltip:AddLine(("|c%s%s|r: %d/%d"):format(RAID_CLASS_COLORS[classType].colorStr, unpack(appearance)))
+		end
+		GameTooltip:Show()
+	end)
+	frame.transmogIcon:SetScript("OnLeave", function(self)
+		GameTooltip:Hide()
+	end)
+
 	frame.collectionsTitle = frame:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
 	frame.collectionsTitle:SetText(("%s:"):format(COLLECTIONS))
-	frame.collectionsTitle:SetPoint("RIGHT", frame.toyIcon, "LEFT", -4, 0)
+	frame.collectionsTitle:SetPoint("RIGHT", frame.transmogIcon, "LEFT", -4, 0)
 
 	maxZoneNameSize = math.max(maxZoneNameSize, frame.collectionsTitle:GetStringWidth())
 
@@ -404,7 +444,7 @@ function addon.PrimalStorms.CreateUI()
 	frame.icon.Border:SetTexture("Interface/Minimap/MiniMap-TrackingBorder")
 	frame.icon.Border:SetPoint("TOPLEFT")
 	frame.icon.Border:SetDesaturated(1)
-	frame:SetSize(maxZoneNameSize + 125, frameHeight + 42 + 20)
+	frame:SetSize(maxZoneNameSize + 145, frameHeight + 42 + 20)
 	frame:SetShown(TomCats_Account.primalstorms.preferences.enabled ~= false)
 	frame:RegisterEvent("AREA_POIS_UPDATED")
 	frame:RegisterEvent("BAG_UPDATE")
