@@ -17,4 +17,4 @@ L["Earth"] = "Terre"
 L["None"] = "Aucun"
 L["Primal Storms"] = "Tempêtes primordiales"
 
-L["Notable Items"] = "Articles Notables"
+L["Unstable Elemental Confluence Source"] = "Récupérez et combinez les éléments primitifs atténués suivants : feu, eau, tempête et terre."

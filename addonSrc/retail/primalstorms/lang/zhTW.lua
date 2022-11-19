@@ -17,4 +17,4 @@ L["Earth"] = "地球"
 L["None"] = "沒有任何"
 L["Primal Storms"] = "洪荒風暴"
 
-L["Notable Items"] = "值得注意的項目"
+L["Unstable Elemental Confluence Source"] = "把朦胧的始源火焰 、流水、风暴和大地 收集并组合起来"

@@ -17,4 +17,4 @@ L["Earth"] = "Terra"
 L["None"] = "Nessuno"
 L["Primal Storms"] = "Tempeste Primordiali"
 
-L["Notable Items"] = "Articoli Notevoli"
+L["Unstable Elemental Confluence Source"] = "Raccogli e combina il Fuoco Primevo Offuscato, l'Acqua Primeva Offuscata, la Tempesta Primeva Offuscata e la Terra Primeva Offuscata."

@@ -17,4 +17,4 @@ L["Earth"] = "Erde"
 L["None"] = "Keiner"
 L["Primal Storms"] = "Urstürme"
 
-L["Notable Items"] = "Beachtenswerte Gegenstände"
+L["Unstable Elemental Confluence Source"] = "Sammelt und verbindet das getrübte urzeitliche Feuer und Wasser sowie den getrübten urzeitlichen Sturm und die getrübte urzeitliche Erde."
