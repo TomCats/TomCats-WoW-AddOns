@@ -79,6 +79,14 @@ function addon.PrimalStorms.CreateUI()
 			end
 			self.currency:SetText(("%d (%d)"):format(currencyAmount, totalAmount))
 			TomCats_Account.primalstorms.preferences.dimmedItems[playerKey] = TomCats_Account.primalstorms.preferences.dimmedItems[playerKey] or { }
+			for k, v in pairs(addon.PrimalStorms.Elements) do
+				local dimmedAmount = GetItemCount(v.dimmedItem, true)
+				if (dimmedAmount > 0) then
+					TomCats_Account.primalstorms.preferences.dimmedItems[playerKey][k] = dimmedAmount
+				else
+					TomCats_Account.primalstorms.preferences.dimmedItems[playerKey][k] = 0
+				end
+			end
 			if (#deferredEnableMouse > 0) then
 				for _, v in ipairs(deferredEnableMouse) do
 					v:EnableMouse(true)
