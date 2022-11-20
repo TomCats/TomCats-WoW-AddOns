@@ -394,9 +394,14 @@ function addon.PrimalStorms.CreateUI()
 			appearances[classType] = { className, 0, 0 }
 		end
 		local acquired = 0
+		local costToComplete = 0
 		for _, transmogItem in ipairs(addon.PrimalStorms.TransmogItems) do
-			local hasTransmog = C_TransmogCollection.PlayerHasTransmogByItemInfo(transmogItem[1])
-			if (hasTransmog) then acquired = acquired + 1 end
+			local hasTransmog = addon.PrimalStorms.PlayerHasTransmog(transmogItem[1])
+			if (hasTransmog) then
+				acquired = acquired + 1
+			else
+				costToComplete = costToComplete + transmogItem[3]
+			end
 			for classType, appearance in pairs(appearances) do
 				if (addon.PrimalStorms.PlayerClassItemTypes[classType][transmogItem[2]]) then
 					if (hasTransmog) then appearance[2] = appearance[2] + 1 end
@@ -405,6 +410,7 @@ function addon.PrimalStorms.CreateUI()
 			end
 		end
 		GameTooltip:SetText(("%s: %d/%d"):format(WARDROBE, acquired, #addon.PrimalStorms.TransmogItems), 1, 1, 1)
+		GameTooltip:AddLine(("%s: %d |TInterface/icons/Inv_enchant_essencecosmicgreater:12:12:0:-1:64:64:4:60:4:60|t"):format("Cost to complete", costToComplete))
 		GameTooltip:AddLine(" ")
 		for classType, appearance in pairs(appearances) do
 			GameTooltip:AddLine(("|c%s%s|r: %d/%d"):format(RAID_CLASS_COLORS[classType].colorStr, unpack(appearance)))

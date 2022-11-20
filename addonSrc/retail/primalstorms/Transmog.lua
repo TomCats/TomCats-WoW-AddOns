@@ -161,7 +161,7 @@ function ShowUI()
 				transmogVendorUI.isDirty = true
 			end
 			transmogVendorUI.items[idx].itemLabel:SetText(itemName)
-			local hasTransmog = C_TransmogCollection.PlayerHasTransmogByItemInfo(transmogItem[1])
+			local hasTransmog = addon.PrimalStorms.PlayerHasTransmog(transmogItem[1])
 			transmogVendorUI.items[idx].itemLabel:SetAlpha( hasTransmog and 0.5 or 1.0)
 			transmogVendorUI.items[idx].itemLabel:Show()
 			transmogVendorUI.items[idx].itemID = transmogItem[1]
@@ -198,3 +198,15 @@ end
 
 MerchantFrame:HookScript("OnShow", function() if (IsStormVendor()) then ShowUI() end end)
 MerchantFrame:HookScript("OnHide", function() HideUI() end)
+
+function addon.PrimalStorms.PlayerHasTransmog(itemID)
+	local itemAppearanceID = C_TransmogCollection.GetItemInfo(itemID)
+	if (itemAppearanceID) then
+		local itemModifiedAppearanceIDs = C_TransmogCollection.GetAllAppearanceSources(itemAppearanceID)
+		for _, itemModifiedAppearanceID in ipairs(itemModifiedAppearanceIDs) do
+			local isCollected = select(5,C_TransmogCollection.GetAppearanceSourceInfo(itemModifiedAppearanceID))
+			if (isCollected) then return true end
+		end
+	end
+	return false
+end
