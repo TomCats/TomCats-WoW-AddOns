@@ -18,3 +18,4 @@ L["None"] = "Ninguno"
 L["Primal Storms"] = "Tormentas primigenias"
 
 L["Unstable Elemental Confluence Source"] = "Reúne y combina los elementos primordiales atenuados de fuego, agua, tormenta y tierra."
+L["Cost to complete"] = "Costo para completar"

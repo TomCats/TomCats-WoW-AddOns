@@ -18,3 +18,4 @@ L["None"] = "없음"
 L["Primal Storms"] = "원시 폭풍"
 
 L["Unstable Elemental Confluence Source"] = "흐릿한 태고의 불, 물, 폭풍, 대지를 모아서 결합해야 합니다"
+L["Cost to complete"] = "완료 비용"

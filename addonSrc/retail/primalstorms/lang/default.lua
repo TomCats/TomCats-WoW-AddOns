@@ -18,3 +18,4 @@ L["None"] = "None"
 L["Primal Storms"] = "Primal Storms"
 
 L["Unstable Elemental Confluence Source"] = "Gather and combine the Dimmed Primeval Fire, Water, Storm, and Earth."
+L["Cost to complete"] = "Cost to complete"

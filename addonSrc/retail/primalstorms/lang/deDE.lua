@@ -18,3 +18,4 @@ L["None"] = "Keiner"
 L["Primal Storms"] = "Urstürme"
 
 L["Unstable Elemental Confluence Source"] = "Sammelt und verbindet das getrübte urzeitliche Feuer und Wasser sowie den getrübten urzeitlichen Sturm und die getrübte urzeitliche Erde."
+L["Cost to complete"] = "Kosten bis zum Abschluss"

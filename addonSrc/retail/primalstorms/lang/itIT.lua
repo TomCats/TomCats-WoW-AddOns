@@ -18,3 +18,4 @@ L["None"] = "Nessuno"
 L["Primal Storms"] = "Tempeste Primordiali"
 
 L["Unstable Elemental Confluence Source"] = "Raccogli e combina il Fuoco Primevo Offuscato, l'Acqua Primeva Offuscata, la Tempesta Primeva Offuscata e la Terra Primeva Offuscata."
+L["Cost to complete"] = "Costo per il completamento"

@@ -410,7 +410,7 @@ function addon.PrimalStorms.CreateUI()
 			end
 		end
 		GameTooltip:SetText(("%s: %d/%d"):format(WARDROBE, acquired, #addon.PrimalStorms.TransmogItems), 1, 1, 1)
-		GameTooltip:AddLine(("%s: %d |TInterface/icons/Inv_enchant_essencecosmicgreater:12:12:0:-1:64:64:4:60:4:60|t"):format("Cost to complete", costToComplete))
+		GameTooltip:AddLine(("%s: %d |TInterface/icons/Inv_enchant_essencecosmicgreater:12:12:0:-1:64:64:4:60:4:60|t"):format(L["Cost to complete"], costToComplete))
 		GameTooltip:AddLine(" ")
 		for classType, appearance in pairs(appearances) do
 			GameTooltip:AddLine(("|c%s%s|r: %d/%d"):format(RAID_CLASS_COLORS[classType].colorStr, unpack(appearance)))
