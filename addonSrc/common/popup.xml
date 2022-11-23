@@ -2,7 +2,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-	<Frame name="TomCats_Static_Popup" inherits="BackdropTemplate" hidden="true">
+	<Frame name="TomCats_Static_Popup" inherits="BackdropTemplate" parent="UIParent" hidden="true">
 		<Size x="320" y="116"/>
 		<KeyValues>
 			<KeyValue key="backdropInfo" value="TOMCATS_TOOLTIP_BACKDROP_STYLE_DEFAULT" type="global"/>
