@@ -1,0 +1,3 @@
+local _, addon = ...
+
+local TCL = addon.TomCatsLibs

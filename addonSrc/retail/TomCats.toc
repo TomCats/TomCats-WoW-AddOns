@@ -59,3 +59,4 @@ discoveries.lua
 beta.lua
 noblegarden/Main.xml
 primalstorms/Main.xml
+dragonflyingglyphs/Main.xml

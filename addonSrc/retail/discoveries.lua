@@ -1,4 +1,5 @@
 --[[ See license.txt for license and copyright information ]]
+--todo: Make minimap icon show something other than a 9 once discovery count has exceeded 9
 local addonName, addon = ...
 
 local _, _, _, tocversion = GetBuildInfo()
@@ -296,59 +297,59 @@ end
 
 do
 	local tmp1 = {
-		["poi-nzothpylon"] = true, -- minor n'zoth vision
-		["VignetteEventElite"] = true, -- special events in the n'zoth zones
-		["VignetteLoot"] = true, -- Black Empire Cache
-		["VignetteKillElite"] = true, -- special elite in the n'zoth zones
-		["nazjatar-nagaevent"] = true, -- purple skulls esp. in Nazjatar
-		["PortalRed"] = true, -- chaotic riftstone (maw)
-		["PortalBlue"] = true, -- animaflow teleporter (maw)
-		["poi-soulspiritghost"] = true, -- souls in the maw
-		["Profession"] = true, -- Soulsteel Anvil in the maw
-		["poi-graveyard-neutral"] = true, -- player's corpse location in the maw
-		["TeleportationNetwork-32x32"] = true, -- from discord dump
-		["poi-workorders"] = true, -- from discord dump
-		["QuestObjective"] = true, -- from discord dump
-		["Object"] = true, -- from discord dump
-		["Warfronts-BaseMapIcons-Empty-Workshop-Minimap-small"] = true, -- from discord dump
-		["VignetteLootElite"] = true, -- from discord dump
-		["SmallQuestBang"] = true, -- from discord dump
-		["WarMode-Broker-32x32"] = true, -- from discord dump 3/15
-		["Vehicle-Air-Occupied"] = true, -- from discord dump 3/15
-		["Embercourt-Guest-DromanAliothe"] = true, -- from discord dump
-		["Embercourt-Guest-CryptkeeperKassir"] = true, -- from discord dump
-		["Embercourt-Guest-Kleia"] = true, -- from discord dump
-		["Embercourt-Guest-Pelagos"] = true, -- from discord dump
-		["Embercourt-Guest-GrandmasterVole"] = true, -- from discord dump
-		["Islands-AzeriteChest"] = true, -- from discord dump
-		["Islands-QuestBang"] = true, -- from discord dump
-		["Islands-HordeBoat"] = true, -- from discord dump
-		["Embercourt-Guest-HuntCaptainKorayn"] = true, -- from discord dump
-		["EmberCourt-32x32"] = true, -- from discord dump
-		["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- from discord dump
-		["Tormentors-Boss"] = true,
-
-		-- Discovered icons as of 3/7/2022
-		["mechagon-projects"] = true, -- Cypher Console mapID=1970 vignetteID=5000
-		["poi-scrapper"] = true, -- Enhancement Console mapID=1970 vignetteID=5020
-		["TeleportationNetwork-32x32"] = true, -- Gateway to Hero's Rest mapID=1533 vignetteID=4578
-		["QuestObjective"] = true, -- Duelmaster Rowyn mapID=1525 vignetteID=4159
-		["poi-workorders"] = true, -- Night Fae Enhancements Available mapID=1565 vignetteID=4469
-		["Object"] = true, -- Осадок стигии mapID=1543 vignetteID=4722
-		--["VignetteLootElite"] = true, -- Свиток веков mapID=1533 vignetteID=4003
-		--["poi-workorders"] = true, -- Venthyr Enhancements Available mapID=1525 vignetteID=4466
-		--["poi-workorders"] = true, -- Kyrian Enhancements Available mapID=1533 vignetteID=4468
-		--["poi-workorders"] = true, -- Améliorations des nécro-seigneurs disponibles mapID=1536 vignetteID=4467
-		--["VignetteLootElite"] = true, -- Black Empire Coffer mapID=1530 vignetteID=3851
-		--["TeleportationNetwork-32x32"] = true, -- Gateway to Hero's Rest mapID=1533 vignetteID=4583
-		["Warfronts-BaseMapIcons-Empty-Workshop-Minimap-small"] = true, -- Цепкий отросток mapID=1536 vignetteID=4581
-		["SmallQuestBang"] = true, -- The Accuser mapID=1525 vignetteID=4600
-		["Object"] = true, -- Hunt: Death Elementals mapID=1543 vignetteID=4555
-		["WarMode-Broker-32x32"] = true, -- Alascène mapID=1565 vignetteID=4628
-		["Embercourt-Guest-HuntCaptainKorayn"] = true, -- Hunt-Captain Korayn mapID=1525 vignetteID=4417
-		["EmberCourt-32x32"] = true, -- Altar of Accomplishment mapID=1525 vignetteID=4669
-		["Embercourt-Guest-GrandmasterVole"] = true, -- Grandmaster Vole mapID=1525 vignetteID=4420
-		["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- Plague Deviser Marileth mapID=1525 vignetteID=4422
+		--["poi-nzothpylon"] = true, -- minor n'zoth vision
+		--["VignetteEventElite"] = true, -- special events in the n'zoth zones
+		--["VignetteLoot"] = true, -- Black Empire Cache
+		--["VignetteKillElite"] = true, -- special elite in the n'zoth zones
+		--["nazjatar-nagaevent"] = true, -- purple skulls esp. in Nazjatar
+		--["PortalRed"] = true, -- chaotic riftstone (maw)
+		--["PortalBlue"] = true, -- animaflow teleporter (maw)
+		--["poi-soulspiritghost"] = true, -- souls in the maw
+		--["Profession"] = true, -- Soulsteel Anvil in the maw
+		--["poi-graveyard-neutral"] = true, -- player's corpse location in the maw
+		--["TeleportationNetwork-32x32"] = true, -- from discord dump
+		--["poi-workorders"] = true, -- from discord dump
+		--["QuestObjective"] = true, -- from discord dump
+		--["Object"] = true, -- from discord dump
+		--["Warfronts-BaseMapIcons-Empty-Workshop-Minimap-small"] = true, -- from discord dump
+		--["VignetteLootElite"] = true, -- from discord dump
+		--["SmallQuestBang"] = true, -- from discord dump
+		--["WarMode-Broker-32x32"] = true, -- from discord dump 3/15
+		--["Vehicle-Air-Occupied"] = true, -- from discord dump 3/15
+		--["Embercourt-Guest-DromanAliothe"] = true, -- from discord dump
+		--["Embercourt-Guest-CryptkeeperKassir"] = true, -- from discord dump
+		--["Embercourt-Guest-Kleia"] = true, -- from discord dump
+		--["Embercourt-Guest-Pelagos"] = true, -- from discord dump
+		--["Embercourt-Guest-GrandmasterVole"] = true, -- from discord dump
+		--["Islands-AzeriteChest"] = true, -- from discord dump
+		--["Islands-QuestBang"] = true, -- from discord dump
+		--["Islands-HordeBoat"] = true, -- from discord dump
+		--["Embercourt-Guest-HuntCaptainKorayn"] = true, -- from discord dump
+		--["EmberCourt-32x32"] = true, -- from discord dump
+		--["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- from discord dump
+		--["Tormentors-Boss"] = true,
+		--
+		---- Discovered icons as of 3/7/2022
+		--["mechagon-projects"] = true, -- Cypher Console mapID=1970 vignetteID=5000
+		--["poi-scrapper"] = true, -- Enhancement Console mapID=1970 vignetteID=5020
+		--["TeleportationNetwork-32x32"] = true, -- Gateway to Hero's Rest mapID=1533 vignetteID=4578
+		--["QuestObjective"] = true, -- Duelmaster Rowyn mapID=1525 vignetteID=4159
+		--["poi-workorders"] = true, -- Night Fae Enhancements Available mapID=1565 vignetteID=4469
+		--["Object"] = true, -- Осадок стигии mapID=1543 vignetteID=4722
+		----["VignetteLootElite"] = true, -- Свиток веков mapID=1533 vignetteID=4003
+		----["poi-workorders"] = true, -- Venthyr Enhancements Available mapID=1525 vignetteID=4466
+		----["poi-workorders"] = true, -- Kyrian Enhancements Available mapID=1533 vignetteID=4468
+		----["poi-workorders"] = true, -- Améliorations des nécro-seigneurs disponibles mapID=1536 vignetteID=4467
+		----["VignetteLootElite"] = true, -- Black Empire Coffer mapID=1530 vignetteID=3851
+		----["TeleportationNetwork-32x32"] = true, -- Gateway to Hero's Rest mapID=1533 vignetteID=4583
+		--["Warfronts-BaseMapIcons-Empty-Workshop-Minimap-small"] = true, -- Цепкий отросток mapID=1536 vignetteID=4581
+		--["SmallQuestBang"] = true, -- The Accuser mapID=1525 vignetteID=4600
+		--["Object"] = true, -- Hunt: Death Elementals mapID=1543 vignetteID=4555
+		--["WarMode-Broker-32x32"] = true, -- Alascène mapID=1565 vignetteID=4628
+		--["Embercourt-Guest-HuntCaptainKorayn"] = true, -- Hunt-Captain Korayn mapID=1525 vignetteID=4417
+		--["EmberCourt-32x32"] = true, -- Altar of Accomplishment mapID=1525 vignetteID=4669
+		--["Embercourt-Guest-GrandmasterVole"] = true, -- Grandmaster Vole mapID=1525 vignetteID=4420
+		--["Embercourt-Guest-PlagueDeviserMarileth"] = true, -- Plague Deviser Marileth mapID=1525 vignetteID=4422
 	}
 	-- found in Zereth Mortis
 	tmp1 = {
@@ -367,6 +368,12 @@ do
 
 		["mechagon-projects"] = true,
 		["poi-scrapper"] = true,
+		-- DF icons
+		["dragon-rostrum"] = true,
+		["Vehicle-SilvershardMines-Arrow"] = true,
+		["racing"] = true,
+		["Warfronts-FieldMapIcons-Empty-Banner-Minimap-small"] = true,
+		["dragonriding-winds"] = true,
 	}
 	for k in pairs(tmp2) do
 		atlasNameInclusions[string.lower(k)] = true
@@ -505,9 +512,9 @@ local function OnUpdate(_, elapsed)
 		vignettes = nil
 		checkedVignetteGUIDs = { }
 		timeSinceLastUpdate = 0
-		if (mapID == 1970) then -- only scan for new discoveries in ZM for now
+		--if (mapID == 1970) then -- only scan for new discoveries in ZM for now
 			vignettes = addon.getVignettes(lastVignetteMapID)
-		end
+		--end
 	end
 	if (timeSinceLastUpdate >= interval) then
 		timeSinceLastUpdate = 0
@@ -526,16 +533,16 @@ local function OnUpdate(_, elapsed)
 								if (atlasNameInclusions[atlasName] and not vignette) then
 									if (not discoveredVignettes[vignetteInfo.vignetteID]) then
 										discoveredVignettes[vignetteInfo.vignetteID] = GetExtendedVignetteInfo(vignetteInfo, mapID)
-										ChatFrame1:AddMessage("|cffffff00Discovered Vignette (please let TomCat know!):|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
+										ChatFrame1:AddMessage(("|cffffff00Discovered Vignette %s (%s) (please let TomCat know!):|r (please let TomCat know!)"):format(vignetteInfo.name, vignetteInfo.atlasName))
 										updateDiscoveryCount(1)
-										--TomCatsDiscoveryAlertSystem:AddAlert()
+										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
 								elseif (not atlasNameExclusions[atlasName] and not atlasNameInclusions[atlasName]) then
 									if (not discoveredVignetteAtlases[vignetteInfo.atlasName]) then
 										discoveredVignetteAtlases[vignetteInfo.atlasName] = GetExtendedVignetteInfo(vignetteInfo, mapID)
-										ChatFrame1:AddMessage("|cffff0000Discovered Icon:|r ", vignetteInfo.atlasName, vignetteInfo.name, "(please let TomCat know!)")
+										ChatFrame1:AddMessage(("|cffff0000Discovered Icon:|r %s (%s) (please let TomCat know!)"):format(vignetteInfo.name, vignetteInfo.atlasName))
 										updateDiscoveryCount(1)
-										--TomCatsDiscoveryAlertSystem:AddAlert()
+										TomCatsDiscoveryAlertSystem:AddAlert()
 									end
 								end
 							end
@@ -556,14 +563,15 @@ end
 local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED") then
 		if (addonName == arg1) then
-			--TomCatsDiscoveryAlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("TomCatsDiscoveryAlertFrameTemplate", TomCatsDiscoveryAlertFrame_SetUp);
-			if (_G["TomCats_Account"].discoveriesVersion ~= "@version@") then
-				_G["TomCats_Account"].discoveries.vignettes = { }
-				_G["TomCats_Account"].discoveries.vignetteAtlases = { }
-				_G["TomCats_Account"].discoveries.version = "@version@"
-				_G["TomCats_Account"].discoveriesResetCount = 0
-				_G["TomCats_Account"].discoveriesVersion = "@version@"
-			end
+			TomCatsDiscoveryAlertSystem = AlertFrame:AddQueuedAlertFrameSubSystem("TomCatsDiscoveryAlertFrameTemplate", TomCatsDiscoveryAlertFrame_SetUp);
+			--todo: re-enable when going live
+			--if (_G["TomCats_Account"].discoveriesVersion ~= "@version@") then
+			--	_G["TomCats_Account"].discoveries.vignettes = { }
+			--	_G["TomCats_Account"].discoveries.vignetteAtlases = { }
+			--	_G["TomCats_Account"].discoveries.version = "@version@"
+			--	_G["TomCats_Account"].discoveriesResetCount = 0
+			--	_G["TomCats_Account"].discoveriesVersion = "@version@"
+			--end
 			local discoveries = 0
 			discoveredVignettes = _G["TomCats_Account"].discoveries.vignettes
 			for _ in pairs(discoveredVignettes) do

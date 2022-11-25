@@ -1,0 +1,19 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+<!--    <Include file="dragonflyingglyphs\eventTime.lua" />-->
+    <Include file="dragonflyingglyphs\preload.lua" />
+    <Include file="dragonflyingglyphs\Libraries.xml" />
+    <Script file="dragonflyingglyphs\data\Locations.lua" />
+    <Script file="dragonflyingglyphs\data\LocationGroups.lua" />
+    <Script file="dragonflyingglyphs\data\Tours.lua" />
+    <Script file="dragonflyingglyphs\data\Quests.lua" />
+    <Script file="dragonflyingglyphs\data\Quests.CreatureName.lua" />
+    <Script file="dragonflyingglyphs\data\QuestLookups.lua" />
+    <Script file="dragonflyingglyphs\data\Entrances.lua" />
+    <Script file="dragonflyingglyphs\data\EntranceLookups.lua" />
+    <Script file="dragonflyingglyphs\data\Pathways.lua" />
+    <Script file="dragonflyingglyphs\data\PhasedZones.lua" />
+    <Include file="dragonflyingglyphs\TomCatsDragonFlyingGlyphsDataProvider.xml" />
+    <Script file="dragonflyingglyphs\Main.lua" />
+<!--    <Script file="dragonflyingglyphs\MainRoute.lua" /> -->
+</Ui>
