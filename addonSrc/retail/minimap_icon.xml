@@ -93,7 +93,7 @@
                 </Texture>
             </Layer>
             <Layer level="BACKGROUND">
-                <Texture name="$parentBackground" file="Interface\Minimap\UI-Minimap-Background">
+                <Texture name="$parentBackground" parentKey="Background" file="Interface\Minimap\UI-Minimap-Background">
                     <Size x="25" y="25"/>
                     <Anchors>
                         <Anchor point="TOPLEFT">
@@ -161,7 +161,7 @@
                 </Texture>
             </Layer>
             <Layer level="OVERLAY" textureSubLevel="3">
-                <Texture name="$parentIconOverlay" hidden="true">
+                <Texture name="$parentIconOverlay" parentKey="IconOverlay" hidden="true">
                     <Anchors>
                         <Anchor point="TOPLEFT" relativeTo="$parentIcon"/>
                         <Anchor point="BOTTOMRIGHT" relativeTo="$parentIcon"/>

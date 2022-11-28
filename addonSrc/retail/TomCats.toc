@@ -10,7 +10,7 @@
 ## SavedVariablesPerCharacter: TomCats_Character
 ## X-Category: Achievements, Map, Miscellaneous
 ## X-Localizations: enUS, enGB, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
-## X-TomCats-Expiry: @expiry14days@
+## X-TomCats-Expiry: @expiry1day@
 
 constants.lua
 slashcommands.lua
@@ -54,10 +54,11 @@ configuration.xml
 configuration.lua
 minimap_icon.xml
 minimap_icon.lua
-discoveries.xml
-discoveries.lua
+worldmap_icon.lua
+#discoveries.xml
+#discoveries.lua
 beta.lua
 noblegarden/Main.xml
-primalstorms/Main.xml
+#primalstorms/Main.xml
 dragonflyingglyphs/Main.xml
 notaint.lua

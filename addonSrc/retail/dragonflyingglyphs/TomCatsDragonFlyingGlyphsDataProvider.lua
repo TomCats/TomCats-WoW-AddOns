@@ -13,14 +13,14 @@ local RED_COLOR = CreateColor(1.0, 0.0, 0.0, 1.0)
 local GREEN_COLOR = CreateColor(0.0, 1.0, 0.0, 1.0)
 local IsQuestFlaggedCompleted = function(achievementID)
     local IDNumber, Name, Points, Completed, Month, Day, Year, Description, Flags, Image, RewardText, isGuildAch = GetAchievementInfo(achievementID)
---    return Completed
-    return false
+    return Completed
+--    return false
 end
 
 local WorldMapTooltip = TomCatsDragonFlyingGlyphsGameTooltip
 
 local function rescale(pin)
-    local scale = TomCats_Account.dragonflyingglyphs.iconScale
+    local scale = TomCats_Account.preferences.MapOptions.iconScale
     local sizeX = 64 * scale
     local sizeY = 64 * scale
     pin.iconDefault:SetSize(sizeX, sizeY)
@@ -201,9 +201,20 @@ function TomCatsDragonFlyingGlyphsDataProviderMixin:OnAdded(owningMap)
     end
     -- P = addon.savedVariables.character.preferences
     table.insert(providers, self)
-    TCL.Events.RegisterEvent("QUEST_TURNED_IN", self)
-    TCL.Events.RegisterEvent("QUEST_LOG_UPDATE", self)
+    --TCL.Events.RegisterEvent("QUEST_TURNED_IN", self)
+    --TCL.Events.RegisterEvent("QUEST_LOG_UPDATE", self)
 end
+
+local function refreshAll(...)
+    print(...)
+    for i = 1, #providers do
+        providers[i]:RefreshAllData()
+    end
+end
+
+TCL.Events.RegisterEvent("CRITERIA_EARNED", refreshAll)
+TCL.Events.RegisterEvent("CRITERIA_COMPLETE", refreshAll)
+TCL.Events.RegisterEvent("ACHIEVEMENT_EARNED", refreshAll)
 
 local function canShowEntrance(entrance)
     if (entrance["Type"] == 3 and PlayerFaction == "Horde") then return false end
@@ -252,10 +263,11 @@ function TomCatsDragonFlyingGlyphsDataProviderMixin:RefreshAllData(fromOnShow)
         end
     end
     lookup = D["Quest IDs by UIMap ID Lookup"][self.activeMapID]
-    if (lookup) then
+    if (lookup and TomCats_Account.preferences.dragonGlyphsEnabled) then
         for i = 1, #lookup do
             local quest = lookup[i]
-            if (P.showCompleted or (not IsQuestFlaggedCompleted(quest["Quest ID"]))) then
+           -- if (P.showCompleted or (not IsQuestFlaggedCompleted(quest["Quest ID"]))) then
+            if (not IsQuestFlaggedCompleted(quest["Quest ID"])) then
                 local location = quest["Location"]
                 if (quest["UIMap ID"] ~= self:GetMap():GetMapID()) then
                     local continentID, worldPosition = C_Map.GetWorldPosFromMapPos(quest["UIMap ID"], location)
@@ -420,9 +432,7 @@ function TomCatsDragonFlyingGlyphsPinMixin:ShowTooltip()
             GameTooltip_AddColoredLine(tooltip, Name, TITLE_COLOR, false)
             GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
             GameTooltip_AddColoredLine(tooltip, Description, WHITE_COLOR, true)
-            GameTooltip_AddColoredLine(tooltip, questID, WHITE_COLOR, true)
-
-
+            -- GameTooltip_AddColoredLine(tooltip, questID, WHITE_COLOR, true)
             --GameTooltip_AddColoredLine(tooltip, C_Map.GetAreaInfo(D["Quests"][questIDsToShow[i]]["Area ID"]), WHITE_COLOR, true)
             if (self.completed) then
                 GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)
@@ -431,23 +441,23 @@ function TomCatsDragonFlyingGlyphsPinMixin:ShowTooltip()
                 GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
             end
     end
-    if (self.pinInfo.entrance) then
-        if (self.pinInfo.entrance["Type"] == 1) then
-            GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
-            GameTooltip_AddColoredLine(tooltip, "(Entryway)", GREY_COLOR, true)
-        elseif (self.pinInfo.entrance["Type"] == 2) then
-            GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
-            GameTooltip_AddColoredLine(tooltip, "(Dungeon Entrance)", GREY_COLOR, true)
-        end
-    end
-    if (self.pinInfo.phasedZone) then
-        local phasedZone = self.pinInfo.phasedZone
-        GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
-        local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"])
-        GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
-        GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
-        GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
-    end
+    --if (self.pinInfo.entrance) then
+    --    if (self.pinInfo.entrance["Type"] == 1) then
+    --        GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
+    --        GameTooltip_AddColoredLine(tooltip, "(Entryway)", GREY_COLOR, true)
+    --    elseif (self.pinInfo.entrance["Type"] == 2) then
+    --        GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
+    --        GameTooltip_AddColoredLine(tooltip, "(Dungeon Entrance)", GREY_COLOR, true)
+    --    end
+    --end
+    --if (self.pinInfo.phasedZone) then
+    --    local phasedZone = self.pinInfo.phasedZone
+    --    GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
+    --    local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"])
+    --    GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
+    --    GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
+    --    GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
+    --end
     if (TomTom) then
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
         GameTooltip_AddColoredLine(tooltip, "Click to add a TomTom Waypoint", WHITE_COLOR, true)
@@ -527,3 +537,9 @@ function addon.dragonflyingglyphs.SetIconScale()
     end
 end
 
+function addon.dragonflyingglyphs.ToggleIcons()
+    TomCats_Account.preferences.dragonGlyphsEnabled = not TomCats_Account.preferences.dragonGlyphsEnabled
+    for i = 1, #providers do
+        providers[i]:RefreshAllData()
+    end
+end

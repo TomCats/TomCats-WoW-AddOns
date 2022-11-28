@@ -26,7 +26,9 @@ addon.defaultSavedVariables = {
 				iconScale = 1.0
 			},
 			betaEnabled = false,
-			defaultVignetteIcon = "default"
+			defaultVignetteIcon = "default",
+			dragonGlyphsEnabled = false,
+			dragonGlyphsTipShown = false,
 		},
 		lastVersionSeen = "NONE",
 		discoveriesVersion = "0",

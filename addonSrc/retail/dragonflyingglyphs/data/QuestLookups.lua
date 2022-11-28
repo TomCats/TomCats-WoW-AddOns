@@ -20,10 +20,17 @@ local function addQuestToUIMaps(quest, uiMapID, skipParent)
     end
 end
 D["Quest NPC Lookup"] = {}
+local mapIconExceptions = {
+    ["202216103"] = true
+}
 for _, quest in pairs(D["Quests"].records) do
-    if (quest["Quest ID"] ~= 16101) then
+    local questID = quest["Quest ID"]
+    local uiMapID = quest["UIMap ID"]
+    if (questID ~= 16101) then
         for i = 2022, 2025 do
-            addQuestToUIMaps(quest, i, i ~= quest["UIMap ID"])
+            if (not mapIconExceptions[i .. questID]) then
+                addQuestToUIMaps(quest, i, i ~= uiMapID)
+            end
         end
     else
         addQuestToUIMaps(quest, 2112, true)
