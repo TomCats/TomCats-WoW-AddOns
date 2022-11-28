@@ -3,8 +3,7 @@ locales: enUS,koKR,frFR,deDE,zhCN,esES,zhTW,enGB,esMX,ruRU,ptBR,itIT,ptPT
 default-locale: enUS
 databases:
   retail-latest:
-#    build: 9.2.7.45745
-    build: 10.0.2.46702
+    build: 10.0.2.46801
     tables:
       uimapgroupmember:
         locales: all
