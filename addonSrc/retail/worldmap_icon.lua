@@ -78,7 +78,7 @@ local function OnEvent(event, arg1)
 			frame:SetScript("OnLeave", HideTooltip)
 			addon.UnregisterEvent("ADDON_LOADED", OnEvent)
 
-			if (not TomCats_Account.preferences.dragonGlyphsTipShown) then
+			if (TomCats_Account.preferences.dragonGlyphsTipShown == false) then
 				local BACKDROP_GLUE_TOOLTIP_16_16 = {
 					bgFile = "Interface\\Glues\\Common\\Glue-Tooltip-Background",
 					edgeFile = "Interface\\Glues\\Common\\Glue-Tooltip-Border",
@@ -107,13 +107,13 @@ local function OnEvent(event, arg1)
 				tipFrame:SetSize(text:GetStringWidth() + 24, text:GetStringHeight() + 28)
 				tipFrame:OnBackdropLoaded()
 				tipFrame:SetScript("OnClick", function(self)
-					TomCats_Account.preferences.dragonGlyphsTipShown = true
 					self:Hide()
+					TomCats_Account.preferences.dragonGlyphsTipShown = true
 				end)
 				tipFrame:Hide()
 			end
 			frame:SetScript("OnShow", function(self)
-				if (tipFrame and not TomCats_Account.preferences.dragonGlyphsTipShown) then
+				if (tipFrame and TomCats_Account.preferences.dragonGlyphsTipShown == false) then
 					local mapID = WorldMapFrame:GetMapID()
 					if (mapID >= 2022 and mapID <= 2025) then
 						tipFrame:Show()
