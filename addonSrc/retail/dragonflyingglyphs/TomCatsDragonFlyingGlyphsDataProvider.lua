@@ -205,8 +205,7 @@ function TomCatsDragonFlyingGlyphsDataProviderMixin:OnAdded(owningMap)
     --TCL.Events.RegisterEvent("QUEST_LOG_UPDATE", self)
 end
 
-local function refreshAll(...)
-    print(...)
+local function refreshAll()
     for i = 1, #providers do
         providers[i]:RefreshAllData()
     end
