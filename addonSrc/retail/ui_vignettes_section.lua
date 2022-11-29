@@ -65,6 +65,8 @@ local function RefreshVignetteSection(section)
 		end
 	end
 	if (state.collapsed) then
+		section.Header.bottomPadding = 22
+		section.Header.Note:Hide()
 		return
 	end
 	if (not state.vignettesSorted) then
@@ -101,7 +103,12 @@ local function RefreshVignetteSection(section)
 			button:Show()
 		end
 	end
+	if (#state.vignettesSorted == 0) then
+		section.Header.Note:Show()
+		section.Header.bottomPadding = 64
+	end
 	if (lastShown) then
+		section.Header.bottomPadding = 22
 		lastShown.bottomPadding = 20
 	end
 end

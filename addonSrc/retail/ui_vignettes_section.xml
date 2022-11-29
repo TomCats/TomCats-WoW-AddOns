@@ -15,6 +15,15 @@
 				</KeyValues>
 				<Size x="20" y="20"/>
 				<Layers>
+					<Layer>
+						<FontString parentKey="Note" text="Rares and Treasures Coming Next Update!" inherits="GameFontNormal">
+							<Size x="175" y="0"/>
+							<Anchors>
+								<Anchor point="TOP" relativePoint="BOTTOM" x="105" y="-24"/>
+							</Anchors>
+							<Color r="0.75" g="0.61" b="0"/>
+						</FontString>
+					</Layer>
 					<Layer level="BACKGROUND">
 						<Texture parentKey="Background" file="Interface/AddOns/TomCats/images/VignettesSectionHeader">
 							<Size x="256" y="64"/>
