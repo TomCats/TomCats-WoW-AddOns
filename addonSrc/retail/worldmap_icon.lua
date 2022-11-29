@@ -39,6 +39,7 @@ local function OnEvent(event, arg1)
 		if (addonName == arg1) then
 			local canvasContainer = WorldMapFrame:GetCanvasContainer()
 			local frame = CreateFrame("Button", "TomCatIcon", canvasContainer, "TomCats-MinimapButtonTemplate")
+			frame:ClearAllPoints()
 			frame:SetPoint("TOPRIGHT", canvasContainer, "TOPRIGHT", -3, -34)
 			frame:SetFrameStrata("HIGH")
 			frame:SetFrameLevel(2)
