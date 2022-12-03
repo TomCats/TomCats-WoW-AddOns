@@ -127,6 +127,11 @@
 							InterfaceOptionsFrame_OpenToCategory(_G["TomCats_ConfigDiscoveries"])
 						end
 					</OnClick>
+					<OnShow>
+						if (not TomCats_ConfigDiscoveries) then
+							self:SetEnabled(false)
+						end
+					</OnShow>
 				</Scripts>
 			</Button>
 			<CheckButton parentKey="checkBox_betaFeatures" parentArray="components" inherits="InterfaceOptionsCheckButtonTemplate">

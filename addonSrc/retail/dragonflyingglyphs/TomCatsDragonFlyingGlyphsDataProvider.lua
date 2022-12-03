@@ -538,6 +538,7 @@ end
 
 function addon.dragonflyingglyphs.ToggleIcons()
     TomCats_Account.preferences.dragonGlyphsEnabled = not TomCats_Account.preferences.dragonGlyphsEnabled
+    ChatFrame1:AddMessage(("TomCat's Tours Dragon Glyphs %s"):format(TomCats_Account.preferences.dragonGlyphsEnabled and "enabled" or "disabled"))
     for i = 1, #providers do
         providers[i]:RefreshAllData()
     end

@@ -114,10 +114,10 @@ local function OnEvent(event, arg1)
 			end
 			frame:SetScript("OnShow", function(self)
 				if (tipFrame and TomCats_Account.preferences.dragonGlyphsTipShown == false) then
-					local mapID = WorldMapFrame:GetMapID()
-					if (mapID >= 2022 and mapID <= 2025) then
+--					local mapID = WorldMapFrame:GetMapID()
+--					if (mapID >= 2022 and mapID <= 2025) then
 						tipFrame:Show()
-					end
+--					end
 				end
 			end)
 		end
