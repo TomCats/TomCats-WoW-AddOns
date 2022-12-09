@@ -40,7 +40,7 @@ hooksecurefunc("ChatFrame_DisplayHelpTextSimple", function(frame)
 			local numMessages = frame:GetNumMessages()
 			local function predicateFunction(entry)
 				if (count == numMessages) then
-					if (entry == HELP_TEXT_SIMPLE) then
+					if (entry and string.match(entry, HELP_TEXT_SIMPLE)) then
 						return true
 					end
 				end
