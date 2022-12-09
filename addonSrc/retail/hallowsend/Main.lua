@@ -107,7 +107,8 @@ local function zoneTweak()
     if (BattlefieldMapFrame) then
         if GetCVar("showBattlefieldMinimap") == "1" then
             local mapID = MapUtil.GetDisplayableMapForPlayer()
-            BattlefieldMapFrame:SetMapID(mapID)
+            --todo: re-enable if Blizzard addresses that this causes taint spread
+            --BattlefieldMapFrame:SetMapID(mapID)
         end
     end
 end
