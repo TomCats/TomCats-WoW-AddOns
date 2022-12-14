@@ -1,4 +1,5 @@
 --[[ See license.txt for license and copyright information ]]
+local _, addon = ...
 
 local function setDefaultVignetteIcon(iconname)
 	print("Setting default vignette icon to: " .. iconname .. "\ntype /reload to take effect")
@@ -13,8 +14,11 @@ local function handleSlashCommand(msg)
 		for str in string.gmatch(msg, "([^ ]+)") do
 			table.insert(t, str)
 		end
-		if (t[2] == "icon") then
+		if (t[2] == "ICON") then
 			setDefaultVignetteIcon(select(2, unpack(t)))
+		end
+		if (t[2] == "ERRORS") then
+			addon.SetErrorButtonsEnabled()
 		end
 	end
 end

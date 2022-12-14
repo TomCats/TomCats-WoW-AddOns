@@ -32,6 +32,7 @@ def wowdirectory = project.property('com.tomcatsaddons.wowdirectory')
 
 def addonProperties = new Properties()
 addonProperties.load(file('addon.properties').newReader())
+def currentTS = Long.toString((long)(System.currentTimeMillis() / 1000))
 def expiry1day = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (60 * 60 * 24 * 1))
 def expiry7days = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (60 * 60 * 24 * 7))
 def expiry14days = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (60 * 60 * 24 * 14))
@@ -40,6 +41,7 @@ addonProperties.setProperty("expiry1day", expiry1day)
 addonProperties.setProperty("expiry7days", expiry7days)
 addonProperties.setProperty("expiry14days", expiry14days)
 addonProperties.setProperty("expiry30days", expiry30days)
+addonProperties.setProperty("currentTS", currentTS)
 
 project.property('com.tomcatsaddons.games').split(',').each { String game ->
 

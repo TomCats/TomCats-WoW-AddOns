@@ -7,7 +7,7 @@
 			<Frame parentKey="Header" parentArray="components">
 				<Size x="80" y="80" />
 				<Anchors>
-					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="16" y="-16" />
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="16" y="0" />
 				</Anchors>
 				<Layers>
 					<Layer>
@@ -129,6 +129,33 @@
 					</OnClick>
 					<OnShow>
 						if (not TomCats_ConfigDiscoveries) then
+							self:SetEnabled(false)
+						end
+					</OnShow>
+				</Scripts>
+			</Button>
+			<Button parentKey="errorsButton" inherits="UIPanelButtonTemplate">
+				<Size x="200" y="22"/>
+				<Scripts>
+					<OnLoad>
+						local parent = self:GetParent()
+						local regions = { parent.html1:GetRegions() }
+						for k, v in ipairs(regions) do
+						if (v.GetText) then
+						local text = v:GetText()
+						if (string.find(text, "|c00000002|r")) then
+						self:ClearAllPoints()
+						self:SetPoint("RIGHT", v, "RIGHT", 0, -3)
+						self:SetText("Error Support")
+						end
+						end
+						end
+					</OnLoad>
+					<OnClick>
+						SettingsPanel:SelectCategory(TomCats_ConfigSupport.category)
+					</OnClick>
+					<OnShow>
+						if (not TomCats_ConfigSupport) then
 							self:SetEnabled(false)
 						end
 					</OnShow>

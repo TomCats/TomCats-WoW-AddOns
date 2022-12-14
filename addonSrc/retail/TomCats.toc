@@ -57,6 +57,8 @@ minimap_icon.lua
 worldmap_icon.lua
 #discoveries.xml
 #discoveries.lua
+support/support.xml
+support/support.lua
 beta.lua
 noblegarden/Main.xml
 #primalstorms/Main.xml

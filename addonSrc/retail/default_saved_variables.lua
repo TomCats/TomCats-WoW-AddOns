@@ -35,8 +35,10 @@ addon.defaultSavedVariables = {
 		discoveriesResetCount = 0,
 		discoveries = {
 			vignettes = addon.constants.HINT_ALL,
-			vignetteAtlases = addon.constants.HINT_ALL
+			vignetteAtlases = addon.constants.HINT_ALL,
+			version = "0",
 		},
+		errorLog = addon.constants.HINT_ALL,
 		loveisintheair = addon.constants.HINT_ALL,
 		lunarfestival = addon.constants.HINT_ALL,
 		hallowsend = addon.constants.HINT_ALL,
