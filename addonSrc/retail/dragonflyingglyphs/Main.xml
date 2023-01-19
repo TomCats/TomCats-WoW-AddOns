@@ -15,5 +15,4 @@
     <Script file="dragonflyingglyphs\data\PhasedZones.lua" />
     <Include file="dragonflyingglyphs\TomCatsDragonFlyingGlyphsDataProvider.xml" />
     <Script file="dragonflyingglyphs\Main.lua" />
-<!--    <Script file="dragonflyingglyphs\MainRoute.lua" /> -->
 </Ui>

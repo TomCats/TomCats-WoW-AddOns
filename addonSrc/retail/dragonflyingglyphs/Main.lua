@@ -44,7 +44,6 @@ local function ADDON_LOADED(_, arg1)
     if (addonName == arg1) then
         TomCats_Account.dragonflyingglyphs.autoEnabled = TomCats_Account.dragonflyingglyphs.autoEnabled == nil and true or TomCats_Account.dragonflyingglyphs.autoEnabled
         TomCats_Account.dragonflyingglyphs.iconsEnabled = TomCats_Account.dragonflyingglyphs.iconsEnabled == nil and true or TomCats_Account.dragonflyingglyphs.iconsEnabled
-        TomCats_Account.dragonflyingglyphs.arrowEnabled = TomCats_Account.dragonflyingglyphs.arrowEnabled == nil and true or TomCats_Account.dragonflyingglyphs.arrowEnabled
         TomCats_Account.dragonflyingglyphs.iconScale = TomCats_Account.dragonflyingglyphs.iconScale == nil and 0.8 or TomCats_Account.dragonflyingglyphs.iconScale
         --addon.dragonflyingglyphs.charm = addon.dragonflyingglyphs.Charms.Create({
         --    name = "TomCats-DragonFlyingGlyphsMinimapButton",
