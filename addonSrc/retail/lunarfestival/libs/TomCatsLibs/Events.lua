@@ -8,7 +8,7 @@ local function validateRegisterUnregisterInput(event, listener)
     if ((not event) or (type(event) ~= "string")) then error("Event must be specified", 3) end
     if ((not listener) or (type(listener) ~= "table" and type(listener) ~= "function")) then error("Listener must be specified", 3) end
 end
-function addon.TomCatsLibs.Events.RegisterEvent(event, listener)
+function addon.lunarfestival.TomCatsLibs.Events.RegisterEvent(event, listener)
     validateRegisterUnregisterInput(event, listener)
     eventListeners[event] = eventListeners[event] or {}
     for i = 1, #eventListeners[event] do
@@ -23,7 +23,7 @@ function addon.TomCatsLibs.Events.RegisterEvent(event, listener)
         end
     end
 end
-function addon.TomCatsLibs.Events.UnregisterEvent(event, listener)
+function addon.lunarfestival.TomCatsLibs.Events.UnregisterEvent(event, listener)
     validateRegisterUnregisterInput(event, listener)
     if (eventListeners[event]) then
         for i = 1, #eventListeners[event] do

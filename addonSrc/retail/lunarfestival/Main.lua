@@ -1,7 +1,7 @@
 local addonName, addon = ...
 if (not addon.lunarfestival.IsEventActive()) then return end
 
-local TCL = addon.TomCatsLibs
+local TCL = addon.lunarfestival.TomCatsLibs
 local WorldMapFrame
 local BattlefieldMapFrame
 local FlightMapFrame
@@ -44,7 +44,7 @@ local function ADDON_LOADED(_, arg1)
     end
     if (addonName == arg1) then
         addon.lunarfestival.charm = addon.lunarfestival.Charms.Create({
-            name = "TomCats-LunarFestivalMinimapButton",
+            name = "TomCats-LunarFestivalMinimapButton2023",
             iconTexture = "Interface\\AddOns\\TomCats\\lunarfestival\\images\\lunarfestival-icon",
             backgroundColor = { 0.0,0.0,0.0,1.0 },
             handler_onclick = function()

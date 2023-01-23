@@ -120,7 +120,7 @@
                     <Size x="20" y="20"/>
                     <Anchors>
                         <Anchor point="TOPLEFT">
-                            <Offset x="6" y="-6"/>
+                            <Offset x="7" y="-6"/>
                         </Anchor>
                     </Anchors>
                 </Texture>

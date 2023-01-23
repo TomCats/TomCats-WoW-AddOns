@@ -14,7 +14,6 @@ local GREEN_COLOR = CreateColor(0.0, 1.0, 0.0, 1.0)
 local IsQuestFlaggedCompleted = function(achievementID)
     local IDNumber, Name, Points, Completed, Month, Day, Year, Description, Flags, Image, RewardText, isGuildAch = GetAchievementInfo(achievementID)
     return Completed
---    return false
 end
 
 local WorldMapTooltip = TomCatsDragonFlyingGlyphsGameTooltip

@@ -1,12 +1,12 @@
 local _, addon = ...
 if (not addon.lunarfestival.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
+local D = addon.lunarfestival.TomCatsLibs.Data
 local dataMineTooltipName = ("%sDatamineTooltip"):format(addon.name)
 local dataMineTooltip = _G.CreateFrame("GameTooltip", dataMineTooltipName, UIParent, "GameTooltipTemplate")
 local dataMineTitleText = _G[("%sDatamineTooltipTextLeft1"):format(addon.name)]
 local isCreatureNamesLoaded
-function addon.getCreatureNameByQuestID(questID)
+function addon.lunarfestival.getCreatureNameByQuestID(questID)
     local quest = D["Quests"][questID]
     if (not quest) then return end
     if (not D["Quests"][questID]["Name"]) then
@@ -33,7 +33,7 @@ function isCreatureNamesLoaded()
 end
 function addon.loadCreatureNames()
     for k in pairs(D["Quests"].records) do
-        addon.getCreatureNameByQuestID(k)
+        addon.lunarfestival.getCreatureNameByQuestID(k)
     end
     return isCreatureNamesLoaded()
 end

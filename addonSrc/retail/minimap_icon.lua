@@ -42,7 +42,7 @@ local function MinimapButtonOnload(self)
 		end
 	end
 	local function ButtonUp()
-		_G[name .. "Icon"]:SetPoint("TOPLEFT", self, "TOPLEFT", 6, -6)
+		_G[name .. "Icon"]:SetPoint("TOPLEFT", self, "TOPLEFT", 7, -6)
 		_G[name .. "IconOverlay"]:Hide()
 	end
 	local function OnMouseDown()

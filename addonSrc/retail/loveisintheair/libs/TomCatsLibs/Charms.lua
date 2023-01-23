@@ -4,8 +4,6 @@ if (not addon.loveisintheair.IsEventActive()) then return end
 local CreateFrame = CreateFrame
 local InCombatLockdown = InCombatLockdown
 local Minimap = Minimap
-local MinimapCluster = MinimapCluster
-local MinimapZoneTextButton = MinimapZoneTextButton
 
 addon.loveisintheair.Charms = { }
 
@@ -50,13 +48,9 @@ end
 
 -- End SexyMap Compatibility --]]
 
-local TOMCATS_LIBS_ICON_LASTFRAMELEVEL = 13
+local TOMCATS_LIBS_ICON_LASTFRAMELEVEL = 15
 
 function addon.loveisintheair.Charms.Create(buttonInfo)
-    --noinspection GlobalCreationOutsideO
-    if (MinimapZoneTextButton and MinimapZoneTextButton:GetParent() == MinimapCluster) then
-        MinimapZoneTextButton:SetParent(Minimap)
-    end
     local name = buttonInfo.name
     if (not name) then
         name = addonName .. "MinimapButton" .. seqNum

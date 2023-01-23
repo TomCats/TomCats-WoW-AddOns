@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.lunarfestival.IsEventActive()) then return end
 
-local TCL = addon.TomCatsLibs
+local TCL = addon.lunarfestival.TomCatsLibs
 local D = TCL.Data
 -- hard disabled due to no saved variables at current release
 local P = { showCompleted = false }
@@ -53,7 +53,7 @@ local function addQuestToTomTom(quest, setClosest)
     addToTomTom({
         uiMapID = quest["UIMap ID"],
         location = quest["Location"],
-        title = addon.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
+        title = addon.lunarfestival.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
     }, setClosest)
 end
 local function addEntranceToTomTom(entrance, setClosest)
@@ -61,9 +61,9 @@ local function addEntranceToTomTom(entrance, setClosest)
     local quest = D["Quests"][entrance["Quest IDs"][1]]
     local title
     if (questCount == 1) then
-        title = addon.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
+        title = addon.lunarfestival.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
     else
-        title = addon.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")\nplus " .. (questCount - 1) .. "more"
+        title = addon.lunarfestival.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")\nplus " .. (questCount - 1) .. "more"
     end
     addToTomTom({
         uiMapID = entrance["UIMap ID"],
@@ -308,10 +308,11 @@ function TomCatsLunarFestivalDataProviderMixin:RefreshAllData(fromOnShow)
         end
     end
 end
-TomCatsLunarFestivalAreaPOIPinMixin = CreateFromMixins(AreaPOIPinMixin)
+TomCatsLunarFestivalAreaPOIPinMixin = CreateFromMixins(BaseMapPoiPinMixin)
 
 function TomCatsLunarFestivalAreaPOIPinMixin:OnAcquired(pinInfo)
-    AreaPOIPinMixin.OnAcquired(self, pinInfo)
+    BaseMapPoiPinMixin.OnAcquired(self, pinInfo);
+    --AreaPOIPinMixin.OnAcquired(self, pinInfo)
     ShowHide(self, enabled)
 end
 
@@ -401,7 +402,7 @@ function TomCatsLunarFestivalPinMixin:ShowTooltip()
         end
     end
     for i = 1, #questIDsToShow do
-            GameTooltip_AddColoredLine(tooltip, addon.getCreatureNameByQuestID(questIDsToShow[i]), TITLE_COLOR, true)
+            GameTooltip_AddColoredLine(tooltip, addon.lunarfestival.getCreatureNameByQuestID(questIDsToShow[i]), TITLE_COLOR, true)
             GameTooltip_AddColoredLine(tooltip, C_Map.GetAreaInfo(D["Quests"][questIDsToShow[i]]["Area ID"]), WHITE_COLOR, true)
             if (self.completed) then
                 GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)

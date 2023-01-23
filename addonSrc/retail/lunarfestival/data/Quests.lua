@@ -3,7 +3,7 @@ if (not addon.lunarfestival.IsEventActive()) then return end
 
 local Coords = CreateVector2D
 
-select(2, ...).TomCatsLibs.Data.loadData(
+addon.lunarfestival.TomCatsLibs.Data.loadData(
 	"Quests",
 	{ "Quest ID", "Creature ID", "Area ID", "UIMap ID", "Map Type", "Location" },
 	{

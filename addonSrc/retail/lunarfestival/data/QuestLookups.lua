@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.lunarfestival.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
+local D = addon.lunarfestival.TomCatsLibs.Data
 D["Quest IDs by UIMap ID Lookup"] = {}
 local aliasMap = {
     [12] = { 1209 },

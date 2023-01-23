@@ -4,8 +4,6 @@ if (not addon.lunarfestival.IsEventActive()) then return end
 local CreateFrame = CreateFrame
 local InCombatLockdown = InCombatLockdown
 local Minimap = Minimap
-local MinimapCluster = MinimapCluster
-local MinimapZoneTextButton = MinimapZoneTextButton
 
 addon.lunarfestival.Charms = { }
 
@@ -50,13 +48,9 @@ end
 
 -- End SexyMap Compatibility --]]
 
-local TOMCATS_LIBS_ICON_LASTFRAMELEVEL = 10
+local TOMCATS_LIBS_ICON_LASTFRAMELEVEL = 16
 
 function addon.lunarfestival.Charms.Create(buttonInfo)
-    --noinspection GlobalCreationOutsideO
-    if (MinimapZoneTextButton and MinimapZoneTextButton:GetParent() == MinimapCluster) then
-        MinimapZoneTextButton:SetParent(Minimap)
-    end
     local name = buttonInfo.name
     if (not name) then
         name = addonName .. "MinimapButton" .. seqNum

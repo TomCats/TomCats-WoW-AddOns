@@ -1,7 +1,7 @@
 local addon = select(2,...)
 --noinspection UnusedDef
-local lib = addon.TomCatsLibs.Arrows
-local Colors = addon.TomCatsLibs.Colors
+local lib = addon.lunarfestival.TomCatsLibs.Arrows
+local Colors = addon.lunarfestival.TomCatsLibs.Colors
 local imagePath = "Interface\\AddOns\\TomCats-LunarFestival\\libs\\TomCatsLibs\\images\\"
 local frame = CreateFrame("Frame", nil, nil)
 local function refreshArrow(self)

@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.lunarfestival.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
+local D = addon.lunarfestival.TomCatsLibs.Data
 D.loadData(
     "Phased Zones",
     { "UIMap ID", "Quest IDs", "Timewalking NPC POI ID", "Visible UIMap IDs", "Timewalking Map Art ID" },

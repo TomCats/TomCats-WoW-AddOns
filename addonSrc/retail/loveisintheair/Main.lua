@@ -80,7 +80,7 @@ local function LFG_UPDATE_RANDOM_INFO()
     end
     addon.loveisintheair:SortedCharacterList()
     if (not character.canLootMount) then
-        if (character.level >= 50) then
+        if (character.level >= 60) then
             if (C_ClassTrial.IsClassTrialCharacter() == false) then
                 character.canLootMount = true
             else
@@ -104,16 +104,16 @@ local function LFG_UPDATE_RANDOM_INFO()
             character.timestamp = GetServerTime()
             if (not initializing) then
                 addon.loveisintheair:UpdateScrollFrame()
-                DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00TomCat's Tours: Love is in the Air: |cffffffff" .. addon.loveisintheair.completedCharacters .. " of " .. addon.loveisintheair.eligibleCharacters .. " Completed Today|r")
+                --DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00TomCat's Tours: Love is in the Air: |cffffffff" .. addon.loveisintheair.completedCharacters .. " of " .. addon.loveisintheair.eligibleCharacters .. " Completed Today|r")
             end
         end
     end
 end
 local function PLAYER_LEVEL_UP(_, level)
     character.level = level
-    if (character.level == 50) then
+    if (character.level == 60) then
         RequestLFDPlayerLockInfo()
-    elseif (character.level > 50) then
+    elseif (character.level > 60) then
         addon.loveisintheair:UpdateScrollFrame()
     end
 end
@@ -174,7 +174,7 @@ local function ADDON_LOADED(_, arg1)
         characters[guid] = character
         addon.loveisintheair.character = character
         addon.loveisintheair.charm = addon.loveisintheair.Charms.Create({
-            name = "TomCats-LoveIsInTheAirMinimapButton",
+            name = "TomCats-LoveIsInTheAirMinimapButton2023",
             iconTexture = "Interface\\AddOns\\TomCats\\loveisintheair\\images\\liith-icon",
             backgroundColor = { 0.0,0.0,0.0,1.0 },
             handler_onclick = toggleUI

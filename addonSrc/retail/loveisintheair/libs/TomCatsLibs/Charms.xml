@@ -118,7 +118,7 @@
                     <Size x="20" y="20"/>
                     <Anchors>
                         <Anchor point="TOPLEFT">
-                            <Offset x="6" y="-6"/>
+                            <Offset x="7" y="-6"/>
                         </Anchor>
                     </Anchors>
                 </Texture>
@@ -183,7 +183,7 @@
                         _G[name .. "IconOverlay"]:Show();
                     end
                     local function ButtonUp()
-                        _G[name .. "Icon"]:SetPoint("TOPLEFT", self, "TOPLEFT", 6, -6);
+                        _G[name .. "Icon"]:SetPoint("TOPLEFT", self, "TOPLEFT", 7, -6);
                         _G[name .. "IconOverlay"]:Hide();
                     end
                     local function OnMouseDown()

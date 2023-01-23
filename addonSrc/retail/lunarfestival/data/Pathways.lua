@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.lunarfestival.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
+local D = addon.lunarfestival.TomCatsLibs.Data
 local Coords = CreateVector2D
 D.loadData(
     "Pathways",

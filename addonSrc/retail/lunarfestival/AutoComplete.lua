@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.lunarfestival.IsEventActive()) then return end
 
-local TCL = addon.TomCatsLibs
+local TCL = addon.lunarfestival.TomCatsLibs
 local D = TCL.Data
 local function QUEST_COMPLETE()
     local enabledVar = TomCats_Account and TomCats_Account.lunarfestival and TomCats_Account.lunarfestival.autoEnabled

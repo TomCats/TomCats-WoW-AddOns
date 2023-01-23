@@ -173,8 +173,9 @@ do
 			label = "Lunar Festival Minimap Button",
 			tooltip = "Displays the Lunar Festival minimap button",
 			defaultValue = "1",
-			preferenceTable = "TomCats-LunarFestivalMinimapButton",
+			preferenceTable = "TomCats-LunarFestivalMinimapButton2023",
 			preferenceKey = "hidden",
+			inverseValue = true,
 			SetValue = function(_, value)
 				if (addon.lunarfestival:IsEventActive()) then
 					addon.lunarfestival.charm:SetEnabled(value == "1")
@@ -189,8 +190,9 @@ do
 			label = "Love is in the Air Minimap Button",
 			tooltip = "Displays the Love is in the Air minimap button",
 			defaultValue = "1",
-			preferenceTable = "TomCats-LoveIsInTheAirMinimapButton",
+			preferenceTable = "TomCats-LoveIsInTheAirMinimapButton2023",
 			preferenceKey = "hidden",
+			inverseValue = true,
 			SetValue = function(_, value)
 				if (addon.loveisintheair:IsEventActive()) then
 					addon.loveisintheair.charm:SetEnabled(value == "1")

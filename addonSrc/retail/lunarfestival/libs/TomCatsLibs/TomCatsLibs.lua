@@ -15,7 +15,7 @@ local function getTomCatsLibs(_, key)
         local stack = debugstack(2, 1, 2)
         if (not string.find(stack, "TomCatsLibs")) then
             setmetatable(addon, {})
-            addon.TomCatsLibs = TomCatsLibs
+            addon.lunarfestival.TomCatsLibs = TomCatsLibs
             for i = 1, #libs do
                 local lib = libs[i]
                 if (lib.init) then lib.init() lib.init = nil end
@@ -26,4 +26,4 @@ local function getTomCatsLibs(_, key)
         return rawget(addon, key)
     end
 end
-setmetatable(addon, { __index = getTomCatsLibs })
+setmetatable(addon.lunarfestival, { __index = getTomCatsLibs })

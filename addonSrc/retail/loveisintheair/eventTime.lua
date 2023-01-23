@@ -22,12 +22,12 @@ local function setupGlobalEventTimes(val, euOffset, naOffset, krOffset, cnOffset
 	return times
 end
 
--- 2/7/2022 7:00am UTC in EU
-local eventResets = setupGlobalEventTimes(1644217200, 0, 28800, -28800, -28800, -28800)
--- 2/7/2022 10:00am CET in EU
-local eventStarts = setupGlobalEventTimes(1644224400, 0, 32400, -28800, -25200, -25200)
--- 2/21/2022 10:00am CET in EU
-local eventEnds = setupGlobalEventTimes(1645434000, 0, 32400, -28800, -25200, -25200)
+-- 2/6/2023 7:00am UTC in EU
+local eventResets = setupGlobalEventTimes(1675666800, 0, 28800, -28800, -28800, -28800)
+-- 2/6/2023 10:00am CET in EU
+local eventStarts = setupGlobalEventTimes(1675674000, 0, 32400, -28800, -25200, -25200)
+-- 2/20/2023 10:00am CET in EU
+local eventEnds = setupGlobalEventTimes(1676883600, 0, 32400, -28800, -25200, -25200)
 
 function component.getCurrentOffsetMinutes()
 	if (currentOffsetMinutes) then return currentOffsetMinutes end
@@ -97,5 +97,12 @@ function component.IsEventActive()
 	local startTime = component.getEventStartsTime()
 	local localTime = GetServerTime()
 	local endTime = component.getEventEndsTime()
-	return (localTime >= startTime and localTime < endTime)
+	return (localTime >= (startTime - (2 * 24 * 60 * 60)) and localTime < endTime)
+end
+
+function component.IsEventSoon()
+	local startTime = component.getEventStartsTime()
+	local localTime = GetServerTime()
+	local endTime = component.getEventEndsTime()
+	return component.IsEventActive() and not (localTime >= startTime and localTime < endTime)
 end

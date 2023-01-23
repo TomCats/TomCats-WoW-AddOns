@@ -9,11 +9,11 @@ addon.defaultSavedVariables = {
 				position = -2.888,
 				hidden = false
 			},
-			["TomCats-LunarFestivalMinimapButton"] = {
+			["TomCats-LunarFestivalMinimapButton2023"] = {
 				position = -2.514,
 				hidden = false
 			},
-			["TomCats-LoveIsInTheAirMinimapButton"] = {
+			["TomCats-LoveIsInTheAirMinimapButton2023"] = {
 				position = -3.262,
 				hidden = false
 			},
