@@ -341,7 +341,7 @@ function TomCatsLunarFestivalPinMixin:OnAcquired(pinInfo)
     if (pinInfo.entrance) then
         if (pinInfo.entrance["Type"] == 1) then
             self.iconEntrance:Show();
-        elseif (pinInfo.entrance["Type"] == 2) then
+        elseif (pinInfo.entrance["Type"] == 2 or pinInfo.entrance["Type"] == 5) then
             self.iconDungeon:Show();
         elseif (pinInfo.entrance["Type"] == 3) then
             self.iconPortalAlliance:Show();
@@ -366,7 +366,7 @@ end
 function TomCatsLunarFestivalPinMixin:OnCanvasScaleChanged()
     local scaleBase = 0.425
     local uiMapID = self:GetMap():GetMapID()
-    if (uiMapID == 12 or uiMapID == 13 or uiMapID == 113) then scaleBase = 0.35 end
+    if (uiMapID == 12 or uiMapID == 13 or uiMapID == 113 or uiMapID == 1978) then scaleBase = 0.35 end
     self:SetScale(scaleBase * self:GetMap():GetGlobalPinScale() / self:GetParent():GetScale())
     self:SetPosition(self.pinInfo.location.x, self.pinInfo.location.y)
 end
@@ -418,6 +418,9 @@ function TomCatsLunarFestivalPinMixin:ShowTooltip()
         elseif (self.pinInfo.entrance["Type"] == 2) then
             GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
             GameTooltip_AddColoredLine(tooltip, "(Dungeon Entrance)", GREY_COLOR, true)
+        elseif (self.pinInfo.entrance["Type"] == 5) then
+            GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
+            GameTooltip_AddColoredLine(tooltip, "(Venthyr Only)", GREY_COLOR, true)
         end
     end
     if (self.pinInfo.phasedZone) then

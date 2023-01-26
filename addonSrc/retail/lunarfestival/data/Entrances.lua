@@ -7,6 +7,8 @@ local TYPE_ENTRANCE = 1
 local TYPE_DUNGEON = 2
 local TYPE_PORTAL_ALLIANCE = 3
 local TYPE_PORTAL_HORDE = 4
+local TYPE_VENTHYR = 5
+
 addon.lunarfestival.TomCatsLibs.Data.loadData(
     "Entrances",
     { "Entrance ID", "Quest IDs", "Area ID", "UIMap ID", "Location", "Type", "Add to Parent UIMaps" },
@@ -56,5 +58,12 @@ addon.lunarfestival.TomCatsLibs.Data.loadData(
         { 43, {8713}, 1477, 51, Coords(0.76, 0.4522), TYPE_DUNGEON, true }, --  Elder Starsong / Sunken Temple
         { 44, {29741}, 5034, 249, Coords(0.3158, 0.6299), TYPE_NONE, false }, --  Elder Sekhemi - extra map pin
         { 45, {29742}, 5034, 249, Coords(0.6551, 0.1868), TYPE_NONE, false }, --  Elder Menkhaf - extra map pin
+        { 46, {63213}, 13329, 1525, Coords(0.28, 0.43 ), TYPE_VENTHYR, true }, -- Naladu (Ember Court)
+        { 47, {73859}, 13873, 2022, Coords(0.8885498046875, 0.77075862884521), TYPE_NONE, false },
+        { 48, {73848}, 13943, 2025, Coords(0.21594434976578, 0.074004769325256), TYPE_NONE, false },
+        { 49, {73716}, 13738, 2025, Coords(0.19733734428883, 0.33003112673759), TYPE_NONE, false },
+        { 50, {73717}, 13765, 2025, Coords(0.07124450802803, 0.64775812625885), TYPE_NONE, false },
+        { 51, {73172}, 13751, 2025, Coords(0.2619217634201, 0.77175080776215), TYPE_NONE, false },
+        { 52, {73172}, 13751, 2024, Coords(0.46171823143959, 0.010468549095094), TYPE_NONE, false },
     }
 )

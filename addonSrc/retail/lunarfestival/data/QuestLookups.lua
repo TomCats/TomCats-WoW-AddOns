@@ -5,7 +5,8 @@ local D = addon.lunarfestival.TomCatsLibs.Data
 D["Quest IDs by UIMap ID Lookup"] = {}
 local aliasMap = {
     [12] = { 1209 },
-    [13] = { 1208 }
+    [13] = { 1208 },
+    [1978] = { 2057 },
 }
 local function addQuestToUIMaps(quest, uiMapID)
     if (aliasMap[uiMapID]) then
