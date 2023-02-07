@@ -66,6 +66,7 @@ end
 
 local function SetupCharacterButton(button, character)
     if (character) then
+        button.character = character
         if (character.boxes > 0 and character ~= addon.loveisintheair.character) then
             button.Alert:Show()
             button.Complete:Hide()
@@ -95,6 +96,7 @@ local function SetupCharacterButton(button, character)
         button.Bracelets:SetText(tostring(character.bracelets))
         button:Show()
     else
+        button.character = nil
         button:Hide()
     end
 end
@@ -246,6 +248,17 @@ function PageMixin:Show()
         else
             button:Hide()
         end
+        button:SetScript("OnClick", function()
+            if (IsShiftKeyDown() and IsControlKeyDown()) then
+                for k, v in pairs(TomCats_Account.loveisintheair.characters) do
+                    if (v == button.character) then
+                        TomCats_Account.loveisintheair.characters[k] = nil
+                        addon.loveisintheair:UpdateScrollFrame()
+                        break
+                    end
+                end
+            end
+        end)
     end
     totalsFont = insetFrame:CreateFontString(nil, nil, "GameFontHighlightSmall")
     totalsFont:SetPoint("BOTTOMLEFT", insetFrame, "BOTTOMLEFT", 0, 5)
