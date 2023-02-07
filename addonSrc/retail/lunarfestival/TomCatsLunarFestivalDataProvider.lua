@@ -434,7 +434,7 @@ function TomCatsLunarFestivalPinMixin:ShowTooltip()
     if (TomTom) then
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
         GameTooltip_AddColoredLine(tooltip, "Click to add a TomTom Waypoint", WHITE_COLOR, true)
-        GameTooltip_AddColoredLine(tooltip, "Right-Click to add all visible waypoints from this map", WHITE_COLOR, true)
+        GameTooltip_AddColoredLine(tooltip, "Shift-Click to add all visible waypoints from this map", WHITE_COLOR, true)
     end
     WorldMapTooltip:Show()
     WorldMapTooltip.recalculatePadding = true
@@ -469,22 +469,23 @@ end
 function TomCatsLunarFestivalPinMixin:OnMouseUp(button)
     if (TomTom) then
         if (button == "LeftButton") then
-            if (self.pinInfo.quest) then
-                addQuestToTomTom(self.pinInfo.quest, true)
-            end
-            if (self.pinInfo.entrance) then
-                addEntranceToTomTom(self.pinInfo.entrance, true)
-            end
-        end
-        if (button == "RightButton") then
-            for _, pin in pairs(self.pinInfo.provider.activePins) do
-                addQuestToTomTom(pin.pinInfo.quest, false)
-            end
-            for _, pin in pairs(self.pinInfo.provider.activeEntrancePins) do
-                addEntranceToTomTom(pin.pinInfo.entrance, false)
-            end
-            if (not IsInInstance()) then
-                TomTom:SetClosestWaypoint()
+            if (IsShiftKeyDown()) then
+                for _, pin in pairs(self.pinInfo.provider.activePins) do
+                    addQuestToTomTom(pin.pinInfo.quest, false)
+                end
+                for _, pin in pairs(self.pinInfo.provider.activeEntrancePins) do
+                    addEntranceToTomTom(pin.pinInfo.entrance, false)
+                end
+                if (not IsInInstance()) then
+                    TomTom:SetClosestWaypoint()
+                end
+            else
+                if (self.pinInfo.quest) then
+                    addQuestToTomTom(self.pinInfo.quest, true)
+                end
+                if (self.pinInfo.entrance) then
+                    addEntranceToTomTom(self.pinInfo.entrance, true)
+                end
             end
         end
     end
