@@ -23,7 +23,7 @@ local function setupGlobalEventTimes(val, euOffset, naOffset, krOffset, cnOffset
 end
 
 -- 2/6/2023 7:00am UTC in EU
-local eventResets = setupGlobalEventTimes(1675666800, 0, 28800, -28800, -28800, -28800)
+local eventResets = setupGlobalEventTimes(1675666800, -10800, 28800, -28800, -28800, -28800)
 -- 2/6/2023 10:00am CET in EU
 local eventStarts = setupGlobalEventTimes(1675674000, 0, 32400, -28800, -25200, -25200)
 -- 2/20/2023 10:00am CET in EU

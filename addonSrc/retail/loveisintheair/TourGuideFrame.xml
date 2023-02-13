@@ -150,11 +150,11 @@
                     <Layer level="ARTWORK">
                         <FontString name="$parentTitle" inherits="QuestTitleFontBlackShadow" justifyH="LEFT" parentKey="title" text="LFG_TYPE_RANDOM_DUNGEON">
                             <Anchors>
-                                <Anchor point="TOPLEFT" x="85" y="-60"/>
+                                <Anchor point="TOPLEFT" x="88" y="-63"/>
                             </Anchors>
                         </FontString>
                         <FontString name="$parentDescription" inherits="QuestFont" justifyH="LEFT" parentKey="description">
-                            <Size x="280" y="0"/>
+                            <Size x="290" y="0"/>
                             <Anchors>
                                 <Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
                             </Anchors>
