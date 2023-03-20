@@ -1,13 +1,16 @@
-url-pattern: https://wow.tools/dbc/api/export/?name=${table}&build=${build}&locale=${locale}
+url-pattern: http://localhost:5000/dbc/export/?name=${table}&build=${build}&locale=${locale}
 locales: enUS,koKR,frFR,deDE,zhCN,esES,zhTW,enGB,esMX,ruRU,ptBR,itIT,ptPT
 default-locale: enUS
 databases:
   retail-latest:
-    build: 10.0.2.47067
+    build: 10.0.7.48520
     tables:
       uimapgroupmember:
         locales: all
         columnTypes: Int,String,Int,Int,Int,Int
+      vignette:
+        locales: all
+        columnTypes: Int,String,Int,Int,Int,Int,Int,Int,Int,Int,Int
       uimapxmapart:
         locales: default
         columnTypes: Int,Int,Int,Int
@@ -17,9 +20,6 @@ databases:
       uimapassignment:
         locales: default
         columnTypes: Int,Int,Int,Int,Float,Float,Float,Float,Float,Float,Int,Int,Int,Int,Int,Int,Int
-      vignette:
-        locales: all
-        columnTypes: Int,String,Int,Int,Int,Int,Int,Int,Int,Int,Int
       playercondition:
         locales: default
         columnTypes: Int,Int,Int
