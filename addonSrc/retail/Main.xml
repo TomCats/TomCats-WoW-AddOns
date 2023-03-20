@@ -6,9 +6,8 @@
 	<Script file="Throttle.lua" />
 	<Script file="Time.lua" />
 	<Script file="UI.lua" />
-	<!--	<Script file="templates/BasicWindowTemplate.lua" />
-	<Script file="templates/TimerRowTemplate.lua" />
-	<Script file="Init.lua" /> -->
+	<Include file="templates/Templates.xml" />
+	<!-- <Script file="Init.lua" /> -->
 	<Script file="constants.lua" />
 	<Script file="slashcommands.lua" />
 	<Script file="event.lua" />
