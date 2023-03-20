@@ -7,7 +7,7 @@
 	<Script file="Time.lua" />
 	<Script file="UI.lua" />
 	<Include file="templates/Templates.xml" />
-	<!-- <Script file="Init.lua" /> -->
+	<Script file="Init.lua" />
 	<Script file="constants.lua" />
 	<Script file="slashcommands.lua" />
 	<Script file="event.lua" />
@@ -58,7 +58,7 @@
 	<Script file="beta.lua" />
 	<Include file="noblegarden/Main.xml" />
 	<!-- <Include file="primalstorms/Main.xml" /> -->
-	<!-- <Include file="osd/OSD.xml" /> -->
+	<Include file="osd/OSD.xml" />
 	<Include file="dragonflyingglyphs/Main.xml" />
 	<Script file="notaint.lua" />
 </Ui>
