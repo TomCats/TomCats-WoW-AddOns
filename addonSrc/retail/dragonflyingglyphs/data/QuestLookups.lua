@@ -14,8 +14,9 @@ local function addQuestToUIMaps(quest, uiMapID, skipParent)
     end
     D["Quest IDs by UIMap ID Lookup"][uiMapID] = D["Quest IDs by UIMap ID Lookup"][uiMapID] or {}
     table.insert(D["Quest IDs by UIMap ID Lookup"][uiMapID], quest)
-    local parentMapID = C_Map.GetMapInfo(uiMapID).parentMapID
-    if ((not skipParent) and parentMapID ~= 0 and parentMapID ~= 946 and parentMapID ~= 947) then
+    local mapInfo = C_Map.GetMapInfo(uiMapID)
+    local parentMapID = mapInfo and mapInfo.parentMapID
+    if (parentMapID and (not skipParent) and parentMapID ~= 0 and parentMapID ~= 946 and parentMapID ~= 947) then
         addQuestToUIMaps(quest, parentMapID)
     end
 end
@@ -26,7 +27,9 @@ local mapIconExceptions = {
 for _, quest in pairs(D["Quests"].records) do
     local questID = quest["Quest ID"]
     local uiMapID = quest["UIMap ID"]
-    if (questID ~= 16101) then
+    if (questID >= 17398 and questID <= 17405) then
+        addQuestToUIMaps(quest, 2151,false)
+    elseif (questID ~= 16101) then
         for i = 2022, 2025 do
             if (not mapIconExceptions[i .. questID]) then
                 addQuestToUIMaps(quest, i, i ~= uiMapID)
