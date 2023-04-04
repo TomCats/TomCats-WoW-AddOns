@@ -118,7 +118,6 @@ function Templates.CreateSelectionPopoutWithButtons(parent, entries, callback)
 		if (buttonID == "LeftButton" and self:IsVisible()) then
 			for _, e in ipairs(frame.entries) do
 				if (e:IsVisible() and e:IsMouseOver()) then
-					print("Selecting via global event")
 					frame:Select(e)
 				end
 			end
