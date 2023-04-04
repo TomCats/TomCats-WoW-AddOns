@@ -3,9 +3,25 @@ local _, addon = ...
 local TCL = addon.TomCatsLibs
 local PREFIX = "TCT_RIDEALONG"
 local D = TCL.Data
-local currentPassenger
-local currentPassengerData
 local achievementIDXs = { }
+local currentPassenger, currentPassengerData
+
+local rideAlongBuffs = {
+	[388588] = true,
+	[388598] = true,
+	[388599] = true,
+	[388600] = true,
+	[388602] = true,
+}
+
+local ridingAlongDebuffs = {
+	[388501] = true,
+	[390106] = true,
+	[390107] = true,
+	[390108] = true,
+	[390109] = true,
+	[390110] = true,
+}
 
 local achievementIDs = { }
 for k in pairs(D["Quests"].records) do
@@ -24,7 +40,7 @@ local function transmitUpdate()
 			if (not debuff) then
 				break
 			end
-			if (debuff == 390108) then
+			if (ridingAlongDebuffs[debuff]) then
 				isRidingAlong = true
 				break
 			end
@@ -57,14 +73,14 @@ local function msgReceived(_, _, prefix, msg, _, _, sender)
 	end
 end
 
-local function passengersChanged(_, event)
+local function passengersChanged()
 	local hasRideAlong
 	for i = 1, 40 do
 		local aura = select(10, UnitAura("player", i))
 		if (not aura) then
 			break
 		end
-		if (aura == 388599) then
+		if (rideAlongBuffs[aura]) then
 			hasRideAlong = true
 			break
 		end
@@ -83,6 +99,7 @@ local function passengersChanged(_, event)
 		currentPassenger = nil
 		currentPassengerData = nil
 	end
+	addon.dragonflyingglyphs.RefreshAll()
 end
 
 local function init()

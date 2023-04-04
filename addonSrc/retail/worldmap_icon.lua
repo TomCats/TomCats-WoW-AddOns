@@ -24,7 +24,7 @@ local function ButtonDown(self)
 end
 
 local function ButtonUp(self)
-	self.Icon:SetPoint("TOPLEFT", self, "TOPLEFT", 6, -6)
+	self.Icon:SetPoint("TOPLEFT", self, "TOPLEFT", 7, -6)
 	self.IconOverlay:Hide()
 end
 
@@ -55,7 +55,7 @@ local function OnEvent(event, arg1)
 			background:SetWidth(25)
 			background:SetHeight(25)
 			background:SetVertexColor(0,0,0,1)
-			frame.Icon:SetTexture("Interface\\AddOns\\TomCats\\images\\tomcats_logo")
+			frame.Icon:SetTexture("Interface\\AddOns\\TomCats\\images\\tomcats_minimap_icon.png", "CLAMP", "CLAMP", "TRILINEAR")
 			--end
 			--if (buttonInfo.name) then
 			--	local scope = _G["TomCats_Account"].preferences

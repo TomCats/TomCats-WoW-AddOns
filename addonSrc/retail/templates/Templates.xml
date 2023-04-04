@@ -2,5 +2,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 	<Script file="templates/BasicWindowTemplate.lua" />
+	<Script file="templates/SelectionPopoutWithButtonsTemplate.lua" />
 	<Script file="templates/TimerRowTemplate.lua" />
 </Ui>

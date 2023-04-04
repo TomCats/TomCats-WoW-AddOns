@@ -117,7 +117,7 @@
             </Layer>
             <Layer textureSubLevel="2">
                 <Texture name="$parentIcon" parentKey="Icon" file="Interface\Minimap\Tracking\None">
-                    <Size x="20" y="20"/>
+                    <Size x="32" y="32"/>
                     <Anchors>
                         <Anchor point="TOPLEFT">
                             <Offset x="7" y="-6"/>
@@ -164,7 +164,7 @@
                 <Texture name="$parentIconOverlay" parentKey="IconOverlay" hidden="true">
                     <Anchors>
                         <Anchor point="TOPLEFT" relativeTo="$parentIcon"/>
-                        <Anchor point="BOTTOMRIGHT" relativeTo="$parentIcon"/>
+                        <Anchor point="BOTTOMRIGHT" relativeTo="$parentIcon" relativePoint="TOPLEFT" x="20" y="-20" />
                     </Anchors>
                     <Color a="0.5"/>
                 </Texture>

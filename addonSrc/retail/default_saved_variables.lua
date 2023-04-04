@@ -5,6 +5,10 @@ addon.defaultSavedVariables = {
 	TomCats_Account = {
 		lastExpirationWarning = 0,
 		preferences = {
+			AccessoryWindow = {
+				WindowLocation = addon.constants.HINT_ALL,
+				display = addon.constants.accessoryDisplay.NOINSTANCES
+			},
 			["TomCats-MinimapButton"] = {
 				position = -2.888,
 				hidden = false
@@ -27,8 +31,6 @@ addon.defaultSavedVariables = {
 			},
 			betaEnabled = false,
 			defaultVignetteIcon = "default",
-			dragonGlyphsEnabled = false,
-			dragonGlyphsTipShown = false,
 		},
 		lastVersionSeen = "NONE",
 		discoveriesVersion = "0",

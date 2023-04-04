@@ -9,7 +9,7 @@ local function OverlayVariables(template, overlay)
 	for k, v in pairs(template) do
 		if (overlay[k] ~= nil and type(v) == type(overlay[k])) then
 			if (type(v) == "table") then
-				newVars[k] = (v == HINT_ALL) and overlay[k] or OverlayVariables(v, overlay[k])
+				newVars[k] = (v == HINT_ALL or v == HINT_ALL) and overlay[k] or OverlayVariables(v, overlay[k])
 			else
 				newVars[k] = overlay[k]
 			end

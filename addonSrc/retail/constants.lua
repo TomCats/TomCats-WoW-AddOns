@@ -19,6 +19,13 @@ addon.constants.visibilityTypes = {
 	ALL = 3
 }
 
+addon.constants.accessoryDisplay = {
+	ALWAYS = 1,
+	NEVER = 2,
+	NOINSTANCES = 3,
+	RELEVANTZONES = 4,
+}
+
 TOMCATS_TOOLTIP_BACKDROP_STYLE_DEFAULT = {
 	bgFile = "Interface/Tooltips/UI-Tooltip-Background",
 	edgeFile = "Interface/Tooltips/UI-Tooltip-Border",

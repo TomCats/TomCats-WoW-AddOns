@@ -90,14 +90,6 @@ local function MinimapButtonOnload(self)
 		UpdatePosition()
 	end
 	local function OnUpdate()
-		local TomCats_Config = _G["TomCats_Config"]
-		if (TomCats_Config and TomCats_Config:IsVisible()) then
-			self.Icon:SetDesaturated(true)
-			self:Disable()
-		else
-			self.Icon:SetDesaturated(false)
-			self:Enable()
-		end
 		if (isDragging) then
 			UpdatePositionByCursor()
 		else
@@ -150,6 +142,9 @@ local function MinimapButtonOnload(self)
 			preferences.position = -2.888
 		end
 		return preferences
+	end
+	function self:IsEnabled()
+		return not preferences.hidden
 	end
 	function self:SetPreferences(savedPreferences)
 		if (savedPreferences) then
@@ -210,7 +205,7 @@ local function CreateMinimapButton(buttonInfo)
 	end
 	frame.title = buttonInfo.title or name
 	if (buttonInfo.iconTexture) then
-		_G[name .. "Icon"]:SetTexture(buttonInfo.iconTexture)
+		_G[name .. "Icon"]:SetTexture(buttonInfo.iconTexture, "CLAMP", "CLAMP", "TRILINEAR")
 	end
 	if (buttonInfo.name) then
 		local scope = _G["TomCats_Account"].preferences
@@ -232,9 +227,12 @@ local function CreateMinimapButton(buttonInfo)
 end
 
 local function OpenControlPanel()
-	if (not _G["TomCats_Config"]:IsVisible()) then
-		Settings.OpenToCategory((_G["TomCats_Config"]).category:GetID())
+	if (addon.SettingsCategory) then
+		Settings.OpenToCategory(addon.SettingsCategory:GetID())
 	end
+	--	if (not _G["TomCats_Config"]:IsVisible()) then
+	--		Settings.OpenToCategory((_G["TomCats_Config"]).category:GetID())
+	--	end
 end
 
 local function OnEvent(event, arg1)
@@ -251,7 +249,7 @@ local function OnEvent(event, arg1)
 	if (event == "ADDON_LOADED" and addonName == arg1) then
 		addon.minimapButton = CreateMinimapButton({
 			name = "TomCats-MinimapButton",
-			iconTexture = "Interface\\AddOns\\TomCats\\images\\tomcats_logo",
+			iconTexture = "Interface\\AddOns\\TomCats\\images\\tomcats_minimap_icon.png",
 			backgroundColor = { 0.0,0.0,0.0,1.0 },
 			handler_onclick = OpenControlPanel
 		})

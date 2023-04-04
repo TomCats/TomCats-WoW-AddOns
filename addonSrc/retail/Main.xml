@@ -2,13 +2,21 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 	<Script file="Scopes.lua" />
+	<Script file="constants.lua" />
+
+	<Include file="templates/Templates.xml" />
+
+	<Script file="Fixes.lua" />
+	<Script file="Image.lua" />
 	<Script file="Names.lua" />
 	<Script file="Throttle.lua" />
 	<Script file="Time.lua" />
 	<Script file="UI.lua" />
-	<Include file="templates/Templates.xml" />
-	<Script file="Init.lua" />
-	<Script file="constants.lua" />
+	<Script file="Version.lua" />
+
+	<Include file="options/Options.xml" />
+	<Include file="osd/OSD.xml" />
+
 	<Script file="slashcommands.lua" />
 	<Script file="event.lua" />
 	<Include file="popup.xml" />
@@ -46,19 +54,18 @@
 	<Include file="loveisintheair/Main.xml" />
 	<Include file="hallowsend/Main.xml" />
 	<Script file="announcements.lua" />
-	<Include file="configuration.xml" />
-	<Script file="configuration.lua" />
+	<!-- <Include file="configuration.xml" /> -->
+	<!-- <Script file="configuration.lua" /> -->
 	<Include file="minimap_icon.xml" />
 	<Script file="minimap_icon.lua" />
-	<Script file="worldmap_icon.lua" />
+	<!-- <Script file="worldmap_icon.lua" /> -->
 	<!-- <Include file="discoveries.xml" /> -->
 	<!-- <Script file="discoveries.lua" /> -->
-	<Include file="support/support.xml" />
-	<Script file="support/support.lua" />
+	<!-- <Include file="support/support.xml" /> -->
+	<!-- <Script file="support/support.lua" /> -->
 	<Script file="beta.lua" />
-	<Include file="noblegarden/Main.xml" />
+	<!-- <Include file="noblegarden/Main.xml" /> -->
 	<!-- <Include file="primalstorms/Main.xml" /> -->
-	<Include file="osd/OSD.xml" />
 	<Include file="dragonflyingglyphs/Main.xml" />
 	<Script file="notaint.lua" />
 </Ui>

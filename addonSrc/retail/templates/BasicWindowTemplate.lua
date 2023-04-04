@@ -43,7 +43,7 @@ function Templates.CreateBasicWindow(parentFrame, params)
 		self:StopMovingOrSizing()
 		prefs.WindowLocation = { self:GetPoint() }
 	end)
-	if (prefs.WindowLocation) then
+	if (prefs.WindowLocation and (#prefs.WindowLocation > 0)) then
 		frame:ClearAllPoints()
 		frame:SetPoint(unpack(prefs.WindowLocation))
 	else
@@ -69,7 +69,7 @@ function Templates.CreateBasicWindow(parentFrame, params)
 	frame.title = frame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 	frame.title:SetPoint("TOP", frame, "TOP", 0, -8)
 	if (params and params.icon) then
-		frame.icon = CreateFrame("Frame", nil, frame)
+		frame.icon = CreateFrame("Button", nil, frame)
 		frame.icon:SetSize(32, 32)
 		frame.icon:SetPoint("TOPLEFT", frame, "TOPLEFT", -1, 3)
 		frame.icon.Background = frame.icon:CreateTexture(nil, "ARTWORK")
@@ -80,8 +80,8 @@ function Templates.CreateBasicWindow(parentFrame, params)
 		frame.icon.Background:Show()
 		frame.icon.logo = frame.icon:CreateTexture(nil, "ARTWORK")
 		frame.icon.logo:SetDrawLayer("ARTWORK", 2)
-		frame.icon.logo:SetTexture(params.icon)
-		frame.icon.logo:SetSize(20, 20)
+		frame.icon.logo:SetTexture(params.icon, "CLAMP", "CLAMP", "TRILINEAR")
+		frame.icon.logo:SetSize(32, 32)
 		frame.icon.logo:SetPoint("TOPLEFT", 7, -6)
 		frame.icon.logo:Show()
 		frame.icon.Border = frame.icon:CreateTexture(nil, "OVERLAY")

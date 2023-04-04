@@ -454,11 +454,20 @@ function TomCatsMapCanvasPinMixin:OnReleased()
 	self.Expand:Hide()
 end
 
+function addon.GetIconScale()
+	return _G["TomCats_Account"].preferences.MapOptions.iconScale
+end
+
 function addon.SetIconScale(value)
+	_G["TomCats_Account"].preferences.MapOptions.iconScale = value
 	globalPinScale = value
 	for pin in pairs(activePins) do
 		rescale(pin)
 	end
+end
+
+function addon.IsIconAnimationEnabled()
+	return _G["TomCats_Account"].preferences.MapOptions.iconAnimationEnabled
 end
 
 function addon.SetIconAnimationEnabled(value)
