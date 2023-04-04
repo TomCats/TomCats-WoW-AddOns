@@ -115,14 +115,15 @@ function Templates.CreateSelectionPopoutWithButtons(parent, entries, callback)
 		frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox")
 	end)
 	frame.Button:SetScript("OnEvent", function(self, _, buttonID)
-		if (buttonID == "LeftButton" and self:IsShown()) then
+		if (buttonID == "LeftButton" and self:IsVisible()) then
 			for _, e in ipairs(frame.entries) do
-				if (e:IsMouseOver()) then
+				if (e:IsVisible() and e:IsMouseOver()) then
+					print("Selecting via global event")
 					frame:Select(e)
 				end
 			end
 			local mouseOver = self:IsMouseOver()
-			popoutShown = frame.Popout:IsShown()
+			popoutShown = frame.Popout:IsVisible()
 			if (mouseOver) then
 				popoutShown = not popoutShown
 			else
