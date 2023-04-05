@@ -70,7 +70,7 @@ Home:SetScript("OnShow", function(self)
 		welcome:SetPoint("RIGHT")
 		welcome:SetScript("OnHyperlinkClick", Prime_OnHyperlinkClick)
 		welcome.paragraphSpacing = 12
-		local configurationTitle = CreateOptionsTitle(contents, "Configuration", welcome)
+		local configurationTitle = CreateOptionsTitle(contents, "Settings", welcome)
 		local configurationFrame = CreateFrame("Frame", nil, contents, "ResizeLayoutFrame")
 		configurationFrame:SetPoint("LEFT")
 		configurationFrame:SetPoint("RIGHT")
@@ -169,7 +169,7 @@ Home:SetScript("OnShow", function(self)
 		accessoryWindowConfig.Label = accessoryWindowConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		accessoryWindowConfig.Label:SetJustifyH("LEFT")
 		accessoryWindowConfig.Label:SetPoint("LEFT", 32, 0)
-		accessoryWindowConfig.Label:SetText("Display Accessory Window")
+		accessoryWindowConfig.Label:SetText("Elemental Storms")
 		local accessoryWindowDisplayPreference = osd.GetVisibilityOption()
 		local accessoryDisplayConstants = addon.constants.accessoryDisplay
 		accessoryWindowConfig.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
@@ -203,12 +203,8 @@ Home:SetScript("OnShow", function(self)
 		accessoryWindowConfig.selectionPopout:SetPoint("LEFT", 230, 0)
 		accessoryWindowConfig.selectionPopout.Popout:Layout()
 		AttachTooltip({
-			"Display Accessory Window",
-			"Sets when to display the accessory window",
-			" ",
-			"Currently shows the timers for Elemental Storms",
-			" ",
-			"(additional timers and tools may be added later)"
+			"Elemental Storms",
+			"Set when to display the Elemental Storms timers within the accessory window",
 		}, accessoryWindowConfig.Label, accessoryWindowConfig.selectionPopout.Button)
 
 		local contactTitle = CreateOptionsTitle(contents, "Links", configurationFrame)

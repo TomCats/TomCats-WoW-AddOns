@@ -24,6 +24,7 @@ addon.constants.accessoryDisplay = {
 	NEVER = 2,
 	NOINSTANCES = 3,
 	RELEVANTZONES = 4,
+	REMOVED = 100
 }
 
 TOMCATS_TOOLTIP_BACKDROP_STYLE_DEFAULT = {

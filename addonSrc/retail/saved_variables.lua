@@ -25,6 +25,11 @@ local function OnEvent(event, arg1)
 		if (addonName == arg1) then
 			for k, v in pairs(defaultSavedVariables) do
 				_G[k] = OverlayVariables(v, _G[k] or { })
+				-- todo: remove later: backwards compatibility with var change
+				if (TomCats_Account.preferences.AccessoryWindow.display ~= addon.constants.accessoryDisplay.REMOVED) then
+					TomCats_Account.preferences.AccessoryWindow.elementalStorms = TomCats_Account.preferences.AccessoryWindow.display
+					TomCats_Account.preferences.AccessoryWindow.display = addon.constants.accessoryDisplay.REMOVED
+				end
 			end
 			addon.UnregisterEvent("ADDON_LOADED", OnEvent)
 		end

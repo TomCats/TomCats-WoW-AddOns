@@ -4,13 +4,6 @@ select(2, ...).SetScope("osd")
 local frame = CreateFrame("Frame")
 local UpdateVisibility
 
-addon.constants.accessoryDisplay = {
-	ALWAYS = 1,
-	NEVER = 2,
-	NOINSTANCES = 3,
-	RELEVANTZONES = 4,
-}
-
 local relevantZones = {
 	[1978] = true
 }

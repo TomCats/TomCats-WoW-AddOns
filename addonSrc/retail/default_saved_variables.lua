@@ -7,7 +7,8 @@ addon.defaultSavedVariables = {
 		preferences = {
 			AccessoryWindow = {
 				WindowLocation = addon.constants.HINT_ALL,
-				display = addon.constants.accessoryDisplay.NOINSTANCES
+				display = addon.constants.accessoryDisplay.REMOVED,
+				elementalStorms = addon.constants.accessoryDisplay.NOINSTANCES,
 			},
 			["TomCats-MinimapButton"] = {
 				position = -2.888,
