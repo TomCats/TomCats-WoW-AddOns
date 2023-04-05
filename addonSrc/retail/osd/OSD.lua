@@ -57,18 +57,33 @@ local OSDProtoType = {
 	end,
 }
 
-local function IconOnClick()
-	if (addon.SettingsCategory) then
-		Settings.OpenToCategory(addon.SettingsCategory:GetID())
-	end
-end
-
 local function OnEvent(_, event, arg1, arg2)
 	if (event == "AREA_POIS_UPDATED") then
 		OSD:Refresh()
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		OSD = UI.New(OSDProtoType)
-		OSD.frame.icon:SetScript("OnClick", IconOnClick)
+		OSD.frame.icon:EnableMouse(false)
+		local settingsButton = CreateFrame("Button", nil, OSD.frame)
+		settingsButton:SetSize(16, 16)
+		settingsButton:SetNormalTexture(ImagePNG.Gear_64)
+		settingsButton:GetNormalTexture():SetTexCoord(0, 0.5, 0.5, 1)
+		settingsButton:SetPushedTexture(ImagePNG.Gear_64)
+		settingsButton:GetPushedTexture():SetTexCoord(0, 0.5, 0, 0.5)
+		settingsButton:SetHighlightTexture(ImagePNG.Gear_64)
+		settingsButton:GetHighlightTexture():SetAlpha(0.25)
+		settingsButton:GetHighlightTexture():SetTexCoord(0.5, 1, 0.5, 1)
+		settingsButton:SetScript("OnMouseDown", function()
+			settingsButton:GetHighlightTexture():SetTexCoord(0.5, 1, 0, 0.5)
+		end)
+		settingsButton:SetScript("OnClick", function()
+			if (addon.SettingsCategory) then
+				Settings.OpenToCategory(addon.SettingsCategory:GetID())
+			end
+		end)
+		settingsButton:SetScript("OnMouseUp", function()
+			settingsButton:GetHighlightTexture():SetTexCoord(0.5, 1, 0.5, 1)
+		end)
+		settingsButton:SetPoint("TOPRIGHT", -6.5, -6.5)
 		frame:SetScript("OnUpdate", function(_, elapsed)
 			OSD:Update(elapsed)
 		end)
@@ -84,16 +99,21 @@ end
 
 function UpdateVisibility()
 	if (OSD) then
-		visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.display]()
+		local level = UnitLevel("player")
+		if (level == 70) then
+			visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.elementalStorms]()
+		else
+			OSD.frame:Hide()
+		end
 	end
 end
 
 function GetVisibilityOption()
-	return TomCats_Account.preferences.AccessoryWindow.display
+	return TomCats_Account.preferences.AccessoryWindow.elementalStorms
 end
 
 function SetVisibilityOption(value)
-	TomCats_Account.preferences.AccessoryWindow.display = value
+	TomCats_Account.preferences.AccessoryWindow.elementalStorms = value
 	UpdateVisibility()
 end
 
