@@ -207,6 +207,32 @@ Home:SetScript("OnShow", function(self)
 			"Set when to display the Elemental Storms timers within the accessory window",
 		}, accessoryWindowConfig.Label, accessoryWindowConfig.selectionPopout.Button)
 
+		if (addon.noblegarden.IsEventActive()) then
+			local noblegardenConfig = CreateFrame("Frame", nil, configurationFrame)
+			noblegardenConfig:SetPoint("TOPLEFT", accessoryWindowConfig, "BOTTOMLEFT", 0, -8)
+			noblegardenConfig:SetPoint("RIGHT")
+			noblegardenConfig:SetHeight(28)
+			noblegardenConfig.Label = noblegardenConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+			noblegardenConfig.Label:SetJustifyH("LEFT")
+			noblegardenConfig.Label:SetPoint("LEFT", 32, 0)
+			noblegardenConfig.Label:SetText("Noblegarden")
+			noblegardenConfig.checkButton = CreateFrame("CheckButton", nil, noblegardenConfig)
+			noblegardenConfig.checkButton:SetSize(30, 29)
+			noblegardenConfig.checkButton:SetPoint("LEFT", 230, 0)
+			noblegardenConfig.checkButton:SetNormalAtlas("checkbox-minimal", true)
+			noblegardenConfig.checkButton:SetPushedAtlas("checkbox-minimal", true)
+			noblegardenConfig.checkButton:SetCheckedAtlas("checkmark-minimal", true)
+			noblegardenConfig.checkButton:SetDisabledCheckedAtlas("checkmark-minimal-disabled", true)
+			noblegardenConfig.checkButton:SetScript("OnClick", function(self)
+				TomCats_Account.noblegarden.enabled = self:GetChecked()
+			end)
+			noblegardenConfig.checkButton:SetChecked(TomCats_Account.noblegarden.enabled)
+			AttachTooltip({
+				"Noblegarden",
+				"Enables or disables the TomCat's Tours Nobelgarden egg auto-looting feature"
+			}, noblegardenConfig.Label, noblegardenConfig.checkButton)
+		end
+
 		local contactTitle = CreateOptionsTitle(contents, "Links", configurationFrame)
 		local contact = CreateFrame("SimpleHTML",nil, contents, "@addonName@_HTML_Contact")
 		contact:SetPoint("TOPLEFT", contactTitle, "BOTTOMLEFT", 0, 0)

@@ -7,6 +7,7 @@ addon.defaultSavedVariables = {
 		preferences = {
 			AccessoryWindow = {
 				WindowLocation = addon.constants.HINT_ALL,
+				--todo: remove deprecated 'display' property upon adding new accessory window components
 				display = addon.constants.accessoryDisplay.REMOVED,
 				elementalStorms = addon.constants.accessoryDisplay.NOINSTANCES,
 			},
@@ -44,6 +45,9 @@ addon.defaultSavedVariables = {
 		errorLog = addon.constants.HINT_ALL,
 		loveisintheair = addon.constants.HINT_ALL,
 		lunarfestival = addon.constants.HINT_ALL,
+		noblegarden = {
+			enabled = true
+		},
 		hallowsend = addon.constants.HINT_ALL,
 		primalstorms = {
 			preferences = addon.constants.HINT_ALL,

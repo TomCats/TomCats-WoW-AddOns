@@ -3,4 +3,5 @@
 ..\FrameXML\UI.xsd">
     <Script file="noblegarden\eventTime.lua" />
     <Script file="noblegarden\Main.lua" />
+    <Script file="noblegarden\announcements.lua" />
 </Ui>
