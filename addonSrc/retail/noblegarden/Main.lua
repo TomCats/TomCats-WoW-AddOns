@@ -8,7 +8,6 @@ local primed = false
 
 local function BAG_UPDATE()
     if (TomCats_Account.noblegarden.enabled and addon.noblegarden.IsEventActive()) then
-        print("Autoloot")
         local eggs = GetItemCount(45072, true)
         if (eggs > 0 and (not primed)) then
             primed = true
