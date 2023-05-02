@@ -365,7 +365,8 @@ do
 		["VignetteKillElite"] = true,
 		["VignetteLoot"] = true,
 		["VignetteLootElite"] = true,
-
+		["niffen-myritt"] = true,
+		["minimap-genericevent-hornicon-small"] = true,
 		["mechagon-projects"] = true,
 		["poi-scrapper"] = true,
 		-- DF icons
@@ -379,12 +380,12 @@ do
 		atlasNameInclusions[string.lower(k)] = true
 	end
 
-	TomCats_ConfigDiscoveries.name = "Discoveries"
-	TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
-	TomCats_ConfigDiscoveries.controls = { }
-	TomCats_ConfigDiscoveries.Header.Text:SetFont(TomCats_ConfigDiscoveries.Header.Text:GetFont(), 64)
-	local subcategory = Settings.RegisterCanvasLayoutSubcategory(TomCats_Config.category, TomCats_ConfigDiscoveries, TomCats_ConfigDiscoveries.name);
-	TomCats_ConfigDiscoveries.category = subcategory
+	--TomCats_ConfigDiscoveries.name = "Discoveries"
+	--TomCats_ConfigDiscoveries.parent = "TomCat's Tours"
+	--TomCats_ConfigDiscoveries.controls = { }
+	--TomCats_ConfigDiscoveries.Header.Text:SetFont(TomCats_ConfigDiscoveries.Header.Text:GetFont(), 64)
+	--local subcategory = Settings.RegisterCanvasLayoutSubcategory(TomCats_Config.category, TomCats_ConfigDiscoveries, TomCats_ConfigDiscoveries.name);
+	--TomCats_ConfigDiscoveries.category = subcategory
 end
 
 local function serializeTable(val, key)
@@ -437,6 +438,10 @@ local function OnHyperlinkClick(self, link)
 	self.popup:SetFrameStrata("TOOLTIP")
 end
 
+_G.TCTDISCOVERIES = function()
+	print(addon.base64.encode(serializeTable(_G["TomCats_Account"].discoveries)))
+end
+
 local function OnHyperlinkEnter(self, link, _, fontString)
 	self.linksHighlight = self.linksHighlight or self:CreateFontString()
 	self.links = fontString
@@ -463,36 +468,36 @@ local function OnHyperlinkLeave(self)
 	self.links:SetAlpha(1.0)
 end
 
-TomCats_ConfigDiscoveries.html:SetScript("OnHyperlinkClick", OnHyperlinkClick)
-TomCats_ConfigDiscoveries.html:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
-TomCats_ConfigDiscoveries.html:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)
-TomCats_ConfigDiscoveries.discoveriesButton:SetScript("OnClick", function()
-	OnHyperlinkClick(TomCats_ConfigDiscoveries.html, "discoveries")
-end)
+--TomCats_ConfigDiscoveries.html:SetScript("OnHyperlinkClick", OnHyperlinkClick)
+--TomCats_ConfigDiscoveries.html:SetScript("OnHyperlinkEnter", OnHyperlinkEnter)
+--TomCats_ConfigDiscoveries.html:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)
+--TomCats_ConfigDiscoveries.discoveriesButton:SetScript("OnClick", function()
+--	OnHyperlinkClick(TomCats_ConfigDiscoveries.html, "discoveries")
+--end)
 
 local function updateDiscoveryCount(amount)
 	addon.discoveries = addon.discoveries or 0
 	addon.discoveries = addon.discoveries + amount
 	local totalDiscoveries = _G["TomCats_Account"].discoveriesResetCount + addon.discoveries
 	local newDiscoveries = addon.discoveries
-	if (totalDiscoveries == newDiscoveries) then
-		TomCats_Config.discoveriesButton:SetText(("Discoveries: %d"):format(totalDiscoveries))
-		TomCats_ConfigDiscoveries.discoveriesButton:SetText(("Discoveries: %d"):format(totalDiscoveries))
-	else
-		TomCats_Config.discoveriesButton:SetText(("Discoveries: %d (New: %d)"):format(totalDiscoveries, newDiscoveries))
-		TomCats_ConfigDiscoveries.discoveriesButton:SetText(("Discoveries: %d (New: %d)"):format(totalDiscoveries, newDiscoveries))
-	end
-	if (addon.discoveries == 0 and _G["TomCats_Account"].discoveriesResetCount == 0) then
-		TomCats_ConfigDiscoveries.discoveriesButton:Disable()
-	else
-		TomCats_ConfigDiscoveries.discoveriesButton:Enable()
-	end
+	--if (totalDiscoveries == newDiscoveries) then
+	--	TomCats_Config.discoveriesButton:SetText(("Discoveries: %d"):format(totalDiscoveries))
+	--	TomCats_ConfigDiscoveries.discoveriesButton:SetText(("Discoveries: %d"):format(totalDiscoveries))
+	--else
+	--	TomCats_Config.discoveriesButton:SetText(("Discoveries: %d (New: %d)"):format(totalDiscoveries, newDiscoveries))
+	--	TomCats_ConfigDiscoveries.discoveriesButton:SetText(("Discoveries: %d (New: %d)"):format(totalDiscoveries, newDiscoveries))
+	--end
+	--if (addon.discoveries == 0 and _G["TomCats_Account"].discoveriesResetCount == 0) then
+	--	TomCats_ConfigDiscoveries.discoveriesButton:Disable()
+	--else
+	--	TomCats_ConfigDiscoveries.discoveriesButton:Enable()
+	--end
 end
 
-TomCats_ConfigDiscoveries.discoveriesResetCounterButton:SetScript("OnClick", function()
-	_G["TomCats_Account"].discoveriesResetCount = _G["TomCats_Account"].discoveriesResetCount + addon.discoveries
-	updateDiscoveryCount(-addon.discoveries)
-end)
+--TomCats_ConfigDiscoveries.discoveriesResetCounterButton:SetScript("OnClick", function()
+--	_G["TomCats_Account"].discoveriesResetCount = _G["TomCats_Account"].discoveriesResetCount + addon.discoveries
+--	updateDiscoveryCount(-addon.discoveries)
+--end)
 
 local function GetExtendedVignetteInfo(vignetteInfo, mapID)
 	vignetteInfo.mapID = mapID
@@ -512,9 +517,10 @@ local function OnUpdate(_, elapsed)
 		vignettes = nil
 		checkedVignetteGUIDs = { }
 		timeSinceLastUpdate = 0
-		--if (mapID == 1970) then -- only scan for new discoveries in ZM for now
-			vignettes = addon.getVignettes(lastVignetteMapID)
-		--end
+		if (mapID == 2133) then -- only scan for new discoveries in this zone
+--			vignettes = addon.getVignettes(lastVignetteMapID)
+			vignettes = { }
+		end
 	end
 	if (timeSinceLastUpdate >= interval) then
 		timeSinceLastUpdate = 0
