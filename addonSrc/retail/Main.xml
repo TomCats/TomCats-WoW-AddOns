@@ -64,7 +64,7 @@
 	<!-- <Include file="support/support.xml" /> -->
 	<!-- <Script file="support/support.lua" /> -->
 	<Script file="beta.lua" />
-	<!-- <Include file="noblegarden/Main.xml" /> -->
+	<Include file="noblegarden/Main.xml" />
 	<!-- <Include file="primalstorms/Main.xml" /> -->
 	<Include file="dragonflyingglyphs/Main.xml" />
 	<Script file="notaint.lua" />
