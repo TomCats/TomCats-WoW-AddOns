@@ -1,8 +1,9 @@
 --[[ See license.txt for license and copyright information ]]
+local function CreateFrameProxy(...)
+	return CreateFrame(...)
+end
+
 select(2, ...).SetScope()
-
-local CreateFrame_Orig = CreateFrame
-
 local function RefreshContentHeight(frame)
 	local top = frame:GetTop()
 	local bottom = top
@@ -65,7 +66,7 @@ end
 	and unexpected need to call GetWidth() on each region which will trigger a resize
 ]]
 function CreateFrame(frameType, name, parent, template, id)
-	local frame = CreateFrame_Orig(frameType, name, parent, template, id)
+	local frame = CreateFrameProxy(frameType, name, parent, template, id)
 	frameType = string.upper(frameType)
 	if (frameType == "SIMPLEHTML" and template) then
 		local w, h = frame:GetSize()
