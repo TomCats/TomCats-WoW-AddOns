@@ -11,9 +11,10 @@ ID,EXT,EXPR,V_RULE,L_RULE,T_RULE,CV_RULE
 1543,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default,default
 1565,"""VisibleTrackingQuestID""",[VISIBLETRACKINGQUESTID],default,default,default,default
 1961,"""Related"",""Alias"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],VISIBLETRACKINGQUESTID]",shadowlands,default,default,default
-1970,"""Related"",""Alias"",""Once"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],EXT[2],VISIBLETRACKINGQUESTID]",shadowlands,default,default,zerethmortis
+1970,"""Related"",""Alias"",""Once"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],EXT[2],VISIBLETRACKINGQUESTID]",shadowlands,default,default,hasOnce
 2022,"""Related"",""Alias"",""VisibleTrackingQuestID"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],EXT[2],VISIBLETRACKINGQUESTID]",shadowlands,default,default,default
 2023,"""Related"",""Alias"",""VisibleTrackingQuestID"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],EXT[2],VISIBLETRACKINGQUESTID]",shadowlands,default,default,default
 2024,"""Related"",""Alias"",""VisibleTrackingQuestID"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],EXT[2],VISIBLETRACKINGQUESTID]",shadowlands,default,default,default
 2025,"""Related"",""Alias"",""VisibleTrackingQuestID"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],EXT[2],VISIBLETRACKINGQUESTID]",shadowlands,default,default,default
 2107,"""Related"",""Alias"",""VisibleTrackingQuestID"",""VisibleTrackingQuestID""","[EXT[0],EXT[1],EXT[2],VISIBLETRACKINGQUESTID]",shadowlands,default,default,default
+2133,"""Once"",""VisibleTrackingQuestID""","[EXT[0],VISIBLETRACKINGQUESTID]",default,default,default,hasOnce

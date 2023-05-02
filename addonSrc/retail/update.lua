@@ -3,7 +3,7 @@ local addonName, addon = ...
 
 local outdatedText = "TomCat's Tours is outdated:\n\nPlease update via the CurseForge app"
 local ACCEPT_ALT = ACCEPT_ALT
-local GetAddOnMetadata = GetAddOnMetadata
+local GetAddOnMetadata = C_AddOns.GetAddOnMetadata
 local GetServerTime = GetServerTime
 local StaticPopup_Show = StaticPopup_Show
 local StaticPopupDialogs = StaticPopupDialogs

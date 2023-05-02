@@ -57,7 +57,7 @@ local trackingRules = {
 
 local completedVisibilityRules = {
 	["default"] = loadstring(rulePrepend .. "return true"),
-	["zerethmortis"] = loadstring(rulePrepend .. "return not o.Once"),
+	["hasOnce"] = loadstring(rulePrepend .. "return not o.Once"),
 }
 
 local function executeRule(ruleSet, ruleName, obj)

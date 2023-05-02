@@ -130,7 +130,7 @@ local function OnEvent(_, event, arg1, arg2)
 			for i = 1, numAddons do
 				local name, _, _, enabled = GetAddOnInfo(i)
 				if (enabled) then
-					addons[name] = GetAddOnMetadata(i, "version") or "unspecified"
+					addons[name] = C_AddOns.GetAddOnMetadata(i, "version") or "unspecified"
 				end
 			end
 			error.addons = addons

@@ -3,7 +3,7 @@ locales: enUS,koKR,frFR,deDE,zhCN,esES,zhTW,enGB,esMX,ruRU,ptBR,itIT,ptPT
 default-locale: enUS
 databases:
   retail-latest:
-    build: 10.0.7.48520
+    build: 10.1.0.49365
     tables:
       uimapgroupmember:
         locales: all
@@ -29,9 +29,9 @@ databases:
       uitextureatlasmember:
         locales: default
         columnTypes: String,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int
-  tbc-latest:
-    build: 2.5.1.39170
-    tables:
-      map:
-        locales: default
-        columnTypes: Int,String,String,String,String,String,String,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,String,String
+#  tbc-latest:
+#    build: 2.5.1.39170
+#    tables:
+#      map:
+#        locales: default
+#        columnTypes: Int,String,String,String,String,String,String,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,Int,String,String
