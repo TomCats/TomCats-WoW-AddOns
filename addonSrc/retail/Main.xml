@@ -39,6 +39,7 @@
 	<Script file="db_vignette_info.lua" />
 	<Script file="db_item_companion.lua" />
 	<Script file="db_vignettes_known.lua" />
+	<Script file="db_drakewatcher_manuscripts.lua" />
 	<Script file="dao_vignettes.lua" />
 	<Script file="dao_loot.lua" />
 	<Script file="proxy.lua" />

@@ -9,7 +9,8 @@ addon.constants.lootTypes = {
 	UNKNOWN = 0,
 	MOUNT = 1,
 	COMPANION_PET = 2,
-	TOY = 3
+	TOY = 3,
+	DRAKEWATCHER_MANUSCRIPT = 4
 }
 
 addon.constants.visibilityTypes = {

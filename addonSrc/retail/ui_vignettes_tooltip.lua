@@ -12,7 +12,8 @@ local lootIcons = {
 	[LOOT_TYPE.UNKNOWN] = 134400, -- question mark
 	[LOOT_TYPE.MOUNT] = "StableMaster",
 	[LOOT_TYPE.COMPANION_PET] = "WildBattlePetCapturable",
-	[LOOT_TYPE.TOY] = 237429
+	[LOOT_TYPE.TOY] = 237429,
+	[LOOT_TYPE.DRAKEWATCHER_MANUSCRIPT] = "dragon-rostrum",
 }
 
 local itemBorderAtlases = {
