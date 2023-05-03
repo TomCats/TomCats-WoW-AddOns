@@ -146,18 +146,18 @@ end
 
 local function GetVignettePosition(vignetteGUIDs, mapID)
 	if (#vignetteGUIDs == 1) then
-		return C_VignetteInfo.GetVignettePosition(vignetteGUIDs[1], mapID)
+		return C_VignetteInfo.GetVignettePosition(vignetteGUIDs[1], mapID), vignetteGUIDs[1]
 	end
 	local idx = C_VignetteInfo.FindBestUniqueVignette(vignetteGUIDs)
 	if (idx) then
 		local position = C_VignetteInfo.GetVignettePosition(vignetteGUIDs[idx], mapID)
-		if (position) then return position end
+		if (position) then return position, vignetteGUIDs[idx] end
 	end
 	for _, v in ipairs(vignetteGUIDs) do
 		local vignetteInfo = vignetteInfoCache[v]
 		if (vignetteInfo and not vignetteInfo.isDead) then
 			local position = C_VignetteInfo.GetVignettePosition(vignetteInfo.vignetteGUID, mapID)
-			if (position) then return position end
+			if (position) then return position, vignetteInfo.vignetteGUID end
 		end
 	end
 end
@@ -205,10 +205,11 @@ local function OnUpdate(_, elapsed)
 					local spawned
 					if (pin) then
 						if (vignetteGUIDs) then
-							local position = GetVignettePosition(vignetteGUIDs, mapID)
+							local position, vignetteGUID = GetVignettePosition(vignetteGUIDs, mapID)
 							if (position) then
 								if (not pin.isSpawned) then
 									pin.isSpawned = true
+									pin.vignetteInfo = vignetteInfoCache[vignetteGUID]
 									updateVignettePin(pin)
 								end
 								pin:SetPosition(position:GetXY())
@@ -218,6 +219,7 @@ local function OnUpdate(_, elapsed)
 						if (not spawned) then
 							if (pin.isSpawned) then
 								pin.isSpawned = false
+								pin.vignetteInfo = nil
 								updateVignettePin(pin)
 							end
 							local x, y = pin.vignette:GetLocation()
@@ -431,11 +433,25 @@ function TomCatsMapCanvasPinMixin:OnMouseClickAction()
 end
 
 function TomCatsMapCanvasPinMixin:OnMouseEnter()
-	TomCatsVignetteTooltip:SetOwner(self)
+	if (self.vignetteInfo and self.vignetteInfo.widgetSetID) then
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+		GameTooltip_SetTitle(GameTooltip, self.vignette["Name"]);
+		local overflow = GameTooltip_AddWidgetSet(GameTooltip, self.vignetteInfo.widgetSetID, self.vignetteInfo.addPaddingAboveWidgets and 10);
+		GameTooltip:Show()
+		if (overflow) then
+			GameTooltip:SetPadding(0, -overflow);
+		end
+	else
+		TomCatsVignetteTooltip:SetOwner(self)
+	end
 end
 
 function TomCatsMapCanvasPinMixin:OnMouseLeave()
-	TomCatsVignetteTooltip:SetOwner()
+	if (self.vignetteInfo and self.vignetteInfo.widgetSetID) then
+		GameTooltip:Hide();
+	else
+		TomCatsVignetteTooltip:SetOwner()
+	end
 end
 
 function TomCatsMapCanvasPinMixin:OnReleased()
