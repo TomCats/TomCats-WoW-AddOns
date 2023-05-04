@@ -45,7 +45,7 @@ addon.vignetteDescriptions = {
 	[5530] = NOINFO,
 	[5531] = NOINFO,
 	[5619] = "The path to the cave entrance is about 80 yards Southwest of the chest. To unlock it, click the empowered gems in the following order: red, black, blue, yellow, green.",
-	[5637] = NOINFO,
+	[5637] = "This likely becomes available once \"The Ancient Bargain\" chapter of the Embers of Neltharion campaign is able to be completed.",
 	[5675] = NOINFO,
 	[5685] = "To unlock the chest, /kneel before the dragon statue that is about 680 yards Southwest of the chest (at 43.6, 23.0) ",
 	[5649] = NOINFO,
@@ -59,4 +59,5 @@ addon.vignetteDescriptions = {
 	[5638] = "To get Salverun, combine the Kob'rok's Luminescent Scale that drops from Kob'rok with the Ouroboros Tablet (obtained from Sniffenseeking reward bags)",
 	[5711] = "Solve the puzzle inside of the reliquary to open the chest.\n\nNote: The entrance will not be opened until you have completed the campaign quest: Open That Door!",
 	[5712] = "Let a nearby Preying Dustmoth cast Drowsy Dust on you and then open the chest while you have the debuff",
+	[5714] = "Multiple spawns across Zaralek Cavern"
 }
