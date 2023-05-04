@@ -47,7 +47,7 @@ addon.vignetteDescriptions = {
 	[5619] = NOINFO,
 	[5637] = NOINFO,
 	[5675] = NOINFO,
-	[5685] = NOINFO,
+	[5685] = "To unlock the chest, /kneel before the dragon statue that is about 680 yards Southwest of the chest (at 43.6, 23.0) ",
 	[5649] = NOINFO,
 	[5657] = NOINFO,
 	[5655] = NOINFO,
@@ -57,6 +57,6 @@ addon.vignetteDescriptions = {
 	[5687] = "Click on the nearby Thieving Rock Mouse 5 times to get it to drop the Old Trunk Key",
 	[5690] = "To unlock the chest:\n\n1) Go about 200 yards West atop the pillars to collect the orange \"Attunement Crystal\"\n\n2) Go about 250 yards North of the orange crystal atop the pillars to collect the purple \"Attunement Crystal\"",
 	[5638] = "To get Salverun, combine the Kob'rok's Luminescent Scale that drops from Kob'rok with the Ouroboros Tablet (obtained from Sniffenseeking reward bags)",
-	[5711] = "Solve the puzzle inside of the reliquary to open the chest.\n\nNote: The entrance may not be open yet.  If you have information on what might open the entrance, please find TomCat and let him know!",
+	[5711] = "Solve the puzzle inside of the reliquary to open the chest.\n\nNote: The entrance will not be opened until you have completed the campaign quest: Open That Door!",
 	[5712] = "Let a nearby Preying Dustmoth cast Drowsy Dust on you and then open the chest while you have the debuff",
 }
