@@ -33,6 +33,7 @@ function Templates.CreateBasicWindow(parentFrame, params)
 	frame:SetMovable(true)
 	frame:EnableMouse(true)
 	frame:RegisterForDrag("LeftButton")
+	frame:SetPassThroughButtons("RightButton");
 	frame:SetClampedToScreen(true)
 	frame:SetScript("OnDragStart", function(self)
 		if not self.isLocked then
