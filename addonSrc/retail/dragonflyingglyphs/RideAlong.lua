@@ -88,6 +88,9 @@ local function passengersChanged()
 	if (hasRideAlong) then
 		local _, passenger, realm = UnitVehicleSeatInfo("player", 1)
 		if (passenger) then
+			if (not realm) then
+				_, realm = UnitFullName("player")
+			end
 			if (realm) then passenger = passenger .. "-" .. realm end
 			currentPassenger = passenger
 			C_ChatInfo.SendAddonMessage(PREFIX, "UPDATEME", "RAID")
