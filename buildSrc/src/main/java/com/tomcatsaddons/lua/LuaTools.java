@@ -187,7 +187,10 @@ public class LuaTools {
                             .replaceAll("\"","\\\\\""))
                     .append("\"");
         }
-        return sb.toString();
+        String val = sb.toString();
+        if (val.equals("\"true\"")) return "true";
+        if (val.equals("\"false\"")) return "false";
+        return val;
     }
 
     private static LuaTable getLuaTable(Object[] objs) {
