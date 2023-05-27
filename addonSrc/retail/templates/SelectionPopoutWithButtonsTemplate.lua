@@ -3,7 +3,7 @@ select(2, ...).SetScope()
 
 Templates = Templates or { }
 
-local AddPopoutEntry, CreateNextBackButton, SetSelectedEntry
+local AddPopoutEntry, CreateNextBackButton, SetSelectedEntry, SetDropdownHover
 
 function AddPopoutEntry(parent, label, value)
 	local idx = #parent.entries + 1
@@ -33,6 +33,11 @@ function AddPopoutEntry(parent, label, value)
 	entry:SetScript("OnLeave", function()
 		entry.HighlightBGTex:SetAlpha(0)
 	end)
+    entry:SetScript("OnClick", function()
+        parent:Select(entry)
+        parent.Popout:SetShown(false)
+        SetDropdownHover(parent)
+    end)
 	entry.SelectionDetails = CreateFrame("Frame", nil, entry)
 	entry.SelectionDetails:SetSize(250, 20)
 	entry.SelectionDetails:SetPoint("TOPLEFT", 14, 0)
@@ -65,6 +70,16 @@ function CreateNextBackButton(parent, type, anchor)
 	button:SetScript("OnMouseUp", function() button:SetHighlightAtlas("charactercreate-customize-" .. type .. "button")  end)
 	button:SetPoint(anchor)
 	return button
+end
+
+function SetDropdownHover(frame)
+    if (frame.Button:IsMouseOver() and not frame.Popout:IsShown()) then
+        frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox-hover")
+        frame.Button:GetHighlightTexture():SetAlpha(0)
+    else
+        frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox")
+        frame.Button:GetHighlightTexture():SetAlpha(0.3)
+    end
 end
 
 function SetSelectedEntry(frame, entry)
@@ -102,41 +117,34 @@ function Templates.CreateSelectionPopoutWithButtons(parent, entries, callback)
 	frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox")
 	frame.Button:SetHighlightAtlas("charactercreate-customize-dropdownbox-open", "ADD")
 	frame.Button:GetHighlightTexture():SetAlpha(0)
-	local popoutShown = false
 	frame.Button:SetScript("OnEnter", function()
-		if (not popoutShown) then
-			frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox-hover")
-			frame.Button:GetHighlightTexture():SetAlpha(0)
-		else
-			frame.Button:GetHighlightTexture():SetAlpha(0.3)
-		end
+        SetDropdownHover(frame)
 	end)
 	frame.Button:SetScript("OnLeave", function()
-		frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox")
+        SetDropdownHover(frame)
 	end)
+    frame.Button:SetScript("OnClick", function(self)
+        frame.Popout:SetShown(not frame.Popout:IsShown())
+        SetDropdownHover(frame)
+    end)
 	frame.Button:SetScript("OnEvent", function(self, _, buttonID)
-		if (buttonID == "LeftButton" and self:IsVisible()) then
-			for _, e in ipairs(frame.entries) do
-				if (e:IsVisible() and e:IsMouseOver()) then
-					frame:Select(e)
-				end
-			end
-			local mouseOver = self:IsMouseOver()
-			popoutShown = frame.Popout:IsVisible()
-			if (mouseOver) then
-				popoutShown = not popoutShown
-			else
-				popoutShown = false
-			end
-			frame.Popout:SetShown(popoutShown)
-			if (mouseOver and not popoutShown) then
-				frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox-hover")
-				frame.Button:GetHighlightTexture():SetAlpha(0)
-			else
-				frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox")
-				frame.Button:GetHighlightTexture():SetAlpha(0.3)
-			end
-		end
+        if (frame.Popout:IsShown()) then
+            local hide = true
+            if (self:IsMouseOver()) then
+                hide = false
+            else
+                for _, e in ipairs(frame.entries) do
+                    if (e:IsVisible() and e:IsMouseOver()) then
+                        hide = false
+                        break
+                    end
+                end
+            end
+            if (hide) then
+                frame.Popout:SetShown(false)
+            end
+        end
+        SetDropdownHover(frame)
 	end)
 	frame.Button:RegisterEvent("GLOBAL_MOUSE_DOWN")
 	frame.Popout = CreateFrame("Frame", nil, frame, "ResizeLayoutFrame")

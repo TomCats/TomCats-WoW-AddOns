@@ -2,45 +2,11 @@
 select(2, ...).SetScope("osd")
 
 local frame = CreateFrame("Frame")
-local UpdateVisibility
-
-local relevantZones = {
-	[1978] = true
-}
-
-local visibilityFunctions = {
-	[addon.constants.accessoryDisplay.ALWAYS] = function()
-		OSD.frame:Show()
-	end,
-	[addon.constants.accessoryDisplay.NEVER] = function()
-		OSD.frame:Hide()
-	end,
-	[addon.constants.accessoryDisplay.NOINSTANCES] = function()
-		local inInstance = IsInInstance()
-		OSD.frame:SetShown(not inInstance)
-	end,
-	[addon.constants.accessoryDisplay.RELEVANTZONES] = function()
-		local inInstance = IsInInstance()
-		if (inInstance) then
-			OSD.frame:Hide()
-		else
-			local uiMapID = C_Map.GetBestMapForUnit("player")
-			while (uiMapID) do
-				if (relevantZones[uiMapID]) then
-					OSD.frame:Show()
-					return
-				end
-				local mapInfo = C_Map.GetMapInfo(uiMapID)
-				uiMapID = mapInfo and mapInfo.parentMapID or nil
-			end
-			OSD.frame:Hide()
-		end
-	end,
-}
 
 local OSDProtoType = {
 	AfterRefresh = function(self)
 		self.frame:SetHeight(self.TimerRows:GetHeight() + 64 - 17)
+        self.frame:SetWidth(self.TimerRows:GetWidth())
 	end,
 	New = function(self)
 		self.frame = Templates.CreateBasicWindow(
@@ -100,21 +66,16 @@ end
 function UpdateVisibility()
 	if (OSD) then
 		local level = UnitLevel("player")
+        local shown = false
 		if (level == 70) then
-			visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.elementalStorms]()
-		else
-			OSD.frame:Hide()
-		end
+			shown = shown or IsElementalStormsVisible()
+        end
+        shown = shown or IsGreedyEmissaryVisible()
+    	OSD.frame:SetShown(shown)
+        if (shown) then
+            OSD:Refresh()
+        end
 	end
-end
-
-function GetVisibilityOption()
-	return TomCats_Account.preferences.AccessoryWindow.elementalStorms
-end
-
-function SetVisibilityOption(value)
-	TomCats_Account.preferences.AccessoryWindow.elementalStorms = value
-	UpdateVisibility()
 end
 
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")

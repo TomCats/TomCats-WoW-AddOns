@@ -44,3 +44,49 @@ function GetElementalStorms()
 	end
 	return elementalStorms
 end
+
+local relevantZones = {
+	[1978] = true
+}
+
+local visibilityFunctions = {
+	[addon.constants.accessoryDisplay.ALWAYS] = function()
+		return true
+	end,
+	[addon.constants.accessoryDisplay.NEVER] = function()
+		return false
+	end,
+	[addon.constants.accessoryDisplay.NOINSTANCES] = function()
+		local inInstance = IsInInstance()
+		return not inInstance
+	end,
+	[addon.constants.accessoryDisplay.RELEVANTZONES] = function()
+		local inInstance = IsInInstance()
+		if (inInstance) then
+			return false
+		else
+			local uiMapID = C_Map.GetBestMapForUnit("player")
+			while (uiMapID) do
+				if (relevantZones[uiMapID]) then
+					return true
+				end
+				local mapInfo = C_Map.GetMapInfo(uiMapID)
+				uiMapID = mapInfo and mapInfo.parentMapID or nil
+			end
+			return false
+		end
+	end,
+}
+
+function IsElementalStormsVisible()
+	return visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.elementalStorms]()
+end
+
+function ElementalStorms_GetVisibilityOption()
+	return TomCats_Account.preferences.AccessoryWindow.elementalStorms
+end
+
+function ElementalStorms_SetVisibilityOption(value)
+	TomCats_Account.preferences.AccessoryWindow.elementalStorms = value
+	UpdateVisibility()
+end

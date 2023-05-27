@@ -70,17 +70,26 @@ Home:SetScript("OnShow", function(self)
 		welcome:SetPoint("RIGHT")
 		welcome:SetScript("OnHyperlinkClick", Prime_OnHyperlinkClick)
 		welcome.paragraphSpacing = 12
-		local configurationTitle = CreateOptionsTitle(contents, "Settings", welcome)
+		local configurationTitle = CreateOptionsTitle(contents, "Settings (Map and Floating Window)", welcome)
 		local configurationFrame = CreateFrame("Frame", nil, contents, "ResizeLayoutFrame")
 		configurationFrame:SetPoint("LEFT")
 		configurationFrame:SetPoint("RIGHT")
 		configurationFrame:SetPoint("TOP", configurationTitle, "BOTTOM", 0, 0)
 		configurationFrame:SetHeight(80)
 
+		local tipFrame =  CreateFrame("Frame", nil, configurationFrame)
+		tipFrame:SetPoint("TOPLEFT")
+		tipFrame:SetPoint("RIGHT")
+		tipFrame:SetHeight(14)
+		tipFrame.Label = tipFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+		tipFrame.Label:SetJustifyH("LEFT")
+		tipFrame.Label:SetPoint("LEFT", 16, 0)
+		tipFrame.Label:SetText("|cFFFF0000TIP:|r The floating window hides or shows depending on if you have features enabled for it")
+
 		local minimapButtonConfig = CreateFrame("Frame", nil, configurationFrame)
-		minimapButtonConfig:SetPoint("TOPLEFT")
+		minimapButtonConfig:SetPoint("TOPLEFT", tipFrame, "BOTTOMLEFT", 16, -8)
 		minimapButtonConfig:SetPoint("RIGHT")
-		minimapButtonConfig:SetHeight(28)
+		minimapButtonConfig:SetHeight(30)
 		minimapButtonConfig.Label = minimapButtonConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		minimapButtonConfig.Label:SetJustifyH("LEFT")
 		minimapButtonConfig.Label:SetPoint("LEFT", 32, 0)
@@ -104,7 +113,7 @@ Home:SetScript("OnShow", function(self)
 		local mapIconSizeConfig = CreateFrame("Frame", nil, configurationFrame)
 		mapIconSizeConfig:SetPoint("TOPLEFT", minimapButtonConfig, "BOTTOMLEFT", 0, -8)
 		mapIconSizeConfig:SetPoint("RIGHT")
-		mapIconSizeConfig:SetHeight(28)
+		mapIconSizeConfig:SetHeight(30)
 		mapIconSizeConfig.Label = mapIconSizeConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		mapIconSizeConfig.Label:SetJustifyH("LEFT")
 		mapIconSizeConfig.Label:SetPoint("LEFT", 32, 0)
@@ -141,7 +150,7 @@ Home:SetScript("OnShow", function(self)
 		local mapIconAnimationConfig = CreateFrame("Frame", nil, configurationFrame)
 		mapIconAnimationConfig:SetPoint("TOPLEFT", mapIconSizeConfig, "BOTTOMLEFT", 0, -8)
 		mapIconAnimationConfig:SetPoint("RIGHT")
-		mapIconAnimationConfig:SetHeight(28)
+		mapIconAnimationConfig:SetHeight(30)
 		mapIconAnimationConfig.Label = mapIconAnimationConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		mapIconAnimationConfig.Label:SetJustifyH("LEFT")
 		mapIconAnimationConfig.Label:SetPoint("LEFT", 32, 0)
@@ -165,12 +174,12 @@ Home:SetScript("OnShow", function(self)
 		local accessoryWindowConfig = CreateFrame("Frame", nil, configurationFrame)
 		accessoryWindowConfig:SetPoint("TOPLEFT", mapIconAnimationConfig, "BOTTOMLEFT", 0, -8)
 		accessoryWindowConfig:SetPoint("RIGHT")
-		accessoryWindowConfig:SetHeight(28)
+		accessoryWindowConfig:SetHeight(30)
 		accessoryWindowConfig.Label = accessoryWindowConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		accessoryWindowConfig.Label:SetJustifyH("LEFT")
 		accessoryWindowConfig.Label:SetPoint("LEFT", 32, 0)
 		accessoryWindowConfig.Label:SetText("Elemental Storms")
-		local accessoryWindowDisplayPreference = osd.GetVisibilityOption()
+		local accessoryWindowDisplayPreference = osd.ElementalStorms_GetVisibilityOption()
 		local accessoryDisplayConstants = addon.constants.accessoryDisplay
 		accessoryWindowConfig.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
 				accessoryWindowConfig,
@@ -197,21 +206,66 @@ Home:SetScript("OnShow", function(self)
 					},
 				},
 				function()
-					osd.SetVisibilityOption(accessoryWindowConfig.selectionPopout.selected.value)
+					osd.ElementalStorms_SetVisibilityOption(accessoryWindowConfig.selectionPopout.selected.value)
 				end
 		)
 		accessoryWindowConfig.selectionPopout:SetPoint("LEFT", 230, 0)
 		accessoryWindowConfig.selectionPopout.Popout:Layout()
 		AttachTooltip({
 			"Elemental Storms",
-			"Set when to display the Elemental Storms timers within the accessory window",
+			"Set when to display the Elemental Storms timers within the floating window\n\n(The floating window will only be visible when you have features enabled for it)",
 		}, accessoryWindowConfig.Label, accessoryWindowConfig.selectionPopout.Button)
+		local last = accessoryWindowConfig
+
+		if (osd.GreedyEmissary:IsEventActive()) then
+			local treasureGoblinConfig = CreateFrame("Frame", nil, configurationFrame)
+			treasureGoblinConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+			last = treasureGoblinConfig
+			treasureGoblinConfig:SetPoint("RIGHT")
+			treasureGoblinConfig:SetHeight(30)
+			treasureGoblinConfig.Label = treasureGoblinConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+			treasureGoblinConfig.Label:SetJustifyH("LEFT")
+			treasureGoblinConfig.Label:SetPoint("LEFT", 32, 0)
+			treasureGoblinConfig.Label:SetText("Treasure Goblin")
+			local treasureGoblinDisplayPreference = osd.TreasureGoblin_GetVisibilityOption()
+			local treasureGoblinDisplayConstants = addon.constants.accessoryDisplay
+			treasureGoblinConfig.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
+					treasureGoblinConfig,
+					{
+						{
+							label = "Always Shown",
+							value = treasureGoblinDisplayConstants.ALWAYS,
+							selected = treasureGoblinDisplayPreference == treasureGoblinDisplayConstants.ALWAYS
+						},
+						{
+							label = "Never Shown",
+							value = treasureGoblinDisplayConstants.NEVER,
+							selected = treasureGoblinDisplayPreference == treasureGoblinDisplayConstants.NEVER
+						},
+						{
+							label = "Hide when in instances",
+							value = treasureGoblinDisplayConstants.NOINSTANCES,
+							selected = treasureGoblinDisplayPreference == treasureGoblinDisplayConstants.NOINSTANCES
+						},
+					},
+					function()
+						osd.TreasureGoblin_SetVisibilityOption(treasureGoblinConfig.selectionPopout.selected.value)
+					end
+			)
+			treasureGoblinConfig.selectionPopout:SetPoint("LEFT", 230, 0)
+			treasureGoblinConfig.selectionPopout.Popout:Layout()
+			AttachTooltip({
+				"Special Event: A Greedy Emissary",
+				"Set when to display the Treasure Goblin timers within the floating window\n\n(The floating window will only be visible when you have features enabled for it)",
+			}, treasureGoblinConfig.Label, treasureGoblinConfig.selectionPopout.Button)
+		end
 
 		if (addon.noblegarden.IsEventActive()) then
 			local noblegardenConfig = CreateFrame("Frame", nil, configurationFrame)
-			noblegardenConfig:SetPoint("TOPLEFT", accessoryWindowConfig, "BOTTOMLEFT", 0, -8)
+			noblegardenConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+			last = noblegardenConfig
 			noblegardenConfig:SetPoint("RIGHT")
-			noblegardenConfig:SetHeight(28)
+			noblegardenConfig:SetHeight(30)
 			noblegardenConfig.Label = noblegardenConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 			noblegardenConfig.Label:SetJustifyH("LEFT")
 			noblegardenConfig.Label:SetPoint("LEFT", 32, 0)
