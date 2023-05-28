@@ -13,16 +13,21 @@ local eventActive = false
 local eventStart
 local gracePeriod = 60 * 6
 local regionID = GetCurrentRegion()
-local zoneRotation = { 84,2112,85,2022,84,2023,85,2024,84,2025,85,2112,84,2022,85,2023,84,2024,85,2025,84 }
+local zoneRotations = {
+    [1] = { 84,2112,85,2022,84,2023,85,2024,84,2025,85,2112,84,2022,85,2023,84,2024,85,2025,84 },
+    [3] = { 84,2023,85,2024,84,2025,85,2112,84,2022,85,2023,84,2024,85,2025,84,2112,85,2022,84 },
+}
+local zoneRotation
 
 local eventTimes = {
     [1] = { 1685034000, 1686812340 },
-    [3] = { 1685005200, 1686783540 },
+    [3] = { 1685001600, 1686779940 },
 }
 
 do
     local currentTime = GetServerTime()
     local eventTime = eventTimes[regionID]
+    zoneRotation = zoneRotations[regionID]
     if (eventTime and currentTime > eventTime[1] and currentTime < eventTime[2]) then
         eventActive = true
         eventStart = eventTime[1]
