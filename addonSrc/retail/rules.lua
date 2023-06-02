@@ -12,7 +12,6 @@ local warfrontStates = { 1, 1, 2, 2 }
 
 local functions = {
 	["containsAny"] = function(tbl1, tbl2)
-		DEBUGTABLE1, DEBUGTABLE2 = tbl1, tbl2
 		for _, v in ipairs(tbl2) do
 			if (tbl1[v]) then return true end
 		end
@@ -41,7 +40,8 @@ local visibilityRules = {
 		If the VignetteID has coordinates, display it on the map
 			unless it has related vignettes and at least one of them is visible (g.vignettes)
 	]]
-	["shadowlands"] = loadstring(rulePrepend .. "if (o.Locations and o.Related and f.containsAny(g.vignettes, o.Related) and not g.vignettes[o.ID]) then return c.visibilityTypes.LIST end return c.visibilityTypes.ALL")
+	["shadowlands"] = loadstring(rulePrepend .. "if (o.Locations and o.Related and f.containsAny(g.vignettes, o.Related) and not g.vignettes[o.ID]) then return c.visibilityTypes.LIST end return c.visibilityTypes.ALL"),
+	["dragonflight"] = loadstring(rulePrepend .. "return (o.SkillID[1] == nil or o.SkillID[1] == 0 or g.PlayerHasSkillID(o.SkillID[1])) and (o.Achievement[0] == nil or o.Achievement[0] == 0 or select(4, o.Achievement[0]))")
 }
 
 local locationRules = {
@@ -134,6 +134,7 @@ local function OnUpdate(_, elapsed)
 		end
 		addon.globals.betaEnabled = addon.IsBetaEnabled and addon.IsBetaEnabled()
 		addon.globals.vignettes = addon.globals.vignettes or { }
+		addon.globals.PlayerHasSkillID = addon.PlayerHasSkillID
 		local vignettesChanged = false
 		if (addon.vignetteGUIDsByVignetteID) then
 			for k in pairs(addon.vignetteGUIDsByVignetteID) do

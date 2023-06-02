@@ -30,6 +30,7 @@
 	<Script file="playerposition.lua" />
 	<Script file="arrows.lua" />
 	<Script file="cache.lua" />
+	<Script file="professions.lua" />
 	<Script file="rules.lua" />
 	<Script file="bit32.lua" />
 	<Script file="base64.lua" />

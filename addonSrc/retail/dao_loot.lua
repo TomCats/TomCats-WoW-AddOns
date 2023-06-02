@@ -60,6 +60,13 @@ function addon.getLootDisplayInfo(items)
 						end
 					else
 						lootType = LOOT_TYPE.UNKNOWN
+						local _, itemSpell = GetItemSpell(itemID)
+						if (itemSpell) then
+							local spellDescription = GetSpellDescription(itemSpell)
+							if (spellDescription) then
+								collectedString = spellDescription
+							end
+						end
 					end
 				end
 				table.insert(loot, {

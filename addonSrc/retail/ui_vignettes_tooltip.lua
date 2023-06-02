@@ -119,7 +119,7 @@ function TomCatsVignetteTooltipMixin:SetOwner(owner)
 				v.Text[2]:Hide()
 			end
 			if (k ~= 1) then
-				v:SetPoint("TOP", self.Loot[k-1], "TOP", 0, -50)
+				v:SetPoint("TOP", self.Loot[k-1], "TOP", 0, -70)
 			end
 			v:Show()
 		else
@@ -145,7 +145,7 @@ function TomCatsVignetteTooltipMixin:OnUpdate()
 		totalHeight = totalHeight + 6
 		for _, v in ipairs(self.Loot) do
 			if (v:IsShown()) then
-				totalHeight = totalHeight + 50
+				totalHeight = totalHeight + 70
 			end
 		end
 		totalHeight = totalHeight + 8
