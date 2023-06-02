@@ -15,7 +15,11 @@ function Timer:New(parentFrame)
 	self.frame = Templates.CreateTimerRow(parentFrame)
 	self.frame:SetScript("OnEnter", function()
 		GameTooltip:SetOwner(self.frame, "ANCHOR_CURSOR", 0, 0)
-		GameTooltip:SetText(self.tooltipText)
+		if (self.tooltipFunction) then
+			self.tooltipFunction()
+		else
+			GameTooltip:SetText(self.tooltipText)
+		end
 		GameTooltip:Show()
 	end)
 	self.frame:SetScript("OnLeave", function()
@@ -146,6 +150,7 @@ function Timers:Refresh()
 			timerRow:SetIcon(elementalStorm.icon, elementalStorm.desaturated)
 			timerRow:SetTitle(elementalStorm.title)
 			timerRow:SetTimer(elementalStorm.endTime)
+			timerRow.tooltipFunction = nil
 			timerRow:SetTooltipText("Elemental Storms (ends)")
 			height = height + timerRow:GetHeight() + 4
 			timerRow:SetShown(true)
@@ -160,6 +165,16 @@ function Timers:Refresh()
 		timerRow:SetIcon("BuildanAbomination-32x32")
 		timerRow:SetTitle(string.format("Treasure Goblin: %s", mapInfo.name))
 		timerRow:SetStartTime(greedyEmissaryStartTime, GreedyEmissary.GetGracePeriod())
+		timerRow.tooltipFunction = function()
+			GameTooltip:SetText("Special Event: A Greedy Emissary (starts)")
+			if (GreedyEmissary.KilledToday()) then
+				GameTooltip:AddLine("Killed today: Yes")
+				GameTooltip:AddLine("(your chances for a drop are lower)")
+			else
+				GameTooltip:AddLine("Killed today: No")
+				GameTooltip:AddLine("(your chances for a drop are higher)")
+			end
+		end
 		timerRow:SetTooltipText("Special Event: A Greedy Emissary (starts)")
 		height = height + timerRow:GetHeight() + 4
 		timerRow:SetShown(true)

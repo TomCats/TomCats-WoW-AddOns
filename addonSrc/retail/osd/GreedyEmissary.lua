@@ -79,3 +79,7 @@ function TreasureGoblin_SetVisibilityOption(value)
     TomCats_Account.preferences.AccessoryWindow.treasureGoblin = value
     UpdateVisibility()
 end
+
+function GreedyEmissary.KilledToday()
+    return C_QuestLog.IsQuestFlaggedCompleted(76215)
+end
