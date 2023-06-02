@@ -24,6 +24,9 @@ addon.CreateProxyMixinFunctions(
 			"OnMouseUp",
 			"SetPosition",
 			"SetScaleStyle"
+		},
+		{
+			"DisableInheritedMotionScriptsWarning"
 		}
 )
 
