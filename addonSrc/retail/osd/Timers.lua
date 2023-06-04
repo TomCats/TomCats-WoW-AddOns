@@ -26,6 +26,7 @@ function Timer:New(parentFrame)
 		mX = mX / scale
 		mY = (mY + 30) / scale
 		local tooltipWidth = GameTooltip:GetWidth()
+		GameTooltip:ClearAllPoints()
 		GameTooltip:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", mX - (tooltipWidth / 2), mY)
 	end)
 	self.frame:SetScript("OnLeave", function()
