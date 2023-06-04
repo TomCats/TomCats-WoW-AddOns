@@ -80,13 +80,28 @@ function TreasureGoblin_SetVisibilityOption(value)
     UpdateVisibility()
 end
 
+local bagLink_
+local mountLink_
+
+local eventFrame = CreateFrame("Frame")
+eventFrame:RegisterEvent("ITEM_DATA_LOAD_RESULT")
+
+eventFrame:SetScript("OnEvent", function(_, _, itemID, success)
+    if (itemID == 206003 and success) then
+        bagLink_ = select(2,GetItemInfo(206003))
+    end
+    if (itemID == 76755 and success) then
+        mountLink_ = select(2,GetItemInfo(76755))
+    end
+end)
+
 -- cache the item names
-GetItemInfo(206003)
-GetItemInfo(76755)
+C_Item.RequestLoadItemDataByID(206003)
+C_Item.RequestLoadItemDataByID(76755)
 
 function GreedyEmissary.LootInfo()
-    local _, bagLink = GetItemInfo(206003)
-    local _, mountLink = GetItemInfo(76755)
+    local bagLink = bagLink_ or "|cFFA335EE|Hitem:206003::::::::61:72:::::::::|h[Horadric Haversack]|h|r"
+    local mountLink = mountLink_ or "|cFFA335EE|Hitem:76755::::::::61:72:::::::::|h[Tyrael's Charger]|h|r"
     local hasBag = GetItemCount(206003, true) > 0 or false
     local _, _, _, _, _, _, _, _, _, _, hasMount = C_MountJournal.GetMountInfoByID(439)
     local bagQuestComplete = C_QuestLog.IsQuestFlaggedCompleted(76215)
@@ -95,7 +110,7 @@ function GreedyEmissary.LootInfo()
     local text = { }
 
     if (hasBag) then
-        table.insert(text, string.format("\n\ou already have %s on this character\n\n", bagLink))
+        table.insert(text, string.format("\nYou already have %s on this character\n\n", bagLink))
     elseif (bagQuestComplete) then
         table.insert(text, "\nYou've already looted the Treasure Goblin with this character today\n\n")
     else
