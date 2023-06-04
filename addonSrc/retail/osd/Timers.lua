@@ -14,13 +14,19 @@ end
 function Timer:New(parentFrame)
 	self.frame = Templates.CreateTimerRow(parentFrame)
 	self.frame:SetScript("OnEnter", function()
-		GameTooltip:SetOwner(self.frame, "ANCHOR_CURSOR", 0, 0)
+		GameTooltip:SetOwner(self.frame, "ANCHOR_PRESERVE")
 		if (self.tooltipFunction) then
 			self.tooltipFunction()
 		else
 			GameTooltip:SetText(self.tooltipText)
 		end
 		GameTooltip:Show()
+		local mX, mY = GetCursorPosition()
+		local scale = UIParent:GetEffectiveScale()
+		mX = mX / scale
+		mY = (mY + 30) / scale
+		local tooltipWidth = GameTooltip:GetWidth()
+		GameTooltip:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", mX - (tooltipWidth / 2), mY)
 	end)
 	self.frame:SetScript("OnLeave", function()
 		GameTooltip:Hide()
@@ -167,15 +173,11 @@ function Timers:Refresh()
 		timerRow:SetStartTime(greedyEmissaryStartTime, GreedyEmissary.GetGracePeriod())
 		timerRow.tooltipFunction = function()
 			GameTooltip:SetText("Special Event: A Greedy Emissary (starts)")
-			if (GreedyEmissary.KilledToday()) then
-				GameTooltip:AddLine("Killed today: Yes")
-				GameTooltip:AddLine("(your chances for a drop are lower)")
-			else
-				GameTooltip:AddLine("Killed today: No")
-				GameTooltip:AddLine("(your chances for a drop are higher)")
+			local text = GreedyEmissary.LootInfo()
+			for _, v in ipairs(text) do
+				GameTooltip:AddLine(v,1,1,1,true)
 			end
 		end
-		timerRow:SetTooltipText("Special Event: A Greedy Emissary (starts)")
 		height = height + timerRow:GetHeight() + 4
 		timerRow:SetShown(true)
 	end

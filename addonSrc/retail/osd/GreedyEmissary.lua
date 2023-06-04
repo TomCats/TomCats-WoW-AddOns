@@ -80,6 +80,41 @@ function TreasureGoblin_SetVisibilityOption(value)
     UpdateVisibility()
 end
 
-function GreedyEmissary.KilledToday()
-    return C_QuestLog.IsQuestFlaggedCompleted(76215)
+-- cache the item names
+GetItemInfo(206003)
+GetItemInfo(76755)
+
+function GreedyEmissary.LootInfo()
+    local _, bagLink = GetItemInfo(206003)
+    local _, mountLink = GetItemInfo(76755)
+    local hasBag = GetItemCount(206003, true) > 0 or 0
+    local _, _, _, _, _, _, _, _, _, _, hasMount = C_MountJournal.GetMountInfoByID(439)
+    local bagQuestComplete = C_QuestLog.IsQuestFlaggedCompleted(76215)
+    local mountQuestComplete = C_QuestLog.IsQuestFlaggedCompleted(76216)
+
+    local text = { }
+
+    if (hasBag > 0) then
+        table.insert(text, string.format("\n\ou already have %s on this character\n\n", bagLink))
+    elseif (bagQuestComplete) then
+        table.insert(text, "\nYou've already looted the Treasure Goblin with this character today\n\n")
+    else
+        table.insert(text, "\nYou've not looted the Treasure Goblin with this character today\n\n")
+    end
+
+    if (hasMount) then
+        table.insert(text, string.format("You already have %s on this account\n\n\n", mountLink))
+    elseif (mountQuestComplete) then
+        table.insert(text, "You have already looted the Treasure Goblin using this account today\n\n\n")
+    else
+        table.insert(text, "You haven't looted the Treasure Goblin using this account today\n\n\n")
+    end
+
+    table.insert(text, "|cFFFFD400Additional information:|r\n\n")
+    table.insert(text, string.format("Confirmed as once daily per character: Higher chance to loot %s\n\n", bagLink))
+    table.insert(text, string.format("Confirmed as once daily per account: Higher chance to loot %s\n\n", mountLink))
+
+    table.insert(text, string.format(
+            "\n|cFFFFD400There seems to be an additional chance to loot %s on characters who don't have %s due to how the trackers are working and reports from the community, but I cannot confirm this with absolute certainty.|r", mountLink, bagLink))
+    return text
 end
