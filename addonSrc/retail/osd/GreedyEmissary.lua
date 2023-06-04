@@ -87,14 +87,14 @@ GetItemInfo(76755)
 function GreedyEmissary.LootInfo()
     local _, bagLink = GetItemInfo(206003)
     local _, mountLink = GetItemInfo(76755)
-    local hasBag = GetItemCount(206003, true) > 0 or 0
+    local hasBag = GetItemCount(206003, true) > 0 or false
     local _, _, _, _, _, _, _, _, _, _, hasMount = C_MountJournal.GetMountInfoByID(439)
     local bagQuestComplete = C_QuestLog.IsQuestFlaggedCompleted(76215)
     local mountQuestComplete = C_QuestLog.IsQuestFlaggedCompleted(76216)
 
     local text = { }
 
-    if (hasBag > 0) then
+    if (hasBag) then
         table.insert(text, string.format("\n\ou already have %s on this character\n\n", bagLink))
     elseif (bagQuestComplete) then
         table.insert(text, "\nYou've already looted the Treasure Goblin with this character today\n\n")
