@@ -11,6 +11,6 @@
 ## SavedVariablesPerCharacter: TomCats_Character
 ## X-Category: Achievements, Map, Miscellaneous
 ## X-Localizations: enUS, enGB, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
-## X-TomCats-Expiry: @expiry14days@
+## X-TomCats-Expiry: @expiry30days@
 
 Main.xml
