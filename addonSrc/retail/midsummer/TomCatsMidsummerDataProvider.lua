@@ -54,22 +54,22 @@ local function addQuestToTomTom(quest, setClosest)
     addToTomTom({
         uiMapID = quest["UIMap ID"],
         location = quest["Location"],
-        title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
+--        title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
     }, setClosest)
 end
 local function addEntranceToTomTom(entrance, setClosest)
-    local questCount = #entrance["Quest IDs"]
-    local quest = D["Quests"][entrance["Quest IDs"][1]]
-    local title
-    if (questCount == 1) then
-        title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
-    else
-        title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")\nplus " .. (questCount - 1) .. "more"
-    end
+--    local questCount = #entrance["Quest IDs"]
+--    local quest = D["Quests"][entrance["Quest IDs"][1]]
+--    local title
+--    if (questCount == 1) then
+--        title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
+--    else
+ --       title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")\nplus " .. (questCount - 1) .. "more"
+--    end
     addToTomTom({
         uiMapID = entrance["UIMap ID"],
         location = entrance["Location"],
-        title = title
+ --       title = title
     }, setClosest)
 end
 TomCatsMidsummerDataProviderMixin = CreateFromMixins(MapCanvasDataProviderMixin)
@@ -425,14 +425,20 @@ function TomCatsMidsummerPinMixin:ShowTooltip()
         end
     end
     for i = 1, #questIDsToShow do
-            GameTooltip_AddColoredLine(tooltip, addon.midsummer.getCreatureNameByQuestID(questIDsToShow[i]), TITLE_COLOR, true)
-            GameTooltip_AddColoredLine(tooltip, C_Map.GetAreaInfo(D["Quests"][questIDsToShow[i]]["Area ID"]), WHITE_COLOR, true)
-            if (self.completed) then
-                GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)
-            end
-            if (i < #questIDs) then
-                GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
-            end
+        local questTitle = C_QuestLog.GetTitleForQuestID(questIDsToShow[i])
+        if (questTitle) then
+            GameTooltip_AddColoredLine(tooltip, questTitle, TITLE_COLOR, true)
+        else
+            -- do something to let the tooltip refresh once loaded
+        end
+        local mapInfo = C_Map.GetMapInfo(D["Quests"][questIDsToShow[i]]["UIMap ID"])
+        GameTooltip_AddColoredLine(tooltip, mapInfo.name, WHITE_COLOR, true)
+        if (self.completed) then
+            GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)
+        end
+        if (i < #questIDs) then
+            GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
+        end
     end
     if (self.pinInfo.entrance) then
         if (self.pinInfo.entrance["Type"] == 1) then

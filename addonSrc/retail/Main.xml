@@ -13,6 +13,7 @@
 	<Script file="Time.lua" />
 	<Script file="UI.lua" />
 	<Script file="Version.lua" />
+	<Include file="services/Services.xml" />
 
 	<Include file="options/Options.xml" />
 	<Include file="osd/OSD.xml" />

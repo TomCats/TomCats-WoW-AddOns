@@ -5,7 +5,7 @@
     <Include file="midsummer\preload.lua" />
     <Include file="midsummer\Libraries.xml" />
     <Script file="midsummer\data\Quests.lua" />
-    <Script file="midsummer\data\Quests.CreatureName.lua" />
+    <!-- <Script file="midsummer\data\Quests.CreatureName.lua" /> -->
     <Script file="midsummer\data\QuestLookups.lua" />
     <Script file="midsummer\data\Entrances.lua" />
     <Script file="midsummer\data\EntranceLookups.lua" />
@@ -13,5 +13,5 @@
     <Script file="midsummer\data\PhasedZones.lua" />
     <Include file="midsummer\TomCatsMidsummerDataProvider.xml" />
     <Script file="midsummer\Main.lua" />
-    <Script file="midsummer\AutoComplete.lua" />
+    <!-- <Script file="midsummer\AutoComplete.lua" /> -->
 </Ui>

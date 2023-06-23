@@ -51,27 +51,15 @@ local function ADDON_LOADED(_, arg1)
                 if (not TomCats_Account.midsummer.discovered) then
                     TomCats_Account.midsummer.discovered = true
                     ChatFrame1:AddMessage("|TInterface/AddOns/TomCats/images/tomcat_chat_icon_lg.blp:16:32:0:2:64:64:0:64:0:32|t|cff00ff00 The Midsummer Fire Festival has arrived!|r")
-                    ChatFrame1:AddMessage("|TInterface/AddOns/TomCats/images/tomcat_chat_icon_lg.blp:16:32:0:2:64:64:0:64:32:64|t|cffffff00 To toggle the Midsummer Fire Festival features, click and/or shift-click the icon|r")
+                    ChatFrame1:AddMessage("|TInterface/AddOns/TomCats/images/tomcat_chat_icon_lg.blp:16:32:0:2:64:64:0:64:32:64|t|cffffff00 To toggle the Midsummer Fire Festival features, click the minimap icon|r")
                     addon.midsummer.charm.MinimapLoopPulseAnim:Stop()
                 else
-                    if (IsShiftKeyDown()) then
-                        if (TomCats_Account.midsummer.autoEnabled) then
-                            TomCats_Account.midsummer.autoEnabled = false
-                            ChatFrame1:AddMessage("|cffffff00 The Midsummer Fire Festival quest automatic features are now disabled|r")
-                        else
-                            TomCats_Account.midsummer.autoEnabled = true
-                            ChatFrame1:AddMessage("|cffffff00 The Midsummer Fire Festival quest automatic features are now enabled|r")
-                        end
+                    if (TomCats_Account.midsummer.iconsEnabled) then
+                        TomCats_Account.midsummer.iconsEnabled = false
+                        ChatFrame1:AddMessage("|cffffff00 The Midsummer Fire Festival icons are now disabled|r")
                     else
-                        if (TomCats_Account.midsummer.iconsEnabled) then
-                            TomCats_Account.midsummer.iconsEnabled = false
-                            ChatFrame1:AddMessage("|cffffff00 The Midsummer Fire Festival icons are now disabled|r")
-                            ChatFrame1:AddMessage("|cffffff00 (shift-click to toggle quest auto-looting)|r")
-                        else
-                            TomCats_Account.midsummer.iconsEnabled = true
-                            ChatFrame1:AddMessage("|cffffff00 The Midsummer Fire Festival icons are now enabled|r")
-                            ChatFrame1:AddMessage("|cffffff00 (shift-click to toggle quest auto-looting)|r")
-                        end
+                        TomCats_Account.midsummer.iconsEnabled = true
+                        ChatFrame1:AddMessage("|cffffff00 The Midsummer Fire Festival icons are now enabled|r")
                     end
                 end
             end
@@ -82,6 +70,7 @@ local function ADDON_LOADED(_, arg1)
                 GameTooltip:SetOwner(this, "ANCHOR_LEFT")
                 GameTooltip:SetText("TomCat's Tours:", 1, 1, 1)
                 GameTooltip:AddLine("Midsummer Fire Festival", nil, nil, nil, true)
+                GameTooltip:AddLine("(click to toggle the map icons)", nil, nil, nil, true)
                 GameTooltip:Show()
             end,
             Hide = function()
