@@ -183,6 +183,23 @@ do
 			end
 		})
 	end
+	if (addon.midsummer:IsEventActive()) then
+		TomCats_Config.checkBox_midsummerMinimapButton:Show()
+		Setup_CheckBox({
+			component = TomCats_Config.checkBox_midsummerMinimapButton,
+			label = "Midsummer Fire Festival Minimap Button",
+			tooltip = "Displays the Midsummer Fire Festival minimap button",
+			defaultValue = "1",
+			preferenceTable = "TomCats-MidsummerMinimapButton2023",
+			preferenceKey = "hidden",
+			inverseValue = true,
+			SetValue = function(_, value)
+				if (addon.midsummer:IsEventActive()) then
+					addon.midsummer.charm:SetEnabled(value == "1")
+				end
+			end
+		})
+	end
 	if (addon.loveisintheair:IsEventActive()) then
 		TomCats_Config.checkBox_loveIsInTheAirMinimapButton:Show()
 		Setup_CheckBox({

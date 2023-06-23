@@ -20,6 +20,10 @@ addon.defaultSavedVariables = {
 				position = -2.514,
 				hidden = false
 			},
+			["TomCats-MidsummerMinimapButton2023"] = {
+				position = -2.514,
+				hidden = false
+			},
 			["TomCats-LoveIsInTheAirMinimapButton2023"] = {
 				position = -3.262,
 				hidden = false
@@ -46,6 +50,7 @@ addon.defaultSavedVariables = {
 		errorLog = addon.constants.HINT_ALL,
 		loveisintheair = addon.constants.HINT_ALL,
 		lunarfestival = addon.constants.HINT_ALL,
+		midsummer = addon.constants.HINT_ALL,
 		noblegarden = {
 			enabled = true
 		},
@@ -56,6 +61,9 @@ addon.defaultSavedVariables = {
 	},
 	TomCats_Character = {
 		lunarfestival = {
+			preferences = addon.constants.HINT_ALL
+		},
+		midsummer = {
 			preferences = addon.constants.HINT_ALL
 		},
 		loveisintheair = {

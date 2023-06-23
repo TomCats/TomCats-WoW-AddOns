@@ -1,0 +1,17 @@
+<!-- See license.txt for license and copyright information -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Include file="midsummer\eventTime.lua" />
+    <Include file="midsummer\preload.lua" />
+    <Include file="midsummer\Libraries.xml" />
+    <Script file="midsummer\data\Quests.lua" />
+    <Script file="midsummer\data\Quests.CreatureName.lua" />
+    <Script file="midsummer\data\QuestLookups.lua" />
+    <Script file="midsummer\data\Entrances.lua" />
+    <Script file="midsummer\data\EntranceLookups.lua" />
+    <Script file="midsummer\data\Pathways.lua" />
+    <Script file="midsummer\data\PhasedZones.lua" />
+    <Include file="midsummer\TomCatsMidsummerDataProvider.xml" />
+    <Script file="midsummer\Main.lua" />
+    <Script file="midsummer\AutoComplete.lua" />
+</Ui>

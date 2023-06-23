@@ -1,0 +1,90 @@
+<!-- See license.txt for license and copyright information -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <GameTooltip name="TomCatsMidsummerGameTooltip" inherits="GameTooltipTemplate" parent="UIParent" />
+
+    <Script file="TomCatsMidsummerDataProvider.lua"/>
+    <Frame name="TomCatsMidsummerPinTemplate" hidden="true" enableMouse="true" mixin="TomCatsMidsummerPinMixin" virtual="true">
+        <Size x="64" y="64"/>
+        <Layers>
+            <Layer textureSubLevel="1">
+                <Texture parentKey="iconDungeon" file="Interface\MINIMAP\Dungeon_Icon" hidden="true">
+                    <Size x="96" y="96"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="22" y="-9"/>
+                    </Anchors>
+                </Texture>
+                <!--<Texture parentKey="iconEntrance" file="Interface\MINIMAP\ObjectIconsAtlas" hidden="true"> -->
+                <Texture parentKey="iconEntrance" atlas="poi-door-up" hidden="true">
+                    <Size x="36" y="36"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="22" y="-9"/>
+                    </Anchors>
+                    <!--<TexCoords top="0.9375" bottom="1" left="0.28125" right="0.3125" />-->
+                </Texture>
+                <Texture parentKey="iconPortalAlliance" file="Interface\MINIMAP\Vehicle-AllianceWarlockPortal" hidden="true">
+                    <Size x="48" y="48"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="22" y="-9"/>
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="iconPhased" file="Interface\TargetingFrame\UI-PhasingIcon" hidden="true">
+                    <Size x="48" y="48"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="22" y="-9"/>
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="iconPortalHorde" file="Interface\MINIMAP\Vehicle-HordeWarlockPortal" hidden="true">
+                    <Size x="48" y="48"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="22" y="-9"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer>
+                <Texture parentKey="iconDefault" file="Interface\AddOns\TomCats\midsummer\images\BonfireIcons.png">
+                    <Size x="64" y="64"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                    <TexCoords top="0" bottom="1" left="0" right="0.25" />
+                </Texture>
+            </Layer>
+            <Layer>
+                <Texture parentKey="iconHighlighted" file="Interface\AddOns\TomCats\midsummer\images\BonfireIcons.png" hidden="true">
+                    <Size x="64" y="64"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                    <TexCoords top="0" bottom="1" left="0.25" right="0.5" />
+                </Texture>
+            </Layer>
+            <Layer>
+                <Texture parentKey="iconPushed" file="Interface\AddOns\TomCats\midsummer\images\BonfireIcons.png" hidden="true">
+                    <Size x="64" y="64"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                    <TexCoords top="0" bottom="1" left="0.5" right="0.75" />
+                </Texture>
+            </Layer>
+            <Layer>
+                <Texture parentKey="iconCompleted" file="Interface\AddOns\TomCats\midsummer\images\BonfireIcons.png" hidden="true" alpha="1.0">
+                    <Size x="64" y="64"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                    <TexCoords top="0" bottom="1" left="0.75" right="1" />
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
+    <Frame name="TomCatsMidsummerPathwayLineTemplate" virtual="true">
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="-1">
+                <Line parentKey="Fill" file="Interface\Worldmap\UI-QuestBlob-Inside-red" />
+            </Layer>
+        </Layers>
+    </Frame>
+    <Frame name="TomCatsMidsummerAreaPOIPinTemplate" inherits="BaseHighlightableMapPoiPinTemplate" mixin="TomCatsMidsummerAreaPOIPinMixin" virtual="true" />
+</Ui>
