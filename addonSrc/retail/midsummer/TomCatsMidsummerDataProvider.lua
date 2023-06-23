@@ -51,9 +51,11 @@ local function addToTomTom(waypointInfo, setClosest)
     end
 end
 local function addQuestToTomTom(quest, setClosest)
+    local mapInfo = C_Map.GetMapInfo(quest["UIMap ID"])
     addToTomTom({
         uiMapID = quest["UIMap ID"],
         location = quest["Location"],
+        title = "Midsummer Fire Festival: " .. (mapInfo and mapInfo.name or " ")
 --        title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")"
     }, setClosest)
 end
@@ -66,10 +68,11 @@ local function addEntranceToTomTom(entrance, setClosest)
 --    else
  --       title = addon.midsummer.getCreatureNameByQuestID(quest["Quest ID"]) .. "\n(" ..  C_Map.GetAreaInfo(quest["Area ID"]) .. ")\nplus " .. (questCount - 1) .. "more"
 --    end
+    local mapInfo = C_Map.GetMapInfo(D["Quests"][entrance["Quest IDs"][1]]["UIMap ID"])
     addToTomTom({
         uiMapID = entrance["UIMap ID"],
         location = entrance["Location"],
- --       title = title
+        title = "Midsummer Fire Festival: " .. (mapInfo and mapInfo.name or " ")
     }, setClosest)
 end
 TomCatsMidsummerDataProviderMixin = CreateFromMixins(MapCanvasDataProviderMixin)
