@@ -302,7 +302,7 @@ function TomCatsMidsummerDataProviderMixin:RefreshAllData(fromOnShow)
                 end
                 if (displayPOI) then
                     local poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"]))
-                    if (not (poiInfo and poiInfo.location) and phasedZone["Alt Phase Zone"]) then
+                    if (not (poiInfo and poiInfo.position) and phasedZone["Alt Phase Zone"]) then
                         poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["Alt Phase Zone"], phasedZone["Timewalking NPC POI ID"]))
                     end
                     if (poiInfo.position) then
@@ -374,7 +374,7 @@ function TomCatsMidsummerPinMixin:OnAcquired(pinInfo)
         if (phasedZone) then
             if (IsPhasedZone(phasedZone)) then
                 local poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"]))
-                if (not (poiInfo and poiInfo.location) and phasedZone["Alt Phase Zone"]) then
+                if (not (poiInfo and poiInfo.position) and phasedZone["Alt Phase Zone"]) then
                     poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["Alt Phase Zone"], phasedZone["Timewalking NPC POI ID"]))
                 end
                 if (poiInfo.position) then
@@ -459,7 +459,7 @@ function TomCatsMidsummerPinMixin:ShowTooltip()
         local phasedZone = self.pinInfo.phasedZone
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
         local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"])
-        if (not (poiInfo and poiInfo.location) and phasedZone["Alt Phase Zone"]) then
+        if (not (poiInfo and poiInfo.position) and phasedZone["Alt Phase Zone"]) then
             poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["Alt Phase Zone"], phasedZone["Timewalking NPC POI ID"]))
         end
         GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
