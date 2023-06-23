@@ -309,7 +309,7 @@ function TomCatsMidsummerDataProviderMixin:RefreshAllData(fromOnShow)
                         local continentID, worldPosition = C_Map.GetWorldPosFromMapPos(phasedZone["UIMap ID"], poiInfo.position)
                         local uiMapID, mapPosition = C_Map.GetMapPosFromWorldPos(continentID, worldPosition, self:GetMap():GetMapID())
                         poiInfo.position = mapPosition
-                        self.activePOIs[poiInfo.areaPoiID] = self:GetMap():AcquirePin("TomCatsMidsummerAreaPOIPinTemplate", poiInfo)
+--                        self.activePOIs[poiInfo.areaPoiID] = self:GetMap():AcquirePin("TomCatsMidsummerAreaPOIPinTemplate", poiInfo)
                     end
                 end
             end
