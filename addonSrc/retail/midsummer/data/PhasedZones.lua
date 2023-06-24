@@ -7,6 +7,7 @@ D.loadData(
     { "UIMap ID", "Quest IDs", "Timewalking NPC POI ID", "Visible UIMap IDs", "Timewalking Map Art ID", "Alt Phase Zone", "Phase Quest ID", "Phase Complete Status" },
     {
         { 14, { 11764, 11804, 11840, 11732 }, 5989, { 13 }, 15 }, -- arathi highlands
+        { 57, { 11824, 11753 }, 5760, { 12 }, nil, 62, 54411, true }, -- teldrassil
         { 62, { 11811, 11740 }, 5760, { 12 }, nil, nil, 54411, true }, -- darkshore
         { 81, { 11800, 11831, 11760, 11836 }, 5561, { 12 }, 86 }, -- silithus
         { 18, { 11862, 11786 }, 5757, { 13 }, nil, nil, 52758, true }, -- tirisfal glades
