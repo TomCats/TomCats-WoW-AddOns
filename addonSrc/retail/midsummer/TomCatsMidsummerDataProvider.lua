@@ -199,8 +199,8 @@ function TomCatsMidsummerDataProviderMixin:OnAdded(owningMap)
     TCL.Events.RegisterEvent("QUEST_LOG_UPDATE", self)
 end
 local function canShowEntrance(entrance)
-    if (entrance["Type"] == 3 and PlayerFaction == "Horde") then return false end
-    if (entrance["Type"] == 4 and PlayerFaction == "Alliance") then return false end
+    --if (entrance["Type"] == 3 and PlayerFaction == "Horde") then return false end
+    --if (entrance["Type"] == 4 and PlayerFaction == "Alliance") then return false end
     return true
 end
 function TomCatsMidsummerDataProviderMixin:RefreshAllData(fromOnShow)
@@ -411,11 +411,11 @@ function TomCatsMidsummerPinMixin:ShowTooltip()
     if (self.pinInfo.entrance) then
         if (self.pinInfo.entrance["Type"] == 3) then
             GameTooltip_AddColoredLine(tooltip, "Portals leading to:", GREEN_COLOR, true)
-            GameTooltip_AddColoredLine(tooltip, "(Alliance Only)", WHITE_COLOR, true)
+            --GameTooltip_AddColoredLine(tooltip, "(Alliance Only)", WHITE_COLOR, true)
             GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
         elseif (self.pinInfo.entrance["Type"] == 4) then
             GameTooltip_AddColoredLine(tooltip, "Portals leading to:", GREEN_COLOR, true)
-            GameTooltip_AddColoredLine(tooltip, "(Horde Only)", WHITE_COLOR, true)
+            --GameTooltip_AddColoredLine(tooltip, "(Horde Only)", WHITE_COLOR, true)
             GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
         elseif (self.pinInfo.entrance["Type"] == 6) then
             self.pinInfo.phasedZone = D["Phased Zone by Quest ID Lookup"][questIDs[1]]
