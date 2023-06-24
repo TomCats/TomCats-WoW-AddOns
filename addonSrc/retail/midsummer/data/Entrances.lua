@@ -3,6 +3,7 @@ if (not addon.midsummer.IsEventActive()) then return end
 
 local Coords = CreateVector2D
 local TYPE_NONE = 0
+local TYPE_ENTRANCE = 1
 local TYPE_PHASED = 6
 
 local PlayerFaction = UnitFactionGroup("player")
@@ -20,7 +21,7 @@ if (PlayerFaction == "Horde") then
                 { 6, {32503}, 1530, Coords(0.798,0.37), TYPE_PHASED, false }, -- Vale additional pin
                 { 7, {32509}, 1530, Coords(0.778,0.331), TYPE_PHASED, false }, --Vale additional pin
                 { 8, {9330}, 37, Coords(0.1937,0.3845), TYPE_NONE, false }, --Stormwind additional pin
-                { 9, {9331}, 27, Coords(0.6858,0.2296), TYPE_NONE, false }, --Ironforge additional pin
+                { 9, {9331}, 27, Coords(0.6058,0.3318), TYPE_ENTRANCE, false }, --Ironforge additional pin
             }
     )
 else
