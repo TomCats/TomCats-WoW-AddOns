@@ -13,6 +13,7 @@ local GREY_COLOR = CreateColor(0.8, 0.8, 0.8, 1.0)
 local RED_COLOR = CreateColor(1.0, 0.0, 0.0, 1.0)
 local GREEN_COLOR = CreateColor(0.0, 1.0, 0.0, 1.0)
 local IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
+local GetPoiInfoForPhasedZone
 local IsPhasedZone
 
 local WorldMapTooltip = TomCatsMidsummerGameTooltip
@@ -301,11 +302,8 @@ function TomCatsMidsummerDataProviderMixin:RefreshAllData(fromOnShow)
                     end
                 end
                 if (displayPOI) then
-                    local poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"]))
-                    if (not (poiInfo and poiInfo.position) and phasedZone["Alt Phase Zone"]) then
-                        poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["Alt Phase Zone"], phasedZone["Timewalking NPC POI ID"]))
-                    end
-                    if (poiInfo.position) then
+                    local poiInfo = GetPoiInfoForPhasedZone(phasedZone)
+                    if (poiInfo and poiInfo.position) then
                         local continentID, worldPosition = C_Map.GetWorldPosFromMapPos(phasedZone["UIMap ID"], poiInfo.position)
                         local uiMapID, mapPosition = C_Map.GetMapPosFromWorldPos(continentID, worldPosition, self:GetMap():GetMapID())
                         poiInfo.position = mapPosition
@@ -313,6 +311,19 @@ function TomCatsMidsummerDataProviderMixin:RefreshAllData(fromOnShow)
                     end
                 end
             end
+        end
+    end
+end
+
+function GetPoiInfoForPhasedZone(phasedZone)
+    local poiInfo
+    for _, poiID in ipairs(phasedZone["Timewalking NPC POI IDs"]) do
+        poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], poiID))
+        if (not (poiInfo and poiInfo.position) and phasedZone["Alt Phase Zone"]) then
+            poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["Alt Phase Zone"], poiID))
+        end
+        if (poiInfo and poiInfo.position) then
+            return poiInfo
         end
     end
 end
@@ -373,11 +384,8 @@ function TomCatsMidsummerPinMixin:OnAcquired(pinInfo)
         local phasedZone = D["Phased Zone by Quest ID Lookup"][pinInfo.quest["Quest ID"]]
         if (phasedZone) then
             if (IsPhasedZone(phasedZone)) then
-                local poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"]))
-                if (not (poiInfo and poiInfo.position) and phasedZone["Alt Phase Zone"]) then
-                    poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["Alt Phase Zone"], phasedZone["Timewalking NPC POI ID"]))
-                end
-                if (poiInfo.position) then
+                local poiInfo = GetPoiInfoForPhasedZone(phasedZone)
+                if (poiInfo and poiInfo.position) then
                     self.iconPhased:Show()
                     self.pinInfo.phasedZone = phasedZone
                 end
@@ -458,13 +466,12 @@ function TomCatsMidsummerPinMixin:ShowTooltip()
     if (self.pinInfo.phasedZone) then
         local phasedZone = self.pinInfo.phasedZone
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
-        local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"])
-        if (not (poiInfo and poiInfo.position) and phasedZone["Alt Phase Zone"]) then
-            poiInfo = CreateFromMixins(C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["Alt Phase Zone"], phasedZone["Timewalking NPC POI ID"]))
-        end
+        local poiInfo = GetPoiInfoForPhasedZone(phasedZone)
         GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
-        GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
-        GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
+        if (poiInfo and poiInfo.position) then
+            GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
+            GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
+        end
     end
     if (TomTom) then
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
