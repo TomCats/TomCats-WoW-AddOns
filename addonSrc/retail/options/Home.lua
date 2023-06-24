@@ -260,6 +260,34 @@ Home:SetScript("OnShow", function(self)
 			}, treasureGoblinConfig.Label, treasureGoblinConfig.selectionPopout.Button)
 		end
 
+		if (addon.midsummer and addon.midsummer.IsEventActive()) then
+			local midsummerConfig = CreateFrame("Frame", nil, configurationFrame)
+			midsummerConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+			last = midsummerConfig
+			midsummerConfig:SetPoint("RIGHT")
+			midsummerConfig:SetHeight(30)
+			midsummerConfig.Label = midsummerConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+			midsummerConfig.Label:SetJustifyH("LEFT")
+			midsummerConfig.Label:SetPoint("LEFT", 32, 0)
+			midsummerConfig.Label:SetText("Midsummer (Minimap Button)")
+			midsummerConfig.checkButton = CreateFrame("CheckButton", nil, midsummerConfig)
+			midsummerConfig.checkButton:SetSize(30, 29)
+			midsummerConfig.checkButton:SetPoint("LEFT", 230, 0)
+			midsummerConfig.checkButton:SetNormalAtlas("checkbox-minimal", true)
+			midsummerConfig.checkButton:SetPushedAtlas("checkbox-minimal", true)
+			midsummerConfig.checkButton:SetCheckedAtlas("checkmark-minimal", true)
+			midsummerConfig.checkButton:SetDisabledCheckedAtlas("checkmark-minimal-disabled", true)
+			midsummerConfig.checkButton:SetScript("OnClick", function(self)
+				TomCats_Account.midsummer.preferences.hideButton = not self:GetChecked()
+				addon.midsummer.charm:SetShown(not TomCats_Account.midsummer.preferences.hideButton)
+			end)
+			midsummerConfig.checkButton:SetChecked(TomCats_Account.midsummer.preferences.hideButton ~= true)
+			AttachTooltip({
+				"Midsummer Fire Festival",
+				"Enables or disables the Midsummer Fire Festival icon on the minimap"
+			}, midsummerConfig.Label, midsummerConfig.checkButton)
+		end
+
 		if (addon.noblegarden.IsEventActive()) then
 			local noblegardenConfig = CreateFrame("Frame", nil, configurationFrame)
 			noblegardenConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
