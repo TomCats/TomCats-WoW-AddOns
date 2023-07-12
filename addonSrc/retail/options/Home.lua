@@ -217,7 +217,7 @@ Home:SetScript("OnShow", function(self)
 		}, accessoryWindowConfig.Label, accessoryWindowConfig.selectionPopout.Button)
 		local last = accessoryWindowConfig
 
-		if (osd.GreedyEmissary:IsEventActive()) then
+		if (osd.GreedyEmissary and osd.GreedyEmissary:IsEventActive()) then
 			local treasureGoblinConfig = CreateFrame("Frame", nil, configurationFrame)
 			treasureGoblinConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 			last = treasureGoblinConfig
