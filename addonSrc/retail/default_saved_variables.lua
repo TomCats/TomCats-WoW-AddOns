@@ -10,7 +10,10 @@ addon.defaultSavedVariables = {
 				--todo: remove deprecated 'display' property upon adding new accessory window components
 				display = addon.constants.accessoryDisplay.REMOVED,
 				elementalStorms = addon.constants.accessoryDisplay.NOINSTANCES,
-				treasureGoblin = addon.constants.accessoryDisplay.NOINSTANCES
+				treasureGoblin = addon.constants.accessoryDisplay.NOINSTANCES,
+				timeRifts = addon.constants.accessoryDisplay.NOINSTANCES,
+				twitchDrops = addon.constants.accessoryDisplay.NOINSTANCES,
+				snoozed = addon.constants.HINT_ALL,
 			},
 			["TomCats-MinimapButton"] = {
 				position = -2.888,

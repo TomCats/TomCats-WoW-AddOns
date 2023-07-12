@@ -25,6 +25,7 @@ addon.constants.accessoryDisplay = {
 	NEVER = 2,
 	NOINSTANCES = 3,
 	RELEVANTZONES = 4,
+	SNOOZED = 5,
 	REMOVED = 100
 }
 

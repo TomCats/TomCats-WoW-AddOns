@@ -4,7 +4,7 @@ select(2, ...).SetScope()
 Templates = Templates or { }
 
 function Templates.CreateTimerRow(parentFrame, params)
-	local frame = CreateFrame("Frame",nil, parentFrame)
+	local frame = CreateFrame("Button",nil, parentFrame)
 	local texture = frame:CreateTexture()
 	texture:SetAllPoints()
 	frame.title = frame:CreateFontString(nil, "ARTWORK", "GameFontWhite")

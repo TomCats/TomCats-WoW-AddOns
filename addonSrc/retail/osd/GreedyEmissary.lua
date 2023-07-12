@@ -67,7 +67,7 @@ local visibilityFunctions = {
     end,
 }
 
-function IsGreedyEmissaryVisible()
+function GreedyEmissary.IsVisible()
     return eventActive and 	visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.treasureGoblin]()
 end
 

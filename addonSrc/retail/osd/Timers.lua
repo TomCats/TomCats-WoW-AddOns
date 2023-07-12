@@ -2,6 +2,7 @@
 select(2, ...).SetScope("osd")
 
 local Timer = { }
+local tooltipInstance = 0
 
 function Timer:GetHeight()
 	return self.frame.title:GetStringHeight()
@@ -14,23 +15,40 @@ end
 function Timer:New(parentFrame)
 	self.frame = Templates.CreateTimerRow(parentFrame)
 	self.frame:SetScript("OnEnter", function()
-		GameTooltip:SetOwner(self.frame, "ANCHOR_PRESERVE")
-		if (self.tooltipFunction) then
-			self.tooltipFunction()
-		else
-			GameTooltip:SetText(self.tooltipText)
-		end
-		GameTooltip:Show()
-		local mX, mY = GetCursorPosition()
-		local scale = UIParent:GetEffectiveScale()
-		mX = mX / scale
-		mY = (mY + 30) / scale
-		local tooltipWidth = GameTooltip:GetWidth()
-		GameTooltip:ClearAllPoints()
-		GameTooltip:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", mX - (tooltipWidth / 2), mY)
+		local tooltipInstance_ = tooltipInstance + 1
+		tooltipInstance = tooltipInstance_
+		C_Timer.NewTimer(0.25, function()
+			if (tooltipInstance == tooltipInstance_) then
+				GameTooltip:SetOwner(self.frame, "ANCHOR_CURSOR")
+				if (self.tooltipFunction) then
+					self.tooltipFunction()
+				else
+					GameTooltip:SetText(self.tooltipText)
+					GameTooltip:Show()
+				end
+				local mX, mY = GetCursorPosition()
+				local scale = UIParent:GetEffectiveScale()
+				mX = mX / scale
+				mY = (mY + 30) / scale
+				local tooltipWidth = GameTooltip:GetWidth()
+				GameTooltip:ClearAllPoints()
+				GameTooltip:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", mX - (tooltipWidth / 2), mY)
+			end
+		end)
 	end)
 	self.frame:SetScript("OnLeave", function()
+		tooltipInstance = tooltipInstance + 1
+		local numLines = GameTooltip:NumLines()
+		for i = 1, numLines do
+			local line = _G[GameTooltip:GetName().."TextLeft"..i]
+			line:SetJustifyH("LEFT")
+		end
 		GameTooltip:Hide()
+	end)
+	self.frame:SetScript("OnClick", function()
+		if (self.clickFunction) then
+			self.clickFunction()
+		end
 	end)
 end
 
@@ -163,24 +181,17 @@ function Timers:Refresh()
 			timerRow:SetShown(true)
 		end
 	end
-	if (IsGreedyEmissaryVisible()) then
-		local greedyEmissaryZone, greedyEmissaryStartTime = GreedyEmissary.GetEvent()
+	if (GreedyEmissary and GreedyEmissary.IsVisible()) then
 		idx = idx + 1
-		local timerRow = self:GetTimerRow(idx)
-		local mapInfo = C_Map.GetMapInfo(greedyEmissaryZone)
-		--timerRow:SetIcon("WarlockPortal-Yellow-32x32")
-		timerRow:SetIcon("BuildanAbomination-32x32")
-		timerRow:SetTitle(string.format("Treasure Goblin: %s", mapInfo.name))
-		timerRow:SetStartTime(greedyEmissaryStartTime, GreedyEmissary.GetGracePeriod())
-		timerRow.tooltipFunction = function()
-			GameTooltip:SetText("Special Event: A Greedy Emissary (starts)")
-			local text = GreedyEmissary.LootInfo()
-			for _, v in ipairs(text) do
-				GameTooltip:AddLine(v,1,1,1,true)
-			end
-		end
-		height = height + timerRow:GetHeight() + 4
-		timerRow:SetShown(true)
+		height = height + GreedyEmissary.Render(self, idx)
+	end
+	if (TimeRifts and TimeRifts.IsVisible()) then
+		idx = idx + 1
+		height = height + TimeRifts.Render(self, idx)
+	end
+	if (TwitchDrops and TwitchDrops.IsVisible()) then
+		idx = idx + 1
+		height = height + TwitchDrops.Render(self, idx)
 	end
 	for idx_ = 1, idx do
 		minWidth = math.max(minWidth, self:GetTimerRow(idx_):GetTitleWidth())
