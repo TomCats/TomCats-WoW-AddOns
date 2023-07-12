@@ -45,6 +45,7 @@ function TwitchDrops.GetVisibilityOption()
 end
 
 function TwitchDrops.IsVisible()
+    if (GetServerTime() > promotionEndTime) then return false end
     return visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.twitchDrops]()
 end
 
@@ -52,7 +53,7 @@ function TwitchDrops.Render(Timers, idx)
     local timerRow = Timers:GetTimerRow(idx)
     timerRow:SetIcon(atlasName)
     timerRow:SetTitle(string.format("Twitch Promo Ends"))
-    timerRow:SetStartTime(promotionEndTime, 0)
+    timerRow:SetTimer(promotionEndTime, 0)
 
     timerRow.tooltipFunction = function()
         GameTooltip:AddLine(selectedLocale.title1, 1, 0.82, 0, false)
