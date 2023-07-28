@@ -317,7 +317,7 @@ Home:SetScript("OnShow", function(self)
 			primeGamingLootConfig.Label = primeGamingLootConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 			primeGamingLootConfig.Label:SetJustifyH("LEFT")
 			primeGamingLootConfig.Label:SetPoint("LEFT", 32, 0)
-			primeGamingLootConfig.Label:SetText("Twitch Promos")
+			primeGamingLootConfig.Label:SetText("Prime Gaming Loot")
 			local primeGamingLootConfigDisplayPreference = osd.PrimeGamingLoot.GetVisibilityOption()
 			local primeGamingLootConfigDisplayConstants = addon.constants.accessoryDisplay
 			primeGamingLootConfig.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
@@ -351,7 +351,7 @@ Home:SetScript("OnShow", function(self)
 			primeGamingLootConfig.selectionPopout:SetPoint("LEFT", 230, 0)
 			primeGamingLootConfig.selectionPopout.Popout:Layout()
 			AttachTooltip({
-				"Twitch Drops",
+				"Prime Gaming Loot",
 				"Set when to display the Prime Gaming Loot timer within the floating window\n\n|cFFFF0000PRO TIP: |r|cFFFFFFFFUse \"Snooze\" to stop displaying until the next promo begins|r\n\n(The floating window will only be visible when you have features enabled for it)",
 			}, primeGamingLootConfig.Label, primeGamingLootConfig.selectionPopout.Button)
 		end

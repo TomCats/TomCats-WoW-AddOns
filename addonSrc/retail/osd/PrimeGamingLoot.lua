@@ -43,7 +43,7 @@ end
 
 function PrimeGamingLoot.IsVisible()
     if (GetServerTime() > promotionEndTime) then return false end
-    if (C_PetJournal.GetOwnedBattlePetString(171)) then return false end
+    if (not C_PetJournal.GetOwnedBattlePetString(171)) then return false end
     return visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.primeGamingLoot]()
 end
 
