@@ -308,6 +308,54 @@ Home:SetScript("OnShow", function(self)
 			}, twitchDropsConfig.Label, twitchDropsConfig.selectionPopout.Button)
 		end
 
+		if (osd.PrimeGamingLoot) then
+			local primeGamingLootConfig = CreateFrame("Frame", nil, configurationFrame)
+			primeGamingLootConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+			last = primeGamingLootConfig
+			primeGamingLootConfig:SetPoint("RIGHT")
+			primeGamingLootConfig:SetHeight(30)
+			primeGamingLootConfig.Label = primeGamingLootConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+			primeGamingLootConfig.Label:SetJustifyH("LEFT")
+			primeGamingLootConfig.Label:SetPoint("LEFT", 32, 0)
+			primeGamingLootConfig.Label:SetText("Twitch Promos")
+			local primeGamingLootConfigDisplayPreference = osd.PrimeGamingLoot.GetVisibilityOption()
+			local primeGamingLootConfigDisplayConstants = addon.constants.accessoryDisplay
+			primeGamingLootConfig.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
+					primeGamingLootConfig,
+					{
+						{
+							label = "Snooze",
+							value = primeGamingLootConfigDisplayConstants.SNOOZED,
+							selected = primeGamingLootConfigDisplayPreference == primeGamingLootConfigDisplayConstants.SNOOZED
+						},
+						{
+							label = "Always Shown",
+							value = primeGamingLootConfigDisplayConstants.ALWAYS,
+							selected = primeGamingLootConfigDisplayPreference == primeGamingLootConfigDisplayConstants.ALWAYS
+						},
+						{
+							label = "Never Shown",
+							value = primeGamingLootConfigDisplayConstants.NEVER,
+							selected = primeGamingLootConfigDisplayPreference == primeGamingLootConfigDisplayConstants.NEVER
+						},
+						{
+							label = "Hide when in instances",
+							value = primeGamingLootConfigDisplayConstants.NOINSTANCES,
+							selected = primeGamingLootConfigDisplayPreference == primeGamingLootConfigDisplayConstants.NOINSTANCES
+						},
+					},
+					function()
+						osd.PrimeGamingLoot.SetVisibilityOption(primeGamingLootConfig.selectionPopout.selected.value)
+					end
+			)
+			primeGamingLootConfig.selectionPopout:SetPoint("LEFT", 230, 0)
+			primeGamingLootConfig.selectionPopout.Popout:Layout()
+			AttachTooltip({
+				"Twitch Drops",
+				"Set when to display the Prime Gaming Loot timer within the floating window\n\n|cFFFF0000PRO TIP: |r|cFFFFFFFFUse \"Snooze\" to stop displaying until the next promo begins|r\n\n(The floating window will only be visible when you have features enabled for it)",
+			}, primeGamingLootConfig.Label, primeGamingLootConfig.selectionPopout.Button)
+		end
+
 		if (osd.GreedyEmissary and osd.GreedyEmissary:IsEventActive()) then
 			local treasureGoblinConfig = CreateFrame("Frame", nil, configurationFrame)
 			treasureGoblinConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)

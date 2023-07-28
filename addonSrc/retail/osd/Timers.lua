@@ -193,6 +193,10 @@ function Timers:Refresh()
 		idx = idx + 1
 		height = height + TwitchDrops.Render(self, idx)
 	end
+	if (PrimeGamingLoot and PrimeGamingLoot.IsVisible()) then
+		idx = idx + 1
+		height = height + PrimeGamingLoot.Render(self, idx)
+	end
 	for idx_ = 1, idx do
 		minWidth = math.max(minWidth, self:GetTimerRow(idx_):GetTitleWidth())
 	end
