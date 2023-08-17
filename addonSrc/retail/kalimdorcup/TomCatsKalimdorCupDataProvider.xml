@@ -1,0 +1,39 @@
+<!-- See license.txt for license and copyright information -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+<!--    <GameTooltip name="TomCatsDragonFlyingGlyphsGameTooltip" inherits="GameTooltipTemplate" parent="UIParent" />-->
+
+    <Script file="TomCatsKalimdorCupDataProvider.lua"/>
+
+    <Frame name="TomCatsKalimdorCupPinTemplate" hidden="true" enableMouse="true" mixin="TomCatsKalimdorCupPinMixin" virtual="true">
+        <Size x="64" y="64"/>
+        <Layers>
+            <Layer textureSubLevel="1">
+                <Texture parentKey="iconFinished" atlas="Capacitance-General-WorkOrderCheckmark" useAtlasSize="false" hidden="true">
+                    <Size x="48" y="48"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="10" y="-18"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer>
+                <Texture parentKey="iconDefault" atlas="racing" useAtlasSize="false">
+                    <Size x="64" y="64"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer>
+                <Texture parentKey="iconHighlighted" atlas="racing" useAtlasSize="false" hidden="true">
+                    <Size x="64" y="64"/>
+                    <Anchors>
+                        <Anchor point="CENTER"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
+<!--    <Frame name="TomCatsDragonFlyingGlyphsAreaPOIPinTemplate" inherits="BaseHighlightableMapPoiPinTemplate" mixin="TomCatsDragonFlyingGlyphsAreaPOIPinMixin" virtual="true" />-->
+</Ui>

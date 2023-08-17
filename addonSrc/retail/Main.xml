@@ -3,6 +3,7 @@
 ..\FrameXML\UI.xsd">
 	<Script file="Scopes.lua" />
 	<Script file="constants.lua" />
+	<Script file="wrap.lua" />
 
 	<Include file="templates/Templates.xml" />
 
@@ -71,5 +72,6 @@
 	<Include file="noblegarden/Main.xml" />
 	<!-- <Include file="primalstorms/Main.xml" /> -->
 	<Include file="dragonflyingglyphs/Main.xml" />
+	<Include file="kalimdorcup/Main.xml" />
 	<Script file="notaint.lua" />
 </Ui>
