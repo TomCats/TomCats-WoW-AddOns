@@ -1,6 +1,37 @@
 local _, addon = ...
 
+if (not addon.KalimdorCup.IsEventActive()) then return end
+
+local AreaPOIPinMouseOver, appendTooltip
+
 local eventMapID = 12
+
+local progress = {
+	{ 1100022, "None" },
+	{ 1002572, "Bronze" },
+	{ 1002575, "Silver" },
+	{ 1002573, "Gold" },
+}
+
+local raceTypes = {
+	"Normal",
+	"Advanced",
+	"Reverse"
+}
+
+local function isFinished(eventLocation)
+	if (not select(13, GetAchievementInfo(eventLocation.achievementBase + 2))) then return false end
+	if (not select(13, GetAchievementInfo(eventLocation.achievementBase + 5))) then return false end
+	if (not select(13, GetAchievementInfo(eventLocation.achievementBase + 8))) then return false end
+	return true
+end
+
+local function getProgress(achievementBase)
+	if (select(13, GetAchievementInfo(achievementBase + 2))) then return 4 end
+	if (select(13, GetAchievementInfo(achievementBase + 1))) then return 3 end
+	if (select(13, GetAchievementInfo(achievementBase))) then return 2 end
+	return 1
+end
 
 local function rescale(pin)
 	local scale = TomCats_Account.preferences.MapOptions.iconScale
@@ -8,8 +39,50 @@ local function rescale(pin)
 	local sizeY = 64 * scale
 	pin.iconFinished:SetSize(48 * scale, 48 * scale)
 	pin.iconDefault:SetSize(sizeX, sizeY)
-	pin.iconHighlighted:SetSize(sizeX, sizeY)
+	--pin.iconHighlighted:SetSize(sizeX, sizeY)
 	pin:SetSize(sizeX, sizeY)
+end
+
+local progressFrames
+
+local function addProgressFrame()
+	local frame = CreateFrame("Frame", nil, progressFrames)
+	frame:SetScale(0.75)
+	frame:SetSize(43, 43)
+	frame.Icon = frame:CreateTexture(nil, "ARTWORK")
+	frame.Icon:SetTexture(PROGRESS_NONE)
+	frame.Icon:SetSize(41, 41)
+	frame.Icon:SetPoint("CENTER", 0, 0.5)
+	local mask = frame:CreateMaskTexture()
+	mask:SetTexture("Interface/CharacterFrame/TempPortraitAlphaMask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE","TRILINEAR")
+	mask:SetPoint("TOPLEFT", frame.Icon, 1.2, -1.2)
+	mask:SetPoint("BOTTOMRIGHT", frame.Icon, -1.2, 1.2)
+	frame.Icon:AddMaskTexture(mask)
+	frame.IconBorder = frame:CreateTexture(nil, "BACKGROUND")
+	frame.IconBorder:SetAtlas("auctionhouse-itemicon-border-artifact")
+	frame.IconBorder:SetSize(54, 54)
+	frame.IconBorder:SetPoint("CENTER")
+	frame.RaceType = progressFrames:CreateFontString(nil, "ARTWORK", "Game12Font")
+	frame.RaceType:SetPoint("TOPLEFT", frame.Icon, "TOPRIGHT", 10, -3)
+	frame.Progress = progressFrames:CreateFontString(nil, "ARTWORK", "Game11Font")
+	frame.Progress:SetPoint("BOTTOMLEFT", frame.Icon, "BOTTOMRIGHT", 10, 3)
+	table.insert(progressFrames.courses, frame)
+	if (#progressFrames.courses == 1) then
+		frame:SetPoint("TOPLEFT", progressFrames, "TOPLEFT", 0, -14)
+	else
+		frame:SetPoint("TOPLEFT", progressFrames.courses[#progressFrames.courses - 1], "BOTTOMLEFT", 0, -10)
+	end
+end
+
+local function setupProgressFrames()
+	if (not progressFrames) then
+		progressFrames = CreateFrame("Frame")
+		progressFrames:SetSize(100, 120)
+		progressFrames.courses = { }
+		addProgressFrame()
+		addProgressFrame()
+		addProgressFrame()
+	end
 end
 
 TomCatsKalimdorCupDataProviderMixin = CreateFromMixins(MapCanvasDataProviderMixin)
@@ -35,17 +108,14 @@ end
 
 function TomCatsKalimdorCupPinMixin:OnAcquired(pinInfo)
 	self.pinInfo = pinInfo
-	if (self.pinInfo.mapID < 80) then
+	if (isFinished(self.pinInfo)) then
 		self.iconFinished:Show()
---		self.iconDefault:SetVertexColor(0, 1, 0)
 	else
 		self.iconFinished:Hide()
---		self.iconDefault:SetVertexColor(1, 1, 1)
 	end
 	rescale(self)
 	self:SetPosition(pinInfo.x, pinInfo.y)
 	self:Show()
-	_G.DEBUGPINS[self] = self
 end
 
 function TomCatsKalimdorCupPinMixin:OnCanvasScaleChanged()
@@ -60,150 +130,48 @@ end
 TomCatsKalimdorCupPinMixin.OnLoad = nop
 
 function TomCatsKalimdorCupPinMixin:OnReleased()
-	_G.DEBUGPINS[self] = nil
 	self:Hide()
 end
 
-_G.DEBUGPINS = { }
+function appendTooltip(eventLocation)
+	setupProgressFrames()
+	for i = 1, #progressFrames.courses do
+		local p = getProgress(eventLocation.achievementBase + (i-1) * 3)
+		progressFrames.courses[i].Icon:SetTexture(progress[p][1])
+		progressFrames.courses[i].RaceType:SetText(raceTypes[i])
+		progressFrames.courses[i].Progress:SetText(progress[p][2])
+	end
+	GameTooltip_InsertFrame(GameTooltip, progressFrames)
+end
 
---function TomCatsKalimdorCupPinMixin:ShowTooltip()
---    local tooltip = WorldMapTooltip
---    WorldMapTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 10, 20)
---    WorldMapTooltip:ClearLines();
---    local questIDs
---    if (self.pinInfo.quest) then questIDs = { self.pinInfo.quest["Quest ID"] } else questIDs = self.pinInfo.entrance["Quest IDs"] end
---    if (self.pinInfo.entrance) then
---        if (self.pinInfo.entrance["Type"] == 3) then
---            GameTooltip_AddColoredLine(tooltip, "Portals leading to:", GREEN_COLOR, true)
---            GameTooltip_AddColoredLine(tooltip, "(Alliance Only)", WHITE_COLOR, true)
---            GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
---        elseif (self.pinInfo.entrance["Type"] == 4) then
---            GameTooltip_AddColoredLine(tooltip, "Portals leading to:", GREEN_COLOR, true)
---            GameTooltip_AddColoredLine(tooltip, "(Horde Only)", WHITE_COLOR, true)
---            GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
---        end
---    end
---    local questIDsToShow = {}
---    for i = 1, #questIDs do
---        if (P.showCompleted or (not IsQuestFlaggedCompleted(questIDs[i]))) then
---            table.insert(questIDsToShow,questIDs[i])
---        end
---    end
---    for i = 1, #questIDsToShow do
---        local questID = questIDsToShow[i]
---        local IDNumber, Name, Points, Completed, Month, Day, Year, Description, Flags, Image, RewardText, isGuildAch = GetAchievementInfo(questID)
---            GameTooltip_AddColoredLine(tooltip, Name, TITLE_COLOR, false)
---            GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
---            GameTooltip_AddColoredLine(tooltip, Description, WHITE_COLOR, true)
---            --GameTooltip_AddColoredLine(tooltip, questID, WHITE_COLOR, true)
---            --GameTooltip_AddColoredLine(tooltip, C_Map.GetAreaInfo(D["Quests"][questIDsToShow[i]]["Area ID"]), WHITE_COLOR, true)
---            if (self.completed) then
---                GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)
---            end
---            if (i < #questIDs) then
---                GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
---            end
---    end
---    --if (self.pinInfo.entrance) then
---    --    if (self.pinInfo.entrance["Type"] == 1) then
---    --        GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
---    --        GameTooltip_AddColoredLine(tooltip, "(Entryway)", GREY_COLOR, true)
---    --    elseif (self.pinInfo.entrance["Type"] == 2) then
---    --        GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
---    --        GameTooltip_AddColoredLine(tooltip, "(Dungeon Entrance)", GREY_COLOR, true)
---    --    end
---    --end
---    --if (self.pinInfo.phasedZone) then
---    --    local phasedZone = self.pinInfo.phasedZone
---    --    GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
---    --    local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(phasedZone["UIMap ID"], phasedZone["Timewalking NPC POI ID"])
---    --    GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
---    --    GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
---    --    GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
---    --end
---    if (TomTom) then
---        GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
---        GameTooltip_AddColoredLine(tooltip, "Click to add a TomTom Waypoint", WHITE_COLOR, true)
---    end
---    if (not addon.dragonflyingglyphs.IsRideAlongComplete(questIDsToShow[1])) then
---        GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
---        GameTooltip_AddColoredLine(tooltip, "Your passenger hasn't collected this glyph yet", GREEN_COLOR, true)
---    end
---    WorldMapTooltip:Show()
---    WorldMapTooltip.recalculatePadding = true
---end
---function TomCatsKalimdorCupPinMixin:HideItemTooltip()
---    WorldMapTooltip:Hide()
---end
---function TomCatsKalimdorCupPinMixin:SetIconState(state)
---   local iconStates = self:GetIconStates()
---   local stateTexture = self["icon" .. state]
---   for i = 1, #iconStates do
---       if (iconStates[i] ~= stateTexture) then iconStates[i]:Hide() end
---   end
---    stateTexture:Show()
---end
---function TomCatsKalimdorCupPinMixin:OnMouseEnter()
---    self:SetIconState("Highlighted")
---    self:ShowTooltip()
---end
---function TomCatsKalimdorCupPinMixin:OnMouseLeave()
---    if (not self.completed) then
---        self:SetIconState("Default")
---    else
---        self:SetIconState("Completed")
---    end
---    self:HideItemTooltip()
---end
---function TomCatsKalimdorCupPinMixin:OnMouseDown()
-----    setIconState(self.iconPushed)
-----    self:HideItemTooltip()
---end
---function TomCatsKalimdorCupPinMixin:OnMouseUp(button)
---    if (TomTom) then
---        if (button == "LeftButton") then
---            if (self.pinInfo.quest) then
---                addQuestToTomTom(self.pinInfo.quest, true)
---            end
---            if (self.pinInfo.entrance) then
---                addEntranceToTomTom(self.pinInfo.entrance, true)
---            end
---        end
---        --if (button == "RightButton") then
---        --    for _, pin in pairs(self.pinInfo.provider.activePins) do
---        --        addQuestToTomTom(pin.pinInfo.quest, false)
---        --    end
---        --    for _, pin in pairs(self.pinInfo.provider.activeEntrancePins) do
---        --        addEntranceToTomTom(pin.pinInfo.entrance, false)
---        --    end
---        --    if (not IsInInstance()) then
---        --        TomTom:SetClosestWaypoint()
---        --    end
---        --end
---    end
---end
---function TomCatsKalimdorCupPinMixin:GetIconStates()
---    return { self.iconDefault, self.iconHighlighted, self.iconPushed, self.iconCompleted }
---end
---
---local function OnUpdate()
---    local enabledVar = TomCats_Account and TomCats_Account.dragonflyingglyphs and TomCats_Account.dragonflyingglyphs.iconsEnabled
---    if (enabledVar ~= enabled) then
---        enabled = enabledVar
---        for pin in pairs(allPins) do
---            ShowHide(pin, enabled)
---        end
---    end
---end
---
---CreateFrame("FRAME"):SetScript("OnUpdate",OnUpdate)
---
---function addon.dragonflyingglyphs.SetIconScale()
---    for pin in pairs(allPins) do
---        rescale(pin)
---    end
---end
---
---function addon.dragonflyingglyphs.RefreshAll()
---    refreshAll()
---end
+function TomCatsKalimdorCupPinMixin:ShowTooltip()
+	GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+	GameTooltip_SetTitle(GameTooltip, self.pinInfo.name, HIGHLIGHT_FONT_COLOR);
+	if self.pinInfo.description then
+		GameTooltip_AddNormalLine(GameTooltip, self.pinInfo.description);
+	end
+	appendTooltip(self.pinInfo)
+	GameTooltip:Show()
+end
+
+function TomCatsKalimdorCupPinMixin:OnMouseEnter()
+    self.HighlightTexture:Show()
+	self:ShowTooltip()
+end
+
+function TomCatsKalimdorCupPinMixin:OnMouseLeave()
+	self.HighlightTexture:Hide()
+	GameTooltip:Hide()
+end
+
+function AreaPOIPinMouseOver(_, pin, tooltipShown, areaPoiID)
+	if (tooltipShown) then
+		local eventLocation = areaPoiID and addon.KalimdorCup.EventLocations[areaPoiID]
+		if (eventLocation) then
+			appendTooltip(eventLocation)
+			GameTooltip:Show()
+		end
+	end
+end
+
+EventRegistry:RegisterCallback("AreaPOIPin.MouseOver", AreaPOIPinMouseOver);
