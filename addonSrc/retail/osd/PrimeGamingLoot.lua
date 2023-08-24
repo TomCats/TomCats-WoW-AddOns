@@ -2,22 +2,22 @@
 select(2, ...).SetScope("osd")
 
 local atlasName = "VignetteLoot"
-local promotionEndTime = 1692835200
+local promotionEndTime = 1695918540
 local modelFrame
 
 local locale = {
-    ["enUS"] = { lang = "en-us", title1 = "In-game content, free with Prime:", title2 = "\nSilver Pig Pet\n\nThis Silver Pig pet is sure to bring you luck.", click = "Click for details" },
-    ["frFR"] = { lang = "fr-fr", title1 = "Contenu en jeu gratuit avec Prime:", title2 = "\nAnimal de compagnie Cochon argenté\n\nCe cochon argenté de compagnie vous portera forcément bonheur !", click = "Cliquer pour les détails" },
-    ["deDE"] = { lang = "de-de", title1 = "Kostenlos mit Prime erhältliche Spielinhalte:", title2 = "\nHaustier „Silbernes Schwein“\n\nDas Haustier „Silbernes Schwein“ wird dir mit Sicherheit Glück bringen!", click = "Klicken Sie für weitere Details" },
-    ["esES"] = { lang = "es-es", title1 = "Contenido de juegos, gratis con Prime:", title2 = "\nMascota Cerdo de plata\n\nLa mascota Cerdo de plata seguro que te traerá suerte.", click = "Haga clic para obtener más detalles" },
-    ["esMX"] = { lang = "es-mx", title1 = "Contenido en el juego gratis con Prime:", title2 = "\nMascota Cerdo de plata\n\nSin duda, este cerdo de plata te traerá suerte.", click = "Haga clic para obtener más detalles" },
-    ["itIT"] = { lang = "it-it", title1 = "Contenuti di gioco, gratis con Prime:", title2 = "\nFamiglio Maiale d’Argento\n\nQuesto famiglio Maiale d’Argento ti porterà sicuramente fortuna.", click = "Clicca per maggiori dettagli" },
-    ["ptBR"] = { lang = "pt-br", title1 = "Conteúdo do jogo grátis com Prime:", title2 = "\nMascote Porco Prateado\n\nEste mascote Porco Prateado certamente dará sorte.", click = "Clique para mais detalhes" },
-    ["ptPT"] = { lang = "pt-br", title1 = "Conteúdo de jogo, grátis com o Prime:", title2 = "\nAnimal de Estimação Porco Prateado\n\nEste animal de estimação Porco Prateado vai-te trazer sorte.", click = "Clique para mais detalhes" },
+    ["enUS"] = { lang = "en-us", title1 = "In-game content, free with Prime:", title2 = "\nTabard of Brilliance Transmog\n\nShow off your devotion to the Light with the Tabard of Brilliance.", click = "Click for details" },
+    ["frFR"] = { lang = "fr-fr", title1 = "Contenu en jeu gratuit avec Prime:", title2 = "\nTransmogrification Tabard de la brillance\n\nMontrez votre dévotion pour la Lumière avec le Tabard de brillance.", click = "Cliquer pour les détails" },
+    ["deDE"] = { lang = "de-de", title1 = "Kostenlos mit Prime erhältliche Spielinhalte:", title2 = "\nTransmog vom Waffenrock der Brillanz\n\nZeige mit dem Wappenrock der Brillanz deine Treue zum Licht.", click = "Klicken Sie für weitere Details" },
+    ["esES"] = { lang = "es-es", title1 = "Contenido de juegos, gratis con Prime:", title2 = "\nTransfiguración del Tabardo de resplandor\n\nDemuestra tu devoción a la Luz con el Tabardo de resplandor.", click = "Haga clic para obtener más detalles" },
+    ["esMX"] = { lang = "es-mx", title1 = "Contenido en el juego gratis con Prime:", title2 = "\nTransfiguración Tabardo de resplandor\n\nDemuestra tu devoción a la Luz con el Tabardo de resplandor.", click = "Haga clic para obtener más detalles" },
+    ["itIT"] = { lang = "it-it", title1 = "Contenuti di gioco, gratis con Prime:", title2 = "\nTrasmogrificazione Insegna dell'Acume\n\nMostra la tua devozione alla Luce con l’Insegna dell'Acume.", click = "Clicca per maggiori dettagli" },
+    ["ptBR"] = { lang = "pt-br", title1 = "Conteúdo do jogo grátis com Prime:", title2 = "\nTransmogrificação Tabardo da Inteligência\n\nMostre sua devoção à Luz com o Tabardo da Inteligência.", click = "Clique para mais detalhes" },
+    ["ptPT"] = { lang = "pt-br", title1 = "Conteúdo de jogo, grátis com o Prime:", title2 = "\nTransmog Tabardo de Resplendor\n\nMostra a tua devoção à Luz com o Tabardo de Resplendor.", click = "Clique para mais detalhes" },
 }
 
 local selectedLocale = locale[GetLocale()] or locale["enUS"]
-local url = "https://gaming.amazon.com/silver-pet-pig"
+local url = "https://gaming.amazon.com/dp/amzn1.pg.item.270f6968-8b67-4923-9c58-4e3aa121ce8d"
 
 PrimeGamingLoot = { }
 
@@ -42,9 +42,18 @@ function PrimeGamingLoot.GetVisibilityOption()
 end
 
 function PrimeGamingLoot.IsVisible()
+    if (TomCats_Account.preferences.AccessoryWindow.primeGamingLoot == addon.constants.accessoryDisplay.SNOOZED
+            and TomCats_Account.preferences.AccessoryWindow.snoozed["prime_tabardofbrilliance"] == nil) then
+        TomCats_Account.preferences.AccessoryWindow.primeGamingLoot = addon.constants.accessoryDisplay.NOINSTANCES
+    end
     if (GetServerTime() > promotionEndTime) then return false end
-    if (C_PetJournal.GetOwnedBattlePetString(171)) then return false end
+    --if (C_PetJournal.GetOwnedBattlePetString(171)) then return false end
     return visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.primeGamingLoot]()
+end
+
+local function Wear(modelFrame_, itemID)
+    local itemLink = "|cff9d9d9d|Hitem:" .. itemID .. "::::::::1:::::::::|h[]|h|r"
+    modelFrame_:TryOn(itemLink)
 end
 
 function PrimeGamingLoot.Render(Timers, idx)
@@ -66,7 +75,7 @@ function PrimeGamingLoot.Render(Timers, idx)
             modelFrame = CreateFrame("Frame", nil, GameTooltip)
             modelFrame:SetSize(200, 200)
             --modelFrame:SetPoint("CENTER", GameTooltip, "CENTER")
-            local model1 = CreateFrame("PlayerModel", nil, modelFrame)
+            local model1 = CreateFrame("DressupModel", nil, modelFrame)
             modelFrame.model1 = model1
             model1:SetSize(200, 200)
             local facing = 0
@@ -81,8 +90,14 @@ function PrimeGamingLoot.Render(Timers, idx)
         modelFrame:SetPoint("RIGHT", GameTooltip, "RIGHT", -12, 0);
         local model1 = modelFrame.model1
         model1:SetPoint("CENTER")
-        model1:SetCreature(25147)
         modelFrame:Show()
+        GameTooltip:Show()
+        model1:SetUnit("player")
+        model1:Undress()
+        Wear(model1, 3427)
+        Wear(model1, 10035)
+        Wear(model1, 6836)
+        Wear(model1, 38312)
         GameTooltip:AddLine(selectedLocale.click, 1, 1, 1, true)
         numLines = GameTooltip:NumLines()
         line = _G[GameTooltip:GetName().."TextLeft"..numLines]
@@ -102,9 +117,9 @@ end
 function PrimeGamingLoot.SetVisibilityOption(value)
     TomCats_Account.preferences.AccessoryWindow.primeGamingLoot = value
     if (value == addon.constants.accessoryDisplay.SNOOZED) then
-        TomCats_Account.preferences.AccessoryWindow.snoozed["prime_silverpig"] = true
+        TomCats_Account.preferences.AccessoryWindow.snoozed["prime_tabardofbrilliance"] = true
     else
-        TomCats_Account.preferences.AccessoryWindow.snoozed["prime_silverpig"] = nil
+        TomCats_Account.preferences.AccessoryWindow.snoozed["prime_tabardofbrilliance"] = nil
     end
     UpdateVisibility()
 end
