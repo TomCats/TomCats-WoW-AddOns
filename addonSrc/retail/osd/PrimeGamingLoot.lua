@@ -74,35 +74,36 @@ function PrimeGamingLoot.Render(Timers, idx)
         if (not modelFrame) then
             modelFrame = CreateFrame("Frame", nil, GameTooltip)
             modelFrame:SetSize(200, 200)
-            --modelFrame:SetPoint("CENTER", GameTooltip, "CENTER")
             local model1 = CreateFrame("DressupModel", nil, modelFrame)
             modelFrame.model1 = model1
             model1:SetSize(200, 200)
             local facing = 0
             local maxrads = 6.28319
             local duration = 3
+            Mixin(model1, addon.WardrobeSetsDetailsModelMixin)
+            model1:OnLoad()
             model1:SetScript("OnUpdate", function(self, elapsed)
                 facing = (facing + maxrads * (elapsed / duration)) % maxrads
                 self:SetFacing(facing)
             end)
         end
         GameTooltip_InsertFrame(GameTooltip, modelFrame)
-        modelFrame:SetPoint("RIGHT", GameTooltip, "RIGHT", -12, 0);
+        modelFrame:SetPoint("RIGHT", GameTooltip, "RIGHT", -30, 0)
+        modelFrame:SetPoint("LEFT", GameTooltip, "LEFT")
         local model1 = modelFrame.model1
         model1:SetPoint("CENTER")
-        modelFrame:Show()
         GameTooltip:Show()
-        model1:SetUnit("player")
-        model1:Undress()
-        Wear(model1, 3427)
-        Wear(model1, 10035)
-        Wear(model1, 6836)
-        Wear(model1, 38312)
         GameTooltip:AddLine(selectedLocale.click, 1, 1, 1, true)
         numLines = GameTooltip:NumLines()
         line = _G[GameTooltip:GetName().."TextLeft"..numLines]
         line:SetJustifyH("CENTER")
         GameTooltip:Show()
+        modelFrame:Show()
+        model1:Undress()
+        Wear(model1, 3427)
+        Wear(model1, 10035)
+        Wear(model1, 6836)
+        Wear(model1, 38312)
     end
 
     timerRow.clickFunction = function()
@@ -123,3 +124,8 @@ function PrimeGamingLoot.SetVisibilityOption(value)
     end
     UpdateVisibility()
 end
+
+C_Item.RequestLoadItemDataByID(3427)
+C_Item.RequestLoadItemDataByID(10035)
+C_Item.RequestLoadItemDataByID(6836)
+C_Item.RequestLoadItemDataByID(38312)
