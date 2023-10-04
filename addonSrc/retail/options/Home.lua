@@ -502,7 +502,7 @@ Home:SetScript("OnShow", function(self)
 						0)
 			end
 		end
-		local featuresTitle = CreateOptionsTitle(contents, "New and Upcoming Features", linksFrame)
+		local featuresTitle = CreateOptionsTitle(contents, "Recently Added Features", linksFrame)
 		local features = CreateFrame("SimpleHTML",nil, contents, "@addonName@_HTML_Features")
 		features:SetPoint("TOPLEFT", featuresTitle, "BOTTOMLEFT", 0, 0)
 		features:SetPoint("RIGHT")
