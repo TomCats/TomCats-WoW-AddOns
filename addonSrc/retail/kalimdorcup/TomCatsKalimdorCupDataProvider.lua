@@ -4,7 +4,8 @@ if (not addon.KalimdorCup.IsEventActive()) then return end
 
 local AreaPOIPinMouseOver, appendTooltip
 
-local eventMapID = 12
+--local eventMapID = 12
+local eventMapID = 13
 
 local progress = {
 	{ 1100022, "None" },
