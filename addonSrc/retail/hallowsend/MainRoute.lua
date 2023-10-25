@@ -219,8 +219,14 @@ function addon:PLAYER_LOGIN(event, ...)
     for _, location in pairs(D["Locations"].records) do
         location["Group ID"] = findLocationGroupID(location["Map ID"])
         -- todo: handle this in the data lib via type definitions
-        location["Map Position"] = CreateVector2D(location["Map Position"][1], location["Map Position"][2])
         local override = overrides[location["Location ID"]]
+        -- Override for Westfall location
+        if (location["Location ID"] == 10 and C_QuestLog.IsQuestFlaggedCompleted(26322)) then
+            location["Map Position"] = CreateVector2D(location["Map Position"][3], location["Map Position"][4])
+            D["Quests"][location["Quest ID"]]["Location"] = location["Map Position"]
+        else
+            location["Map Position"] = CreateVector2D(location["Map Position"][1], location["Map Position"][2])
+        end
         if (override) then
             location["Group Position"] = override
         else
