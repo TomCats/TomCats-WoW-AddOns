@@ -195,7 +195,7 @@ local function bagUpdate()
     questLogUpdate()
 end
 
--- Manual overrides as Dalaran coordinates do not map back to world coordinates
+-- Manual overrides as Dalaran coordinates do not map back to coordinates to its parent map
 -- note: It will be difficult for the player to distinguish the underbelly location
 local overrides = {
     [97] = CreateVector2D(0.4921, 0.410),
