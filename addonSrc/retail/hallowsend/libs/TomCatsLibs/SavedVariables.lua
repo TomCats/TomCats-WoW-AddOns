@@ -1,5 +1,5 @@
 local addon = select(2,...)
-local TCL = addon.TomCatsLibs
+local TCL = addon.hallowsend.TomCatsLibs
 local function ADDON_LOADED(_, event, ...)
     local var1 = select(1, ...)
     if (var1 == addon.name) then

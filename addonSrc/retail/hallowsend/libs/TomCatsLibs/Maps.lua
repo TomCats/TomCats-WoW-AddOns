@@ -8,7 +8,7 @@ For more information, contact via email at tomcat@tomcatstours.com
 ]]
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
---select(2, ...).SetupGlobalFacade()
+--select(2, ...).hallowsend.TomCatsLibsSetupGlobalFacade()
 
 local C_Map = C_Map
 local CreateVector2D = CreateVector2D

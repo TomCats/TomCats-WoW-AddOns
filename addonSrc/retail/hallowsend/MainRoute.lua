@@ -1,8 +1,8 @@
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
-local tcl = addon.TomCatsLibs
+local D = addon.hallowsend.TomCatsLibs.Data
+local tcl = addon.hallowsend.TomCatsLibs
 
 local tour
 local groupID
@@ -97,7 +97,7 @@ local function switchTour(newGroupID)
 end
 
 local function setupArrow(location)
-    if (not TomCats_Account.hallowsend.arrowsEnabled) then
+    if (not TomCats_Account.hallowsend.arrowEnabled) then
         if (arrow) then
             arrow:ClearTarget()
         end
@@ -109,7 +109,7 @@ local function setupArrow(location)
     end
     if (tour) then
         if (not arrow) then
-            arrow = addon.CreateArrow(1.0,0.25,0)
+            arrow = addon.hallowsend.CreateArrow(1.0,0.25,0)
             --arrow = tcl.Arrows:CreateArrow("ORANGERED")
             arrow:SetScript("OnEnter", function()
                 GameTooltip:SetOwner(Minimap, "ANCHOR_CURSOR")
@@ -141,12 +141,12 @@ end
 
 local function checkTreats()
     for bagId = 0, 4 do
-        for slot = 1, GetContainerNumSlots(bagId) do
-            local itemLink = GetContainerItemLink(bagId, slot)
+        for slot = 1, C_Container.GetContainerNumSlots(bagId) do
+            local itemLink = C_Container.GetContainerItemLink(bagId, slot)
             if (itemLink) then
                 local itemId = GetItemInfoInstant(itemLink)
                 if (itemId == 37586) then
-                    UseContainerItem(bagId, slot)
+                    C_Container.UseContainerItem(bagId, slot)
                     return true
                 end
             end

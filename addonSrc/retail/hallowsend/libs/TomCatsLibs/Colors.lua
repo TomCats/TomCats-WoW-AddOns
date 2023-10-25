@@ -1,5 +1,5 @@
 local addon = select(2,...)
-local lib = addon.TomCatsLibs.Colors
+local lib = addon.hallowsend.TomCatsLibs.Colors
 local colors = {}
 setmetatable(lib,{
     __index = function(table, key)

@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-local lib = addon.TomCatsLibs.Data
+local lib = addon.hallowsend.TomCatsLibs.Data
 local recordMetatable = {
     __index = function(table, key)
         return table.record[table.parent.columnNames[key]]

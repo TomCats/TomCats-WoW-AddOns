@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
+local D = addon.hallowsend.TomCatsLibs.Data
 D.loadData(
     "Phased Zones",
     { "UIMap ID", "Quest IDs", "Timewalking NPC POI ID", "Visible UIMap IDs", "Timewalking Map Art ID" },

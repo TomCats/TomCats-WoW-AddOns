@@ -7,7 +7,7 @@ local TYPE_ENTRANCE = 1
 local TYPE_DUNGEON = 2
 local TYPE_PORTAL_ALLIANCE = 3
 local TYPE_PORTAL_HORDE = 4
-select(2, ...).TomCatsLibs.Data.loadData(
+select(2, ...).hallowsend.TomCatsLibs.Data.loadData(
     "Entrances",
     { "Entrance ID", "Quest IDs", "Area ID", "UIMap ID", "Location", "Type", "Add to Parent UIMaps" },
     {

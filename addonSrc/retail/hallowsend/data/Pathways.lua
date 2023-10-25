@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
+local D = addon.hallowsend.TomCatsLibs.Data
 local Coords = CreateVector2D
 D.loadData(
     "Pathways",

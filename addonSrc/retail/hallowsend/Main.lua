@@ -1,7 +1,7 @@
 local addonName, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-local TCL = addon.TomCatsLibs
+local TCL = addon.hallowsend.TomCatsLibs
 local WorldMapFrame
 local BattlefieldMapFrame
 local FlightMapFrame

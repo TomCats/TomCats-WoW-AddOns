@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-local TCL = addon.TomCatsLibs
+local TCL = addon.hallowsend.TomCatsLibs
 local D = TCL.Data
 -- hard disabled due to no saved variables at current release
 local P = { showCompleted = false }
@@ -62,7 +62,7 @@ local function addQuestToTomTom(quest, setClosest)
     addToTomTom({
         uiMapID = quest["UIMap ID"],
         location = quest["Location"],
-        title = addon.getCreatureNameByQuestID(quest["Quest ID"])
+        title = "Candy Bucket" --addon.getCreatureNameByQuestID(quest["Quest ID"])
     }, setClosest)
 end
 local function addEntranceToTomTom(entrance, setClosest)
@@ -70,7 +70,7 @@ local function addEntranceToTomTom(entrance, setClosest)
     local quest = D["Quests"][entrance["Quest IDs"][1]]
     local title
     if (questCount == 1) then
-        title = addon.getCreatureNameByQuestID(quest["Quest ID"])
+        title = "Candy Bucket" -- addon.getCreatureNameByQuestID(quest["Quest ID"])
     end
     addToTomTom({
         uiMapID = entrance["UIMap ID"],
@@ -410,7 +410,8 @@ function TomCatsHallowsEndPinMixin:ShowTooltip()
         end
     end
     for i = 1, #questIDsToShow do
-            GameTooltip_AddColoredLine(tooltip, addon.getCreatureNameByQuestID(questIDsToShow[i]), TITLE_COLOR, true)
+            --GameTooltip_AddColoredLine(tooltip, addon.getCreatureNameByQuestID(questIDsToShow[i]), TITLE_COLOR, true)
+            GameTooltip_AddColoredLine(tooltip, "Candy Bucket", TITLE_COLOR, true)
             --GameTooltip_AddColoredLine(tooltip, C_Map.GetAreaInfo(D["Quests"][questIDsToShow[i]]["Area ID"]), WHITE_COLOR, true)
             if (self.completed) then
                 GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)

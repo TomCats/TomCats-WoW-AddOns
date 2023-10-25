@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-local D = addon.TomCatsLibs.Data
+local D = addon.hallowsend.TomCatsLibs.Data
 local dataMineTooltipName = ("%sDatamineTooltip"):format(addon.name)
 local dataMineTooltip = _G.CreateFrame("GameTooltip", dataMineTooltipName, UIParent, "GameTooltipTemplate")
 local dataMineTitleText = _G[("%sDatamineTooltipTextLeft1"):format(addon.name)]

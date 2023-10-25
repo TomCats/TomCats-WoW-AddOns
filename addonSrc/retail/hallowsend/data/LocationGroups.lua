@@ -1,7 +1,7 @@
 local _, addon = ...
 if (not addon.hallowsend.IsEventActive()) then return end
 
-select(2, ...).TomCatsLibs.Data.loadData(
+select(2, ...).hallowsend.TomCatsLibs.Data.loadData(
     "Location Groups",
     { "Group ID" },
     {
@@ -17,5 +17,7 @@ select(2, ...).TomCatsLibs.Data.loadData(
         {619},
         {875},
         {876},
+        {1978},
+        {2133},
     }
 )
