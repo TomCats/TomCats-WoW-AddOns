@@ -96,7 +96,7 @@ local function switchTour(newGroupID)
     end
 end
 
-local function setupArrow(location)
+local function setupArrow()
     if (not TomCats_Account.hallowsend.arrowEnabled) then
         if (arrow) then
             arrow:ClearTarget()
@@ -195,6 +195,15 @@ local function bagUpdate()
     questLogUpdate()
 end
 
+-- Manual overrides as Dalaran coordinates do not map back to world coordinates
+-- note: It will be difficult for the player to distinguish the underbelly location
+local overrides = {
+    [97] = CreateVector2D(0.4921, 0.410),
+    [106] = CreateVector2D(0.4803, 0.4243),
+    [107] = CreateVector2D(0.4803, 0.4271),
+    [108] = CreateVector2D(0.5753, 0.3917)
+}
+
 function addon:PLAYER_LOGIN(event, ...)
     tcl.Events.UnregisterEvent("PLAYER_LOGIN", self)
     tcl.Events.RegisterEvent("ZONE_CHANGED", zoneChanged)
@@ -211,9 +220,14 @@ function addon:PLAYER_LOGIN(event, ...)
         location["Group ID"] = findLocationGroupID(location["Map ID"])
         -- todo: handle this in the data lib via type definitions
         location["Map Position"] = CreateVector2D(location["Map Position"][1], location["Map Position"][2])
-        local continentID, worldPosition = C_Map.GetWorldPosFromMapPos(location["Map ID"], location["Map Position"])
-        local oid, mapPosition = C_Map.GetMapPosFromWorldPos(continentID, worldPosition, location["Group ID"])
-        location["Group Position"] = mapPosition
+        local override = overrides[location["Location ID"]]
+        if (override) then
+            location["Group Position"] = override
+        else
+            local continentID, worldPosition = C_Map.GetWorldPosFromMapPos(location["Map ID"], location["Map Position"])
+            local oid, mapPosition = C_Map.GetMapPosFromWorldPos(continentID, worldPosition, location["Group ID"])
+            location["Group Position"] = mapPosition
+        end
     end
     switchTour(findLocationGroupID(C_Map.GetBestMapForUnit("player")))
     setupArrow()
