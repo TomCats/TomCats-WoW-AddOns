@@ -427,7 +427,7 @@ Home:SetScript("OnShow", function(self)
 			}, midsummerConfig.Label, midsummerConfig.checkButton)
 		end
 
-		if (addon.noblegarden.IsEventActive()) then
+		if (addon.noblegarden and addon.noblegarden.IsEventActive()) then
 			local noblegardenConfig = CreateFrame("Frame", nil, configurationFrame)
 			noblegardenConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 			last = noblegardenConfig
