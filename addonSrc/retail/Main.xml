@@ -58,8 +58,8 @@
 	<Include file="ui_vignettes_pins.xml" />
 	<!-- <Include file="lunarfestival/Main.xml" /> -->
 	<!-- <Include file="loveisintheair/Main.xml" /> -->
-	<Include file="midsummer/Main.xml" />
-	<Include file="hallowsend/Main.xml" />
+<!--	<Include file="midsummer/Main.xml" />-->
+<!--	<Include file="hallowsend/Main.xml" />-->
 	<Script file="announcements.lua" />
 	<!-- <Include file="configuration.xml" /> -->
 	<!-- <Script file="configuration.lua" /> -->
@@ -71,9 +71,9 @@
 	<!-- <Include file="support/support.xml" /> -->
 	<!-- <Script file="support/support.lua" /> -->
 	<Script file="beta.lua" />
-	<Include file="noblegarden/Main.xml" />
+<!--	<Include file="noblegarden/Main.xml" />-->
 	<!-- <Include file="primalstorms/Main.xml" /> -->
 	<Include file="dragonflyingglyphs/Main.xml" />
-	<Include file="kalimdorcup/Main.xml" />
+<!--	<Include file="kalimdorcup/Main.xml" />-->
 	<Script file="notaint.lua" />
 </Ui>
