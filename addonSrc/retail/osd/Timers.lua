@@ -189,13 +189,12 @@ function Timers:Refresh()
 		idx = idx + 1
 		height = height + TimeRifts.Render(self, idx)
 	end
-	if (TwitchDrops and TwitchDrops.IsVisible()) then
-		idx = idx + 1
-		height = height + TwitchDrops.Render(self, idx)
-	end
-	if (PrimeGamingLoot and PrimeGamingLoot.IsVisible()) then
-		idx = idx + 1
-		height = height + PrimeGamingLoot.Render(self, idx)
+	Promos.UpdateVisibility()
+	for _, promo in ipairs(Promos.GetPromos()) do
+		if (Promos.IsVisible(promo)) then
+			idx = idx + 1
+			height = height + Promos.Render(self, idx, promo)
+		end
 	end
 	for idx_ = 1, idx do
 		minWidth = math.max(minWidth, self:GetTimerRow(idx_):GetTitleWidth())

@@ -260,7 +260,7 @@ Home:SetScript("OnShow", function(self)
 			}, timeRiftsConfig.Label, timeRiftsConfig.selectionPopout.Button)
 		end
 
-		if (osd.TwitchDrops) then
+		if (osd.Promos) then
 			local twitchDropsConfig = CreateFrame("Frame", nil, configurationFrame)
 			twitchDropsConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 			last = twitchDropsConfig
@@ -270,7 +270,7 @@ Home:SetScript("OnShow", function(self)
 			twitchDropsConfig.Label:SetJustifyH("LEFT")
 			twitchDropsConfig.Label:SetPoint("LEFT", 32, 0)
 			twitchDropsConfig.Label:SetText("Twitch Promos")
-			local twitchDropsConfigDisplayPreference = osd.TwitchDrops.GetVisibilityOption()
+			local twitchDropsConfigDisplayPreference = osd.Promos.GetVisibilityOption("twitchDrops")
 			local twitchDropsConfigDisplayConstants = addon.constants.accessoryDisplay
 			twitchDropsConfig.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
 					twitchDropsConfig,
@@ -297,7 +297,7 @@ Home:SetScript("OnShow", function(self)
 						},
 					},
 					function()
-						osd.TwitchDrops.SetVisibilityOption(twitchDropsConfig.selectionPopout.selected.value)
+						osd.Promos.SetVisibilityOption("twitchDrops", "twitch_", twitchDropsConfig.selectionPopout.selected.value)
 					end
 			)
 			twitchDropsConfig.selectionPopout:SetPoint("LEFT", 230, 0)
@@ -308,7 +308,7 @@ Home:SetScript("OnShow", function(self)
 			}, twitchDropsConfig.Label, twitchDropsConfig.selectionPopout.Button)
 		end
 
-		if (osd.PrimeGamingLoot) then
+		if (osd.Promos) then
 			local primeGamingLootConfig = CreateFrame("Frame", nil, configurationFrame)
 			primeGamingLootConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 			last = primeGamingLootConfig
@@ -318,7 +318,7 @@ Home:SetScript("OnShow", function(self)
 			primeGamingLootConfig.Label:SetJustifyH("LEFT")
 			primeGamingLootConfig.Label:SetPoint("LEFT", 32, 0)
 			primeGamingLootConfig.Label:SetText("Prime Gaming Loot")
-			local primeGamingLootConfigDisplayPreference = osd.PrimeGamingLoot.GetVisibilityOption()
+			local primeGamingLootConfigDisplayPreference = osd.Promos.GetVisibilityOption("primeGamingLoot")
 			local primeGamingLootConfigDisplayConstants = addon.constants.accessoryDisplay
 			primeGamingLootConfig.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
 					primeGamingLootConfig,
@@ -345,7 +345,7 @@ Home:SetScript("OnShow", function(self)
 						},
 					},
 					function()
-						osd.PrimeGamingLoot.SetVisibilityOption(primeGamingLootConfig.selectionPopout.selected.value)
+						osd.Promos.SetVisibilityOption("primeGamingLoot", "prime_", primeGamingLootConfig.selectionPopout.selected.value)
 					end
 			)
 			primeGamingLootConfig.selectionPopout:SetPoint("LEFT", 230, 0)

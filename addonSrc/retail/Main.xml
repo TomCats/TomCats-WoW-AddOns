@@ -6,6 +6,7 @@
 
 	<Script file="Scopes.lua" />
 	<Script file="constants.lua" />
+	<Script file="misc.lua" />
 
 	<Include file="templates/Templates.xml" />
 
