@@ -220,6 +220,73 @@ local promoData = {
 			--camDistanceScale = 1.9,
 		},
 	},
+	{
+		type = promoTypes.BLIZZARD_OTHER,
+		startTime = 1698165000,
+		endTime = 1699851600,
+		lang = {
+			["enUS"] = {
+				urlParams = { "en-us" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMELIA DELIVERS WARCRAFT RUMBLE’S JOYFUL CHAOS TO WOW",
+				click = "Click for details" },
+			["enGB"] = {
+				urlParams = { "en-gb" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMELIA DELIVERS WARCRAFT RUMBLE’S JOYFUL CHAOS TO WOW",
+				click = "Click for details" },
+			["koKR"] = {
+				urlParams = { "ko-kr" },
+				title1 = "워크래프트 럼블",
+				title2 = "노멜리아가 워크래프트® 럼블™의 즐거운 혼돈을 WOW에 선사합니다!",
+				click = "자세한 내용을 보려면 클릭하십시오" },
+			["frFR"] = {
+				urlParams = { "fr-fr" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMÉLIA APPORTE LE JOYEUX CHAOS DE WARCRAFT RUMBLE DANS WORLD OF WARCRAFT",
+				click = "Cliquer pour les détails" },
+			["deDE"] = {
+				urlParams = { "de-de" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMELIA BRINGT DAS FREUDIGE CHAOS VON WARCRAFT RUMBLE NACH WOW",
+				click = "Klicken Sie für weitere Details" },
+			["esES"] = {
+				urlParams = { "es-es" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMELIA TRAE EL ALEGRE CAOS DE WARCRAFT RUMBLE A WOW",
+				click = "Haga clic para obtener más detalles" },
+			["zhTW"] = {
+				urlParams = { "zh-tw" },
+				title1 = "《魔獸兵團》",
+				title2 = "諾姆莉亞將《魔獸兵團》歡樂的混亂氣氛送進了《魔獸世界》",
+				click = "點擊了解更多詳情。" },
+			["esMX"] = {
+				urlParams = { "es-mx" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMELIA TRAE TODO EL CAOS Y LA DIVERSIÓN DE WARCRAFT RUMBLE A WOW",
+				click = "Haga clic para obtener más detalles" },
+			["ptBR"] = {
+				urlParams = { "pt-br" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMÉSIA TRAZ O CAOS DIVERTIDO DE WARCRAFT RUMBLE PARA WOW",
+				click = "Clique para mais detalhes" },
+			["ptPT"] = {
+				urlParams = { "pt-pt" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMÉSIA TRAZ O CAOS DIVERTIDO DE WARCRAFT RUMBLE PARA WOW",
+				click = "Clique para mais detalhes" },
+			["itIT"] = {
+				urlParams = { "it-it" },
+				title1 = "Warcraft Rumble:",
+				title2 = "\nGNOMELIA PORTA IL CAOS PIÙ SPASSOSO DI WARCRAFT RUMBLE SU WOW",
+				click = "Clicca per maggiori dettagli" },
+		},
+		url = "https://news.blizzard.com/%s/world-of-warcraft/24023091",
+		slug = "blizzard_gnomelia",
+		modelInfo = {
+			creature = 184285,
+		},
+	},
 }
 
 Promos = { }
