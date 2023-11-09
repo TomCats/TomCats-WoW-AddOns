@@ -517,7 +517,7 @@ local function OnUpdate(_, elapsed)
 		vignettes = nil
 		checkedVignetteGUIDs = { }
 		timeSinceLastUpdate = 0
-		if (mapID == 2133) then -- only scan for new discoveries in this zone
+		if (mapID == 2200) then -- only scan for new discoveries in this zone
 --			vignettes = addon.getVignettes(lastVignetteMapID)
 			vignettes = { }
 		end
