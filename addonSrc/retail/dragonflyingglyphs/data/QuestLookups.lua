@@ -31,6 +31,8 @@ for _, quest in pairs(D["Quests"].records) do
         addQuestToUIMaps(quest, 2151,false)
     elseif (questID >= 17510 and questID <= 17517) then
         addQuestToUIMaps(quest, 2133, false)
+    elseif (uiMapID == 2200) then
+        addQuestToUIMaps(quest, 2200, true)
     elseif (questID ~= 16101) then
         for i = 2022, 2025 do
             if (not mapIconExceptions[i .. questID]) then
