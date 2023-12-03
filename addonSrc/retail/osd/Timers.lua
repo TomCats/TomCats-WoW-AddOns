@@ -167,6 +167,10 @@ function Timers:Refresh()
 	local height = 0
 	local idx = 0
 	local minWidth = 100
+	if (Superbloom and Superbloom.IsVisible()) then
+		idx = idx + 1
+		height = height + Superbloom.Render(self, idx)
+	end
 	if (IsElementalStormsVisible()) then
 		local elementalStorms = GetElementalStorms()
 		for _, elementalStorm in ipairs(elementalStorms) do

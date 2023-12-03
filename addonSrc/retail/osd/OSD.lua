@@ -84,6 +84,7 @@ function UpdateVisibility()
         end
         shown = shown or GreedyEmissary and GreedyEmissary.IsVisible()
 		shown = shown or TimeRifts and TimeRifts.IsVisible()
+		shown = shown or Superbloom and Superbloom.IsVisible()
 		Promos.UpdateVisibility()
 		shown = shown or Promos.IsVisible()
     	OSD.frame:SetShown(shown)
