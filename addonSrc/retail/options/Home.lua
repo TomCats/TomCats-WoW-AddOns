@@ -595,7 +595,7 @@ Home:SetScript("OnShow", function(self)
 			}, noblegardenConfig.Label, noblegardenConfig.checkButton)
 		end
 
-		local featuresTitle = CreateOptionsTitle(contents, "Recently Added Features", configurationFrame)
+		local featuresTitle = CreateOptionsTitle(contents, "Recently Added and Upcoming Features", configurationFrame)
 		local features = CreateFrame("SimpleHTML",nil, contents, "@addonName@_HTML_Features")
 		features:SetPoint("TOPLEFT", featuresTitle, "BOTTOMLEFT", 0, 0)
 		features:SetPoint("RIGHT")
