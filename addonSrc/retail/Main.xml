@@ -75,6 +75,6 @@
 <!--	<Include file="noblegarden/Main.xml" />-->
 	<!-- <Include file="primalstorms/Main.xml" /> -->
 	<Include file="dragonflyingglyphs/Main.xml" />
-<!--	<Include file="kalimdorcup/Main.xml" />-->
+	<Include file="kalimdorcup/Main.xml" />
 	<Script file="notaint.lua" />
 </Ui>

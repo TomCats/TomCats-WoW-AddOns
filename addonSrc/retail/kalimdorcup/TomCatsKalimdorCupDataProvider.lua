@@ -4,8 +4,9 @@ if (not addon.KalimdorCup.IsEventActive()) then return end
 
 local AreaPOIPinMouseOver, appendTooltip
 
---local eventMapID = 12
-local eventMapID = 13
+-- local eventMapID = 12 -- Kalimdor
+-- local eventMapID = 13 -- Eastern Kingdoms
+local eventMapID = 101 -- Outland
 
 local progress = {
 	{ 1100022, "None" },

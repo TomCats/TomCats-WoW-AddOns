@@ -15,9 +15,10 @@ local function GetPOIInfo(t)
 		poiInfoCache[poiID] = poiInfo
 		if (poiInfo) then
 			local continent, worldPosition = C_Map.GetWorldPosFromMapPos(mapID, poiInfo.position)
---			local _, kalimdorPosition = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 12)
-			local _, kalimdorPosition = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 13)
-			poiInfo.x, poiInfo.y = kalimdorPosition.x, kalimdorPosition.y
+--			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 12) -- Kalimdor
+--			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 13) -- Eastern Kingdoms
+			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 101) -- Outland
+			poiInfo.x, poiInfo.y = position.x, position.y
 		end
 	end
 	return poiInfo or { }
@@ -29,6 +30,7 @@ local poiColumns = {
 	achievementBase = 3,
 }
 
+-- Kalimdor
 --local eventLocations = {
 --	{ 7494, 77, 17568 },
 --	{ 7495, 83, 17577 },
@@ -48,21 +50,39 @@ local poiColumns = {
 --	{ 7509, 78, 17703 },
 --}
 
+-- Eastern Kingdoms
+--local eventLocations = {
+--	{ 7571, 217, 18399 },
+--	{ 7572, 48, 18408 },
+--	{ 7573, 32, 18417 },
+--	{ 7574, 241, 18426 },
+--	{ 7575, 42, 18435 },
+--	{ 7576, 37, 18444 },
+--	{ 7577, 50, 18453 },
+--	{ 7578, 27, 18462 },
+--	{ 7579, 17, 18474 },
+--	{ 7580, 23, 18483 },
+--	{ 7581, 210, 18498 },
+--	{ 7582, 15, 18510 },
+--	{ 7583, 241, 18519 },
+--	{ 7584, 49, 18528 },
+--}
+
+-- Outland Cup
 local eventLocations = {
-	{ 7571, 217, 18399 },
-	{ 7572, 48, 18408 },
-	{ 7573, 32, 18417 },
-	{ 7574, 241, 18426 },
-	{ 7575, 42, 18435 },
-	{ 7576, 37, 18444 },
-	{ 7577, 50, 18453 },
-	{ 7578, 27, 18462 },
-	{ 7579, 17, 18474 },
-	{ 7580, 23, 18483 },
-	{ 7581, 210, 18498 },
-	{ 7582, 15, 18510 },
-	{ 7583, 241, 18519 },
-	{ 7584, 49, 18528 },
+	{7589, 100, 18580 },
+	{7590, 102, 18603 },
+	{7591, 105, 18617 },
+	{7592, 107, 18626 },
+	{7593, 108, 18649 },
+	{7594, 108, 18658 },
+	{7595, 109, 18667 },
+	{7596, 108, 18679 },
+	{7597, 104, 18692 },
+	{7598, 109, 18707 },
+	{7599, 107, 18739 },
+	{7600, 108, 18794 },
+	{7601, 104, 18842 },
 }
 
 local eventLocationsMetatable = {
