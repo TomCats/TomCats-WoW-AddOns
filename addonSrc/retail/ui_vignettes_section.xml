@@ -16,7 +16,7 @@
 				<Size x="20" y="20"/>
 				<Layers>
 					<Layer>
-						<FontString parentKey="Note" text="Rares and Treasures Coming Next Feature Update!" inherits="GameFontNormal">
+						<FontString parentKey="Note" text="Rares and Treasures Coming Soon(tm)" inherits="GameFontNormal">
 							<Size x="175" y="0"/>
 							<Anchors>
 								<Anchor point="TOP" relativePoint="BOTTOM" x="105" y="-24"/>
