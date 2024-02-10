@@ -430,7 +430,7 @@ function Promos.Render(Timers, idx, promo)
 		end
 	end
 	timerRow.clickFunction = function()
-		options.TogglePopup(string.format(promo.url, unpack(selectedLang.urlParams)), "Press CONTROL-C to copy the link", { "CENTER", UIParent, "CENTER" })
+		options.TogglePopup(string.format(promo.url, unpack(selectedLang.urlParams)), "Press " .. (IsMacClient() and "Cmd" or "Ctrl") .. "-C to copy the link", { "CENTER", UIParent, "CENTER" })
 	end
 	local height = timerRow:GetHeight() + 4
 	timerRow:SetShown(true)

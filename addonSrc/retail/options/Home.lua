@@ -10,7 +10,7 @@ local spacing = 20
 local function Prime_OnHyperlinkClick(_, _, _, _, region, left, top, width, height)
 	TogglePopup(
 			"https://subs.twitch.tv/TomCat",
-			"Press Control-C to copy the link",
+			"Press " .. (IsMacClient() and "Cmd" or "Ctrl") .. "-C to copy the link",
 			{ "CENTER", SettingsPanel.Container.SettingsCanvas, "CENTER", 0, 0 },
 			region, { left, top, width, height }
 	)

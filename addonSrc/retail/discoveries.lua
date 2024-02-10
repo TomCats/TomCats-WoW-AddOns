@@ -426,10 +426,10 @@ local function OnHyperlinkClick(self, link)
 	self.popup.lastLink = link
 	if (link == "discoveries") then
 		self.popup.editbox.text = addon.base64.encode(serializeTable(_G["TomCats_Account"].discoveries))
-		self.popup.info:SetText("Press Control-C to copy the data")
+		self.popup.info:SetText("Press " .. (IsMacClient() and "Cmd" or "Ctrl") .. "-C to copy the data")
 	else
 		self.popup.editbox.text = "https://" .. link
-		self.popup.info:SetText("Press Control-C to copy the link")
+		self.popup.info:SetText("Press " .. (IsMacClient() and "Cmd" or "Ctrl") .. "-C to copy the link")
 	end
 	self.popup.editbox:SetText(self.popup.editbox.text)
 	self.popup.editbox:HighlightText()

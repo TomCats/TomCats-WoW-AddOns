@@ -24,7 +24,7 @@ local function OnHyperlinkClick(self, link)
 		return
 	end
 	self.popup.text = link
-	self.popup.info:SetText("Press Control-C to copy the link")
+	self.popup.info:SetText("Press " .. (IsMacClient() and "Cmd" or "Ctrl") .. "-C to copy the link")
 	self.popup.editbox:SetText(self.popup.text)
 	self.popup.editbox:HighlightText()
 	self.popup:SetFrameStrata("TOOLTIP")

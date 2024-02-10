@@ -6,7 +6,7 @@ LinkButton = { }
 local function OnClick(self)
 	TogglePopup(
 			self.linkText,
-			"Press Control-C to copy the link",
+			"Press " .. (IsMacClient() and "Cmd" or "Ctrl") .. "-C to copy the link",
 			{ "CENTER", SettingsPanel.Container.SettingsCanvas, "CENTER", 0, 0 },
 			self
 	)
