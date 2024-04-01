@@ -33,73 +33,6 @@ local promoTypes = {
 }
 
 local promoData = {
-	--{
-	--	type = promoTypes.TWITCH_DROP,
-	--	startTime = 1699380000,
-	--	endTime = 1699984800,
-	--	lang = {
-	--		["enUS"] = {
-	--			urlParams = { "en-us" },
-	--			title1 = "DRAGONFLIGHT TWITCH DROPS:",
-	--			title2 = "GET THE DOTTIE PET",
-	--			click = "Click for details" },
-	--		["enGB"] = {
-	--			urlParams = { "en-gb" },
-	--			title1 = "DRAGONFLIGHT TWITCH DROPS:",
-	--			title2 = "GET THE DOTTIE PET",
-	--			click = "Click for details" },
-	--		["koKR"] = {
-	--			urlParams = { "ko-kr" },
-	--			title1 = "용군단 트위치 드롭스:",
-	--			title2 = "도티 애완동물과 길들인 흰색 낙타 탈것을 손에 넣으세요",
-	--			click = "자세한 내용을 보려면 클릭하십시오" },
-	--		["frFR"] = {
-	--			urlParams = { "fr-fr" },
-	--			title1 = "DROPS TWITCH POUR DRAGONFLIGHT:",
-	--			title2 = "OBTENEZ LA MASCOTTE DOTTIE",
-	--			click = "Cliquer pour les détails" },
-	--		["deDE"] = {
-	--			urlParams = { "de-de" },
-	--			title1 = "TWITCH-DROPS FÜR DRAGONFLIGHT:",
-	--			title2 = "HOLT EUCH DAS HAUSTIER DOTTIE",
-	--			click = "Klicken Sie für weitere Details" },
-	--		["esES"] = {
-	--			urlParams = { "es-es" },
-	--			title1 = "DROPS DE TWITCH EN DRAGONFLIGHT:",
-	--			title2 = "CONSIGUE LA MASCOTA LOCUELA",
-	--			click = "Haga clic para obtener más detalles" },
-	--		["zhTW"] = {
-	--			urlParams = { "zh-tw" },
-	--			title1 = "《巨龍崛起》TWITCH 掉寶：",
-	--			title2 = "獲得點點寵物和白色騎乘駱駝坐騎",
-	--			click = "點擊了解更多詳情。" },
-	--		["esMX"] = {
-	--			urlParams = { "es-mx" },
-	--			title1 = "DROPS DE TWITCH DE DRAGONFLIGHT:",
-	--			title2 = "CONSIGUE LA MASCOTA DOTI",
-	--			click = "Haga clic para obtener más detalles" },
-	--		["ptBR"] = {
-	--			urlParams = { "pt-br" },
-	--			title1 = "TWITCH DROPS DE DRAGONFLIGHT:",
-	--			title2 = "ADOTE A MASCOTE PINTINHA",
-	--			click = "Clique para mais detalhes" },
-	--		["ptPT"] = {
-	--			urlParams = { "pt-br" },
-	--			title1 = "TWITCH DROPS DE DRAGONFLIGHT:",
-	--			title2 = "ADOTE A MASCOTE PINTINHA",
-	--			click = "Clique para mais detalhes" },
-	--		["itIT"] = {
-	--			urlParams = { "it-it" },
-	--			title1 = "TWITCH DROP DI DRAGONFLIGHT:",
-	--			title2 = "OTTIENI LA MASCOTTE DOTTIE",
-	--			click = "Clicca per maggiori dettagli" },
-	--	},
-	--	url = "https://news.blizzard.com/%s/world-of-warcraft/23987093",
-	--	slug = "twitch_dottie",
-	--	modelInfo = {
-	--		creature = 151788
-	--	},
-	--},
 	{
 		type = promoTypes.PRIME_GAMING,
 		startTime = 1709055000,
@@ -152,6 +85,68 @@ local promoData = {
 			items = { 3427, 10035, 6836, 23709 },
 			--			creature = 138741,
 			--			camDistanceScale = 0.8,
+		},
+	},
+	{
+		type = promoTypes.TWITCH_DROP,
+		startTime = 1711126800,
+		endTime = 1712336400,
+		lang = {
+			["enUS"] = {
+				urlParams = { "en-us" },
+				title1 = "DRAGONFLIGHT TWITCH DROPS:",
+				title2 = "GET THE FATHOM PET",
+				click = "Click for details" },
+			["enGB"] = {
+				urlParams = { "en-gb" },
+				title1 = "DRAGONFLIGHT TWITCH DROPS:",
+				title2 = "GET THE FATHOM PET",
+				click = "Click for details" },
+			["frFR"] = {
+				urlParams = { "fr-fr" },
+				title1 = "DROPS TWITCH POUR DRAGONFLIGHT:",
+				title2 = "OBTENEZ LA MASCOTTE PROFONDIM",
+				click = "Cliquer pour les détails" },
+			["deDE"] = {
+				urlParams = { "de-de" },
+				title1 = "TWITCH-DROPS FÜR DRAGONFLIGHT:",
+				title2 = "HOLT EUCH AB JETZT LOT ALS HAUSTIER!",
+				click = "Klicken Sie für weitere Details" },
+			["esES"] = {
+				urlParams = { "es-es" },
+				title1 = "DROPS DE TWITCH EN DRAGONFLIGHT:",
+				title2 = "HAZTE CON LA MASCOTA PROFUNDO",
+				click = "Haga clic para obtener más detalles" },
+			["zhTW"] = {
+				urlParams = { "zh-tw" },
+				title1 = "《巨龍崛起》TWITCH 掉寶：",
+				title2 = "現已可獲取深淵鱘寵物！",
+				click = "點擊了解更多詳情。" },
+			["esMX"] = {
+				urlParams = { "es-mx" },
+				title1 = "DROPS DE TWITCH DE DRAGONFLIGHT:",
+				title2 = "¡LA MASCOTA SONDEO YA ESTÁ DISPONIBLE!",
+				click = "Haga clic para obtener más detalles" },
+			["ptBR"] = {
+				urlParams = { "pt-br" },
+				title1 = "TWITCH DROPS DE DRAGONFLIGHT:",
+				title2 = "OBTENHA A MASCOTE BRAÇA",
+				click = "Clique para mais detalhes" },
+			["ptPT"] = {
+				urlParams = { "pt-br" },
+				title1 = "TWITCH DROPS DE DRAGONFLIGHT:",
+				title2 = "OBTENHA A MASCOTE BRAÇA",
+				click = "Clique para mais detalhes" },
+			["itIT"] = {
+				urlParams = { "it-it" },
+				title1 = "TWITCH DROP DI DRAGONFLIGHT:",
+				title2 = "OTTIENI LA MASCOTTE FONDALIO",
+				click = "Clicca per maggiori dettagli" },
+		},
+		url = "https://news.blizzard.com/%s/world-of-warcraft/24075000",
+		slug = "twitch_fathom",
+		modelInfo = {
+			creature = 218060
 		},
 	},
 	--{
