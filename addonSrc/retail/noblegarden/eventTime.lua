@@ -22,10 +22,10 @@ local function setupGlobalEventTimes(val, euOffset, naOffset, krOffset, cnOffset
 	return times
 end
 -- 1681146000
--- 4/10/2022 10:00am CET in EU (CEST/CEDT - daylight savings time being observed)
-local eventStarts = setupGlobalEventTimes(1681113600, 0, 32400, -28800, -25200, -25200)
--- 4/17/2022 10:00am CET in EU (CEST/CEDT - daylight savings time being observed)
-local eventEnds = setupGlobalEventTimes(1681718400, 0, 32400, -28800, -25200, -25200)
+-- 5/1/2024 10:00am CEST
+local eventStarts = setupGlobalEventTimes(1711958400, 0, 32400, -28800, -25200, -25200)
+-- 5/8/2024 10:00am CEST
+local eventEnds = setupGlobalEventTimes(1715155200, 0, 32400, -28800, -25200, -25200)
 
 function component.getCurrentOffsetMinutes()
 	if (currentOffsetMinutes) then return currentOffsetMinutes end

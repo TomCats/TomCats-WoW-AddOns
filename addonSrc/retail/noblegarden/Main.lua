@@ -1,6 +1,5 @@
 local addonName, addon = ...
 if (not addon.noblegarden.IsEventActive()) then return end
-
 local chocolates = 0
 local safeLoot = true
 local lootAttempted = false
