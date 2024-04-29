@@ -6,7 +6,8 @@ local AreaPOIPinMouseOver, appendTooltip
 
 -- local eventMapID = 12 -- Kalimdor
 -- local eventMapID = 13 -- Eastern Kingdoms
-local eventMapID = 101 -- Outland
+-- local eventMapID = 101 -- Outland
+local eventMapID = 113 -- Northrend
 
 local progress = {
 	{ 1100022, "None" },

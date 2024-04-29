@@ -17,7 +17,8 @@ local function GetPOIInfo(t)
 			local continent, worldPosition = C_Map.GetWorldPosFromMapPos(mapID, poiInfo.position)
 --			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 12) -- Kalimdor
 --			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 13) -- Eastern Kingdoms
-			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 101) -- Outland
+--			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 101) -- Outland
+			local _, position = C_Map.GetMapPosFromWorldPos(continent, worldPosition, 113) -- Northrend
 			poiInfo.x, poiInfo.y = position.x, position.y
 		end
 	end
@@ -69,20 +70,36 @@ local poiColumns = {
 --}
 
 -- Outland Cup
+--local eventLocations = {
+--	{7589, 100, 18580 },
+--	{7590, 102, 18603 },
+--	{7591, 105, 18617 },
+--	{7592, 107, 18626 },
+--	{7593, 108, 18649 },
+--	{7594, 108, 18658 },
+--	{7595, 109, 18667 },
+--	{7596, 108, 18679 },
+--	{7597, 104, 18692 },
+--	{7598, 109, 18707 },
+--	{7599, 107, 18739 },
+--	{7600, 108, 18794 },
+--	{7601, 104, 18842 },
+--}
+
+-- Northrend
 local eventLocations = {
-	{7589, 100, 18580 },
-	{7590, 102, 18603 },
-	{7591, 105, 18617 },
-	{7592, 107, 18626 },
-	{7593, 108, 18649 },
-	{7594, 108, 18658 },
-	{7595, 109, 18667 },
-	{7596, 108, 18679 },
-	{7597, 104, 18692 },
-	{7598, 109, 18707 },
-	{7599, 107, 18739 },
-	{7600, 108, 18794 },
-	{7601, 104, 18842 },
+	{ 7689, 117, 19199 },
+	{ 7690, 117, 19277 },
+	{ 7691, 116, 19582 },
+	{ 7692, 121, 19591 },
+	{ 7693, 120, 19600 },
+	{ 7694, 127, 19609 },
+	{ 7695, 115, 19618 },
+	{ 7696, 118, 19627 },
+	{ 7697, 119, 19636 },
+	{ 7698, 114, 19647 },
+	{ 7699, 121, 19656 },
+	{ 7700, 114, 19665 },
 }
 
 local eventLocationsMetatable = {
