@@ -22,6 +22,9 @@ local function handleSlashCommand(msg)
 		if (t[2] == "ERRORS") then
 			addon.SetErrorButtonsEnabled()
 		end
+		if (t[2] == "QUEUEWU") then
+			addon.ToggleQueuewu()
+		end
 	end
 end
 

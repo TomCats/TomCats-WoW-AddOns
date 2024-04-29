@@ -43,6 +43,7 @@ addon.defaultSavedVariables = {
 				iconScale = 1.0
 			},
 			betaEnabled = false,
+			queuewu = false,
 			defaultVignetteIcon = "default",
 		},
 		lastVersionSeen = "NONE",
