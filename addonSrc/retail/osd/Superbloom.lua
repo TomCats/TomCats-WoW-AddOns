@@ -30,6 +30,9 @@ function Superbloom.GetVisibilityOption()
 end
 
 function Superbloom.IsVisible()
+    -- Begin code to disable the timer for Pandaria Remix (may be removed after Pandaria Remix is over)
+    if (PlayerGetTimerunningSeasonID()) then return false end
+    -- end
     return visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.superbloom]()
 end
 
