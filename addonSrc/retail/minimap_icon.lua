@@ -63,26 +63,28 @@ local function MinimapButtonOnload(self)
 			local x, y = math.cos(rad), math.sin(rad)
 			x = math.max(-r, math.min(x * h, r))
 			y = math.max(-r, math.min(y * h, r))
-			self:SetPoint("CENTER", Minimap, "CENTER", x, y)
+			self:SetPoint("CENTER", Minimap, "CENTER", x-2, y)
 		else
 			local Cx = r * math.cos(rad)
 			local Cy = r * math.sin(rad)
-			self:SetPoint("CENTER", Minimap, "CENTER", Cx, Cy)
+			self:SetPoint("CENTER", Minimap, "CENTER", Cx-2, Cy)
 		end
-		local buttonRight = self:GetRight()
-		if (buttonRight > right) then
-			local point = { self:GetPoint() }
-			local adj = (buttonRight - right) --* scale
-			point[4] = point[4] - adj
-			self:SetPoint(unpack(point))
-		end
-		local buttonTop = self:GetTop()
-		if (buttonTop > top) then
-			local point = { self:GetPoint() }
-			local adj = (buttonTop - top) --* scale
-			point[5] = point[5] - adj
-			self:SetPoint(unpack(point))
-		end
+		--local buttonRight = self:GetRight()
+		--if (buttonRight > right) then
+		--	local point = { self:GetPoint() }
+		--	local adj = (buttonRight - right) --* scale
+		--	adj = 0
+		--	point[4] = point[4] - adj
+		--	self:SetPoint(unpack(point))
+		--end
+		--local buttonTop = self:GetTop()
+		--if (buttonTop > top) then
+		--	local point = { self:GetPoint() }
+		--	local adj = (buttonTop - top) --* scale
+		--	adj = 0
+		--	point[5] = point[5] - adj
+		--	self:SetPoint(unpack(point))
+		--end
 	end
 	local function UpdatePositionByCursor()
 		local Bx, By = GetCursorPosition()
