@@ -76,10 +76,10 @@ function GetPlayerUnitGUID()
 end
 
 function UpdateBonusXPTracker()
-	local level = charVars.level
-	local xp = charVars.xp
+	local level = charVars.level or 10
+	local xp = charVars.xp or 0
 	local data = XPData[level - 9]
-	local bonus = GetXPBonus()
+	local bonus = GetXPBonus() or 0
 	for bonusXPTokenIndex, bonusXPTokenType in ipairs(bonusXPTokenTypes) do
 		for i = 1, charVars[bonusXPTokenType] do
 			xp = xp + (data[bonusXPTokenIndex + 2] * (bonus + 100)) / 100
@@ -104,13 +104,13 @@ function UpdateBonusXPTracker()
 		OSD.xpBarTotal:SetText("100% (100%)")
 		OSD.xpBarPending:Hide()
 	else
-		local characterXP = XPData[1][2] - XPData[charVars.level - 9][2] + charVars.xp
+		local characterXP = XPData[1][2] - XPData[(charVars.level or 10) - 9][2] + (charVars.xp or 0)
 		local percentageEarned = characterXP / XPData[1][2]
 		local XPPending = XPData[1][2] - data[2] + xp - characterXP
 		local percentagePending = XPPending / XPData[1][2]
 		OSD.xpBar:SetSize(OSD.footerBar:GetWidth() * percentageEarned, OSD.footerBar:GetHeight())
 		OSD.xpBarPending:SetSize(OSD.footerBar:GetWidth() * percentagePending, OSD.footerBar:GetHeight())
-		OSD.xpBarTotal:SetText(string.format("%d%% (%d%%)", math.floor(percentageEarned * 100), math.floor((percentageEarned + percentagePending) * 100)))
+		OSD.xpBarTotal:SetText(string.format("%s%% (%s%%)", math.floor(percentageEarned * 1000)/10, math.floor((percentageEarned + percentagePending) * 1000)/10))
 	end
 end
 
@@ -262,12 +262,10 @@ function component.Init()
 		if (not atMaxLevel) then
 			OSD:Show()
 		end
-		if (not charVars.synchronized and not atMaxLevel) then
---			print("Click on a mailbox to synchronize XP tracking")
-		elseif (GetXPBonus() ~= 0) then
+		if (charVars.synchronized) then
 			SetSynchronized()
-			UpdateBonusXPTracker()
 		end
+		UpdateBonusXPTracker()
 	end
 end
 
