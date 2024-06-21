@@ -84,7 +84,7 @@ addon.defaultSavedVariables = {
 		},
 		mopremix = {
 			bonusxp = {
-				level = 1,
+				level = 10,
 				xp = 0,
 				bonus = 0,
 				synchronized = false,
