@@ -64,6 +64,9 @@ addon.defaultSavedVariables = {
 		hallowsend = addon.constants.HINT_ALL,
 		primalstorms = {
 			preferences = addon.constants.HINT_ALL,
+		},
+		mopremix = {
+			osd = addon.constants.HINT_ALL
 		}
 	},
 	TomCats_Character = {
@@ -78,6 +81,17 @@ addon.defaultSavedVariables = {
 		},
 		hallowsend = {
 			preferences = addon.constants.HINT_ALL
+		},
+		mopremix = {
+			bonusxp = {
+				level = 1,
+				xp = 0,
+				bonus = 0,
+				synchronized = false,
+				uncommon = 0,
+				rare = 0,
+				epic = 0,
+			}
 		}
 	}
 }

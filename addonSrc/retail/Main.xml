@@ -77,5 +77,6 @@
 	<Include file="dragonflyingglyphs/Main.xml" />
 	<Include file="kalimdorcup/Main.xml" />
 	<Script file="soundoverride/soundoverride.lua" />
+	<Include file="mopremix/Main.xml" />
 	<Script file="notaint.lua" />
 </Ui>
