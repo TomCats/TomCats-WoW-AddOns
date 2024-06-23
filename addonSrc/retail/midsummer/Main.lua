@@ -5,6 +5,8 @@ local TCL = addon.midsummer.TomCatsLibs
 local WorldMapFrame
 local BattlefieldMapFrame
 local FlightMapFrame
+local loggedIn = false
+local addonLoaded = false
 
 -- TODO: Add icons to the WorldMapFrame
 -- TODO: Add icons to the BattleFieldMapFrame
@@ -29,20 +31,21 @@ local function AddDataProviderToMap(map)
         map:AddDataProvider(CreateFromMixins(TomCatsMidsummerDataProviderMixin))
     end
 end
-local function ADDON_LOADED(_, arg1)
-    if (not WorldMapFrame and _G["WorldMapFrame"]) then
-        WorldMapFrame = addon.GetProxy(_G["WorldMapFrame"])
-        AddDataProviderToMap(WorldMapFrame)
-    end
-    if (not BattlefieldMapFrame and _G["BattlefieldMapFrame"]) then
-        BattlefieldMapFrame = addon.GetProxy(_G["BattlefieldMapFrame"])
-        AddDataProviderToMap(BattlefieldMapFrame)
-    end
-    if (not FlightMapFrame and _G["FlightMapFrame"]) then
-        FlightMapFrame = addon.GetProxy(_G["FlightMapFrame"])
-        AddDataProviderToMap(FlightMapFrame)
-    end
-    if (addonName == arg1) then
+local function InitAddon()
+    if (not PlayerGetTimerunningSeasonID()) then
+        addon.midsummerInit()
+        if (not WorldMapFrame and _G["WorldMapFrame"]) then
+            WorldMapFrame = addon.GetProxy(_G["WorldMapFrame"])
+            AddDataProviderToMap(WorldMapFrame)
+        end
+        if (not BattlefieldMapFrame and _G["BattlefieldMapFrame"]) then
+            BattlefieldMapFrame = addon.GetProxy(_G["BattlefieldMapFrame"])
+            AddDataProviderToMap(BattlefieldMapFrame)
+        end
+        if (not FlightMapFrame and _G["FlightMapFrame"]) then
+            FlightMapFrame = addon.GetProxy(_G["FlightMapFrame"])
+            AddDataProviderToMap(FlightMapFrame)
+        end
         addon.midsummer.charm = addon.midsummer.Charms.Create({
             name = "TomCats-MidsummerMinimapButton2023",
             iconTexture = "Interface\\AddOns\\TomCats\\midsummer\\images\\midsummer-icon.png",
@@ -85,6 +88,21 @@ local function ADDON_LOADED(_, arg1)
         end
     end
 end
+
+local function ADDON_LOADED(_, arg1)
+    if (addonName == arg1) then
+        addonLoaded = true
+        if (loggedIn) then
+            InitAddon()
+        end
+    end
+end
+local function PLAYER_LOGIN()
+    loggedIn = true
+    if (addonLoaded) then
+        InitAddon()
+    end
+end
 local function zoneTweak()
     if (BattlefieldMapFrame) then
         if GetCVar("showBattlefieldMinimap") == "1" then
@@ -107,6 +125,7 @@ local function zoneTweakRecheck()
     end
 end
 addon.RegisterEvent("ADDON_LOADED", ADDON_LOADED)
+addon.RegisterEvent("PLAYER_LOGIN", PLAYER_LOGIN)
 TCL.Events.RegisterEvent("ZONE_CHANGED", zoneTweak)
 TCL.Events.RegisterEvent("ZONE_CHANGED_INDOORS", zoneTweak)
 TCL.Events.RegisterEvent("NEW_WMO_CHUNK", zoneTweak)

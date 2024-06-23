@@ -546,4 +546,6 @@ local function OnUpdate()
     end
 end
 
-CreateFrame("FRAME"):SetScript("OnUpdate",OnUpdate)
+function addon.midsummerInit()
+    CreateFrame("FRAME"):SetScript("OnUpdate",OnUpdate)
+end
