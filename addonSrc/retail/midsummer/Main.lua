@@ -32,7 +32,7 @@ local function AddDataProviderToMap(map)
     end
 end
 local function InitAddon()
-    if (not PlayerGetTimerunningSeasonID()) then
+    --if (not PlayerGetTimerunningSeasonID()) then
         addon.midsummerInit()
         if (not WorldMapFrame and _G["WorldMapFrame"]) then
             WorldMapFrame = addon.GetProxy(_G["WorldMapFrame"])
@@ -86,7 +86,7 @@ local function InitAddon()
         if (TomCats_Account.midsummer.preferences.hideButton) then
             addon.midsummer.charm:Hide()
         end
-    end
+    --end
 end
 
 local function ADDON_LOADED(_, arg1)
