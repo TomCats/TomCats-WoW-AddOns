@@ -229,7 +229,7 @@ function component.Init()
 		end
 		OSD.xpBar = OSD:CreateTexture(nil, "BACKGROUND")
 		OSD.xpBar:SetDrawLayer("BACKGROUND", 2)
-		OSD.xpBar:SetColorTexture(0,0,0.8,0.8)
+		OSD.xpBar:SetColorTexture(0.54,0.098,0.105,1.0)
 		OSD.xpBar:SetPoint("LEFT", OSD.footerBar, "LEFT")
 		OSD.xpBar:SetSize(1, OSD.footerBar:GetHeight())
 
@@ -251,7 +251,7 @@ function component.Init()
 
 		OSD.xpBarPending = OSD:CreateTexture(nil, "BACKGROUND")
 		OSD.xpBarPending:SetDrawLayer("BACKGROUND", 2)
-		OSD.xpBarPending:SetColorTexture(0,0,0.8,0.5)
+		OSD.xpBarPending:SetColorTexture(0.54,0.098,0.105,0.5)
 		OSD.xpBarPending:SetPoint("LEFT", OSD.xpBar, "RIGHT")
 		OSD.xpBarPending:SetSize(1, OSD.footerBar:GetHeight())
 
