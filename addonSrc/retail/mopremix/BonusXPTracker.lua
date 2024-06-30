@@ -99,14 +99,19 @@ function UpdateBonusXPTracker()
 			break
 		end
 	end
-	if (level == 70) then
+	if (charVars.level == 70) then
 		OSD.xpBar:SetSize(OSD.footerBar:GetWidth(), OSD.footerBar:GetHeight())
 		OSD.xpBarTotal:SetText("100% (100%)")
 		OSD.xpBarPending:Hide()
 	else
 		local characterXP = XPData[1][2] - XPData[(charVars.level or 10) - 9][2] + (charVars.xp or 0)
 		local percentageEarned = characterXP / XPData[1][2]
-		local XPPending = XPData[1][2] - data[2] + xp - characterXP
+		local XPPending
+		if (not data) then
+			XPPending = XPData[1][2] - characterXP
+		else
+			XPPending = XPData[1][2] - data[2] + xp - characterXP
+		end
 		local percentagePending = XPPending / XPData[1][2]
 		OSD.xpBar:SetSize(OSD.footerBar:GetWidth() * percentageEarned, OSD.footerBar:GetHeight())
 		OSD.xpBarPending:SetSize(OSD.footerBar:GetWidth() * percentagePending, OSD.footerBar:GetHeight())
