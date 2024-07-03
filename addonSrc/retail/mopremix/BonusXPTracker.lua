@@ -128,9 +128,9 @@ local function OnEvent(_, event, ...)
 				charVars.level = UnitLevel("player")
 				atMaxLevel = charVars.level == 70
 				charVars.xp = UnitXP("player")
-				if (atMaxLevel) then
-					OSD:Hide()
-				end
+				--if (atMaxLevel) then
+				--	OSD:Hide()
+				--end
 				dirty = true
 			end
 		elseif ((event == "UNIT_SPELLCAST_SUCCEEDED" and args[1] == "player" and args[3] == 440393)
@@ -264,9 +264,9 @@ function component.Init()
 		OSD.footerBar:SetScript("OnLeave", HideXPTrackerTooltip)
 		OSD.xpCaption:SetScript("OnEnter", ShowXPTrackerTooltip)
 		OSD.xpCaption:SetScript("OnLeave", HideXPTrackerTooltip)
-		if (not atMaxLevel) then
-			OSD:Show()
-		end
+		--if (not atMaxLevel) then
+		--	OSD:Show()
+		--end
 		if (charVars.synchronized) then
 			SetSynchronized()
 		end
