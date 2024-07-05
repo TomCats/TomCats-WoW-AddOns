@@ -5,4 +5,5 @@
     <Script file="mopremix\GearAdvisor.lua" />
     <Script file="mopremix\XPData.lua" />
     <Script file="mopremix\BonusXPTracker.lua" />
+    <Script file="mopremix\CollectionTracker.lua" />
 </Ui>
