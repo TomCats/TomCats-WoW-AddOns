@@ -66,7 +66,8 @@ addon.defaultSavedVariables = {
 			preferences = addon.constants.HINT_ALL,
 		},
 		mopremix = {
-			osd = addon.constants.HINT_ALL
+			osd = addon.constants.HINT_ALL, -- bonusXPTracker position
+			bonusXPTrackerDisplay = addon.constants.accessoryDisplay.WHENAPPLICABLE,
 		}
 	},
 	TomCats_Character = {
