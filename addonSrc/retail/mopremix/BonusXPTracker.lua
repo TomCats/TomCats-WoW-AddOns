@@ -294,7 +294,9 @@ function component.Init()
 		if (charVars.synchronized) then
 			SetSynchronized()
 		end
-		UpdateBonusXPTracker()
+		if (not atMaxLevel) then
+			UpdateBonusXPTracker()
+		end
 	end
 end
 
