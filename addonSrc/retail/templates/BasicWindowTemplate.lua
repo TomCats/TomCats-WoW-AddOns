@@ -88,10 +88,16 @@ function Templates.CreateBasicWindow(parentFrame, params)
 						prefs.minimized = false
 						frame.icon:SetParent(frame)
 						frame:Show()
+						if (params.onMaximizeFunc) then
+							params.onMaximizeFunc(frame)
+						end
 					else
 						prefs.minimized = true
 						frame.icon:SetParent(UIParent)
 						frame:Hide()
+						if (params.onMinimizeFunc) then
+							params.onMinimizeFunc(frame)
+						end
 					end
 				end
 			end
@@ -122,10 +128,19 @@ function Templates.CreateBasicWindow(parentFrame, params)
 		frame.icon.Border:SetTexture("Interface/Minimap/MiniMap-TrackingBorder")
 		frame.icon.Border:SetPoint("TOPLEFT")
 		frame.icon.Border:SetDesaturated(1)
-		if (prefs.minimized) then
-			frame.icon:SetParent(UIParent)
-			frame.icon:SetFrameLevel(3001)
-			frame:Hide()
+		if (frame.minimizable) then
+			if (prefs.minimized) then
+				frame.icon:SetParent(UIParent)
+				frame.icon:SetFrameLevel(3001)
+				frame:Hide()
+				if (params.onMinimizeFunc) then
+					params.onMinimizeFunc(frame)
+				end
+			else
+				if (params.onMaximizeFunc) then
+					params.onMaximizeFunc(frame)
+				end
+			end
 		end
 	end
 	return frame
