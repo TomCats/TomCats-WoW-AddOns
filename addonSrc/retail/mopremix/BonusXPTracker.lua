@@ -220,19 +220,6 @@ function component.Init()
 				{
 					icon = ImagePNG.tomcats_minimap_icon,
 					prefs = TomCats_Account.mopremix.osd,
-					--minimizable = true,
-					--iconEnterFunc = function(self)
-					--	GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-					--	GameTooltip:ClearLines()
-					--	GameTooltip:AddLine("TomCat's Tours Remix Edition", nil, nil, nil, true)
-					--	GameTooltip:AddLine("\nEnjoy the work in progress and download updates regularly to find new features!", 1, 1, 1, true)
-					--	GameTooltip:AddLine("\nIf you have questions or feedback, visit me on Twitch or Discord!", 1, 1, 1, true)
-					--	GameTooltip:AddLine("\nDouble-click to toggle", 1, 1, 1, true)
-					--	GameTooltip:Show()
-					--end,
-					--iconLeaveFunc = function()
-					--	GameTooltip:Hide()
-					--end
 				}
 		)
 		OSD:SetSize(260,100)
