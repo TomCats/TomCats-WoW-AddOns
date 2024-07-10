@@ -17,8 +17,17 @@ local function OnEvent(_, event, arg1)
 	end
 end
 
+local function OnUpdate()
+	for _, component in ipairs(components) do
+		if (component.dirty and component.Refresh) then
+			component.Refresh()
+		end
+	end
+end
+
 eventFrame:RegisterEvent("PLAYER_LOGIN")
 eventFrame:SetScript("OnEvent", OnEvent)
+eventFrame:SetScript("OnUpdate", OnUpdate)
 
 function AddComponent(component)
 	table.insert(components, component)
