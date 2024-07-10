@@ -6,5 +6,6 @@
     <Script file="mopremix\XPData.lua" />
     <Script file="mopremix\BonusXPTracker.lua" />
     <Script file="mopremix\CollectionData.lua" />
+    <Script file="mopremix\CollectionTrackerService.lua" />
     <Script file="mopremix\CollectionTrackerUI.lua" />
 </Ui>
