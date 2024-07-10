@@ -555,9 +555,9 @@ Home:SetScript("OnShow", function(self)
 			mopremixCollectionTrackerConfig.checkButton:SetCheckedAtlas("checkmark-minimal", true)
 			mopremixCollectionTrackerConfig.checkButton:SetDisabledCheckedAtlas("checkmark-minimal-disabled", true)
 			mopremixCollectionTrackerConfig.checkButton:SetScript("OnClick", function(self)
-				mopremix.CollectionTracker.SetDisplayed(self:GetChecked())
+				mopremix.CollectionTrackerUI.SetDisplayed(self:GetChecked())
 			end)
-			mopremixCollectionTrackerConfig.checkButton:SetChecked(mopremix.CollectionTracker.IsDisplayed())
+			mopremixCollectionTrackerConfig.checkButton:SetChecked(mopremix.CollectionTrackerUI.IsDisplayed())
 			AttachTooltip({
 				"MoP Remix Collection Tracker",
 				"Enables or disables the display of the collection tracker or its icon"
