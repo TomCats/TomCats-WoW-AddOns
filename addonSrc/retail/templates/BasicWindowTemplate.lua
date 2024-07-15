@@ -43,7 +43,10 @@ function Templates.CreateBasicWindow(parentFrame, params)
 	end)
 	frame:SetScript("OnDragStop", function(self)
 		self:StopMovingOrSizing()
-		prefs.WindowLocation = { self:GetPoint() }
+		local topLeftX, topLeftY = self:GetLeft(), self:GetTop()
+		self:ClearAllPoints()
+		self:SetPoint("TOPLEFT", UIParent, "TOPLEFT", topLeftX, topLeftY-UIParent:GetHeight())
+		prefs.WindowLocation = { "TOPLEFT", "UIParent", "TOPLEFT", topLeftX, topLeftY-UIParent:GetHeight() }
 	end)
 	if (prefs.WindowLocation and (#prefs.WindowLocation > 0)) then
 		frame:ClearAllPoints()
