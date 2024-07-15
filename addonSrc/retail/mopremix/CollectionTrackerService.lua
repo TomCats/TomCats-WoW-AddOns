@@ -4,6 +4,7 @@ select(2, ...).SetScope("mopremix")
 local initialized = false
 local initializing = false
 local collectionItemsLUT
+local illusionSpellItemLUT
 local itemsByModifiedAppearanceID
 local itemsByMountID
 local eventFrame
@@ -116,6 +117,15 @@ local function SetupEquipmentItem(collectionItem, itemModifiedAppearanceID)
 	RefreshEquipmentItem(collectionItem)
 end
 
+local function SetupIllusion(collectionItem)
+	collectionItem.type = COLLECTION_ITEM_TYPE.ILLUSION
+	local _, spellID = GetItemSpell(collectionItem.itemID)
+	if (spellID) then
+		illusionSpellItemLUT[spellID] = collectionItem
+	end
+	local illusionInfo = C_TransmogCollection.GetIllusionInfo(collectionItem.illusionSourceID)
+	collectionItem.collected = illusionInfo and illusionInfo.isCollected or false
+end
 
 local function HandleItemDataLoad(itemID, success)
 	local collectionItem = collectionItemsLUT[itemID]
@@ -125,7 +135,9 @@ local function HandleItemDataLoad(itemID, success)
 			collectionItem.loaded = true
 			local itemName, _, _, _, _, _, _, _, _, _, _, classID, subclassID = C_Item.GetItemInfo(itemID)
 			collectionItem.name = itemName
-			if (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.Mount) then
+			if (collectionItem.illusionSourceID) then
+				SetupIllusion(collectionItem)
+			elseif (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.Mount) then
 				SetupMount(collectionItem)
 			else
 				local setID = C_Item.GetItemLearnTransmogSet(itemID)
@@ -164,7 +176,7 @@ local function HandleItemDataLoad(itemID, success)
 	end
 end
 
-local function OnEvent(_, event, arg1, arg2)
+local function OnEvent(_, event, arg1, arg2, arg3)
 	if (event == "ITEM_DATA_LOAD_RESULT") then
 		HandleItemDataLoad(arg1, arg2)
 	elseif (event == "TRANSMOG_SEARCH_UPDATED") then
@@ -201,6 +213,12 @@ local function OnEvent(_, event, arg1, arg2)
 		if (initialized) then
 			CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.NONE)
 		end
+	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg1 == "player") then
+		local collectionItem = illusionSpellItemLUT[arg3]
+		if (collectionItem) then
+			collectionItem.collected = true
+			CollectionTrackerUI.MarkDirty()
+		end
 	end
 end
 
@@ -213,6 +231,7 @@ function CollectionTrackerService.Init()
 		itemsByModifiedAppearanceID = { }
 		itemsByMountID = { }
 		illusionSpellItemLUT = { }
+		vendorNPCs = { }
 		eventFrame = CreateFrame("Frame")
 		eventFrame:RegisterEvent("ITEM_DATA_LOAD_RESULT")
 		--eventFrame:RegisterEvent("TRANSMOG_COLLECTION_SOURCE_ADDED")
@@ -222,12 +241,15 @@ function CollectionTrackerService.Init()
 		eventFrame:RegisterEvent("NEW_MOUNT_ADDED")
 		eventFrame:RegisterEvent("NEW_TOY_ADDED")
 		eventFrame:RegisterEvent("HEIRLOOMS_UPDATED")
+		eventFrame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 		eventFrame:SetScript("OnEvent", OnEvent)
 		for _, collectionItem in ipairs(CollectionItems) do
 			setmetatable(collectionItem, CollectionItemsMetatable)
 			collectionItemsLUT[collectionItem.itemID] = collectionItem
 			itemLoadingTracker:Add(collectionItem.itemID)
-			vendorNPCs[collectionItem.vendorNPC] = true
+			if (collectionItem.vendorNPC) then
+				vendorNPCs[collectionItem.vendorNPC] = true
+			end
 		end
 		for _, collectionItem in ipairs(CollectionItems) do
 			C_Item.RequestLoadItemDataByID(collectionItem.itemID)
