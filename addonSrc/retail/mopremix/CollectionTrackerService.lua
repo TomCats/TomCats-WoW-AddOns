@@ -8,7 +8,7 @@ local itemsByModifiedAppearanceID
 local itemsByMountID
 local eventFrame
 local dataProvider
-local vendorNPCs = { }
+local vendorNPCs
 local currentFilter
 local lastFilter
 
@@ -212,6 +212,7 @@ function CollectionTrackerService.Init()
 		collectionItemsLUT = { }
 		itemsByModifiedAppearanceID = { }
 		itemsByMountID = { }
+		illusionSpellItemLUT = { }
 		eventFrame = CreateFrame("Frame")
 		eventFrame:RegisterEvent("ITEM_DATA_LOAD_RESULT")
 		--eventFrame:RegisterEvent("TRANSMOG_COLLECTION_SOURCE_ADDED")
