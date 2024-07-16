@@ -259,6 +259,11 @@ function component.Init()
 			local owner = GameTooltip:GetOwner()
 			if (owner and itemButtons[owner]) then
 				GameTooltip:AddLine(string.format("\nSource: %s", CollectionTrackerService.GetSourceForItem(owner.collectionItem)))
+				if (owner.collectionItem.collected) then
+					GameTooltip:AddLine("Collected: Yes")
+				else
+					GameTooltip:AddLine("Collected: No")
+				end
 			end
 		end)
 	end
