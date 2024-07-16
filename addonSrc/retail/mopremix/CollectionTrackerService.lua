@@ -16,6 +16,8 @@ local filterOptions
 local typeMap
 local lastVendor
 local searchText
+local isAtMerchant = false
+
 
 local itemLoadingTracker = {
 	remaining = 0,
@@ -223,15 +225,19 @@ local function OnEvent(_, event, arg1, arg2, arg3)
 				if (unitType == "Creature") then
 					npcID = tonumber(npcID)
 					if (vendorNPCs[npcID]) then
-						CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.VENDOR, npcID)
+						isAtMerchant = true
+						CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.VENDOR, vendorNPCs[npcID])
+						CollectionTrackerUI.MarkDirty()
 					end
 				end
 			end
 		end
 	elseif (event == "MERCHANT_CLOSED") then
+		isAtMerchant = false
 		if (initialized) then
 			CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.DEFAULT)
 		end
+		CollectionTrackerUI.MarkDirty()
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg1 == "player") then
 		local collectionItem = illusionSpellItemLUT[arg3]
 		if (collectionItem) then
@@ -285,7 +291,13 @@ function CollectionTrackerService.Init()
 			collectionItemsLUT[collectionItem.itemID] = collectionItem
 			itemLoadingTracker:Add(collectionItem.itemID)
 			if (collectionItem.vendorNPC) then
-				vendorNPCs[collectionItem.vendorNPC] = true
+				vendorNPCs[collectionItem.vendorNPC] = collectionItem.vendorNPC
+				local vendorAliases = VendorAliases[collectionItem.vendorNPC]
+				if (vendorAliases) then
+					for _, alias in ipairs(vendorAliases) do
+						vendorNPCs[alias] = collectionItem.vendorNPC
+					end
+				end
 			end
 		end
 		for _, collectionItem in ipairs(CollectionItems) do
@@ -383,6 +395,20 @@ function CollectionTrackerService.SetSearchText(text)
 	searchText = text ~= "" and text or nil
 	CollectionTrackerService.SetFilter(lastFilter, lastVendor)
 	CollectionTrackerUI.MarkDirty()
+end
+
+function CollectionTrackerService.IsAtMerchant()
+	return isAtMerchant
+end
+
+function CollectionTrackerService.GetSourceForItem(collectionItem)
+	if (collectionItem.vendorNPC) then
+		return "Vendor"
+	end
+	if (collectionItem.achievementID) then
+		return "Achievement"
+	end
+	return "Unknown"
 end
 
 COLLECTION_TRACKER_FILTER = {

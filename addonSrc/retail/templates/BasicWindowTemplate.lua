@@ -43,10 +43,12 @@ function Templates.CreateBasicWindow(parentFrame, params)
 	end)
 	frame:SetScript("OnDragStop", function(self)
 		self:StopMovingOrSizing()
-		local topLeftX, topLeftY = self:GetLeft(), self:GetTop()
-		self:ClearAllPoints()
-		self:SetPoint("TOPLEFT", UIParent, "TOPLEFT", topLeftX, topLeftY-UIParent:GetHeight())
-		prefs.WindowLocation = { "TOPLEFT", "UIParent", "TOPLEFT", topLeftX, topLeftY-UIParent:GetHeight() }
+		if not self.isLocked then
+			local topLeftX, topLeftY = self:GetLeft(), self:GetTop()
+			self:ClearAllPoints()
+			self:SetPoint("TOPLEFT", UIParent, "TOPLEFT", topLeftX, topLeftY-UIParent:GetHeight())
+			prefs.WindowLocation = { "TOPLEFT", "UIParent", "TOPLEFT", topLeftX, topLeftY-UIParent:GetHeight() }
+		end
 	end)
 	if (prefs.WindowLocation and (#prefs.WindowLocation > 0)) then
 		frame:ClearAllPoints()
@@ -80,31 +82,38 @@ function Templates.CreateBasicWindow(parentFrame, params)
 			local clickTimes = { }
 			local threshold = 0.4
 			local function OnClick()
-				local currentTime = GetTime()
-				if #clickTimes == 0 or (currentTime - clickTimes[#clickTimes]) > threshold then
-					clickTimes = {currentTime}
-				else
-					table.insert(clickTimes, currentTime)
-				end
-				if #clickTimes >= 2 and (clickTimes[#clickTimes] - clickTimes[#clickTimes - 1]) <= threshold then
+				--local currentTime = GetTime()
+				--if #clickTimes == 0 or (currentTime - clickTimes[#clickTimes]) > threshold then
+				--	clickTimes = {currentTime}
+				--else
+				--	table.insert(clickTimes, currentTime)
+				--end
+				--if #clickTimes >= 2 and (clickTimes[#clickTimes] - clickTimes[#clickTimes - 1]) <= threshold then
 					if (prefs.minimized) then
 						prefs.minimized = false
 						frame.icon:SetParent(frame)
-						frame.icon:SetScale(1.0)
 						frame:Show()
 						if (params.onMaximizeFunc) then
 							params.onMaximizeFunc(frame)
 						end
 					else
-						prefs.minimized = true
-						frame.icon:SetParent(UIParent)
-						frame.icon:SetFrameLevel(3001)
-						frame.icon:SetScale(1.5)
-						frame:Hide()
-						if (params.onMinimizeFunc) then
-							params.onMinimizeFunc(frame)
-						end
+						--prefs.minimized = true
+						--frame.icon:SetParent(UIParent)
+						--frame.icon:SetFrameLevel(3001)
+						--frame:Hide()
+						--if (params.onMinimizeFunc) then
+						--	params.onMinimizeFunc(frame)
+						--end
 					end
+				--end
+			end
+			frame.Minimize = function(self)
+				prefs.minimized = true
+				frame.icon:SetParent(UIParent)
+				frame.icon:SetFrameLevel(3001)
+				frame:Hide()
+				if (params.onMinimizeFunc) then
+					params.onMinimizeFunc(frame)
 				end
 			end
 			frame.icon:SetScript("OnClick", OnClick)
@@ -138,13 +147,11 @@ function Templates.CreateBasicWindow(parentFrame, params)
 			if (prefs.minimized) then
 				frame.icon:SetParent(UIParent)
 				frame.icon:SetFrameLevel(3001)
-				frame.icon:SetScale(1.5)
 				frame:Hide()
 				if (params.onMinimizeFunc) then
 					params.onMinimizeFunc(frame)
 				end
 			else
-				frame.icon:SetScale(1.0)
 				if (params.onMaximizeFunc) then
 					params.onMaximizeFunc(frame)
 				end
