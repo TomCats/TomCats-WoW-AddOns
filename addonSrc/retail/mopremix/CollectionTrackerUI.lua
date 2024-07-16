@@ -381,6 +381,20 @@ function component.MarkDirty()
 	component.dirty = true
 end
 
+local scrollPosition
+
+function component.PreserveScrollPosition()
+	if (OSD and OSD.ScrollBar) then
+		scrollPosition = OSD.ScrollBar:GetScrollPercentage()
+	end
+end
+
+function component.RestoreScrollPosition()
+	if (OSD and OSD.ScrollBar and scrollPosition) then
+		OSD.ScrollBar:SetScrollPercentage(scrollPosition, true)
+	end
+end
+
 AddComponent(component)
 
 CollectionTrackerUI = component

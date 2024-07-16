@@ -176,8 +176,6 @@ local function HandleItemDataLoad(itemID, success)
 							local itemAppearanceID, itemModifiedAppearanceID = C_TransmogCollection.GetItemInfo(itemID)
 							if (itemAppearanceID) then
 								SetupEquipmentItem(collectionItem, itemModifiedAppearanceID)
-							else
-								print("Info not loaded for:", collectionItem.name)
 							end
 						end
 					end
@@ -208,12 +206,15 @@ local function OnEvent(_, event, arg1, arg2, arg3)
 				RefreshEquipmentItem(collectionItem)
 			end
 		end
+		isDirty = true
 		CollectionTrackerUI.MarkDirty()
 	elseif (event == "NEW_MOUNT_ADDED") then
 		RefreshMount(arg1)
+		isDirty = true
 		CollectionTrackerUI.MarkDirty()
 	elseif (event == "NEW_TOY_ADDED") then
 		RefreshToy(arg1)
+		isDirty = true
 		CollectionTrackerUI.MarkDirty()
 	elseif (event == "HEIRLOOMS_UPDATED") then
 		RefreshHeirloom()
@@ -237,17 +238,20 @@ local function OnEvent(_, event, arg1, arg2, arg3)
 		if (initialized) then
 			CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.DEFAULT)
 		end
+		isDirty = true
 		CollectionTrackerUI.MarkDirty()
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg1 == "player") then
 		local collectionItem = illusionSpellItemLUT[arg3]
 		if (collectionItem) then
 			collectionItem.collected = true
+			isDirty = true
 			CollectionTrackerUI.MarkDirty()
 		end
 	elseif (event == "NEW_PET_ADDED") then
 		for _, collectionItem in ipairs(CollectionItems) do
 			if (collectionItem.type == COLLECTION_ITEM_TYPE.PET and not collectionItem.collected) then
 				RefreshPet(collectionItem)
+				isDirty = true
 				CollectionTrackerUI.MarkDirty()
 			end
 		end
@@ -313,6 +317,9 @@ function CollectionTrackerService.GetDataProvider()
 			return a.name < b.name
 		end, true)
 		CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.DEFAULT)
+	elseif (isDirty) then
+		isDirty = false
+		CollectionTrackerService.SetFilter(lastFilter, lastVendor)
 	end
 	return dataProvider
 end
@@ -353,6 +360,7 @@ local function CanAdd(collectionItem)
 end
 
 function CollectionTrackerService.SetFilter(filter, arg1)
+	CollectionTrackerUI.PreserveScrollPosition()
 	dataProvider:Flush()
 	if (filter == COLLECTION_TRACKER_FILTER.DEFAULT) then
 		local filteredItems = { }
@@ -375,6 +383,7 @@ function CollectionTrackerService.SetFilter(filter, arg1)
 	end
 	lastFilter = filter
 	lastVendor = arg1
+	CollectionTrackerUI.RestoreScrollPosition()
 end
 
 function CollectionTrackerService.IsInitialized()
@@ -387,13 +396,13 @@ end
 
 function CollectionTrackerService.ToggleFilterOption(optionName)
 	filterOptions[optionName] = not filterOptions[optionName]
-	CollectionTrackerService.SetFilter(lastFilter, lastVendor)
+	isDirty = true
 	CollectionTrackerUI.MarkDirty()
 end
 
 function CollectionTrackerService.SetSearchText(text)
 	searchText = text ~= "" and text or nil
-	CollectionTrackerService.SetFilter(lastFilter, lastVendor)
+	isDirty = true
 	CollectionTrackerUI.MarkDirty()
 end
 
