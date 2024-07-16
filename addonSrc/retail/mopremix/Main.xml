@@ -1,6 +1,14 @@
 <!-- See license.txt for license and copyright information -->
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
+    <!-- Tiered Menu imported -->
+    <Script file="ConstantsUI.lua" />
+    <Script file="FactoryTools.lua" />
+    <Script file="LegacyUI.lua" />
+    <Script file="ScreenSide.lua" />
+    <Script file="MenuButton.lua" />
+    <Script file="TieredMenu.lua" />
+
     <Script file="mopremix\Main.lua" />
     <Script file="mopremix\GearAdvisor.lua" />
     <Script file="mopremix\XPData.lua" />

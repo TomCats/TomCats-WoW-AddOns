@@ -90,6 +90,7 @@ function Templates.CreateBasicWindow(parentFrame, params)
 					if (prefs.minimized) then
 						prefs.minimized = false
 						frame.icon:SetParent(frame)
+						frame.icon:SetScale(1.0)
 						frame:Show()
 						if (params.onMaximizeFunc) then
 							params.onMaximizeFunc(frame)
@@ -97,6 +98,8 @@ function Templates.CreateBasicWindow(parentFrame, params)
 					else
 						prefs.minimized = true
 						frame.icon:SetParent(UIParent)
+						frame.icon:SetFrameLevel(3001)
+						frame.icon:SetScale(1.5)
 						frame:Hide()
 						if (params.onMinimizeFunc) then
 							params.onMinimizeFunc(frame)
@@ -135,11 +138,13 @@ function Templates.CreateBasicWindow(parentFrame, params)
 			if (prefs.minimized) then
 				frame.icon:SetParent(UIParent)
 				frame.icon:SetFrameLevel(3001)
+				frame.icon:SetScale(1.5)
 				frame:Hide()
 				if (params.onMinimizeFunc) then
 					params.onMinimizeFunc(frame)
 				end
 			else
+				frame.icon:SetScale(1.0)
 				if (params.onMaximizeFunc) then
 					params.onMaximizeFunc(frame)
 				end

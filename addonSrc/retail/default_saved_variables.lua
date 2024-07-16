@@ -70,6 +70,17 @@ addon.defaultSavedVariables = {
 			bonusXPTrackerDisplay = addon.constants.accessoryDisplay.WHENAPPLICABLE,
 			collectionTracker = addon.constants.HINT_ALL,
 			collectionTrackerDisplay = true,
+			filterOptions = {
+				collected = true,
+				notCollected = true,
+				mounts = true,
+				pets = true,
+				toys = true,
+				appearances = true,
+				heirlooms = true,
+				vendor = true,
+				achievement = true
+			}
 		}
 	},
 	TomCats_Character = {

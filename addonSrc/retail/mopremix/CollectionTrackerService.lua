@@ -12,6 +12,10 @@ local dataProvider
 local vendorNPCs
 local currentFilter
 local lastFilter
+local filterOptions
+local typeMap
+local lastVendor
+local searchText
 
 local itemLoadingTracker = {
 	remaining = 0,
@@ -127,6 +131,19 @@ local function SetupIllusion(collectionItem)
 	collectionItem.collected = illusionInfo and illusionInfo.isCollected or false
 end
 
+local function RefreshPet(collectionItem)
+	local _, collected = C_PetJournal.GetNumPetsInJournal(collectionItem.creatureID)
+	collectionItem.collected = collected > 0 and true or false
+end
+
+local function SetupPet(collectionItem)
+	local name,  _, _, creatureID = C_PetJournal.GetPetInfoByItemID(collectionItem.itemID)
+	collectionItem.name = name
+	collectionItem.type = COLLECTION_ITEM_TYPE.PET
+	collectionItem.creatureID = creatureID
+	RefreshPet(collectionItem)
+end
+
 local function HandleItemDataLoad(itemID, success)
 	local collectionItem = collectionItemsLUT[itemID]
 	if (collectionItem and not collectionItem.loaded) then
@@ -139,6 +156,8 @@ local function HandleItemDataLoad(itemID, success)
 				SetupIllusion(collectionItem)
 			elseif (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.Mount) then
 				SetupMount(collectionItem)
+			elseif (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.CompanionPet) then
+				SetupPet(collectionItem)
 			else
 				local setID = C_Item.GetItemLearnTransmogSet(itemID)
 				if (setID) then
@@ -211,13 +230,20 @@ local function OnEvent(_, event, arg1, arg2, arg3)
 		end
 	elseif (event == "MERCHANT_CLOSED") then
 		if (initialized) then
-			CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.NONE)
+			CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.DEFAULT)
 		end
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg1 == "player") then
 		local collectionItem = illusionSpellItemLUT[arg3]
 		if (collectionItem) then
 			collectionItem.collected = true
 			CollectionTrackerUI.MarkDirty()
+		end
+	elseif (event == "NEW_PET_ADDED") then
+		for _, collectionItem in ipairs(CollectionItems) do
+			if (collectionItem.type == COLLECTION_ITEM_TYPE.PET and not collectionItem.collected) then
+				RefreshPet(collectionItem)
+				CollectionTrackerUI.MarkDirty()
+			end
 		end
 	end
 end
@@ -232,6 +258,16 @@ function CollectionTrackerService.Init()
 		itemsByMountID = { }
 		illusionSpellItemLUT = { }
 		vendorNPCs = { }
+		typeMap = {
+			[COLLECTION_ITEM_TYPE.TRANSMOG] = "appearances",
+			[COLLECTION_ITEM_TYPE.TOY] = "toys",
+			[COLLECTION_ITEM_TYPE.MOUNT] = "mounts",
+			[COLLECTION_ITEM_TYPE.HEIRLOOM] = "heirlooms",
+			[COLLECTION_ITEM_TYPE.EQUIPMENT] = "appearances",
+			[COLLECTION_ITEM_TYPE.PET] = "pets",
+			[COLLECTION_ITEM_TYPE.ILLUSION] = "appearances",
+		}
+		filterOptions = TomCats_Account.mopremix.filterOptions
 		eventFrame = CreateFrame("Frame")
 		eventFrame:RegisterEvent("ITEM_DATA_LOAD_RESULT")
 		--eventFrame:RegisterEvent("TRANSMOG_COLLECTION_SOURCE_ADDED")
@@ -240,6 +276,7 @@ function CollectionTrackerService.Init()
 		eventFrame:RegisterEvent("MERCHANT_CLOSED")
 		eventFrame:RegisterEvent("NEW_MOUNT_ADDED")
 		eventFrame:RegisterEvent("NEW_TOY_ADDED")
+		eventFrame:RegisterEvent("NEW_PET_ADDED")
 		eventFrame:RegisterEvent("HEIRLOOMS_UPDATED")
 		eventFrame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 		eventFrame:SetScript("OnEvent", OnEvent)
@@ -263,34 +300,92 @@ function CollectionTrackerService.GetDataProvider()
 		dataProvider:SetSortComparator(function(a, b)
 			return a.name < b.name
 		end, true)
-		CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.NONE)
+		CollectionTrackerService.SetFilter(COLLECTION_TRACKER_FILTER.DEFAULT)
 	end
 	return dataProvider
 end
 
+local function CanAdd(collectionItem)
+	if (collectionItem.collected) then
+		if (not filterOptions.collected) then
+			return false
+		end
+	else
+		if (not filterOptions.notCollected) then
+			return false
+		end
+	end
+	for itemType, filterName in pairs(typeMap) do
+		if (collectionItem.type == itemType) then
+			if (not filterOptions[filterName]) then
+				return false
+			end
+		end
+	end
+	if (collectionItem.vendorNPC) then
+		if (not filterOptions.vendor) then
+			return false
+		end
+	end
+	if (collectionItem.achievementID) then
+		if (not filterOptions.achievement) then
+			return false
+		end
+	end
+	if (searchText) then
+		if (not string.find(collectionItem.name, searchText, 1, true)) then
+			return false
+		end
+	end
+	return true
+end
+
 function CollectionTrackerService.SetFilter(filter, arg1)
 	dataProvider:Flush()
-	if (filter == COLLECTION_TRACKER_FILTER.NONE) then
-		dataProvider:InsertTable(CollectionItems)
-		lastFilter = COLLECTION_TRACKER_FILTER.NONE
+	if (filter == COLLECTION_TRACKER_FILTER.DEFAULT) then
+		local filteredItems = { }
+		for _, collectionItem in ipairs(CollectionItems) do
+			if (CanAdd(collectionItem)) then
+				table.insert(filteredItems, collectionItem)
+			end
+		end
+		dataProvider:InsertTable(filteredItems)
 	elseif (filter == COLLECTION_TRACKER_FILTER.VENDOR) then
-		lastFilter = currentFilter
 		local vendorItems = { }
 		for _, collectionItem in ipairs(CollectionItems) do
 			if (collectionItem.vendorNPC == arg1) then
-				table.insert(vendorItems, collectionItem)
+				if (CanAdd(collectionItem)) then
+					table.insert(vendorItems, collectionItem)
+				end
 			end
 		end
 		dataProvider:InsertTable(vendorItems)
 	end
-	currentFilter = COLLECTION_TRACKER_FILTER.NONE
+	lastFilter = filter
+	lastVendor = arg1
 end
 
 function CollectionTrackerService.IsInitialized()
 	return initialized
 end
 
+function CollectionTrackerService.GetFilterOption(optionName)
+	return filterOptions[optionName]
+end
+
+function CollectionTrackerService.ToggleFilterOption(optionName)
+	filterOptions[optionName] = not filterOptions[optionName]
+	CollectionTrackerService.SetFilter(lastFilter, lastVendor)
+	CollectionTrackerUI.MarkDirty()
+end
+
+function CollectionTrackerService.SetSearchText(text)
+	searchText = text ~= "" and text or nil
+	CollectionTrackerService.SetFilter(lastFilter, lastVendor)
+	CollectionTrackerUI.MarkDirty()
+end
+
 COLLECTION_TRACKER_FILTER = {
-	NONE = 0,
+	DEFAULT = 0,
 	VENDOR = 1,
 }

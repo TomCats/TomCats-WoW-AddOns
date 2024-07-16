@@ -46,6 +46,125 @@ function component.Init()
 	end
 end
 
+local filterMenu
+
+local function GetFilterMenu()
+	if (not filterMenu) then
+		filterMenu = {
+			{
+				text = "Collected",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("collected")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("collected")
+				end
+			},
+			{
+				text = "Not Collected",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("notCollected")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("notCollected")
+				end
+			},
+			{
+				text = "",
+				hasArrow = false,
+				notCheckable = true,
+			},
+			{
+				text = "Type",
+				isTitle = true,
+				notCheckable = true,
+			},
+			{
+				text = "Mounts",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("mounts")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("mounts")
+				end
+			},
+			{
+				text = "Pets",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("pets")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("pets")
+				end
+			},
+			{
+				text = "Toys",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("toys")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("toys")
+				end				},
+			{
+				text = "Appearances",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("appearances")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("appearances")
+				end
+			},
+			{
+				text = "Heirlooms",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("heirlooms")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("heirlooms")
+				end
+			},
+			{
+				text = "",
+				hasArrow = false,
+				notCheckable = true,
+			},
+			{
+				text = "Source",
+				isTitle = true,
+				notCheckable = true,
+			},
+			{
+				text = "Vendor",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("vendor")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("vendor")
+				end
+			},
+			{
+				text = "Achievement",
+				hasArrow = false,
+				checked = function()
+					return CollectionTrackerService.GetFilterOption("achievement")
+				end,
+				func = function()
+					CollectionTrackerService.ToggleFilterOption("achievement")
+				end
+			}
+		}
+	end
+	return filterMenu
+end
+
 function component.Refresh()
 	component.dirty = false
 	if (CollectionTrackerService.IsInitialized()) then
@@ -55,12 +174,12 @@ function component.Refresh()
 			local ScrollBox = CreateFrame("Frame", nil, OSD, "WowScrollBoxList")
 			OSD.ScrollBox = ScrollBox
 			--ScrollBox:SetFrameStrata("HIGH")
-			ScrollBox:SetPoint("TOPLEFT", OSD.headerBar, "BOTTOMLEFT", 0, -4)
+			ScrollBox:SetPoint("TOPLEFT", OSD.headerBar, "BOTTOMLEFT", 0, -36)
 			ScrollBox:SetPoint("BOTTOMRIGHT", OSD.footerBar, "TOPRIGHT", -24, 4)
 			local ScrollBar = CreateFrame("EventFrame", nil, OSD, "MinimalScrollBar")
 			OSD.ScrollBar = ScrollBar
 			--ScrollBar:SetFrameStrata("HIGH")
-			ScrollBar:SetPoint("TOPLEFT", ScrollBox, "TOPRIGHT", 8, 0)
+			ScrollBar:SetPoint("TOPLEFT", ScrollBox, "TOPRIGHT", 8, 32)
 			ScrollBar:SetPoint("BOTTOMLEFT", ScrollBox, "BOTTOMRIGHT", 8, 0)
 			local view = CreateScrollBoxListLinearView();
 			view:SetElementExtent(40)
@@ -88,27 +207,32 @@ function component.Refresh()
 			end);
 			view:SetPadding(0,0,0,0,0);
 			ScrollUtil.InitScrollBoxListWithScrollBar(ScrollBox, ScrollBar, view);
-		--			<Frame parentKey="ScrollBox" inherits="WowScrollBoxList" frameStrata="HIGH">
-		--	<Anchors>
-		--<Anchor point="TOPLEFT" relativeKey="$parent.LeftInset" x="3" y="-36"/>
-		--<Anchor point="BOTTOMRIGHT" relativeKey="$parent.LeftInset" x="-2" y="3"/>
-		--</Anchors>
-		--</Frame>
-		--
-		--<EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar" frameStrata="HIGH">
-		--<Anchors>
-		--<Anchor point="TOPLEFT" relativeKey="$parent.ScrollBox" relativePoint="TOPRIGHT" x="8" y="31"/>
-		--<Anchor point="BOTTOMLEFT" relativeKey="$parent.ScrollBox" relativePoint="BOTTOMRIGHT" x="8" y="-1"/>
-		--</Anchors>
-		--</EventFrame>
+			OSD.filterButton = CreateFrame("Button", nil, OSD, "UIMenuButtonStretchTemplate")
+			OSD.filterButton:SetSize(93, 24)
+			OSD.filterButton.Icon = OSD.filterButton:CreateTexture(nil, "ARTWORK")
+			OSD.filterButton.Icon:SetTexture("Interface\\ChatFrame\\ChatFrameExpandArrow")
+			OSD.filterButton.Icon:SetSize(10, 12)
+			OSD.filterButton.Icon:SetPoint("RIGHT", -5, 0)
+			OSD.filterButton:SetPoint("TOPRIGHT", OSD.headerBar, "BOTTOMRIGHT", -24, -6)
+			OSD.filterButton.Text:SetText("Filter")
+			local filterMenu = TieredMenu.CreateMenu(OSD)
+			OSD.filterButton:SetScript("OnClick", function()
+				if (filterMenu:IsShown()) then
+					filterMenu:Display(false)
+				else
+					filterMenu:Display(GetFilterMenu(), "TOPLEFT", OSD.filterButton, "TOPRIGHT", -12, -4)
+				end
+			end)
+			OSD.searchBox = CreateFrame("EditBox", nil, OSD, "SearchBoxTemplate")
+			OSD.searchBox:SetSize(112, 20)
+			OSD.searchBox:SetMaxLetters(40)
+			OSD.searchBox:SetPoint("TOPLEFT", OSD.headerBar, "BOTTOMLEFT", 12, -8)
+			OSD.searchBox:SetScript("OnTextChanged", function(self)
+				SearchBoxTemplate_OnTextChanged(self)
+				CollectionTrackerService.SetSearchText(self:GetText())
+			end)
 		end
 		OSD.ScrollBox:SetDataProvider(CollectionTrackerService.GetDataProvider(), ScrollBoxConstants.RetainScrollPosition);
-
-		--local newDataProvider = CreateDataProvider()
-		--for _, collectionItem in ipairs(CollectionItems) do
-		--	newDataProvider:Insert(collectionItem);
-		--end
-		--OSD.ScrollBox:SetDataProvider(newDataProvider, ScrollBoxConstants.RetainScrollPosition);
 	end
 end
 

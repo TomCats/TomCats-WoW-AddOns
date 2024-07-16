@@ -13,6 +13,7 @@ do
 		"bronzeCost",
 		"name",
 		"setID",
+		"creatureID",
 		"type",
 		"hasAllSources",
 		"hasAllAppearances",
