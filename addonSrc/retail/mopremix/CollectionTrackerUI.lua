@@ -270,6 +270,9 @@ function component.Init()
 					GameTooltip:AddLine("Collected: Yes")
 				else
 					GameTooltip:AddLine("Collected: No")
+					if (owner.collectionItem.type == COLLECTION_ITEM_TYPE.TRANSMOG) then
+						GameTooltip:AddLine("(Missing one or more appearance sources)")
+					end
 				end
 			end
 		end)
