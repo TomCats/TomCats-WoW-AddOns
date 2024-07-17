@@ -352,7 +352,7 @@ local function CanAdd(collectionItem)
 		end
 	end
 	if (searchText) then
-		if (not string.find(collectionItem.name, searchText, 1, true)) then
+		if (not string.find(string.upper(collectionItem.name), string.upper(searchText), 1, true)) then
 			return false
 		end
 	end
