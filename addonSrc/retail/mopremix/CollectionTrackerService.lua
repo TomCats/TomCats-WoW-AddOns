@@ -217,7 +217,7 @@ local function OnEvent(_, event, arg1, arg2, arg3)
 		isDirty = true
 		CollectionTrackerUI.MarkDirty()
 	elseif (event == "HEIRLOOMS_UPDATED") then
-		RefreshHeirloom()
+		RefreshHeirloom(arg1)
 	elseif (event == "MERCHANT_SHOW") then
 		if (initialized) then
 			local guid = UnitGUID("npc")
