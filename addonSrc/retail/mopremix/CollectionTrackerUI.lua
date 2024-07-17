@@ -259,6 +259,13 @@ function component.Init()
 			local owner = GameTooltip:GetOwner()
 			if (owner and itemButtons[owner]) then
 				GameTooltip:AddLine(string.format("\nSource: %s", CollectionTrackerService.GetSourceForItem(owner.collectionItem)))
+				if (owner.collectionItem.vendorNPC) then
+					if (owner.collectionItem.bonesCost) then
+						GameTooltip:AddLine(string.format("Cost: %s Bronze + %s Bones", owner.collectionItem.bronzeCost, owner.collectionItem.bonesCost))
+					else
+						GameTooltip:AddLine(string.format("Cost: %s Bronze", owner.collectionItem.bronzeCost))
+					end
+				end
 				if (owner.collectionItem.collected) then
 					GameTooltip:AddLine("Collected: Yes")
 				else
@@ -339,7 +346,6 @@ function component.Refresh()
 				CollectionTrackerService.SetSearchText(self:GetText())
 			end)
 			OSD.footerBarText = OSD:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-			OSD.footerBarText:Hide()
 			OSD.footerBarText:SetPoint("TOP", OSD.footerBar, "TOP", 0, -1)
 		end
 		OSD.ScrollBox:SetDataProvider(CollectionTrackerService.GetDataProvider(), ScrollBoxConstants.RetainScrollPosition);
@@ -350,14 +356,15 @@ function component.Refresh()
 				OSD.isLocked = true
 				OSD:ClearAllPoints()
 				OSD:SetPoint("TOPLEFT", MerchantFrame, "TOPRIGHT", 12, 0)
-				OSD.footerBarText:Show()
 				OSD.footerBarText:SetText("Showing Merchant's Items Only!")
 			else
 				OSD.isLocked = TomCats_Account.mopremix.collectionTracker.locked
 				OSD:ClearAllPoints()
 				OSD:SetPoint(unpack(TomCats_Account.mopremix.collectionTracker.WindowLocation))
-				OSD.footerBarText:Hide()
 			end
+		end
+		if (not isAtMerchant) then
+			OSD.footerBarText:SetText(string.format("%s/%s Collected (%s Shown)", CollectionTrackerService.GetTotals()))
 		end
 	end
 end

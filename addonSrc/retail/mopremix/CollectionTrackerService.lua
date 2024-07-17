@@ -420,6 +420,21 @@ function CollectionTrackerService.GetSourceForItem(collectionItem)
 	return "Unknown"
 end
 
+function CollectionTrackerService.GetTotals()
+	local collected = 0
+	local total = #CollectionItems
+	local shown = 0
+	for _, collectionItem in ipairs(CollectionItems) do
+		if (collectionItem.collected) then
+			collected = collected + 1
+		end
+	end
+	if (dataProvider) then
+		shown = dataProvider:GetSize()
+	end
+	return collected, total, shown
+end
+
 COLLECTION_TRACKER_FILTER = {
 	DEFAULT = 0,
 	VENDOR = 1,
