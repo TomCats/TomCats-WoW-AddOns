@@ -156,6 +156,7 @@ local function HandleItemDataLoad(itemID, success)
 		if (success and itemLoadingTracker.itemIDs[itemID]) then
 			itemLoadingTracker:Remove(itemID)
 			tail = tail + 1
+			CollectionTrackerUI.UpdateLoadingPercentage(tail / #CollectionItems)
 			collectionItem.loaded = true
 			local itemName, _, _, _, _, _, _, _, _, _, _, classID, subclassID = C_Item.GetItemInfo(itemID)
 			collectionItem.name = itemName
@@ -166,22 +167,20 @@ local function HandleItemDataLoad(itemID, success)
 			elseif (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.CompanionPet) then
 				SetupPet(collectionItem)
 			else
-				local setID = C_Item.GetItemLearnTransmogSet(itemID)
-				if (setID) then
-					SetupEnsembleItem(collectionItem, setID)
+				local _, name = C_ToyBox.GetToyInfo(itemID)
+				if (name) then
+					collectionItem.name = name
+					SetupToy(collectionItem)
+				elseif (C_Heirloom.IsItemHeirloom(itemID)) then
+					SetupHeirloom(collectionItem)
 				else
-					local _, name = C_ToyBox.GetToyInfo(itemID)
-					if (name) then
-						collectionItem.name = name
-						SetupToy(collectionItem)
+					local setID = C_Item.GetItemLearnTransmogSet(itemID)
+					if (setID) then
+						SetupEnsembleItem(collectionItem, setID)
 					else
-						if (C_Heirloom.IsItemHeirloom(itemID)) then
-							SetupHeirloom(collectionItem)
-						else
-							local itemAppearanceID, itemModifiedAppearanceID = C_TransmogCollection.GetItemInfo(itemID)
-							if (itemAppearanceID) then
-								SetupEquipmentItem(collectionItem, itemModifiedAppearanceID)
-							end
+						local itemAppearanceID, itemModifiedAppearanceID = C_TransmogCollection.GetItemInfo(itemID)
+						if (itemAppearanceID) then
+							SetupEquipmentItem(collectionItem, itemModifiedAppearanceID)
 						end
 					end
 				end
@@ -193,7 +192,7 @@ local function HandleItemDataLoad(itemID, success)
 				eventFrame:UnregisterEvent("ITEM_DATA_LOAD_RESULT")
 			end
 		else
-			C_Timer.NewTimer(60, function()
+			C_Timer.NewTimer(1, function()
 				if (not collectionItem.loaded) then
 					C_Item.RequestLoadItemDataByID(itemID)
 				end
@@ -267,9 +266,18 @@ end
 
 CollectionTrackerService = { }
 
-local function OnUpdate()
+local throttle = 0
+
+local function OnUpdate(_, elapsed)
+	if (throttle == 0) then
+		throttle = 1
+	elseif (elapsed < 0.05) then
+		throttle = throttle + math.floor(0.05/elapsed)
+	else
+		throttle = 0
+	end
 	if (ready and head == tail) then
-		for i = 1, 2 do
+		for i = 1, throttle do
 			head = head + 1
 			if (CollectionItems[head]) then
 				C_Item.RequestLoadItemDataByID(CollectionItems[head].itemID)

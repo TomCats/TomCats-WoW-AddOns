@@ -405,6 +405,10 @@ function component.RestoreScrollPosition()
 	end
 end
 
+function component.UpdateLoadingPercentage(percentage)
+	OSD.loading:SetText(string.format("Loading %s%%", math.floor(percentage * 100)))
+end
+
 AddComponent(component)
 
 CollectionTrackerUI = component
