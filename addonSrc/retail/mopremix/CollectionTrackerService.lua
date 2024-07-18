@@ -146,11 +146,16 @@ local function SetupPet(collectionItem)
 	RefreshPet(collectionItem)
 end
 
+local head = 0
+local tail = 0
+local ready = false
+
 local function HandleItemDataLoad(itemID, success)
 	local collectionItem = collectionItemsLUT[itemID]
 	if (collectionItem and not collectionItem.loaded) then
 		if (success and itemLoadingTracker.itemIDs[itemID]) then
 			itemLoadingTracker:Remove(itemID)
+			tail = tail + 1
 			collectionItem.loaded = true
 			local itemName, _, _, _, _, _, _, _, _, _, _, classID, subclassID = C_Item.GetItemInfo(itemID)
 			collectionItem.name = itemName
@@ -189,7 +194,9 @@ local function HandleItemDataLoad(itemID, success)
 			end
 		else
 			C_Timer.NewTimer(60, function()
-				C_Item.RequestLoadItemDataByID(itemID)
+				if (not collectionItem.loaded) then
+					C_Item.RequestLoadItemDataByID(itemID)
+				end
 			end)
 		end
 	end
@@ -260,6 +267,19 @@ end
 
 CollectionTrackerService = { }
 
+local function OnUpdate()
+	if (ready and head == tail) then
+		for i = 1, 2 do
+			head = head + 1
+			if (CollectionItems[head]) then
+				C_Item.RequestLoadItemDataByID(CollectionItems[head].itemID)
+			else
+				ready = false
+			end
+		end
+	end
+end
+
 function CollectionTrackerService.Init()
 	if (not initialized and not initializing) then
 		initializing = true
@@ -290,6 +310,7 @@ function CollectionTrackerService.Init()
 		eventFrame:RegisterEvent("HEIRLOOMS_UPDATED")
 		eventFrame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 		eventFrame:SetScript("OnEvent", OnEvent)
+		eventFrame:SetScript("OnUpdate", OnUpdate)
 		for _, collectionItem in ipairs(CollectionItems) do
 			setmetatable(collectionItem, CollectionItemsMetatable)
 			collectionItemsLUT[collectionItem.itemID] = collectionItem
@@ -304,9 +325,7 @@ function CollectionTrackerService.Init()
 				end
 			end
 		end
-		for _, collectionItem in ipairs(CollectionItems) do
-			C_Item.RequestLoadItemDataByID(collectionItem.itemID)
-		end
+		ready = true
 	end
 end
 

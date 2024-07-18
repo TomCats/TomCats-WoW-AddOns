@@ -7,7 +7,7 @@ local componentsByName = { }
 
 
 local function OnEvent(_, event, arg1)
-	if (event == "PLAYER_LOGIN" and PlayerGetTimerunningSeasonID() == 1) then
+	if (event == "FIRST_FRAME_RENDERED" and PlayerGetTimerunningSeasonID() == 1) then
 		active = true
 		for _, component in ipairs(components) do
 			if (component.Init) then
@@ -26,7 +26,7 @@ local function OnUpdate()
 	end
 end
 
-eventFrame:RegisterEvent("PLAYER_LOGIN")
+eventFrame:RegisterEvent("FIRST_FRAME_RENDERED")
 eventFrame:SetScript("OnEvent", OnEvent)
 eventFrame:SetScript("OnUpdate", OnUpdate)
 
