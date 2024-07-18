@@ -155,7 +155,10 @@ local function HandleItemDataLoad(itemID, success)
 	if (collectionItem and not collectionItem.loaded) then
 		if (success and itemLoadingTracker.itemIDs[itemID]) then
 			itemLoadingTracker:Remove(itemID)
-			tail = tail + 1
+			if (collectionItem.loading) then
+				tail = tail + 1
+				collectionItem.loading = false
+			end
 			CollectionTrackerUI.UpdateLoadingPercentage(tail / #CollectionItems)
 			collectionItem.loaded = true
 			local itemName, _, _, _, _, _, _, _, _, _, _, classID, subclassID = C_Item.GetItemInfo(itemID)
@@ -279,8 +282,14 @@ local function OnUpdate(_, elapsed)
 	if (ready and head == tail) then
 		for i = 1, throttle do
 			head = head + 1
-			if (CollectionItems[head]) then
-				C_Item.RequestLoadItemDataByID(CollectionItems[head].itemID)
+			local collectionItem = CollectionItems[head]
+			if (collectionItem) then
+				if (not collectionItem.loaded) then
+					collectionItem.loading = true
+					C_Item.RequestLoadItemDataByID(collectionItem.itemID)
+				else
+					tail = tail + 1
+				end
 			else
 				ready = false
 			end

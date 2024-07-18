@@ -21,6 +21,7 @@ do
 		"itemModifiedAppearanceID",
 		"collected",
 		"loaded",
+		"loading",
 	}) do
 		CollectionItemsColumns[columnName] = i
 	end
