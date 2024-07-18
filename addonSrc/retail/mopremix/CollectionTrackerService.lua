@@ -149,7 +149,7 @@ end
 local function HandleItemDataLoad(itemID, success)
 	local collectionItem = collectionItemsLUT[itemID]
 	if (collectionItem and not collectionItem.loaded) then
-		if (success) then
+		if (success and itemLoadingTracker.itemIDs[itemID]) then
 			itemLoadingTracker:Remove(itemID)
 			collectionItem.loaded = true
 			local itemName, _, _, _, _, _, _, _, _, _, _, classID, subclassID = C_Item.GetItemInfo(itemID)
