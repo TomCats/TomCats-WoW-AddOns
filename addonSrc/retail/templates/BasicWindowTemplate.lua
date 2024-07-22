@@ -90,12 +90,7 @@ function Templates.CreateBasicWindow(parentFrame, params)
 				--end
 				--if #clickTimes >= 2 and (clickTimes[#clickTimes] - clickTimes[#clickTimes - 1]) <= threshold then
 					if (prefs.minimized) then
-						prefs.minimized = false
-						frame.icon:SetParent(frame)
-						frame:Show()
-						if (params.onMaximizeFunc) then
-							params.onMaximizeFunc(frame)
-						end
+						frame:Maximize()
 					else
 						--prefs.minimized = true
 						--frame.icon:SetParent(UIParent)
@@ -106,6 +101,14 @@ function Templates.CreateBasicWindow(parentFrame, params)
 						--end
 					end
 				--end
+			end
+			frame.Maximize = function(self)
+				prefs.minimized = false
+				self.icon:SetParent(frame)
+				self:Show()
+				if (params.onMaximizeFunc) then
+					params.onMaximizeFunc(frame)
+				end
 			end
 			frame.Minimize = function(self)
 				prefs.minimized = true

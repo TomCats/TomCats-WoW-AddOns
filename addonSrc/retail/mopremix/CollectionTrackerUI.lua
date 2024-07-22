@@ -376,6 +376,7 @@ function component.SetDisplayed(displayed)
 	TomCats_Account.mopremix.collectionTrackerDisplay = displayed
 	component.Init()
 	if (OSD) then
+		OSD:Maximize()
 		OSD:SetShown(displayed)
 	end
 	if (displayed) then
