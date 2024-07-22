@@ -14,7 +14,6 @@ local function OnEvent(_, event, arg1)
 				component.Init(componentsByName)
 			end
 		end
-		CollectionTrackerService.Init()
 	end
 end
 
