@@ -1,7 +1,7 @@
 --[[ See license.txt for license and copyright information ]]
 local addonName, addon = ...
 
-local DisableAddOn= DisableAddOn
+local DisableAddOn = C_AddOns.DisableAddOn
 
 local expiredAddOns = {
 	"TomCats-ArathiHighlandsRares",
