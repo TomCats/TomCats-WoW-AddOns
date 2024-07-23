@@ -76,11 +76,11 @@ end
 local function passengersChanged()
 	local hasRideAlong
 	for i = 1, 40 do
-		local aura = select(10, UnitAura("player", i))
-		if (not aura) then
+		local auraData = C_UnitAuras.GetAuraDataByIndex("player", i)
+		if (not (auraData and auraData.spellId)) then
 			break
 		end
-		if (rideAlongBuffs[aura]) then
+		if (rideAlongBuffs[auraData.spellId]) then
 			hasRideAlong = true
 			break
 		end
