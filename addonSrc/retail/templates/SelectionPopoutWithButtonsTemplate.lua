@@ -111,7 +111,9 @@ function Templates.CreateSelectionPopoutWithButtons(parent, entries, callback)
 	frame.NextButton = CreateNextBackButton(frame, "next", "RIGHT")
 	frame.BackButton = CreateNextBackButton(frame, "back", "LEFT")
 	frame.Button = CreateFrame("EventButton", nil, frame)
-	frame.Button.HandlesGlobalMouseEvent = SelectionPopoutButtonMixin.HandlesGlobalMouseEvent
+	frame.Button.HandlesGlobalMouseEvent = function (self, buttonID, event)
+		return event == "GLOBAL_MOUSE_DOWN" and buttonID == "LeftButton";
+	end
 	frame.Button:SetSize(250, 38)
 	frame.Button:SetPoint("CENTER")
 	frame.Button:SetNormalAtlas("charactercreate-customize-dropdownbox")
