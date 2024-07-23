@@ -144,7 +144,7 @@ local function checkTreats()
         for slot = 1, C_Container.GetContainerNumSlots(bagId) do
             local itemLink = C_Container.GetContainerItemLink(bagId, slot)
             if (itemLink) then
-                local itemId = GetItemInfoInstant(itemLink)
+                local itemId = C_Item.GetItemInfoInstant(itemLink)
                 if (itemId == 37586) then
                     C_Container.UseContainerItem(bagId, slot)
                     return true

@@ -88,10 +88,10 @@ eventFrame:RegisterEvent("ITEM_DATA_LOAD_RESULT")
 
 eventFrame:SetScript("OnEvent", function(_, _, itemID, success)
     if (itemID == 206003 and success) then
-        bagLink_ = select(2,GetItemInfo(206003))
+        bagLink_ = select(2,C_Item.GetItemInfo(206003))
     end
     if (itemID == 76755 and success) then
-        mountLink_ = select(2,GetItemInfo(76755))
+        mountLink_ = select(2,C_Item.GetItemInfo(76755))
     end
 end)
 

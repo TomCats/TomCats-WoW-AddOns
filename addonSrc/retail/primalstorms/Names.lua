@@ -22,7 +22,7 @@ local itemNameCache = { }
 
 function Names.GetItemName(itemID)
 	if (itemNameCache[itemID]) then return itemNameCache[itemID] end
-	local itemName = GetItemInfo(itemID)
+	local itemName = C_Item.GetItemInfo(itemID)
 	if (itemName) then
 		itemNameCache[itemID] = itemName
 		return itemName

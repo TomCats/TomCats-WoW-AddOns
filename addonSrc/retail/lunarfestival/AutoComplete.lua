@@ -37,7 +37,7 @@ local function BAG_UPDATE()
             for slot = 1, C_Container.GetContainerNumSlots(bagId) do
                 local itemLink = C_Container.GetContainerItemLink(bagId, slot)
                 if (itemLink) then
-                    local itemId = GetItemInfoInstant(itemLink)
+                    local itemId = C_Item.GetItemInfoInstant(itemLink)
                     if (itemId == 21746) then
                         if (origState == "0") then
                             SetCVar("autoLootDefault","1")
