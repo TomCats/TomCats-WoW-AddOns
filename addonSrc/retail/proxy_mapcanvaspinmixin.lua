@@ -14,6 +14,7 @@ addon.CreateProxyMixinFunctions(
 		{
 			"ApplyCurrentPosition",
 			"ApplyCurrentScale",
+			"CheckMouseButtonPassthrough",
 			"GetMap",
 			"GetNudgeSourceRadius",
 			"GetNudgeTargetFactor",
@@ -23,7 +24,8 @@ addon.CreateProxyMixinFunctions(
 			"OnClick",
 			"OnMouseUp",
 			"SetPosition",
-			"SetScaleStyle"
+			"SetScaleStyle",
+			"ShouldMouseButtonBePassthrough"
 		},
 		{
 			"DisableInheritedMotionScriptsWarning"
