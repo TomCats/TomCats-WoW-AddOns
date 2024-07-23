@@ -41,20 +41,11 @@ local itemLoadingTracker = {
 
 local function RefreshEnsembleItem(collectionItem)
 	local appearances = C_Transmog.GetAllSetAppearancesByID(collectionItem.setID)
-	local appearanceIDs = { }
 	collectionItem.hasAllSources = true
 	for _, appearance in ipairs(appearances) do
-		local _, appearanceID, _, _, isCollected = C_TransmogCollection.GetAppearanceSourceInfo(appearance.itemModifiedAppearanceID)
-		if (not isCollected) then
+		local sourceInfo = C_TransmogCollection.GetSourceInfo(appearance.itemModifiedAppearanceID)
+		if (not sourceInfo.isCollected) then
 			collectionItem.hasAllSources = false
-		end
-		appearanceIDs[appearanceID] = isCollected or appearanceIDs[appearanceID] or false
-	end
-	collectionItem.hasAllAppearances = true
-	for _, appearanceID in pairs(appearanceIDs) do
-		if (not appearanceID) then
-			collectionItem.hasAllAppearances = false
-			break
 		end
 	end
 	collectionItem.collected = collectionItem.hasAllSources
@@ -317,7 +308,6 @@ function CollectionTrackerService.Init()
 		filterOptions = TomCats_Account.mopremix.filterOptions
 		eventFrame = CreateFrame("Frame")
 		eventFrame:RegisterEvent("ITEM_DATA_LOAD_RESULT")
-		--eventFrame:RegisterEvent("TRANSMOG_COLLECTION_SOURCE_ADDED")
 		eventFrame:RegisterEvent("TRANSMOG_SEARCH_UPDATED")
 		eventFrame:RegisterEvent("MERCHANT_SHOW")
 		eventFrame:RegisterEvent("MERCHANT_CLOSED")

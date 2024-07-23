@@ -16,7 +16,6 @@ do
 		"creatureID",
 		"type",
 		"hasAllSources",
-		"hasAllAppearances",
 		"mountID",
 		"itemModifiedAppearanceID",
 		"collected",
