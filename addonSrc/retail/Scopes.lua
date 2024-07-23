@@ -34,11 +34,30 @@ local scopeMetatable = {
 	end
 }
 
+local directReferences = {
+	ColorMixin = ColorMixin,
+	ItemLocationMixin = ItemLocationMixin,
+	ItemTransmogInfoMixin = ItemTransmogInfoMixin,
+	PlayerLocationMixin = PlayerLocationMixin,
+	ReportInfoMixin = ReportInfoMixin,
+	TransmogLocationMixin = TransmogLocationMixin,
+	TransmogPendingInfoMixin = TransmogPendingInfoMixin,
+	Vector2DMixin = Vector2DMixin,
+	Vector3DMixin = Vector3DMixin,
+}
+
 function addon.InitScope(scopeName)
 	if (scopeName == nil) then return root end
-	root[scopeName] = root[scopeName] or { }
-	setmetatable(root[scopeName] , scopeMetatable)
-	return root[scopeName]
+	local scope = root[scopeName]
+	if (not scope) then
+		scope = { }
+		for k, v in pairs(directReferences) do
+			scope[k]= v
+		end
+		setmetatable(scope , scopeMetatable)
+		root[scopeName] = scope
+	end
+	return scope
 end
 
 function addon.SetScope(scopeName)
