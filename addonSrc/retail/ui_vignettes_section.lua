@@ -106,6 +106,8 @@ local function RefreshVignetteSection(section)
 	if (#state.vignettesSorted == 0) then
 		section.Header.Note:Show()
 		section.Header.bottomPadding = 64
+	else
+		section.Header.Note:Hide()
 	end
 	if (lastShown) then
 		section.Header.bottomPadding = 22

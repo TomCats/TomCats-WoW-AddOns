@@ -10,14 +10,14 @@
 				<KeyValues>
 					<KeyValue key="layoutIndex" value="1" type="number" />
 					<KeyValue key="leftPadding" value="18" type="number" />
-					<KeyValue key="topPadding" value="13" type="number" />
+					<KeyValue key="topPadding" value="20" type="number" />
 					<KeyValue key="bottomPadding" value="22" type="number" />
 				</KeyValues>
 				<Size x="20" y="20"/>
 				<Layers>
 					<Layer>
 						<FontString parentKey="Note" text="Rares and Treasures Coming Soon(tm)" inherits="GameFontNormal">
-							<Size x="175" y="0"/>
+							<Size x="308" y="0"/>
 							<Anchors>
 								<Anchor point="TOP" relativePoint="BOTTOM" x="105" y="-24"/>
 							</Anchors>
@@ -26,17 +26,17 @@
 					</Layer>
 					<Layer level="BACKGROUND">
 						<Texture parentKey="Background" file="Interface/AddOns/TomCats/images/VignettesSectionHeader">
-							<Size x="256" y="64"/>
+							<Size x="308" y="77"/>
 							<Anchors>
-								<Anchor point="TOPLEFT" x="-16" y="13"/>
+								<Anchor point="TOPLEFT" x="-16" y="20"/>
 							</Anchors>
 						</Texture>
 					</Layer>
 					<Layer level="HIGHLIGHT">
 						<Texture parentKey="HighlightBackground" file="Interface/AddOns/TomCats/images/VignettesSectionHeader" alphaMode="ADD" alpha="0.5">
-							<Size x="256" y="64"/>
+							<Size x="308" y="77"/>
 							<Anchors>
-								<Anchor point="TOPLEFT" x="-16" y="13"/>
+								<Anchor point="TOPLEFT" x="-16" y="20"/>
 							</Anchors>
 						</Texture>
 					</Layer>
