@@ -60,9 +60,9 @@ function addon.getLootDisplayInfo(items)
 						end
 					else
 						lootType = LOOT_TYPE.UNKNOWN
-						local _, itemSpell = GetItemSpell(itemID)
+						local _, itemSpell = C_Item.GetItemSpell(itemID)
 						if (itemSpell) then
-							local spellDescription = GetSpellDescription(itemSpell)
+							local spellDescription = C_Spell.GetSpellDescription(itemSpell)
 							if (spellDescription) then
 								collectedString = spellDescription
 							end
