@@ -125,7 +125,7 @@ end
 
 local function SetupIllusion(collectionItem)
 	collectionItem.type = COLLECTION_ITEM_TYPE.ILLUSION
-	local _, spellID = GetItemSpell(collectionItem.itemID)
+	local _, spellID = C_Item.GetItemSpell(collectionItem.itemID)
 	if (spellID) then
 		illusionSpellItemLUT[spellID] = collectionItem
 	end
