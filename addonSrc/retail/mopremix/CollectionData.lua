@@ -336,6 +336,7 @@ CollectionItems = {
 	{ 224374, 219032, nil, nil, nil, 38500 },
 	{ 226127, 219025, nil, nil, nil, 5 },
 	{ 227550, 219027, nil, nil, 20, 38500 },
+	{ 223810, nil, 223810, nil, nil, nil },
 }
 
 CollectionItemsMetatable = {
