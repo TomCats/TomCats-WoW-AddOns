@@ -5,6 +5,7 @@
 	<Include file="osd\Timers.lua" />
 	<Include file="osd\Superbloom.lua" />
 	<Include file="osd\ElementalStorms.lua" />
+	<Include file="osd\RadiantEchoes.lua" />
 <!--	<Include file="osd\GreedyEmissary.lua" />-->
 	<Include file="osd\TimeRifts.lua" />
 <!--	<Include file="osd\TwitchDrops.lua" />-->

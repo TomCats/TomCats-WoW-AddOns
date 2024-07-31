@@ -354,6 +354,49 @@ Home:SetScript("OnShow", function(self)
 				}, superbloom.Label, superbloom.selectionPopout.Button)
 			end
 
+			if (osd.RadiantEchoes) then
+				local radiantEchoes = CreateFrame("Frame", nil, configurationFrame)
+				radiantEchoes:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+				last = radiantEchoes
+				radiantEchoes:SetPoint("RIGHT")
+				radiantEchoes:SetHeight(30)
+				radiantEchoes.Label = radiantEchoes:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+				radiantEchoes.Label:SetJustifyH("LEFT")
+				radiantEchoes.Label:SetPoint("LEFT", 32, 0)
+				radiantEchoes.Label:SetText("Radiant Echoes")
+				local radiantEchoesConfigDisplayPreference = osd.RadiantEchoes.GetVisibilityOption()
+				local radiantEchoesConfigDisplayConstants = addon.constants.accessoryDisplay
+				radiantEchoes.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
+						radiantEchoes,
+						{
+							{
+								label = "Always Shown",
+								value = radiantEchoesConfigDisplayConstants.ALWAYS,
+								selected = radiantEchoesConfigDisplayPreference == radiantEchoesConfigDisplayConstants.ALWAYS
+							},
+							{
+								label = "Never Shown",
+								value = radiantEchoesConfigDisplayConstants.NEVER,
+								selected = radiantEchoesConfigDisplayPreference == radiantEchoesConfigDisplayConstants.NEVER
+							},
+							{
+								label = "Hide when in instances",
+								value = radiantEchoesConfigDisplayConstants.NOINSTANCES,
+								selected = radiantEchoesConfigDisplayPreference == radiantEchoesConfigDisplayConstants.NOINSTANCES
+							},
+						},
+						function()
+							osd.RadiantEchoes.SetVisibilityOption(radiantEchoes.selectionPopout.selected.value)
+						end
+				)
+				radiantEchoes.selectionPopout:SetPoint("LEFT", 230, 0)
+				radiantEchoes.selectionPopout.Popout:Layout()
+				AttachTooltip({
+					"Radiant Echoes",
+					"Set when to display the Radiant Echoes timers within the floating window\n\n(The floating window will only be visible when you have features enabled for it)",
+				}, radiantEchoes.Label, radiantEchoes.selectionPopout.Button)
+			end
+
 			if (osd.Promos) then
 				local twitchDropsConfig = CreateFrame("Frame", nil, configurationFrame)
 				twitchDropsConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)

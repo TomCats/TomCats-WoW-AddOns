@@ -47,7 +47,7 @@ function Superbloom.Render(Timers, idx)
         timerRow:SetTitle(string.format("Next %s", poi.name))
         timerRow:SetStartTime(currentHour + 3600, 0)
     else
-        timerRow:SetTitle(string.format("%s Ending", poi.name))
+        timerRow:SetTitle(string.format("Current %s", poi.name))
         timerRow:SetStartTime(currentHour + 1200, 0)
     end
 

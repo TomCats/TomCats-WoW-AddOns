@@ -15,26 +15,28 @@ end
 function Timer:New(parentFrame)
 	self.frame = Templates.CreateTimerRow(parentFrame)
 	self.frame:SetScript("OnEnter", function()
-		local tooltipInstance_ = tooltipInstance + 1
-		tooltipInstance = tooltipInstance_
-		C_Timer.NewTimer(0.25, function()
-			if (tooltipInstance == tooltipInstance_) then
-				GameTooltip:SetOwner(self.frame, "ANCHOR_CURSOR")
-				if (self.tooltipFunction) then
-					self.tooltipFunction()
-				else
-					GameTooltip:SetText(self.tooltipText)
-					GameTooltip:Show()
+		if (self.tooltipFunction or self.tooltipText) then
+			local tooltipInstance_ = tooltipInstance + 1
+			tooltipInstance = tooltipInstance_
+			C_Timer.NewTimer(0.25, function()
+				if (tooltipInstance == tooltipInstance_) then
+					GameTooltip:SetOwner(self.frame, "ANCHOR_CURSOR")
+					if (self.tooltipFunction) then
+						self.tooltipFunction()
+					else
+						GameTooltip:SetText(self.tooltipText)
+						GameTooltip:Show()
+					end
+					local mX, mY = GetCursorPosition()
+					local scale = UIParent:GetEffectiveScale()
+					mX = mX / scale
+					mY = (mY + 30) / scale
+					local tooltipWidth = GameTooltip:GetWidth()
+					GameTooltip:ClearAllPoints()
+					GameTooltip:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", mX - (tooltipWidth / 2), mY)
 				end
-				local mX, mY = GetCursorPosition()
-				local scale = UIParent:GetEffectiveScale()
-				mX = mX / scale
-				mY = (mY + 30) / scale
-				local tooltipWidth = GameTooltip:GetWidth()
-				GameTooltip:ClearAllPoints()
-				GameTooltip:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", mX - (tooltipWidth / 2), mY)
-			end
-		end)
+			end)
+		end
 	end)
 	self.frame:SetScript("OnLeave", function()
 		tooltipInstance = tooltipInstance + 1
@@ -56,6 +58,8 @@ function Timer:Reset()
 	self:SetIcon()
 	self:SetTitle("---")
 	self:SetTimer()
+	self.tooltipFunction = nil
+	self.tooltipText = nil
 	self:SetShown(false)
 end
 
@@ -109,6 +113,10 @@ function Timer:SetTimer(val)
 	else
 		self.frame.timer:SetText(self.endTime or "---")
 	end
+end
+
+function Timer:SetBlankTimer()
+	self.frame.timer:SetText("")
 end
 
 function Timer:Update()
@@ -167,6 +175,11 @@ function Timers:Refresh()
 	local height = 0
 	local idx = 0
 	local minWidth = 100
+	if (RadiantEchoes and RadiantEchoes.IsVisible()) then
+		local plusHeight, plusIndex = RadiantEchoes.Render(self, idx + 1)
+		idx = idx + plusIndex
+		height = height + plusHeight
+	end
 	if (Superbloom and Superbloom.IsVisible()) then
 		idx = idx + 1
 		height = height + Superbloom.Render(self, idx)
