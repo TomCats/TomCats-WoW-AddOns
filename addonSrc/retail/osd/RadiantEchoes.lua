@@ -15,6 +15,8 @@ local radiantEchoEvents = {
 
 local defaultPOIName = "Radiant Echoes"
 
+local lastEvent, lastEndTime
+
 -- echoes-icon
 -- echoes-icon-active
 -- echoes-icon-inactive
@@ -73,13 +75,20 @@ end
 
 function RadiantEchoes.Render(Timers, idx)
 	local currentEvent
-	local secondsLeft
+	local endTime
 	for _, radiantEchoEvent in ipairs(radiantEchoEvents) do
-		secondsLeft = C_AreaPoiInfo.GetAreaPOISecondsLeft(radiantEchoEvent[1])
+		local secondsLeft = C_AreaPoiInfo.GetAreaPOISecondsLeft(radiantEchoEvent[1])
 		if (secondsLeft and secondsLeft >= 0) then
 			currentEvent = radiantEchoEvent
+			lastEvent = currentEvent
+			endTime = GetServerTime() + secondsLeft
+			lastEndTime = endTime
 			break
 		end
+	end
+	if (not currentEvent) then
+		currentEvent = lastEvent
+		endTime = math.max(GetServerTime(), lastEndTime)
 	end
 	if (not currentEvent) then
 		return 0, 0
@@ -95,7 +104,7 @@ function RadiantEchoes.Render(Timers, idx)
 		local mapName = GetMapName(currentEvent[timerInfo[1]])
 		timerRow:SetTitle(mapName)
 		timerRow:SetIcon(timerInfo[2])
-		timerRow:SetTimer(GetServerTime() + secondsLeft + timerInfo[3])
+		timerRow:SetTimer(endTime + timerInfo[3])
 		timerRow.tooltipFunction = function()
 			GameTooltip:AddLine(poi.name, 1, 1, 1, true)
 			GameTooltip:AddLine(timerInfo[4])
