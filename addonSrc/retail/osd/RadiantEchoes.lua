@@ -86,7 +86,7 @@ function RadiantEchoes.Render(Timers, idx)
 			break
 		end
 	end
-	if (not currentEvent) then
+	if (lastEvent and not currentEvent) then
 		currentEvent = lastEvent
 		endTime = math.max(GetServerTime(), lastEndTime)
 	end
