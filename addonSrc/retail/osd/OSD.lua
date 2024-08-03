@@ -26,6 +26,7 @@ local OSDProtoType = {
 local function OnEvent(_, event, arg1, arg2)
 	if (event == "AREA_POIS_UPDATED") then
 		OSD:Refresh()
+		UpdateVisibility()
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		OSD = UI.New(OSDProtoType)
 		OSD.frame.icon:EnableMouse(false)
@@ -85,6 +86,7 @@ function UpdateVisibility()
         shown = shown or GreedyEmissary and GreedyEmissary.IsVisible()
 		shown = shown or TimeRifts and TimeRifts.IsVisible()
 		shown = shown or Superbloom and Superbloom.IsVisible()
+		shown = shown or RadiantEchoes and RadiantEchoes.IsVisible()
 		Promos.UpdateVisibility()
 		shown = shown or Promos.IsVisible()
     	OSD.frame:SetShown(shown)
