@@ -18,7 +18,7 @@ function Time.FormatRemainingTime(duration, notime)
 		local minutes = math.floor((duration % 3600) / 60)
 		return FORMAT_GT_1HOUR:format(hours, minutes)
 	elseif (duration >= 60) then
-		local minutes = math.ceil(duration / 60)
+		local minutes = math.floor(duration / 60)
 		return FORMAT_GT_1MIN:format(minutes)
 	elseif (duration <= 0) then
 		return notime or ""
