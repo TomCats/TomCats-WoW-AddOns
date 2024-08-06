@@ -42,10 +42,10 @@ local defaultPOI = {
 }
 
 local timerInfos = {
-	{ 2, "echoes-icon-active", 0, "Currently active in:" },
-	{ 3, "echoes-icon-inactive", 0, "Upcoming in:" },
-	{ 4, "echoes-icon-inactive", 60, "Upcoming in:" },
-	{ 2, "echoes-icon-inactive", 120, "Upcoming in:" },
+	{ 2, false, 0, "Currently active in:" },
+	{ 3, true, 0, "Upcoming in:" },
+	{ 4, true, 60, "Upcoming in:" },
+	{ 2, true, 120, "Upcoming in:" },
 }
 
 local mapNames = { }
@@ -117,12 +117,14 @@ function RadiantEchoes.IsVisible()
 		local startOfWeek = nextResetTime - 7 * 24 * 60 * 60
 		if (startOfWeek > 1724644800) then
 			timerIncrement = 0
-		elseif (startOfWeek > 1723435200) then
-			timerIncrement = 30
-		elseif (startOfWeek > 1722830400) then
+		else
 			timerIncrement = 60
-		elseif (startOfWeek > 1722225600) then
-			timerIncrement = 90
+		--elseif (startOfWeek > 1723435200) then
+		--	timerIncrement = 30
+		--elseif (startOfWeek > 1722830400) then
+		--	timerIncrement = 60
+		--elseif (startOfWeek > 1722225600) then
+		--	timerIncrement = 90
 		end
 		initialized = true
 	end
@@ -147,20 +149,17 @@ function RadiantEchoes.Render(Timers, idx)
 	local height = 0
 	local newRows = 0
 
+	local resetTime = GetServerTime() + C_DateAndTime.GetSecondsUntilWeeklyReset() + 60
 	for _, timerInfo in ipairs(timerInfos) do
 		local timerRow = Timers:GetTimerRow(idx + newRows)
 		local mapName = GetMapName(currentEvent[timerInfo[1]])
 		timerRow:SetTitle(mapName)
-		timerRow:SetIcon(timerInfo[2])
+		timerRow:SetIcon("echoes-icon-active", timerInfo[2])
 		local timeToSet = 0
-		local resetTime = GetServerTime() + C_DateAndTime.GetSecondsUntilWeeklyReset() + 60
 		if (not unknownTime) then
 			timeToSet = endTime + (timerInfo[3] * timerIncrement)
 		else
 			timeToSet = lastEndTime
-		end
-		if (timeToSet > resetTime) then
-			timeToSet = 0
 		end
 		timerRow:SetTimer(timeToSet)
 		timerRow.tooltipFunction = function()
