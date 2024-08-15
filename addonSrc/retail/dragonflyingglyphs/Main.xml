@@ -15,6 +15,6 @@
     <Script file="dragonflyingglyphs\data\Pathways.lua" />
     <Script file="dragonflyingglyphs\data\PhasedZones.lua" />
     <Include file="dragonflyingglyphs\TomCatsDragonFlyingGlyphsDataProvider.xml" />
-    <Script file="dragonflyingglyphs\RideAlong.lua" />
+<!--    <Script file="dragonflyingglyphs\RideAlong.lua" />-->
     <Script file="dragonflyingglyphs\Main.lua" />
 </Ui>
