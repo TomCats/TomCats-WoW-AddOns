@@ -80,7 +80,7 @@ local visibilityFunctions = {
 
 function IsElementalStormsVisible()
 	-- Begin code to disable the timer for Pandaria Remix (may be removed after Pandaria Remix is over)
-	if (PlayerGetTimerunningSeasonID()) then return false end
+	--if (PlayerGetTimerunningSeasonID()) then return false end
 	-- end
 	return visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.elementalStorms]()
 end

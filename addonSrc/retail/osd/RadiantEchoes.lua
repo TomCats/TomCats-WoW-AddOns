@@ -101,7 +101,7 @@ local initialized = false
 
 function RadiantEchoes.IsVisible()
 	-- Begin code to disable the timer for Pandaria Remix (may be removed after Pandaria Remix is over)
-	if (PlayerGetTimerunningSeasonID()) then return false end
+	--if (PlayerGetTimerunningSeasonID()) then return false end
 	-- end
 	local visible = visibilityFunctions[TomCats_Account.preferences.AccessoryWindow.radiantEchoes]()
 	if (visible and not lastEvent) then
