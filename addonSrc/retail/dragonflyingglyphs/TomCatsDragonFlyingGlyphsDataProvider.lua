@@ -13,9 +13,9 @@ local RED_COLOR = CreateColor(1.0, 0.0, 0.0, 1.0)
 local GREEN_COLOR = CreateColor(0.0, 1.0, 0.0, 1.0)
 local IsQuestFlaggedCompleted = function(achievementID)
     local IDNumber, Name, Points, Completed, Month, Day, Year, Description, Flags, Image, RewardText, isGuildAch = GetAchievementInfo(achievementID)
-    if (Completed) then
-        return addon.dragonflyingglyphs.IsRideAlongComplete(achievementID)
-    end
+    --if (Completed) then
+    --    return addon.dragonflyingglyphs.IsRideAlongComplete(achievementID)
+    --end
     return Completed
 end
 
@@ -463,10 +463,10 @@ function TomCatsDragonFlyingGlyphsPinMixin:ShowTooltip()
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
         GameTooltip_AddColoredLine(tooltip, "Click to add a TomTom Waypoint", WHITE_COLOR, true)
     end
-    if (not addon.dragonflyingglyphs.IsRideAlongComplete(questIDsToShow[1])) then
-        GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
-        GameTooltip_AddColoredLine(tooltip, "Your passenger hasn't collected this glyph yet", GREEN_COLOR, true)
-    end
+    --if (not addon.dragonflyingglyphs.IsRideAlongComplete(questIDsToShow[1])) then
+    --    GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
+    --    GameTooltip_AddColoredLine(tooltip, "Your passenger hasn't collected this glyph yet", GREEN_COLOR, true)
+    --end
     WorldMapTooltip:Show()
     WorldMapTooltip.recalculatePadding = true
 end
