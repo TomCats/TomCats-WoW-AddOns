@@ -440,8 +440,8 @@ Home:SetScript("OnShow", function(self)
 				twitchDropsConfig.selectionPopout:SetPoint("LEFT", 230, 0)
 				twitchDropsConfig.selectionPopout.Popout:Layout()
 				AttachTooltip({
-					"Twitch Drops",
-					"Set when to display the Twitch Drops timer within the floating window\n\n|cFFFF0000PRO TIP: |r|cFFFFFFFFUse \"Snooze\" to stop displaying until the next promo begins|r\n\n(The floating window will only be visible when you have features enabled for it)",
+					"Twitch Promos",
+					"Set when to display the Twitch Promos timer within the floating window\n\n|cFFFF0000PRO TIP: |r|cFFFFFFFFUse \"Snooze\" to stop displaying until the next promo begins|r\n\n(The floating window will only be visible when you have features enabled for it)",
 				}, twitchDropsConfig.Label, twitchDropsConfig.selectionPopout.Button)
 			end
 
