@@ -56,7 +56,7 @@ local scopeMetatable = {
 
 function addon.InitScope(scopeName)
 	if (scopeName == nil) then return root end
-	local scope = root[scopeName]
+	local scope = rawget(root,scopeName)
 	if (not scope) then
 		scope = { }
 		applyDirectReferences(scope)
