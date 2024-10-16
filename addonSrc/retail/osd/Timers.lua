@@ -175,6 +175,10 @@ function Timers:Refresh()
 	local height = 0
 	local idx = 0
 	local minWidth = 100
+	if (TheaterTroupe and TheaterTroupe.IsVisible()) then
+		idx = idx + 1
+		height = height + TheaterTroupe.Render(self, idx)
+	end
 	if (RadiantEchoes and RadiantEchoes.IsVisible()) then
 		local plusHeight, plusIndex = RadiantEchoes.Render(self, idx + 1)
 		idx = idx + plusIndex

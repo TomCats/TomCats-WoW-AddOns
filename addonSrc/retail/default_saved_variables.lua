@@ -17,6 +17,7 @@ addon.defaultSavedVariables = {
 				primeGamingLoot = addon.constants.accessoryDisplay.NOINSTANCES,
 				blizzardOther = addon.constants.accessoryDisplay.NOINSTANCES,
 				radiantEchoes = addon.constants.accessoryDisplay.NOINSTANCES,
+				theaterTroupe = addon.constants.accessoryDisplay.NOINSTANCES,
 				snoozed = addon.constants.HINT_ALL,
 			},
 			["TomCats-MinimapButton"] = {

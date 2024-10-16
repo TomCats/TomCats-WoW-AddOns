@@ -397,6 +397,49 @@ Home:SetScript("OnShow", function(self)
 				}, radiantEchoes.Label, radiantEchoes.selectionPopout.Button)
 			end
 
+			if (osd.TheaterTroupe) then
+				local theaterTroupe = CreateFrame("Frame", nil, configurationFrame)
+				theaterTroupe:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+				last = theaterTroupe
+				theaterTroupe:SetPoint("RIGHT")
+				theaterTroupe:SetHeight(30)
+				theaterTroupe.Label = theaterTroupe:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+				theaterTroupe.Label:SetJustifyH("LEFT")
+				theaterTroupe.Label:SetPoint("LEFT", 32, 0)
+				theaterTroupe.Label:SetText("Theater Troupe")
+				local theaterTroupeConfigDisplayPreference = osd.TheaterTroupe.GetVisibilityOption()
+				local theaterTroupeConfigDisplayConstants = addon.constants.accessoryDisplay
+				theaterTroupe.selectionPopout = Templates.CreateSelectionPopoutWithButtons(
+						theaterTroupe,
+						{
+							{
+								label = "Always Shown",
+								value = theaterTroupeConfigDisplayConstants.ALWAYS,
+								selected = theaterTroupeConfigDisplayPreference == theaterTroupeConfigDisplayConstants.ALWAYS
+							},
+							{
+								label = "Never Shown",
+								value = theaterTroupeConfigDisplayConstants.NEVER,
+								selected = theaterTroupeConfigDisplayPreference == theaterTroupeConfigDisplayConstants.NEVER
+							},
+							{
+								label = "Hide when in instances",
+								value = theaterTroupeConfigDisplayConstants.NOINSTANCES,
+								selected = theaterTroupeConfigDisplayPreference == theaterTroupeConfigDisplayConstants.NOINSTANCES
+							},
+						},
+						function()
+							osd.TheaterTroupe.SetVisibilityOption(theaterTroupe.selectionPopout.selected.value)
+						end
+				)
+				theaterTroupe.selectionPopout:SetPoint("LEFT", 230, 0)
+				theaterTroupe.selectionPopout.Popout:Layout()
+				AttachTooltip({
+					"Theater Troupe",
+					"Set when to display the Theater Troupe timers within the floating window\n\n(The floating window will only be visible when you have features enabled for it)",
+				}, theaterTroupe.Label, theaterTroupe.selectionPopout.Button)
+			end
+
 			if (osd.Promos) then
 				local twitchDropsConfig = CreateFrame("Frame", nil, configurationFrame)
 				twitchDropsConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)

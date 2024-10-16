@@ -3,6 +3,7 @@
 ..\FrameXML\UI.xsd">
 	<Include file="osd\OSD.lua" />
 	<Include file="osd\Timers.lua" />
+	<Include file="TheaterTroupe.lua" />
 	<Include file="osd\Superbloom.lua" />
 	<Include file="osd\ElementalStorms.lua" />
 	<Include file="osd\RadiantEchoes.lua" />
