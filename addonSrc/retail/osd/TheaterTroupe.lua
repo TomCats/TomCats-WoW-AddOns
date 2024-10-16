@@ -105,6 +105,7 @@ function TheaterTroupe.Render(Timers, idx)
 		end
 		GameTooltip:Show()
 	end
+	timerRow:SetShown(true)
 	return timerRow:GetHeight() + 4
 end
 
