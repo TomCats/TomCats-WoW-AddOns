@@ -281,7 +281,7 @@ local promoData = {
 	{
 		type = promoTypes.BLIZZARD_OTHER,
 		startTime = 1729569600,
-		endTime = 1729871940,
+		endTime = 1729958400,
 		lang = {
 			["enUS"] = {
 				urlParams = { "en-us" },
