@@ -327,7 +327,7 @@ end
 TomCatsHallowsEndPinMixin = CreateFromMixins(addon.GetProxy(MapCanvasPinMixin))
 
 function TomCatsHallowsEndPinMixin:ApplyFrameLevel()
-    local frameLevel = self:GetMap():GetPinFrameLevelsManager():GetValidFrameLevel("PIN_FRAME_LEVEL_MAP_LINK")
+    local frameLevel = self:GetMap():GetPinFrameLevelsManager():GetValidFrameLevel("PIN_FRAME_LEVEL_AREA_POI_BANNER")
     self:SetFrameLevel(frameLevel)
 end
 
