@@ -60,7 +60,7 @@
 <!--	<Include file="lunarfestival/Main.xml" />-->
 <!--	<Include file="loveisintheair/Main.xml" />-->
 	<Include file="midsummer/Main.xml" />
-<!--	<Include file="hallowsend/Main.xml" />-->
+	<Include file="hallowsend/Main.xml" />
 	<Script file="announcements.lua" />
 	<!-- <Include file="configuration.xml" /> -->
 	<!-- <Script file="configuration.lua" /> -->

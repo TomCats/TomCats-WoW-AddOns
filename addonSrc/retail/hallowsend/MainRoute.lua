@@ -156,10 +156,12 @@ local function checkTreats()
 end
 
 local function questComplete(event, ...)
-    local _, texture = GetQuestItemInfo("reward", 1)
-    if (texture and texture == 132940) then
-        if (not checkTreats()) then
-            GetQuestReward(0)
+    if (TomCats_Account.hallowsend.autoEnabled) then
+        local _, texture = GetQuestItemInfo("reward", 1)
+        if (texture and texture == 132940) then
+            if (not checkTreats()) then
+                GetQuestReward(0)
+            end
         end
     end
 end
@@ -191,8 +193,10 @@ local function questLogUpdate(event, ...)
 end
 
 local function bagUpdate()
-    questComplete()
-    questLogUpdate()
+    if (TomCats_Account.hallowsend.autoEnabled) then
+        questComplete()
+        questLogUpdate()
+    end
 end
 
 -- Manual overrides as Dalaran coordinates do not map back to coordinates to its parent map

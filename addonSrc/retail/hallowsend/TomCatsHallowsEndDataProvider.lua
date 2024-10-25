@@ -390,7 +390,8 @@ end
 
 function TomCatsHallowsEndPinMixin:ShowTooltip()
     local tooltip = WorldMapTooltip
-    WorldMapTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 10, 20)
+    WorldMapTooltip:SetOwner(self, "ANCHOR_RIGHT", 10, 0)
+    --WorldMapTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT", 10, 20)
     WorldMapTooltip:ClearLines();
     local questIDs
     if (self.pinInfo.quest) then questIDs = { self.pinInfo.quest["Quest ID"] } else questIDs = self.pinInfo.entrance["Quest IDs"] end
