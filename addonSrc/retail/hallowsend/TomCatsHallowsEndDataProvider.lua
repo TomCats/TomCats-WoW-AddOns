@@ -379,7 +379,9 @@ function TomCatsHallowsEndPinMixin:OnCanvasScaleChanged()
     rescale(self)
 end
 
-TomCatsHallowsEndPinMixin.OnLoad = nop
+function TomCatsHallowsEndPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
 
 function TomCatsHallowsEndPinMixin:OnReleased()
     allPins[self] = nil

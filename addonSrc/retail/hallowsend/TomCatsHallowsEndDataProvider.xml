@@ -4,7 +4,7 @@
     <GameTooltip name="TomCatsHallowsEndGameTooltip" inherits="GameTooltipTemplate" parent="UIParent" />
 
     <Script file="TomCatsHallowsEndDataProvider.lua"/>
-    <Frame name="TomCatsHallowsEndPinTemplate" hidden="true" enableMouse="true" mixin="TomCatsHallowsEndPinMixin" virtual="true">
+    <Frame name="TomCatsHallowsEndPinTemplate" hidden="true" enableMouse="true" passThroughButtons="RightButton" mixin="TomCatsHallowsEndPinMixin" virtual="true">
         <Size x="64" y="64"/>
         <Layers>
             <Layer textureSubLevel="1">
@@ -78,6 +78,9 @@
                 </Texture>
             </Layer>
         </Layers>
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
     </Frame>
     <Frame name="TomCatsHallowsEndPathwayLineTemplate" virtual="true">
         <Layers>
