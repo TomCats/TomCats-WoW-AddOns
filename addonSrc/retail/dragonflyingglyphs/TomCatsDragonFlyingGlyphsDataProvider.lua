@@ -335,6 +335,10 @@ function TomCatsDragonFlyingGlyphsDataProviderMixin:RefreshAllData(fromOnShow)
 end
 TomCatsDragonFlyingGlyphsAreaPOIPinMixin = CreateFromMixins(AreaPOIPinMixin)
 
+function TomCatsDragonFlyingGlyphsAreaPOIPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
+
 function TomCatsDragonFlyingGlyphsAreaPOIPinMixin:OnAcquired(pinInfo)
     AreaPOIPinMixin.OnAcquired(self, pinInfo)
     ShowHide(self, enabled)
@@ -343,6 +347,10 @@ end
 
 --TomCatsDragonFlyingGlyphsPinMixin = CreateFromMixins(MapCanvasPinMixin)
 TomCatsDragonFlyingGlyphsPinMixin = CreateFromMixins(addon.GetProxy(MapCanvasPinMixin))
+
+function TomCatsDragonFlyingGlyphsPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
 
 function TomCatsDragonFlyingGlyphsPinMixin:ApplyFrameLevel()
     local frameLevel = self:GetMap():GetPinFrameLevelsManager():GetValidFrameLevel("PIN_FRAME_LEVEL_MAP_LINK")
@@ -396,8 +404,6 @@ function TomCatsDragonFlyingGlyphsPinMixin:OnCanvasScaleChanged()
     self:SetPosition(self.pinInfo.location.x, self.pinInfo.location.y)
     rescale(self)
 end
-
-TomCatsDragonFlyingGlyphsPinMixin.OnLoad = nop
 
 function TomCatsDragonFlyingGlyphsPinMixin:OnReleased()
     allPins[self] = nil

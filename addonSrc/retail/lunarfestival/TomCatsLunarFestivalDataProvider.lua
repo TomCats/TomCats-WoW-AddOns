@@ -310,6 +310,10 @@ function TomCatsLunarFestivalDataProviderMixin:RefreshAllData(fromOnShow)
 end
 TomCatsLunarFestivalAreaPOIPinMixin = CreateFromMixins(BaseMapPoiPinMixin)
 
+function TomCatsLunarFestivalAreaPOIPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
+
 function TomCatsLunarFestivalAreaPOIPinMixin:OnAcquired(pinInfo)
     BaseMapPoiPinMixin.OnAcquired(self, pinInfo);
     --AreaPOIPinMixin.OnAcquired(self, pinInfo)
@@ -318,6 +322,10 @@ end
 
 --TomCatsLunarFestivalPinMixin = CreateFromMixins(MapCanvasPinMixin)
 TomCatsLunarFestivalPinMixin = CreateFromMixins(addon.GetProxy(MapCanvasPinMixin))
+
+function TomCatsLunarFestivalPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
 
 function TomCatsLunarFestivalPinMixin:ApplyFrameLevel()
     local frameLevel = self:GetMap():GetPinFrameLevelsManager():GetValidFrameLevel("PIN_FRAME_LEVEL_MAP_LINK")
@@ -370,8 +378,6 @@ function TomCatsLunarFestivalPinMixin:OnCanvasScaleChanged()
     self:SetScale(scaleBase * self:GetMap():GetGlobalPinScale() / self:GetParent():GetScale())
     self:SetPosition(self.pinInfo.location.x, self.pinInfo.location.y)
 end
-
-TomCatsLunarFestivalPinMixin.OnLoad = nop
 
 function TomCatsLunarFestivalPinMixin:OnReleased()
     allPins[self] = nil

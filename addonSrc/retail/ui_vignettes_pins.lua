@@ -414,7 +414,9 @@ function TomCatsMapCanvasPinMixin:OnAcquired(vignette)
 	self:ApplyCurrentScale()
 end
 
-TomCatsMapCanvasPinMixin.OnLoad = nop
+function TomCatsMapCanvasPinMixin:OnLoad()
+	self.SetPassThroughButtons = nop
+end
 
 function TomCatsMapCanvasPinMixin:OnMouseClickAction()
 	if (addon.IsBetaEnabled()) then

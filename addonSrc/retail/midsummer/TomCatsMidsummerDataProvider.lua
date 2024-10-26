@@ -339,6 +339,10 @@ end
 
 TomCatsMidsummerAreaPOIPinMixin = CreateFromMixins(BaseMapPoiPinMixin)
 
+function TomCatsMidsummerAreaPOIPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
+
 function TomCatsMidsummerAreaPOIPinMixin:OnAcquired(pinInfo)
     BaseMapPoiPinMixin.OnAcquired(self, pinInfo);
     --AreaPOIPinMixin.OnAcquired(self, pinInfo)
@@ -347,6 +351,10 @@ end
 
 --TomCatsMidsummerPinMixin = CreateFromMixins(MapCanvasPinMixin)
 TomCatsMidsummerPinMixin = CreateFromMixins(addon.GetProxy(MapCanvasPinMixin))
+
+function TomCatsMidsummerPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
 
 function TomCatsMidsummerPinMixin:ApplyFrameLevel()
     local frameLevel = self:GetMap():GetPinFrameLevelsManager():GetValidFrameLevel("PIN_FRAME_LEVEL_MAP_LINK")
@@ -402,8 +410,6 @@ function TomCatsMidsummerPinMixin:OnCanvasScaleChanged()
     self:SetScale(scaleBase * self:GetMap():GetGlobalPinScale() / self:GetParent():GetScale())
     self:SetPosition(self.pinInfo.location.x, self.pinInfo.location.y)
 end
-
-TomCatsMidsummerPinMixin.OnLoad = nop
 
 function TomCatsMidsummerPinMixin:OnReleased()
     allPins[self] = nil

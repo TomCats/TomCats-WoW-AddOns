@@ -2,7 +2,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-	<Frame name="TomCatsMapPinTemplate" flattenRenderLayers="true" enableMouseMotion="true" mixin="TomCatsMapCanvasPinMixin" virtual="true">
+	<Frame name="TomCatsMapPinTemplate" flattenRenderLayers="true" enableMouseMotion="true" passThroughButtons="RightButton" mixin="TomCatsMapCanvasPinMixin" virtual="true">
 		<Size x="30" y="30"/>
 		<Animations>
 
@@ -56,6 +56,9 @@
 				</Texture>
 			</Layer>
 		</Layers>
+		<Scripts>
+			<OnLoad method="OnLoad" />
+		</Scripts>
 	</Frame>
 
 </Ui>

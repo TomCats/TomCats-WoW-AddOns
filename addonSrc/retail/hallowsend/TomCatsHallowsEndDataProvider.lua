@@ -318,6 +318,10 @@ function TomCatsHallowsEndDataProviderMixin:RefreshAllData(fromOnShow)
 end
 TomCatsHallowsEndAreaPOIPinMixin = CreateFromMixins(AreaPOIPinMixin)
 
+function TomCatsHallowsEndAreaPOIPinMixin:OnLoad()
+    self.SetPassThroughButtons = nop
+end
+
 function TomCatsHallowsEndAreaPOIPinMixin:OnAcquired(pinInfo)
     AreaPOIPinMixin.OnAcquired(self, pinInfo)
     ShowHide(self, enabled)

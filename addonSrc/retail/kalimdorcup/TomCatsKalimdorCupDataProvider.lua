@@ -104,6 +104,10 @@ end
 
 TomCatsKalimdorCupPinMixin = CreateFromMixins(addon.GetProxy(MapCanvasPinMixin))
 
+function TomCatsKalimdorCupPinMixin:OnLoad()
+	self.SetPassThroughButtons = nop
+end
+
 function TomCatsKalimdorCupPinMixin:ApplyFrameLevel()
 	local frameLevel = self:GetMap():GetPinFrameLevelsManager():GetValidFrameLevel("PIN_FRAME_LEVEL_MAP_LINK")
 	self:SetFrameLevel(frameLevel)
@@ -129,8 +133,6 @@ function TomCatsKalimdorCupPinMixin:OnCanvasScaleChanged()
 	self:SetPosition(self.pinInfo.x, self.pinInfo.y)
 	rescale(self)
 end
-
-TomCatsKalimdorCupPinMixin.OnLoad = nop
 
 function TomCatsKalimdorCupPinMixin:OnReleased()
 	self:Hide()

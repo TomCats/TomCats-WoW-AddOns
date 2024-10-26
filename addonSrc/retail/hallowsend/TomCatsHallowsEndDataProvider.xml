@@ -89,5 +89,9 @@
             </Layer>
         </Layers>
     </Frame>
-    <Frame name="TomCatsHallowsEndAreaPOIPinTemplate" inherits="BaseHighlightableMapPoiPinTemplate" mixin="TomCatsHallowsEndAreaPOIPinMixin" virtual="true" />
+    <Frame name="TomCatsHallowsEndAreaPOIPinTemplate" inherits="BaseHighlightableMapPoiPinTemplate" passThroughButtons="RightButton" mixin="TomCatsHallowsEndAreaPOIPinMixin" virtual="true">
+        <Scripts>
+            <OnLoad method="OnLoad" />
+        </Scripts>
+    </Frame>
 </Ui>
