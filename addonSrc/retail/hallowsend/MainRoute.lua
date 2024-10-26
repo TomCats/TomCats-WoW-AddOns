@@ -32,8 +32,14 @@ end
 local function isLocationActive(location)
     if (C_QuestLog.IsQuestFlaggedCompleted(location["Quest ID"])) then return false end
     if (location["Faction"]) then
-        local _, _, standingID = GetFactionInfoByID(location["Faction"])
-        if (not standingID or (standingID < 4)) then return false end
+        local factionData = C_Reputation.GetFactionDataByID(location["Faction"])
+        if (factionData) then
+            local standingID = factionData.standingID
+            if (not standingID or (standingID < 4)) then return false end
+            return true
+        else
+            return false
+        end
     end
     if (location["Prerequisite"]) then
         if (not C_QuestLog.IsQuestFlaggedCompleted(location["Prerequisite"])) then return false end
