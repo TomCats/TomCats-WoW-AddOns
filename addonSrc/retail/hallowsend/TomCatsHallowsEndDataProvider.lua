@@ -17,7 +17,8 @@ local IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 local WorldMapTooltip = TomCatsHallowsEndGameTooltip
 
 local function rescale(pin)
-    local scale = TomCats_Account.hallowsend.iconScale
+    --local scale = TomCats_Account.hallowsend.iconScale
+    local scale = 0.6 * addon.GetIconScale()
     local sizeX = 64 * scale
     local sizeY = 64 * scale
     pin.iconDefault:SetSize(sizeX, sizeY)

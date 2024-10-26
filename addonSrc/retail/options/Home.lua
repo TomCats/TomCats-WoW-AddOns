@@ -182,6 +182,9 @@ Home:SetScript("OnShow", function(self)
 				0)
 		mapIconSizeConfig.slider.Slider:SetScript("OnValueChanged", function(_, value)
 			addon.SetIconScale(value)
+			if (addon.hallowsend) then
+				addon.hallowsend.SetIconScale()
+			end
 			local trueScale = 0.7 * WorldMapFrame:GetScale() * addon.GetIconScale()
 			mapIconSizeConfig.icon:ClearAllPoints()
 			mapIconSizeConfig.icon:SetScale(trueScale)
