@@ -79,12 +79,23 @@ local function updateTour()
     tour = updatedTour
     announceRoute()
 end
+local savedTour, savedGroupID
 
 local function switchTour(newGroupID)
     if (IsInInstance()) then
+        savedTour = savedTour or tour
+        savedGroupID = savedGroupID or groupID
         tour = nil
         groupID = nil
         return
+    else
+        if (newGroupID and newGroupID == savedGroupID) then
+            tour = savedTour
+            savedTour = nil
+            groupID = savedGroupID
+            savedGroupID = nil
+            return
+        end
     end
     if (newGroupID == groupID) then
         return
