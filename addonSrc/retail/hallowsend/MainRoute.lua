@@ -8,6 +8,7 @@ local tour
 local groupID
 local side = 1
 local arrow
+local saveTour
 
 -- todo: Activate only during hallow's end
 tcl.Events.RegisterEvent("PLAYER_LOGIN", addon)
@@ -81,12 +82,16 @@ local function updateTour()
 end
 local savedTour, savedGroupID
 
+function saveTour()
+    savedTour = savedTour or tour
+    savedGroupID = savedGroupID or groupID
+    tour = nil
+    groupID = nil
+end
+
 local function switchTour(newGroupID)
     if (IsInInstance()) then
-        savedTour = savedTour or tour
-        savedGroupID = savedGroupID or groupID
-        tour = nil
-        groupID = nil
+        saveTour()
         return
     else
         if (newGroupID and newGroupID == savedGroupID) then
@@ -151,7 +156,7 @@ local function zoneChanged()
     if (mapID) then
         switchTour(findLocationGroupID(mapID))
     else
-        tour = nil
+        saveTour()
     end
     setupArrow()
 end
