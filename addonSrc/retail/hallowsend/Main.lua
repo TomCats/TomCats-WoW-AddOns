@@ -98,9 +98,9 @@ local function ADDON_LOADED(_, arg1)
         if (not TomCats_Account.hallowsend.discovered) then
             addon.hallowsend.charm.MinimapLoopPulseAnim:Play()
         end
-        if (TomCats_Account.hallowsend.preferences.hideButton) then
-            addon.hallowsend.charm:Hide()
-        end
+        --if (TomCats_Account.hallowsend.preferences.hideButton) then
+        --    addon.hallowsend.charm:Hide()
+        --end
     end
 end
 local function zoneTweak()
