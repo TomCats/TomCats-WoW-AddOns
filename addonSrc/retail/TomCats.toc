@@ -1,5 +1,5 @@
 # See license.txt for license and copyright information
-## Interface: 110002, 110005
+## Interface: 110005, 110007
 ## Title: TomCat's Tours
 ## Notes: Version: @version@
 ## Author: TomCat
@@ -11,6 +11,6 @@
 ## SavedVariablesPerCharacter: TomCats_Character
 ## X-Category: Achievements, Map, Miscellaneous
 ## X-Localizations: enUS, enGB, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ptPT, ruRU, zhCN, zhTW
-## X-TomCats-Expiry: @expiry3days@
+## X-TomCats-Expiry: @expiry5days@
 
 Main.xml
