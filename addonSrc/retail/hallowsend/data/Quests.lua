@@ -13,13 +13,14 @@ for k, v in ipairs(D["Locations"].records) do
 		row[1] = v.record[2]
 		row[4] = v.record[4]
 		row[6] = Coords(v.record[5][1], v.record[5][2])
+		row[7] = v.record[6]
 		table.insert(quests, row)
 	end
 end
 
 select(2, ...).hallowsend.TomCatsLibs.Data.loadData(
 	"Quests",
-	{ "Quest ID", "Creature ID", "Area ID", "UIMap ID", "Map Type", "Location" },
+	{ "Quest ID", "Creature ID", "Area ID", "UIMap ID", "Map Type", "Location", "Faction" },
 	quests
 )
 

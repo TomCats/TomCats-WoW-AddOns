@@ -27,7 +27,7 @@ local function addQuestToUIMaps(quest, uiMapID)
     end
 end
 D["Quest NPC Lookup"] = {}
-for _, quest in pairs(D["Quests"].records) do
+for _, quest in ipairs(D["Quests"].rawRecords) do
     addQuestToUIMaps(quest, quest["UIMap ID"])
     D["Quest NPC Lookup"][1] = true
 end

@@ -35,8 +35,8 @@ local function isLocationActive(location)
     if (location["Faction"]) then
         local factionData = C_Reputation.GetFactionDataByID(location["Faction"])
         if (factionData) then
-            local standingID = factionData.standingID
-            if (not standingID or (standingID < 4)) then return false end
+            local reaction = factionData.reaction
+            if (not reaction or (reaction < 4)) then return false end
             return true
         else
             return false

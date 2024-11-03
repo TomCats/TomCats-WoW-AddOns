@@ -258,12 +258,19 @@ function TomCatsHallowsEndDataProviderMixin:RefreshAllData(fromOnShow)
                     local uiMapID, mapPosition = C_Map.GetMapPosFromWorldPos(continentID, worldPosition, self:GetMap():GetMapID())
                     location = mapPosition
                 end
-                if (location) then
-                    self.activePins[quest["Quest ID"]] = self:GetMap():AcquirePin("TomCatsHallowsEndPinTemplate", {
-                        quest = quest,
-                        location = location,
-                        provider = self
-                    })
+                if (location and not self.activePins[quest["Quest ID"]]) then
+                    local show = not quest["Faction"] -- default to true unless quest has a faction requirement
+                    if quest["Faction"] then
+                        local factionData = C_Reputation.GetFactionDataByID(quest["Faction"])
+                        show = factionData and factionData.reaction and factionData.reaction >= 4
+                    end
+                    if show then
+                        self.activePins[quest["Quest ID"]] = self:GetMap():AcquirePin("TomCatsHallowsEndPinTemplate", {
+                            quest = quest,
+                            location = location,
+                            provider = self
+                        })
+                    end
                 end
             end
         end

@@ -40,12 +40,14 @@ function lib.loadData(name, columnNames, records)
         table.columnNames[columnNames[i]] = i
     end
     table.records = {}
+    table.rawRecords = {}
     for i = 1, #records, 1 do
         local record = { }
         record.parent = table
         record.record = records[i]
         setmetatable(record, recordMetatable)
         table.records[records[i][1]] = record
+        table.rawRecords[i] = record
     end
     setmetatable(table, tableMetatable)
     lib[name] = table
