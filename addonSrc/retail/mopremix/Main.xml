@@ -9,11 +9,11 @@
     <Script file="MenuButton.lua" />
     <Script file="TieredMenu.lua" />
 
-    <Script file="mopremix\Main.lua" />
-    <Script file="mopremix\GearAdvisor.lua" />
-    <Script file="mopremix\XPData.lua" />
-    <Script file="mopremix\BonusXPTracker.lua" />
-    <Script file="mopremix\CollectionData.lua" />
-    <Script file="mopremix\CollectionTrackerService.lua" />
-    <Script file="mopremix\CollectionTrackerUI.lua" />
+    <Script file="Main.lua" />
+    <Script file="GearAdvisor.lua" />
+    <Script file="XPData.lua" />
+    <Script file="BonusXPTracker.lua" />
+    <Script file="CollectionData.lua" />
+    <Script file="CollectionTrackerService.lua" />
+    <Script file="CollectionTrackerUI.lua" />
 </Ui>

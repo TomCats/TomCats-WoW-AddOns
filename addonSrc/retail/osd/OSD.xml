@@ -1,15 +1,15 @@
 <!-- See license.txt for license and copyright information -->
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-	<Include file="osd\OSD.lua" />
-	<Include file="osd\Timers.lua" />
+	<Include file="OSD.lua" />
+	<Include file="Timers.lua" />
 	<Include file="TheaterTroupe.lua" />
-	<Include file="osd\Superbloom.lua" />
-	<Include file="osd\ElementalStorms.lua" />
-	<Include file="osd\RadiantEchoes.lua" />
-<!--	<Include file="osd\GreedyEmissary.lua" />-->
-	<Include file="osd\TimeRifts.lua" />
-<!--	<Include file="osd\TwitchDrops.lua" />-->
-<!--	<Include file="osd\PrimeGamingLoot.lua" />-->
-	<Include file="osd\Promos.lua" />
+	<Include file="Superbloom.lua" />
+	<Include file="ElementalStorms.lua" />
+	<Include file="RadiantEchoes.lua" />
+<!--	<Include file="GreedyEmissary.lua" />-->
+	<Include file="TimeRifts.lua" />
+<!--	<Include file="TwitchDrops.lua" />-->
+<!--	<Include file="PrimeGamingLoot.lua" />-->
+	<Include file="Promos.lua" />
 </Ui>

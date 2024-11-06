@@ -1,20 +1,20 @@
 <!-- See license.txt for license and copyright information -->
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-    <Include file="hallowsend\eventTime.lua" />
-    <Include file="hallowsend\preload.lua" />
-    <Include file="hallowsend\Libraries.xml" />
-    <Script file="hallowsend\data\Locations.lua" />
-    <Script file="hallowsend\data\LocationGroups.lua" />
-    <Script file="hallowsend\data\Tours.lua" />
-    <Script file="hallowsend\data\Quests.lua" />
-    <Script file="hallowsend\data\Quests.CreatureName.lua" />
-    <Script file="hallowsend\data\QuestLookups.lua" />
-    <Script file="hallowsend\data\Entrances.lua" />
-    <Script file="hallowsend\data\EntranceLookups.lua" />
-    <Script file="hallowsend\data\Pathways.lua" />
-    <Script file="hallowsend\data\PhasedZones.lua" />
-    <Include file="hallowsend\TomCatsHallowsEndDataProvider.xml" />
-    <Script file="hallowsend\Main.lua" />
-    <Script file="hallowsend\MainRoute.lua" />
+    <Include file="eventTime.lua" />
+    <Include file="preload.lua" />
+    <Include file="Libraries.xml" />
+    <Script file="data\Locations.lua" />
+    <Script file="data\LocationGroups.lua" />
+    <Script file="data\Tours.lua" />
+    <Script file="data\Quests.lua" />
+    <Script file="data\Quests.CreatureName.lua" />
+    <Script file="data\QuestLookups.lua" />
+    <Script file="data\Entrances.lua" />
+    <Script file="data\EntranceLookups.lua" />
+    <Script file="data\Pathways.lua" />
+    <Script file="data\PhasedZones.lua" />
+    <Include file="TomCatsHallowsEndDataProvider.xml" />
+    <Script file="Main.lua" />
+    <Script file="MainRoute.lua" />
 </Ui>

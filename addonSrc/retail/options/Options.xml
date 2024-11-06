@@ -14,10 +14,10 @@
 		<FontString inherits="GameFontHighlight" justifyH="LEFT" spacing="3" indented="true"/>
 	</SimpleHTML>
 
-	<Include file="options\Home.lua" />
-	<Include file="options\Header.lua" />
-	<Include file="options\LinkButton.lua" />
-	<Include file="options\Popup.lua" />
-	<Include file="options\ScrollBox.lua" />
+	<Include file="Home.lua" />
+	<Include file="Header.lua" />
+	<Include file="LinkButton.lua" />
+	<Include file="Popup.lua" />
+	<Include file="ScrollBox.lua" />
 
 </Ui>

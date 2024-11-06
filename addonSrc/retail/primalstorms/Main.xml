@@ -1,39 +1,23 @@
 <!-- See license.txt for license and copyright information -->
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-	<Include file="primalstorms\Init.lua" />
+	<Include file="Init.lua" />
 
-	<Include file="primalstorms\lang\default.lua"/>
-	<Include file="primalstorms\lang\deDE.lua"/>
-	<Include file="primalstorms\lang\esES.lua"/>
-	<Include file="primalstorms\lang\esMX.lua"/>
-	<Include file="primalstorms\lang\frFR.lua"/>
-	<Include file="primalstorms\lang\itIT.lua"/>
-	<Include file="primalstorms\lang\koKR.lua"/>
-	<Include file="primalstorms\lang\ptBR.lua"/>
-	<Include file="primalstorms\lang\ruRU.lua"/>
-	<Include file="primalstorms\lang\zhCN.lua"/>
-	<Include file="primalstorms\lang\zhTW.lua"/>
+	<Include file="lang\default.lua"/>
+	<Include file="lang\deDE.lua"/>
+	<Include file="lang\esES.lua"/>
+	<Include file="lang\esMX.lua"/>
+	<Include file="lang\frFR.lua"/>
+	<Include file="lang\itIT.lua"/>
+	<Include file="lang\koKR.lua"/>
+	<Include file="lang\ptBR.lua"/>
+	<Include file="lang\ruRU.lua"/>
+	<Include file="lang\zhCN.lua"/>
+	<Include file="lang\zhTW.lua"/>
 
-	<Include file="primalstorms\Names.lua" />
-	<Include file="primalstorms\UI.lua" />
-	<Include file="primalstorms\Data.lua" />
-	<Include file="primalstorms\Transmog.lua" />
-	<Include file="primalstorms\TransmogData.lua" />
-
-<!--
-	<Include file="lunarfestival\eventTime.lua" />
-	<Include file="lunarfestival\preload.lua" />
-	<Include file="lunarfestival\Libraries.xml" />
-	<Script file="lunarfestival\data\Quests.lua" />
-	<Script file="lunarfestival\data\Quests.CreatureName.lua" />
-	<Script file="lunarfestival\data\QuestLookups.lua" />
-	<Script file="lunarfestival\data\Entrances.lua" />
-	<Script file="lunarfestival\data\EntranceLookups.lua" />
-	<Script file="lunarfestival\data\Pathways.lua" />
-	<Script file="lunarfestival\data\PhasedZones.lua" />
-	<Include file="lunarfestival\TomCatsLunarFestivalDataProvider.xml" />
-	<Script file="lunarfestival\Main.lua" />
-	<Script file="lunarfestival\AutoComplete.lua" />
--->
+	<Include file="Names.lua" />
+	<Include file="UI.lua" />
+	<Include file="Data.lua" />
+	<Include file="Transmog.lua" />
+	<Include file="TransmogData.lua" />
 </Ui>
