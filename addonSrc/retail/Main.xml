@@ -76,6 +76,7 @@
 	<!-- <Include file="primalstorms/Main.xml" /> -->
 	<Include file="dragonflyingglyphs/Main.xml" />
 <!--	<Include file="kalimdorcup/Main.xml" />-->
+<!--	<Include file="wowanniversary/Main.xml" />-->
 	<Script file="soundoverride/soundoverride.lua" />
 	<Script file="delveinfo.lua" />
 <!--	<Include file="mopremix/Main.xml" />-->

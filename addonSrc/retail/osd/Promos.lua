@@ -151,64 +151,128 @@ local promoData = {
 	--},
 	{
 		type = promoTypes.TWITCH_DROP,
-		startTime = 1729573200,
-		endTime = 1730786400,
+		startTime = 1731520800,
+		endTime = 1733940000,
 		lang = {
 			["enUS"] = {
 				urlParams = { "en-us" },
 				title1 = "Twitch Drop:",
-				title2 = "Scramble to Get the Sand Scarab Pet Now!",
+				title2 = "Blackrock Saber mount",
 				click = "Click for details" },
 			["enGB"] = {
 				urlParams = { "en-gb" },
 				title1 = "Twitch Drop:",
-				title2 = "Scramble to Get the Sand Scarab Pet Now!",
+				title2 = "Blackrock Saber mount",
 				click = "Click for details" },
 			["frFR"] = {
 				urlParams = { "fr-fr" },
 				title1 = "Drop Twitch:",
-				title2 = "précipitez-vous sur la mascotte Scarabée des sables!",
+				title2 = "Monture Sabre de guerre rochenoire",
 				click = "Cliquer pour les détails" },
 			["deDE"] = {
 				urlParams = { "de-de" },
 				title1 = "Twitch-Drop:",
-				title2 = "Holt euch jetzt den Sandskarabäus als Haustier!",
+				title2 = "Kriegssäbler des Schwarzfelsklans (Reittier)",
 				click = "Klicken Sie für weitere Details" },
 			["esES"] = {
 				urlParams = { "es-es" },
 				title1 = "Drop de Twitch:",
-				title2 = "¡Participa ya para conseguir la mascota escarabajo de arena!",
+				title2 = "Montura sable de Roca Negra",
 				click = "Haga clic para obtener más detalles" },
 			["zhTW"] = {
 				urlParams = { "zh-tw" },
 				title1 = "Twitch 掉寶：",
-				title2 = "立即獲取沙甲蟲寵物！",
+				title2 = "黑石戰豹坐騎",
 				click = "點擊了解更多詳情。" },
 			["esMX"] = {
 				urlParams = { "es-mx" },
 				title1 = "Drop de Twitch:",
-				title2 = "¡Obtén la mascota Escarabajo de arena ahora!",
+				title2 = "Montura Sable de guerra Roca Negra",
 				click = "Haga clic para obtener más detalles" },
 			["ptBR"] = {
 				urlParams = { "pt-br" },
 				title1 = "Twitch Drop:",
-				title2 = "corra para obter a mascote Escaravelho da Areia agora!",
+				title2 = "Montaria Sabre-de-guerra da Rocha Negra",
 				click = "Clique para mais detalhes" },
 			["ptPT"] = {
 				urlParams = { "pt-br" },
 				title1 = "Twitch Drop:",
-				title2 = "corra para obter a mascote Escaravelho da Areia agora!",
+				title2 = "Montaria Sabre-de-guerra da Rocha Negra",
 				click = "Clique para mais detalhes" },
 			["itIT"] = {
 				urlParams = { "it-it" },
 				title1 = "Twitch Drop:",
-				title2 = "datti da fare per ottenere la mascotte Scarabeo delle Sabbie ora!",
+				title2 = "Cavalcatura Fiera da Guerra dei Roccianera",
 				click = "Clicca per maggiori dettagli" },
 		},
-		url = "https://news.blizzard.com/en-us/world-of-warcraft/24149367",
-		slug = "twitch_sand_scarab",
+		url = "https://worldofwarcraft.blizzard.com/en-us/news/24151415",
+		slug = "twitch_blackrock_saber",
 		modelInfo = {
-			creature = 54745
+			model = 5504975,
+			display = 119657,
+		},
+	},
+	{
+		type = promoTypes.TWITCH_DROP,
+		startTime = 1731520800,
+		endTime = 1733940000,
+		lang = {
+			["enUS"] = {
+				urlParams = { "en-us" },
+				title1 = "Twitch Drop:",
+				title2 = "Kaldorei War Wolf mount",
+				click = "Click for details" },
+			["enGB"] = {
+				urlParams = { "en-gb" },
+				title1 = "Twitch Drop:",
+				title2 = "Kaldorei War Wolf mount",
+				click = "Click for details" },
+			["frFR"] = {
+				urlParams = { "fr-fr" },
+				title1 = "Drop Twitch:",
+				title2 = "Monture Loup de guerre kaldorei",
+				click = "Cliquer pour les détails" },
+			["deDE"] = {
+				urlParams = { "de-de" },
+				title1 = "Twitch-Drop:",
+				title2 = "Kriegswolf der Kaldorei (Reittier)",
+				click = "Klicken Sie für weitere Details" },
+			["esES"] = {
+				urlParams = { "es-es" },
+				title1 = "Drop de Twitch:",
+				title2 = "Montura lobo de guerra kaldorei",
+				click = "Haga clic para obtener más detalles" },
+			["zhTW"] = {
+				urlParams = { "zh-tw" },
+				title1 = "Twitch 掉寶：",
+				title2 = "卡多雷戰狼",
+				click = "點擊了解更多詳情。" },
+			["esMX"] = {
+				urlParams = { "es-mx" },
+				title1 = "Drop de Twitch:",
+				title2 = "Montura Lobo de guerra kaldorei",
+				click = "Haga clic para obtener más detalles" },
+			["ptBR"] = {
+				urlParams = { "pt-br" },
+				title1 = "Twitch Drop:",
+				title2 = "Montaria Lobo de Guerra Kaldorei",
+				click = "Clique para mais detalhes" },
+			["ptPT"] = {
+				urlParams = { "pt-br" },
+				title1 = "Twitch Drop:",
+				title2 = "Montaria Lobo de Guerra Kaldorei",
+				click = "Clique para mais detalhes" },
+			["itIT"] = {
+				urlParams = { "it-it" },
+				title1 = "Twitch Drop:",
+				title2 = "Cavalcatura Lupo da Guerra dei Kaldorei",
+				click = "Clicca per maggiori dettagli" },
+		},
+		url = "https://worldofwarcraft.blizzard.com/en-us/news/24151415",
+		slug = "twitch_kaldorei_war_wolf",
+		modelInfo = {
+			model = 5504995,
+			display = 119661,
 		},
 	},
 	--{
@@ -278,73 +342,73 @@ local promoData = {
 	--		model = 198193
 	--	},
 	--},
-	{
-		type = promoTypes.BLIZZARD_OTHER,
-		startTime = 1729569600,
-		endTime = 1729958400,
-		lang = {
-			["enUS"] = {
-				urlParams = { "en-us" },
-				title1 = "Mount Giveaway:",
-				title2 = "\nEnter to win a Wondrous Wavewhisker by reposting TomCat's message on X.com",
-				click = "Click for details\n(Other Blizzard Promos)" },
-			--["enGB"] = {
-			--	urlParams = { "en-gb" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMELIA DELIVERS WARCRAFT RUMBLE’S JOYFUL CHAOS TO WOW",
-			--	click = "Click for details" },
-			--["koKR"] = {
-			--	urlParams = { "ko-kr" },
-			--	title1 = "워크래프트 럼블",
-			--	title2 = "노멜리아가 워크래프트® 럼블™의 즐거운 혼돈을 WOW에 선사합니다!",
-			--	click = "자세한 내용을 보려면 클릭하십시오" },
-			--["frFR"] = {
-			--	urlParams = { "fr-fr" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMÉLIA APPORTE LE JOYEUX CHAOS DE WARCRAFT RUMBLE DANS WORLD OF WARCRAFT",
-			--	click = "Cliquer pour les détails" },
-			--["deDE"] = {
-			--	urlParams = { "de-de" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMELIA BRINGT DAS FREUDIGE CHAOS VON WARCRAFT RUMBLE NACH WOW",
-			--	click = "Klicken Sie für weitere Details" },
-			--["esES"] = {
-			--	urlParams = { "es-es" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMELIA TRAE EL ALEGRE CAOS DE WARCRAFT RUMBLE A WOW",
-			--	click = "Haga clic para obtener más detalles" },
-			--["zhTW"] = {
-			--	urlParams = { "zh-tw" },
-			--	title1 = "《魔獸兵團》",
-			--	title2 = "諾姆莉亞將《魔獸兵團》歡樂的混亂氣氛送進了《魔獸世界》",
-			--	click = "點擊了解更多詳情。" },
-			--["esMX"] = {
-			--	urlParams = { "es-mx" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMELIA TRAE TODO EL CAOS Y LA DIVERSIÓN DE WARCRAFT RUMBLE A WOW",
-			--	click = "Haga clic para obtener más detalles" },
-			--["ptBR"] = {
-			--	urlParams = { "pt-br" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMÉSIA TRAZ O CAOS DIVERTIDO DE WARCRAFT RUMBLE PARA WOW",
-			--	click = "Clique para mais detalhes" },
-			--["ptPT"] = {
-			--	urlParams = { "pt-pt" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMÉSIA TRAZ O CAOS DIVERTIDO DE WARCRAFT RUMBLE PARA WOW",
-			--	click = "Clique para mais detalhes" },
-			--["itIT"] = {
-			--	urlParams = { "it-it" },
-			--	title1 = "Warcraft Rumble:",
-			--	title2 = "\nGNOMELIA PORTA IL CAOS PIÙ SPASSOSO DI WARCRAFT RUMBLE SU WOW",
-			--	click = "Clicca per maggiori dettagli" },
-		},
-		url = "https://x.com/TomCatsTours/status/1848720589680246915",
-		slug = "blizzard_wondrous_wavewhisker",
-		modelInfo = {
-			model = 4870441,
-		},
-	},
+	--{
+	--	type = promoTypes.BLIZZARD_OTHER,
+	--	startTime = 1729569600,
+	--	endTime = 1729958400,
+	--	lang = {
+	--		["enUS"] = {
+	--			urlParams = { "en-us" },
+	--			title1 = "Mount Giveaway:",
+	--			title2 = "\nEnter to win a Wondrous Wavewhisker by reposting TomCat's message on X.com",
+	--			click = "Click for details\n(Other Blizzard Promos)" },
+	--		--["enGB"] = {
+	--		--	urlParams = { "en-gb" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMELIA DELIVERS WARCRAFT RUMBLE’S JOYFUL CHAOS TO WOW",
+	--		--	click = "Click for details" },
+	--		--["koKR"] = {
+	--		--	urlParams = { "ko-kr" },
+	--		--	title1 = "워크래프트 럼블",
+	--		--	title2 = "노멜리아가 워크래프트® 럼블™의 즐거운 혼돈을 WOW에 선사합니다!",
+	--		--	click = "자세한 내용을 보려면 클릭하십시오" },
+	--		--["frFR"] = {
+	--		--	urlParams = { "fr-fr" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMÉLIA APPORTE LE JOYEUX CHAOS DE WARCRAFT RUMBLE DANS WORLD OF WARCRAFT",
+	--		--	click = "Cliquer pour les détails" },
+	--		--["deDE"] = {
+	--		--	urlParams = { "de-de" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMELIA BRINGT DAS FREUDIGE CHAOS VON WARCRAFT RUMBLE NACH WOW",
+	--		--	click = "Klicken Sie für weitere Details" },
+	--		--["esES"] = {
+	--		--	urlParams = { "es-es" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMELIA TRAE EL ALEGRE CAOS DE WARCRAFT RUMBLE A WOW",
+	--		--	click = "Haga clic para obtener más detalles" },
+	--		--["zhTW"] = {
+	--		--	urlParams = { "zh-tw" },
+	--		--	title1 = "《魔獸兵團》",
+	--		--	title2 = "諾姆莉亞將《魔獸兵團》歡樂的混亂氣氛送進了《魔獸世界》",
+	--		--	click = "點擊了解更多詳情。" },
+	--		--["esMX"] = {
+	--		--	urlParams = { "es-mx" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMELIA TRAE TODO EL CAOS Y LA DIVERSIÓN DE WARCRAFT RUMBLE A WOW",
+	--		--	click = "Haga clic para obtener más detalles" },
+	--		--["ptBR"] = {
+	--		--	urlParams = { "pt-br" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMÉSIA TRAZ O CAOS DIVERTIDO DE WARCRAFT RUMBLE PARA WOW",
+	--		--	click = "Clique para mais detalhes" },
+	--		--["ptPT"] = {
+	--		--	urlParams = { "pt-pt" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMÉSIA TRAZ O CAOS DIVERTIDO DE WARCRAFT RUMBLE PARA WOW",
+	--		--	click = "Clique para mais detalhes" },
+	--		--["itIT"] = {
+	--		--	urlParams = { "it-it" },
+	--		--	title1 = "Warcraft Rumble:",
+	--		--	title2 = "\nGNOMELIA PORTA IL CAOS PIÙ SPASSOSO DI WARCRAFT RUMBLE SU WOW",
+	--		--	click = "Clicca per maggiori dettagli" },
+	--	},
+	--	url = "https://x.com/TomCatsTours/status/1848720589680246915",
+	--	slug = "blizzard_wondrous_wavewhisker",
+	--	modelInfo = {
+	--		model = 4870441,
+	--	},
+	--},
 }
 
 Promos = { }
@@ -439,6 +503,9 @@ function Promos.Render(Timers, idx, promo)
 						model1:SetCreature(promo.modelInfo.creature)
 					else
 						model1:SetModel(promo.modelInfo.model)
+						if (promo.modelInfo.display) then
+							model1:SetDisplayInfo(promo.modelInfo.display)
+						end
 					end
 				end
 				facing = (facing + maxrads * (elapsed / duration)) % maxrads

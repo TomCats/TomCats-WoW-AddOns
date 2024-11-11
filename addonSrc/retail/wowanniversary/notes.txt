@@ -1,0 +1,42 @@
+Info pertaining to world boss tooltips:
+========================================================================================================================
+Doomwalker:
+Most drops are alternate item IDs for gear that drops from Doomwalker in Shadowmoon Valley, however, with it being a 2-4
+hour respawn timer which is hindered when shards will reset after being unoccupied for 15 minutes, it is suggested to
+farm these appearances while Doomwalker is active for the holiday.  These include:
+Anger-Spark Gloves: 186460
+Barrel-Blade Longrifle: 186467
+Black-Iron Battlecloak: 186462
+Darkcrest Waistguard: 186481
+Ethereum Nexus-Reaver: 186466
+Faceguard of the Endless Watch: 186465
+Fathom Healm of the Deeps: 186464
+Gilded Trousers of Benediction: 186461
+Helstitched Mantle: 186475
+Talon of the Tempest: 186468
+Terrorweave Tunic: 186463
+Voidforged Greaves: 186484
+
+Some items only attainable during the holiday are:
+
+Akama's Edge: 186506
+Illidari Doomhawk: 186469
+
+Also, the following is attainable with 100% drop on the first kill:
+Azure Worldchiller (mount): 208572
+Doomwalker Trophy Stand (toy): 186501
+
+Reins of the Grand Black War Mammoth (mount): 43959/44083
+Has an extremely low drop chance (< 0.1%) , but can be obtained from Archavon the Stone Walker inside
+of Vault of Archavon (< 1%) any time of the year, although it has a low drop rate, still about 10x the rate of
+the world boss version.  This also drops from Archavon the Stone Watcher in Tanaris
+========================================================================================================================
+Archavon the Stone Watcher:
+Archavon drops scaled versions of his entire loot table from Vault of Archavon
+In addition:
+Reins of the Grand Black War Mammoth (mount): 43959/44083
+Has an extremely low drop chance (< 0.1%) , but can be obtained from Archavon the Stone Walker inside
+of Vault of Archavon (< 1%) any time of the year, although it has a low drop rate, still about 10x the rate of
+the world boss version.  This also drops from Doomwalker in Tanaris
+========================================================================================================================
+
