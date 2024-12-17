@@ -343,7 +343,7 @@ local function Hook_Pin_Show(self, setShown)
 end
 
 local function trackVignettePins(mapFrame)
-	local pinPool = mapFrame.pinPools[_G.VignetteDataProviderMixin:GetPinTemplate()]
+	local pinPool = mapFrame.pinPools[_G.VignetteDataProviderMixin:GetDefaultPinTemplate()]
 	if (pinPool) then
 		for pin in pinPool:EnumerateActive() do
 			if (not trackedVignettePins[pin]) then
@@ -357,7 +357,7 @@ local function trackVignettePins(mapFrame)
 end
 
 local function Hook_AcquirePin(self, pinTemplate, ...)
-	if (pinTemplate == _G.VignetteDataProviderMixin:GetPinTemplate() or pinTemplate == "AreaPOIPinTemplate") then
+	if (pinTemplate == _G.VignetteDataProviderMixin:GetDefaultPinTemplate() or pinTemplate == "AreaPOIPinTemplate") then
 		trackVignettePins(self)
 	end
 end

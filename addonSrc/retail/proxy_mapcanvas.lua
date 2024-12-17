@@ -31,10 +31,11 @@ addon.CreateProxyMixinFunctions(
 			"GetMapID",
 			"GetName",
 			"GetPinFrameLevelsManager",
+			"GetPinTemplateType",
 			"IsShown",
 			"ProcessGlobalPinMouseActionHandlers",
 			"SetMapID",
-			"TriggerEvent"
+			"TriggerEvent",
 		}
 )
 

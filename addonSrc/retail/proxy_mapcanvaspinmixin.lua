@@ -28,7 +28,7 @@ addon.CreateProxyMixinFunctions(
 			"ShouldMouseButtonBePassthrough"
 		},
 		{
-			"DisableInheritedMotionScriptsWarning"
+			"DisableInheritedMotionScriptsWarning",
 		}
 )
 
