@@ -106,9 +106,9 @@ local function OnUpdate(_, elapsed)
 	if (timeSinceLastUpdate > interval) then
 		timeSinceLastUpdate = 0
 		addon.globals.arathiPhase = warfrontStates[C_ContributionCollector.GetState(11)]
-		addon.globals.arathiVisible = not C_QuestLog.IsQuestFlaggedCompleted(52781)
+		addon.globals.arathiVisible = not C_QuestLog.IsQuestFlaggedCompleted(52781) and not C_PlayerInfo.IsPlayerInChromieTime()
 		addon.globals.darkshorePhase = warfrontStates[C_ContributionCollector.GetState(118)]
-		addon.globals.darkshoreVisible = not C_QuestLog.IsQuestFlaggedCompleted(54411)
+		addon.globals.darkshoreVisible = not C_QuestLog.IsQuestFlaggedCompleted(54411) and not C_PlayerInfo.IsPlayerInChromieTime()
 		if (addon.globals.arathiPhase and addon.globals.darkshorePhase) then
 			interval = maxInterval
 		else
