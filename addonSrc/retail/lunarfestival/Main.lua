@@ -82,6 +82,8 @@ local function ADDON_LOADED(_, arg1)
                 GameTooltip:SetOwner(this, "ANCHOR_LEFT")
                 GameTooltip:SetText("TomCat's Tours:", 1, 1, 1)
                 GameTooltip:AddLine("Lunar Festival", nil, nil, nil, true)
+                GameTooltip:AddLine("\nClick to toggle icons", nil, nil, nil, true)
+                GameTooltip:AddLine("Shift-Click to toggle autoloot", nil, nil, nil, true)
                 GameTooltip:Show()
             end,
             Hide = function()

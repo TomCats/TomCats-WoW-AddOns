@@ -16,6 +16,15 @@ local IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 
 local WorldMapTooltip = TomCatsLunarFestivalGameTooltip
 
+local function rescale(pin)
+    local scale = 0.6 * addon.GetIconScale()
+    local sizeX = 64 * scale
+    local sizeY = 64 * scale
+    pin.iconDefault:SetSize(sizeX, sizeY)
+    pin.iconHighlighted:SetSize(sizeX, sizeY)
+    pin:SetSize(sizeX, sizeY)
+end
+
 local function ShowHide(element, condition)
     if (condition) then
         element:Show()
@@ -370,6 +379,7 @@ function TomCatsLunarFestivalPinMixin:OnAcquired(pinInfo)
     end
     allPins[self] = true
     ShowHide(self, enabled)
+    rescale(self)
 end
 function TomCatsLunarFestivalPinMixin:OnCanvasScaleChanged()
     local scaleBase = 0.425
@@ -377,6 +387,7 @@ function TomCatsLunarFestivalPinMixin:OnCanvasScaleChanged()
     if (uiMapID == 12 or uiMapID == 13 or uiMapID == 113 or uiMapID == 1978) then scaleBase = 0.35 end
     self:SetScale(scaleBase * self:GetMap():GetGlobalPinScale() / self:GetParent():GetScale())
     self:SetPosition(self.pinInfo.location.x, self.pinInfo.location.y)
+    rescale(self)
 end
 
 function TomCatsLunarFestivalPinMixin:OnReleased()
@@ -511,3 +522,9 @@ local function OnUpdate()
 end
 
 CreateFrame("FRAME"):SetScript("OnUpdate",OnUpdate)
+
+function addon.lunarfestival.SetIconScale()
+    for pin in pairs(allPins) do
+        rescale(pin)
+    end
+end

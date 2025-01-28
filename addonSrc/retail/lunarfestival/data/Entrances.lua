@@ -65,5 +65,7 @@ addon.lunarfestival.TomCatsLibs.Data.loadData(
         { 50, {73717}, 13765, 2025, Coords(0.07124450802803, 0.64775812625885), TYPE_NONE, false },
         { 51, {73172}, 13751, 2025, Coords(0.2619217634201, 0.77175080776215), TYPE_NONE, false },
         { 52, {73172}, 13751, 2024, Coords(0.46171823143959, 0.010468549095094), TYPE_NONE, false },
+        { 53, {85935}, 14768, 2256, Coords(0.6691, 0.8553), TYPE_NONE, false },
+        { 54, {85936}, 14949, 2256, Coords(0.4682, 0.5721), TYPE_NONE, false },
     }
 )

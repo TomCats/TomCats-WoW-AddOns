@@ -160,8 +160,38 @@ Home:SetScript("OnShow", function(self)
 			"Enables or disables the TomCat's Tours icon on the minimap"
 		}, minimapButtonConfig.Label, minimapButtonConfig.checkButton)
 
+		local last = minimapButtonConfig
+
+		if (addon.lunarfestival:IsEventActive()) then
+			local lunarfestivalMinimapButtonConfig = CreateFrame("Frame", nil, configurationFrame)
+			lunarfestivalMinimapButtonConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+			lunarfestivalMinimapButtonConfig:SetPoint("RIGHT")
+			lunarfestivalMinimapButtonConfig:SetHeight(30)
+			lunarfestivalMinimapButtonConfig.Label = lunarfestivalMinimapButtonConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+			lunarfestivalMinimapButtonConfig.Label:SetJustifyH("LEFT")
+			lunarfestivalMinimapButtonConfig.Label:SetPoint("LEFT", 32, 0)
+			lunarfestivalMinimapButtonConfig.Label:SetText("Lunar Festival Minimap Button")
+			lunarfestivalMinimapButtonConfig.checkButton = CreateFrame("CheckButton", nil, lunarfestivalMinimapButtonConfig)
+			lunarfestivalMinimapButtonConfig.checkButton:SetSize(30, 29)
+			lunarfestivalMinimapButtonConfig.checkButton:SetPoint("LEFT", 230, 0)
+			lunarfestivalMinimapButtonConfig.checkButton:SetNormalAtlas("checkbox-minimal", true)
+			lunarfestivalMinimapButtonConfig.checkButton:SetPushedAtlas("checkbox-minimal", true)
+			lunarfestivalMinimapButtonConfig.checkButton:SetCheckedAtlas("checkmark-minimal", true)
+			lunarfestivalMinimapButtonConfig.checkButton:SetDisabledCheckedAtlas("checkmark-minimal-disabled", true)
+			lunarfestivalMinimapButtonConfig.checkButton:SetScript("OnClick", function(self)
+				addon.lunarfestival.charm:SetEnabled(self:GetChecked())
+			end)
+
+			lunarfestivalMinimapButtonConfig.checkButton:SetChecked(addon.lunarfestival.charm:IsEnabled())
+			AttachTooltip({
+				"Lunar Festival Minimap Button",
+				"Enables or disables the Lunar Festival icon on the minimap"
+			}, lunarfestivalMinimapButtonConfig.Label, lunarfestivalMinimapButtonConfig.checkButton)
+			last = lunarfestivalMinimapButtonConfig
+		end
+
 		local mapIconSizeConfig = CreateFrame("Frame", nil, configurationFrame)
-		mapIconSizeConfig:SetPoint("TOPLEFT", minimapButtonConfig, "BOTTOMLEFT", 0, -8)
+		mapIconSizeConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 		mapIconSizeConfig:SetPoint("RIGHT")
 		mapIconSizeConfig:SetHeight(30)
 		mapIconSizeConfig.Label = mapIconSizeConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -182,8 +212,11 @@ Home:SetScript("OnShow", function(self)
 				0)
 		mapIconSizeConfig.slider.Slider:SetScript("OnValueChanged", function(_, value)
 			addon.SetIconScale(value)
-			if (addon.hallowsend) then
+			if (addon.hallowsend:IsEventActive()) then
 				addon.hallowsend.SetIconScale()
+			end
+			if (addon.lunarfestival:IsEventActive()) then
+				addon.lunarfestival.SetIconScale()
 			end
 			local trueScale = 0.7 * WorldMapFrame:GetScale() * addon.GetIconScale()
 			mapIconSizeConfig.icon:ClearAllPoints()
@@ -223,7 +256,7 @@ Home:SetScript("OnShow", function(self)
 			"Map Icon Animation",
 			"Sets if the map icons will animate when there is an active rare or treasure"
 		}, mapIconAnimationConfig.Label, mapIconAnimationConfig.checkButton)
-		local last
+
 		if (not (mopremix and mopremix.active)) then
 			local accessoryWindowConfig = CreateFrame("Frame", nil, configurationFrame)
 			accessoryWindowConfig:SetPoint("TOPLEFT", mapIconAnimationConfig, "BOTTOMLEFT", 0, -8)
