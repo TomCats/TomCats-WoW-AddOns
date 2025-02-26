@@ -162,7 +162,7 @@ Home:SetScript("OnShow", function(self)
 
 		local last = minimapButtonConfig
 
-		if (addon.lunarfestival:IsEventActive()) then
+		if (addon.lunarfestival and addon.lunarfestival:IsEventActive()) then
 			local lunarfestivalMinimapButtonConfig = CreateFrame("Frame", nil, configurationFrame)
 			lunarfestivalMinimapButtonConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 			lunarfestivalMinimapButtonConfig:SetPoint("RIGHT")
@@ -190,7 +190,7 @@ Home:SetScript("OnShow", function(self)
 			last = lunarfestivalMinimapButtonConfig
 		end
 
-		if (addon.loveisintheair:IsEventActive()) then
+		if (addon.loveisintheair and addon.loveisintheair:IsEventActive()) then
 			local loveIsInTheAirMinimapButtonConfig = CreateFrame("Frame", nil, configurationFrame)
 			loveIsInTheAirMinimapButtonConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 			loveIsInTheAirMinimapButtonConfig:SetPoint("RIGHT")
@@ -812,10 +812,10 @@ Home:SetScript("OnShow", function(self)
 			}, noblegardenConfig.Label, noblegardenConfig.checkButton)
 		end
 
-		local featuresTitle = CreateOptionsTitle(contents, "Recently Added and Upcoming Features", configurationFrame)
-		local features = CreateFrame("SimpleHTML",nil, contents, "@addonName@_HTML_Features")
-		features:SetPoint("TOPLEFT", featuresTitle, "BOTTOMLEFT", 0, 0)
-		features:SetPoint("RIGHT")
+		--local featuresTitle = CreateOptionsTitle(contents, "Recently Added and Upcoming Features", configurationFrame)
+		--local features = CreateFrame("SimpleHTML",nil, contents, "@addonName@_HTML_Features")
+		--features:SetPoint("TOPLEFT", featuresTitle, "BOTTOMLEFT", 0, 0)
+		--features:SetPoint("RIGHT")
 	end
 	ScrollBox.Acquire(self, contents, spacing * 3)
 end)
