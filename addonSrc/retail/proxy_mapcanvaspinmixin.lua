@@ -29,6 +29,7 @@ addon.CreateProxyMixinFunctions(
 		},
 		{
 			"DisableInheritedMotionScriptsWarning",
+			"IsPinSuppressor"
 		}
 )
 

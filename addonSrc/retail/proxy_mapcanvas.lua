@@ -24,6 +24,7 @@ addon.CreateProxyMixinFunctions(
 			"SetPinPosition",
 		},
 		{
+			"CallMethodOnDataProviders",
 			"GetCanvas",
 			"GetCanvasScale",
 			"GetCanvasZoomPercent",
@@ -34,8 +35,10 @@ addon.CreateProxyMixinFunctions(
 			"GetPinTemplateType",
 			"IsShown",
 			"ProcessGlobalPinMouseActionHandlers",
+			"RegisterPin",
 			"SetMapID",
 			"TriggerEvent",
+			"UnregisterPin"
 		}
 )
 
