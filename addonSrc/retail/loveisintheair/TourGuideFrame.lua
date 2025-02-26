@@ -45,7 +45,7 @@ local function ADDON_LOADED(_, arg1)
                 HideUIPanel(TourGuideFrame)
             else
                 ShowUIPanel(TourGuideFrame)
-                TourGuideFrame.chapterButtons["button" .. currentChapter]:SetChecked(true)
+                --TourGuideFrame.chapterButtons["button" .. currentChapter]:SetChecked(true)
             end
         end
 

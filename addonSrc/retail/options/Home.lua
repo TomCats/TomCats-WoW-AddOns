@@ -190,6 +190,34 @@ Home:SetScript("OnShow", function(self)
 			last = lunarfestivalMinimapButtonConfig
 		end
 
+		if (addon.loveisintheair:IsEventActive()) then
+			local loveIsInTheAirMinimapButtonConfig = CreateFrame("Frame", nil, configurationFrame)
+			loveIsInTheAirMinimapButtonConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
+			loveIsInTheAirMinimapButtonConfig:SetPoint("RIGHT")
+			loveIsInTheAirMinimapButtonConfig:SetHeight(30)
+			loveIsInTheAirMinimapButtonConfig.Label = loveIsInTheAirMinimapButtonConfig:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+			loveIsInTheAirMinimapButtonConfig.Label:SetJustifyH("LEFT")
+			loveIsInTheAirMinimapButtonConfig.Label:SetPoint("LEFT", 32, 0)
+			loveIsInTheAirMinimapButtonConfig.Label:SetText("Love is in the Air Minimap Btn")
+			loveIsInTheAirMinimapButtonConfig.checkButton = CreateFrame("CheckButton", nil, loveIsInTheAirMinimapButtonConfig)
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetSize(30, 29)
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetPoint("LEFT", 230, 0)
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetNormalAtlas("checkbox-minimal", true)
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetPushedAtlas("checkbox-minimal", true)
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetCheckedAtlas("checkmark-minimal", true)
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetDisabledCheckedAtlas("checkmark-minimal-disabled", true)
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetScript("OnClick", function(self)
+				addon.loveisintheair.charm:SetEnabled(self:GetChecked())
+			end)
+
+			loveIsInTheAirMinimapButtonConfig.checkButton:SetChecked(addon.loveisintheair.charm:IsEnabled())
+			AttachTooltip({
+				"Love is in The Air Minimap Button",
+				"Enables or disables the Love is in the Air icon on the minimap"
+			}, loveIsInTheAirMinimapButtonConfig.Label, loveIsInTheAirMinimapButtonConfig.checkButton)
+			last = loveIsInTheAirMinimapButtonConfig
+		end
+
 		local mapIconSizeConfig = CreateFrame("Frame", nil, configurationFrame)
 		mapIconSizeConfig:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8)
 		mapIconSizeConfig:SetPoint("RIGHT")

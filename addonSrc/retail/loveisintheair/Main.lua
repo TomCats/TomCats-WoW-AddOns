@@ -80,7 +80,7 @@ local function LFG_UPDATE_RANDOM_INFO()
     end
     addon.loveisintheair:SortedCharacterList()
     if (not character.canLootMount) then
-        if (character.level >= 60) then
+        if (character.level >= 10) then
             if (C_ClassTrial.IsClassTrialCharacter() == false) then
                 character.canLootMount = true
             else
@@ -111,9 +111,9 @@ local function LFG_UPDATE_RANDOM_INFO()
 end
 local function PLAYER_LEVEL_UP(_, level)
     character.level = level
-    if (character.level == 60) then
+    if (character.level == 10) then
         RequestLFDPlayerLockInfo()
-    elseif (character.level > 60) then
+    elseif (character.level > 10) then
         addon.loveisintheair:UpdateScrollFrame()
     end
 end
