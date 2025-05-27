@@ -23,6 +23,7 @@ addon.CreateProxyMixinFunctions(
 			"IsIgnoringGlobalPinScale",
 			"OnClick",
 			"OnMouseUp",
+			"SetOwningMap",
 			"SetPosition",
 			"SetScaleStyle",
 			"ShouldMouseButtonBePassthrough"
