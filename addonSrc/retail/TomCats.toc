@@ -1,5 +1,5 @@
 # See license.txt for license and copyright information
-## Interface: 110100
+## Interface: 110105
 ## Title: TomCat's Tours
 ## Notes: Version: @version@
 ## Author: TomCat
