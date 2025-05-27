@@ -398,6 +398,11 @@ function TomCatsMapCanvasPinMixin:IsMouseClickEnabled()
 	return true
 end
 
+function TomCatsMapCanvasPinMixin:OnCanvasScaleChanged()
+	rescale(self)
+	self.target.ApplyCurrentScale(self)
+end
+
 function TomCatsMapCanvasPinMixin:OnAcquired(vignette)
 	activePins[self] = true
 	self.vignette = vignette
