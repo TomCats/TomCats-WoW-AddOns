@@ -240,10 +240,10 @@ Home:SetScript("OnShow", function(self)
 				0)
 		mapIconSizeConfig.slider.Slider:SetScript("OnValueChanged", function(_, value)
 			addon.SetIconScale(value)
-			if (addon.hallowsend:IsEventActive()) then
+			if (addon.hallowsend and addon.hallowsend:IsEventActive()) then
 				addon.hallowsend.SetIconScale()
 			end
-			if (addon.lunarfestival:IsEventActive()) then
+			if (addon.lunarfestival and addon.lunarfestival:IsEventActive()) then
 				addon.lunarfestival.SetIconScale()
 			end
 			local trueScale = 0.7 * WorldMapFrame:GetScale() * addon.GetIconScale()
