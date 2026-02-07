@@ -11,8 +11,9 @@ local StaticPopupDialogs = StaticPopupDialogs
 local expiration = tonumber(GetAddOnMetadata("TomCats", "X-TomCats-Expiry"))
 
 local function Isxpired()
-	local serverTime = GetServerTime()
-	return (serverTime >= expiration)
+	return false
+--	local serverTime = GetServerTime()
+--	return (serverTime >= expiration)
 end
 
 local function ShowExpirationPopup()
