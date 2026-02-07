@@ -65,7 +65,7 @@ local function OnUpdate()
                     if (GetCVar("rotateMinimap") == "1") then
                         adj = adj - playerFacing
                     end
-                    local rads = math.atan2((arrow.worldTargetY - unitPositionY) / 1.5, arrow.worldTargetX - unitPositionX) + adj
+                    local rads = math.atan2((arrow.worldTargetY - unitPositionY), arrow.worldTargetX - unitPositionX) + adj
                     local rotation = rads + (math.pi * 0.50)
                     arrow.overlay:SetRotation(rads)
                     arrow.background:SetRotation(rads)
