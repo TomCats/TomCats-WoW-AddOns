@@ -7,7 +7,7 @@
 	<Include file="Superbloom.lua" />
 	<Include file="ElementalStorms.lua" />
 	<Include file="RadiantEchoes.lua" />
-<!--	<Include file="GreedyEmissary.lua" />-->
+    <Include file="GreedyEmissary.lua" />
 	<Include file="TimeRifts.lua" />
 <!--	<Include file="TwitchDrops.lua" />-->
 <!--	<Include file="PrimeGamingLoot.lua" />-->

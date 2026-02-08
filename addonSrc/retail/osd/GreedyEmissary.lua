@@ -20,8 +20,8 @@ local zoneRotations = {
 local zoneRotation
 
 local eventTimes = {
-    [1] = { 1685034000, 1686812340 },
-    [3] = { 1685001600, 1686779940 },
+    [1] = { 1685034000, 1753808400 },
+    [3] = { 1685001600, 1753808400 },
 }
 
 do
@@ -40,11 +40,11 @@ end
 
 function GreedyEmissary.GetEvent() -- return zone ID, time until event starts (negative number means now)
     local now = GetServerTime()
-    local secondsPast30 = (now - eventStart) % 1800
-    local iternum = math.floor((now - eventStart) / 1800)
+    local secondsPast30 = (now - eventStart) % 3600
+    local iternum = math.floor((now - eventStart) / 3600)
     local zoneIndex = (iternum % 20) + 1
     if (secondsPast30 >= gracePeriod) then
-        return zoneRotation[zoneIndex + 1], now + 1800 - secondsPast30
+        return zoneRotation[zoneIndex + 1], now + 3600 - secondsPast30
     else
         return zoneRotation[zoneIndex], now - secondsPast30
     end
@@ -139,14 +139,15 @@ function GreedyEmissary.Render(Timers, idx)
     local timerRow = Timers:GetTimerRow(idx)
     local mapInfo = C_Map.GetMapInfo(greedyEmissaryZone)
     timerRow:SetIcon("BuildanAbomination-32x32")
-    timerRow:SetTitle(string.format("Treasure Goblin: %s", mapInfo.name))
+    --timerRow:SetTitle(string.format("Treasure Goblin: %s", mapInfo.name))
+    timerRow:SetTitle("Treasure Goblin")
     timerRow:SetStartTime(greedyEmissaryStartTime, GreedyEmissary.GetGracePeriod())
     timerRow.tooltipFunction = function()
         GameTooltip:SetText("Special Event: A Greedy Emissary (starts)")
-        local text = GreedyEmissary.LootInfo()
-        for _, v in ipairs(text) do
-            GameTooltip:AddLine(v,1,1,1,true)
-        end
+        --local text = GreedyEmissary.LootInfo()
+        --for _, v in ipairs(text) do
+        --    GameTooltip:AddLine(v,1,1,1,true)
+        --end
     end
     local height = timerRow:GetHeight() + 4
     timerRow:SetShown(true)

@@ -78,11 +78,8 @@ end
 
 function UpdateVisibility()
 	if (OSD) then
-		local level = UnitLevel("player")
         local shown = false
-		if (level == 70) then
-			shown = shown or IsElementalStormsVisible()
-        end
+		shown = shown or IsElementalStormsVisible()
         shown = shown or GreedyEmissary and GreedyEmissary.IsVisible()
 		shown = shown or TimeRifts and TimeRifts.IsVisible()
 		shown = shown or Superbloom and Superbloom.IsVisible()
