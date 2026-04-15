@@ -99,3 +99,25 @@ function CreateFrame(frameType, name, parent, template, id)
 	end
 	return frame
 end
+
+GameTooltip = CreateFrame("GameTooltip", "TomCatsGameTooltip", UIParent, "GameTooltipTemplate")
+GameTooltip.supportsItemComparison = true
+GameTooltip.ItemTooltip = CreateFrame("Frame", nil, GameTooltip, "InternalEmbeddedItemTooltipTemplate")
+GameTooltip.ItemTooltip:SetSize(100, 100)
+GameTooltip.ItemTooltip:SetPoint("BOTTOMLEFT", GameTooltip, "BOTTOMLEFT", 10, 13)
+GameTooltip.ItemTooltip:Hide()
+GameTooltip.ItemTooltip.yspacing = 13
+GameTooltip:SetScript("OnLoad", function(self)
+	if self.OnLoad then
+		self:OnLoad()
+	end
+end)
+GameTooltip:SetScript("OnShow", function(self)
+	GameTooltip_OnShow(self)
+end)
+GameTooltip:SetScript("OnUpdate", function(self, elapsed)
+	GameTooltip_OnUpdate(self, elapsed)
+end)
+if GameTooltip.ItemTooltip.Tooltip then
+	GameTooltip.ItemTooltip.Tooltip.shoppingTooltips = { ShoppingTooltip1, ShoppingTooltip2 }
+end

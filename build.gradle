@@ -40,6 +40,7 @@ def expiry7days = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (6
 def expiry10days = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (60 * 60 * 24 * 10))
 def expiry14days = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (60 * 60 * 24 * 14))
 def expiry30days = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (60 * 60 * 24 * 30))
+def expiry60days = Long.toString(((long)(System.currentTimeMillis() / 1000)) + (60 * 60 * 24 * 60))
 addonProperties.setProperty("expiry1day", expiry1day)
 addonProperties.setProperty("expiry3days", expiry3days)
 addonProperties.setProperty("expiry5days", expiry5days)
@@ -47,6 +48,7 @@ addonProperties.setProperty("expiry7days", expiry7days)
 addonProperties.setProperty("expiry10days", expiry10days)
 addonProperties.setProperty("expiry14days", expiry14days)
 addonProperties.setProperty("expiry30days", expiry30days)
+addonProperties.setProperty("expiry60days", expiry60days)
 addonProperties.setProperty("currentTS", currentTS)
 
 project.property('com.tomcatsaddons.games').split(',').each { String game ->
