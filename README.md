@@ -1,11 +1,37 @@
-# TomCat's AddOns for World of Warcraft
+# TomCat's Tours
 
-I have been creating addons for World of Warcraft since 2018.  Most notably are the TomCat's Tours addons.
+Your all-in-one WoW companion for rare mob tracking, holiday events, and world content —
+built and maintained by TomCat since 2018.
 
-All of my addons have been combined into one, now called 'TomCat's AddOn Suite'
+TomCat's Tours consolidates everything from the original addon family into a single install.
+As you move through the world, relevant waypoints appear automatically and clear as you
+discover them.
 
-You can install my addons via the CurseForge app, which you can get from https://curseforge.overwolf.com/ or view the description at https://www.curseforge.com/wow/addons/tomcats
+## What's Included
 
-You will soon be able to view the sources for this addon here at GitHub.  Please keep in mind that these are not being distributed under an open-source license, but feel free to view for educational or auditing purposes.
+- **Rare mob tracking** — locations, routes, and notable loot (mounts, pets, toys) for rare
+  creatures across expansions
+- **Holiday events** — guided tours for Love is in the Air, Lunar Festival, Hallow's End,
+  Midsummer Fire Festival, Noblegarden, and more
+- **Treasures & achievements** — coordinates for treasures, battle pets, and exploration
+  achievements
+- **Zone-aware waypoints** — relevant content surfaces automatically as you enter each zone
 
-If you would like to help support the ongoing effort, please consider sponsorship https://github.com/sponsors/TomCats
+## Installation
+
+Install via the CurseForge app:
+
+- [Download CurseForge](https://curseforge.overwolf.com/)
+- [TomCat's Tours on CurseForge](https://www.curseforge.com/wow/addons/tomcats)
+
+Type `/tomcats` in-game or click the cat icon on your minimap to open the control panel.
+
+## License
+
+Source code is available for viewing for educational and auditing purposes. This project
+is not distributed under an open-source license — please do not redistribute.
+
+## Support
+
+If you find this addon useful, consider supporting its continued development:
+[GitHub Sponsors](https://github.com/sponsors/TomCats)
