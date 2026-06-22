@@ -26,6 +26,8 @@ if (PlayerFaction == "Horde") then
                 { 9, {9331}, 27, Coords(0.6058,0.3318), TYPE_ENTRANCE, false }, --Ironforge additional pin
                 { 10, {9332, 11753}, 57, Coords(0.5479,0.8826), TYPE_PORTAL_ALLIANCE, true }, --Darnassus additional pin
                 { 11, {11933,11735,11738}, 57, Coords(0.5232,0.8947), TYPE_PORTAL_ALLIANCE, true }, --Exodar/Azuremyst/Bloodmyst additional pin (portal)
+                { 12, {92558}, 2537, Coords(0.5237, 0.2425), TYPE_NONE, false },
+                { 13, {92559}, 2537, Coords(0.8149, 0.1614), TYPE_NONE, false },
             }
     )
 else
@@ -45,6 +47,8 @@ else
                 { 10, {32510}, 1530, Coords(0.796,0.372), TYPE_PHASED, false }, --Vale additional pin
                 { 11, {11824}, 57, Coords(0.5479,0.8826), TYPE_PORTAL_ALLIANCE, true }, --Teldrassil additional pin
                 { 12, {11806,11809}, 57, Coords(0.5232,0.8947), TYPE_PORTAL_ALLIANCE, true }, --Azuremyst/Bloodmyst additional pin (portal)
+                { 13, {92558}, 2537, Coords(0.5237, 0.2425), TYPE_NONE, false },
+                { 14, {92559}, 2537, Coords(0.8149, 0.1614), TYPE_NONE, false },
             }
     )
 end

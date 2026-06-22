@@ -15,7 +15,26 @@ local aliasMap = {
     [876] = { 1014 }, -- Kul Tiras
     [1978] = { 2057 }, -- Dragon Isles
     [2133] = { 2175 }, -- Zaralek Cavern
+    [13] = { 94, 95, 110, 2393, 2395, 2437, 2512, 2537 }, -- Ghostlands, Eversong Woods
 }
+
+local uiMapExclusions = {
+    [94] = true,
+    [95] = true,
+    [110] = true,
+    [2393] = true,
+    [2395] = true,
+    [2437] = true,
+    [2512] = true,
+    [2537] = true,
+}
+
+local parentMapExclusions = {
+    [0] = true,
+    [946] = true,
+    [947] = true,
+}
+
 local function addQuestToUIMaps(quest, uiMapID)
     if (aliasMap[uiMapID]) then
         for i = 1, #aliasMap[uiMapID] do
@@ -25,7 +44,7 @@ local function addQuestToUIMaps(quest, uiMapID)
     D["Quest IDs by UIMap ID Lookup"][uiMapID] = D["Quest IDs by UIMap ID Lookup"][uiMapID] or {}
     table.insert(D["Quest IDs by UIMap ID Lookup"][uiMapID], quest)
     local parentMapID = C_Map.GetMapInfo(uiMapID).parentMapID
-    if (parentMapID ~= 0 and parentMapID ~= 946 and parentMapID ~= 947) then
+    if (not (uiMapExclusions[uiMapID] or parentMapExclusions[parentMapID])) then
         addQuestToUIMaps(quest, parentMapID)
     end
 end

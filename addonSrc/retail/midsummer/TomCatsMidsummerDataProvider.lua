@@ -15,8 +15,32 @@ local GREEN_COLOR = CreateColor(0.0, 1.0, 0.0, 1.0)
 local IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
 local GetPoiInfoForPhasedZone
 local IsPhasedZone
+local IsPhasedQuest
+local TBC_CHECK_COORD = { x = 0.55, y = 0.23 }
+local TBC_Quests = {
+    [11848] = true,
+    [11850] = true,
+    [11935] = true,
+    [11774] = true,
+    [11772] = true,
+}
 
 local WorldMapTooltip = TomCatsMidsummerGameTooltip
+
+local function IsPhasedQuest(questInfo)
+    if (questInfo["Actual UIMap ID"]) then
+        local continentID = C_Map.GetWorldPosFromMapPos(13, TBC_CHECK_COORD)
+        if (continentID == 530 and TBC_Quests[questInfo["Quest ID"]]) then
+            return false
+        elseif (continentID ~= 530 and not TBC_Quests[questInfo["Quest ID"]]) then
+            return false
+        else
+            return true
+        end
+    else
+        return false
+    end
+end
 
 local function ShowHide(element, condition)
     if (condition) then
@@ -398,6 +422,10 @@ function TomCatsMidsummerPinMixin:OnAcquired(pinInfo)
                     self.pinInfo.phasedZone = phasedZone
                 end
             end
+        elseif (pinInfo.quest["Actual UIMap ID"]) then
+            if (IsPhasedQuest(pinInfo.quest)) then
+                self.iconPhased:Show()
+            end
         end
     end
     allPins[self] = true
@@ -448,7 +476,8 @@ function TomCatsMidsummerPinMixin:ShowTooltip()
         else
             -- do something to let the tooltip refresh once loaded
         end
-        local mapInfo = C_Map.GetMapInfo(D["Quests"][questIDsToShow[i]]["UIMap ID"])
+        local mapIDForQuest = D["Quests"][questIDsToShow[i]]["Actual UIMap ID"] or D["Quests"][questIDsToShow[i]]["UIMap ID"]
+        local mapInfo = C_Map.GetMapInfo(mapIDForQuest)
         GameTooltip_AddColoredLine(tooltip, mapInfo.name, WHITE_COLOR, true)
         if (self.completed) then
             GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)
@@ -473,6 +502,14 @@ function TomCatsMidsummerPinMixin:ShowTooltip()
         local phasedZone = self.pinInfo.phasedZone
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
         local poiInfo = GetPoiInfoForPhasedZone(phasedZone)
+        GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
+        if (poiInfo and poiInfo.position) then
+            GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
+            GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
+        end
+    elseif (self.iconPhased:IsShown()) then
+        GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
+        local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(95, 8793) or C_AreaPoiInfo.GetAreaPOIInfo(23, 8794)
         GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
         if (poiInfo and poiInfo.position) then
             GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
