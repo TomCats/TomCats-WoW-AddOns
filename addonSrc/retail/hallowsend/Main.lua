@@ -52,24 +52,12 @@ local function ADDON_LOADED(_, arg1)
             iconTexture = "Interface\\ICONS\\inv_misc_bag_28_halloween",
             backgroundColor = { 0.0,0.0,0.0,1.0 },
             handler_onclick = function(_, button)
-                if (IsShiftKeyDown()) then
-                    if (TomCats_Account.hallowsend.autoEnabled) then
-                        TomCats_Account.hallowsend.autoEnabled = false
-                        ChatFrame1:AddMessage("|cffffff00 The Hallow's End automatic features are now disabled|r")
-                    else
-                        TomCats_Account.hallowsend.autoEnabled = true
-                        ChatFrame1:AddMessage("|cffffff00 The Hallow's End automatic features are now enabled|r")
-                    end
-                elseif (button == "RightButton") then
-                    addon.SkipPumpkin()
+                if (TomCats_Account.hallowsend.iconsEnabled) then
+                    TomCats_Account.hallowsend.iconsEnabled = false
+                    ChatFrame1:AddMessage("|cffffff00 The Hallow's End icons are now disabled|r")
                 else
-                    if (TomCats_Account.hallowsend.iconsEnabled) then
-                        TomCats_Account.hallowsend.iconsEnabled = false
-                        ChatFrame1:AddMessage("|cffffff00 The Hallow's End icons are now disabled|r")
-                           else
-                        TomCats_Account.hallowsend.iconsEnabled = true
-                        ChatFrame1:AddMessage("|cffffff00 The Hallow's End icons are now enabled|r")
-                    end
+                    TomCats_Account.hallowsend.iconsEnabled = true
+                    ChatFrame1:AddMessage("|cffffff00 The Hallow's End icons are now enabled|r")
                 end
             end
         })
@@ -82,13 +70,11 @@ local function ADDON_LOADED(_, arg1)
                 GameTooltip:SetText("TomCat's Tours:", 1, 1, 1)
                 GameTooltip:AddLine("Hallow's End", nil, nil, nil, true)
                 GameTooltip:AddLine(" ", nil, nil, nil, true)
-                GameTooltip:AddLine("Follow the orange arrow for an efficient route leading to each of the candy buckets within the current continent", nil, nil, nil, true)
-                GameTooltip:AddLine(" ", nil, nil, nil, true)
                 GameTooltip:AddLine("<click> to toggle map icons", nil, nil, nil, true)
-                GameTooltip:AddLine(" ", nil, nil, nil, true)
-                GameTooltip:AddLine("<shift-click> to toggle automatic features", nil, nil, nil, true)
-                GameTooltip:AddLine(" ", nil, nil, nil, true)
-                GameTooltip:AddLine("<right-click> to skip the next candy bucket in the route", nil, nil, nil, true)
+                --GameTooltip:AddLine(" ", nil, nil, nil, true)
+                --GameTooltip:AddLine("<shift-click> to toggle automatic features", nil, nil, nil, true)
+                --GameTooltip:AddLine(" ", nil, nil, nil, true)
+                --GameTooltip:AddLine("<right-click> to skip the next candy bucket in the route", nil, nil, nil, true)
                 GameTooltip:Show()
             end,
             Hide = function()
