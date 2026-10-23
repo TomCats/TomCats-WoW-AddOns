@@ -7,22 +7,24 @@ local D = TCL.Data
 local quests = { }
 local faction = UnitFactionGroup("player")
 local factionID = faction == "Alliance" and 1 or 2
--- Old TBC Blood Elf zones: EK coordinates derived via C_Map.GetMapRectOnMap
--- These zones are on a separate continent (530) so C_Map world position
--- conversion to EK fails at runtime. Coordinates pre-computed using the
--- rectOnParent mapping (same technique as HereBeDragons).
-local tbcZoneEKCoords = {
+local ekCoordsByQuestID = {
 	[12364] = { 0.55539223116636272, 0.15601820980012415, 94 },
 	[12365] = { 0.55045841211080548, 0.18778041621297598, 94 },
 	[12369] = { 0.56697306466102604, 0.14711939410865307, 110 },
 	[12370] = { 0.56366316866874699, 0.15224412363767623, 110 },
 	[12373] = { 0.55609130084514613, 0.23529987037181854, 95 },
+	[97142] = { 0.57308226823806763, 0.14081956446170807, 2393 },
+	[97143] = { 0.55681383609771729, 0.18384459614753723, 2395 },
+	[97148] = { 0.56267356872558594, 0.23459680378437042, 2395 },
+	[97150] = { 0.64025741815567017, 0.28691780567169189, 2437 },
+	[97151] = { 0.64296746253967285, 0.20241309702396393, 2437 },
+	[97152] = { 0.62212622165679932, 0.19720819592475891, 2437 },
 }
 for k, v in ipairs(D["Locations"].records) do
 	local row = { }
 	if (v.record[3] == factionID or v.record[3] == 3) then
 		local questID = v.record[2]
-		local ekCoords = tbcZoneEKCoords[questID]
+		local ekCoords = ekCoordsByQuestID[questID]
 		row[1] = questID
 		row[7] = v.record[6]
 		if (ekCoords) then

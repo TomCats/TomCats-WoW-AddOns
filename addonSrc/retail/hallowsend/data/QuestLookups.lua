@@ -5,12 +5,16 @@ local D = addon.hallowsend.TomCatsLibs.Data
 D["Quest IDs by UIMap ID Lookup"] = {}
 local aliasMap = {
     [12] = { 1209 },
-    [13] = { 94, 95, 110 },
+    [13] = { 94, 95, 110, 2393, 2395, 2437, 2537 },
 }
 local uiMapExclusions = {
     [94] = true,
     [95] = true,
     [110] = true,
+    [2393] = true,
+    [2395] = true,
+    [2437] = true,
+    [2537] = true,
 }
 local parentMapOverrides = {
     [2255] = 2256,
