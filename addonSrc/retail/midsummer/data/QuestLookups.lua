@@ -15,7 +15,7 @@ local aliasMap = {
     [876] = { 1014 }, -- Kul Tiras
     [1978] = { 2057 }, -- Dragon Isles
     [2133] = { 2175 }, -- Zaralek Cavern
-    [13] = { 94, 95, 110, 2393, 2395, 2437, 2512, 2537 }, -- Ghostlands, Eversong Woods
+    [13] = { 94, 95, 110, 2393, 2395, 2437, 2537 }, -- Ghostlands, Eversong Woods
 }
 
 local uiMapExclusions = {
@@ -25,7 +25,6 @@ local uiMapExclusions = {
     [2393] = true,
     [2395] = true,
     [2437] = true,
-    [2512] = true,
     [2537] = true,
 }
 
