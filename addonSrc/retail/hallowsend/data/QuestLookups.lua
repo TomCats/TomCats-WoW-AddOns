@@ -5,7 +5,12 @@ local D = addon.hallowsend.TomCatsLibs.Data
 D["Quest IDs by UIMap ID Lookup"] = {}
 local aliasMap = {
     [12] = { 1209 },
-    [13] = { 1208 },
+    [13] = { 94, 95, 110 },
+}
+local uiMapExclusions = {
+    [94] = true,
+    [95] = true,
+    [110] = true,
 }
 local parentMapOverrides = {
     [2255] = 2256,
@@ -22,7 +27,7 @@ local function addQuestToUIMaps(quest, uiMapID)
     D["Quest IDs by UIMap ID Lookup"][uiMapID] = D["Quest IDs by UIMap ID Lookup"][uiMapID] or {}
     table.insert(D["Quest IDs by UIMap ID Lookup"][uiMapID], quest)
     local parentMapID = parentMapOverrides[uiMapID] or C_Map.GetMapInfo(uiMapID).parentMapID
-    if (parentMapID ~= 0 and parentMapID ~= 946 and parentMapID ~= 947) then
+    if (not uiMapExclusions[uiMapID] and parentMapID ~= 0 and parentMapID ~= 946 and parentMapID ~= 947) then
         addQuestToUIMaps(quest, parentMapID)
     end
 end

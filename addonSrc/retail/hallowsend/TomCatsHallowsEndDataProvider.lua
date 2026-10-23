@@ -13,6 +13,29 @@ local GREY_COLOR = CreateColor(0.8, 0.8, 0.8, 1.0)
 local RED_COLOR = CreateColor(1.0, 0.0, 0.0, 1.0)
 local GREEN_COLOR = CreateColor(0.0, 1.0, 0.0, 1.0)
 local IsQuestFlaggedCompleted = C_QuestLog.IsQuestFlaggedCompleted
+local TBC_CHECK_COORD = { x = 0.55, y = 0.23 }
+local TBC_Quests = {
+    [12364] = true,
+    [12365] = true,
+    [12369] = true,
+    [12370] = true,
+    [12373] = true,
+}
+
+local function IsPhasedQuest(questInfo)
+    if (questInfo["Actual UIMap ID"]) then
+        local continentID = C_Map.GetWorldPosFromMapPos(13, TBC_CHECK_COORD)
+        if (continentID == 530 and TBC_Quests[questInfo["Quest ID"]]) then
+            return false
+        elseif (continentID ~= 530 and not TBC_Quests[questInfo["Quest ID"]]) then
+            return false
+        else
+            return true
+        end
+    else
+        return false
+    end
+end
 
 local WorldMapTooltip = TomCatsHallowsEndGameTooltip
 
@@ -59,10 +82,17 @@ local function addToTomTom(waypointInfo, setClosest)
         TomTom:SetClosestWaypoint()
     end
 end
-local function addQuestToTomTom(quest, setClosest)
+local function addQuestToTomTom(pinInfo, setClosest)
+    local quest = pinInfo.quest
+    local uiMapID = quest["UIMap ID"]
+    local location = quest["Location"]
+    if (quest["Actual UIMap ID"]) then
+        uiMapID = quest["Actual UIMap ID"]
+        location = quest["Zone Location"]
+    end
     addToTomTom({
-        uiMapID = quest["UIMap ID"],
-        location = quest["Location"],
+        uiMapID = uiMapID,
+        location = location,
         title = "Candy Bucket" --addon.getCreatureNameByQuestID(quest["Quest ID"])
     }, setClosest)
 end
@@ -377,6 +407,10 @@ function TomCatsHallowsEndPinMixin:OnAcquired(pinInfo)
                     self.pinInfo.phasedZone = phasedZone
                 end
             end
+        elseif (pinInfo.quest["Actual UIMap ID"]) then
+            if (IsPhasedQuest(pinInfo.quest)) then
+                self.iconPhased:Show()
+            end
         end
     end
     allPins[self] = true
@@ -451,6 +485,14 @@ function TomCatsHallowsEndPinMixin:ShowTooltip()
         GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
         GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
         GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
+    elseif (self.iconPhased:IsShown()) then
+        GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
+        local poiInfo = C_AreaPoiInfo.GetAreaPOIInfo(95, 8793) or C_AreaPoiInfo.GetAreaPOIInfo(23, 8794)
+        GameTooltip_AddColoredLine(tooltip, "This NPC is in a different phase", RED_COLOR, true)
+        if (poiInfo and poiInfo.position) then
+            GameTooltip_AddColoredLine(tooltip, "Visit " .. poiInfo.name .. " first:", RED_COLOR, true)
+            GameTooltip_AddColoredLine(tooltip, poiInfo.description, GREY_COLOR, true)
+        end
     end
     if (TomTom) then
         GameTooltip_AddBlankLinesToTooltip(tooltip, 1)
@@ -490,7 +532,7 @@ function TomCatsHallowsEndPinMixin:OnMouseUp(button)
     if (TomTom) then
         if (button == "LeftButton") then
             if (self.pinInfo.quest) then
-                addQuestToTomTom(self.pinInfo.quest, true)
+                addQuestToTomTom(self.pinInfo, true)
             end
             if (self.pinInfo.entrance) then
                 addEntranceToTomTom(self.pinInfo.entrance, true)

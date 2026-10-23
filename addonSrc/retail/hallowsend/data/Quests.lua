@@ -7,20 +7,40 @@ local D = TCL.Data
 local quests = { }
 local faction = UnitFactionGroup("player")
 local factionID = faction == "Alliance" and 1 or 2
+-- Old TBC Blood Elf zones: EK coordinates derived via C_Map.GetMapRectOnMap
+-- These zones are on a separate continent (530) so C_Map world position
+-- conversion to EK fails at runtime. Coordinates pre-computed using the
+-- rectOnParent mapping (same technique as HereBeDragons).
+local tbcZoneEKCoords = {
+	[12364] = { 0.55539223116636272, 0.15601820980012415, 94 },
+	[12365] = { 0.55045841211080548, 0.18778041621297598, 94 },
+	[12369] = { 0.56697306466102604, 0.14711939410865307, 110 },
+	[12370] = { 0.56366316866874699, 0.15224412363767623, 110 },
+	[12373] = { 0.55609130084514613, 0.23529987037181854, 95 },
+}
 for k, v in ipairs(D["Locations"].records) do
 	local row = { }
 	if (v.record[3] == factionID or v.record[3] == 3) then
-		row[1] = v.record[2]
-		row[4] = v.record[4]
-		row[6] = Coords(v.record[5][1], v.record[5][2])
+		local questID = v.record[2]
+		local ekCoords = tbcZoneEKCoords[questID]
+		row[1] = questID
 		row[7] = v.record[6]
+		if (ekCoords) then
+			row[4] = 13
+			row[6] = Coords(ekCoords[1], ekCoords[2])
+			row[8] = ekCoords[3]
+			row[9] = Coords(v.record[5][1], v.record[5][2])
+		else
+			row[4] = v.record[4]
+			row[6] = Coords(v.record[5][1], v.record[5][2])
+		end
 		table.insert(quests, row)
 	end
 end
 
 select(2, ...).hallowsend.TomCatsLibs.Data.loadData(
 	"Quests",
-	{ "Quest ID", "Creature ID", "Area ID", "UIMap ID", "Map Type", "Location", "Faction" },
+	{ "Quest ID", "Creature ID", "Area ID", "UIMap ID", "Map Type", "Location", "Faction", "Actual UIMap ID", "Zone Location" },
 	quests
 )
 
