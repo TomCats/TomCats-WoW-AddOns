@@ -232,9 +232,9 @@ local overrides = {
 
 function addon:PLAYER_LOGIN(event, ...)
     tcl.Events.UnregisterEvent("PLAYER_LOGIN", self)
-    tcl.Events.RegisterEvent("ZONE_CHANGED", zoneChanged)
-    tcl.Events.RegisterEvent("ZONE_CHANGED_INDOORS", zoneChanged)
-    tcl.Events.RegisterEvent("ZONE_CHANGED_NEW_AREA", zoneChanged)
+    --tcl.Events.RegisterEvent("ZONE_CHANGED", zoneChanged)
+    --tcl.Events.RegisterEvent("ZONE_CHANGED_INDOORS", zoneChanged)
+    --tcl.Events.RegisterEvent("ZONE_CHANGED_NEW_AREA", zoneChanged)
     tcl.Events.RegisterEvent("QUEST_COMPLETE", questComplete)
     tcl.Events.RegisterEvent("QUEST_LOG_UPDATE", questLogUpdate)
     tcl.Events.RegisterEvent("BAG_UPDATE", bagUpdate)
@@ -261,8 +261,8 @@ function addon:PLAYER_LOGIN(event, ...)
             location["Group Position"] = mapPosition
         end
     end
-    switchTour(findLocationGroupID(C_Map.GetBestMapForUnit("player")))
-    setupArrow()
+    --switchTour(findLocationGroupID(C_Map.GetBestMapForUnit("player")))
+    --setupArrow()
 end
 
 --if (TomCats and TomCats.Register) then
