@@ -27,10 +27,10 @@ end
 local eventResets = setupGlobalEventTimes(1729843200, 0, 28800, -28800, -28800, -28800)
 -- 10/25/2024 10:00am CET in EU
 -- 10/18/2025 midnight EST (generic start)
-local eventStarts = setupGlobalEventTimes(1760760000, 0, 32400, -28800, -25200, -25200)
+local eventStarts = setupGlobalEventTimes(1792404000, 0, 32400, -28800, -25200, -25200)
 -- 11/8/2024 11:00am CET in EU
 -- 11/2/2024 midnight EST (generic end)
-local eventEnds = setupGlobalEventTimes(1762056000, 0, 32400, -28800, -25200, -25200)
+local eventEnds = setupGlobalEventTimes(1793620800, 0, 32400, -28800, -25200, -25200)
 
 function component.getCurrentOffsetMinutes()
 	if (currentOffsetMinutes) then return currentOffsetMinutes end
