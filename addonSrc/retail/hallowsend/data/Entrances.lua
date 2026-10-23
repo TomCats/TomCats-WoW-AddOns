@@ -56,7 +56,8 @@ select(2, ...).hallowsend.TomCatsLibs.Data.loadData(
         --{ 43, {8713}, 1477, 51, Coords(0.76, 0.4522), TYPE_DUNGEON, true }, --  Elder Starsong / Sunken Temple
         --{ 44, {29741}, 5034, 249, Coords(0.3158, 0.6299), TYPE_NONE, false }, --  Elder Sekhemi - extra map pin
         --{ 45, {29742}, 5034, 249, Coords(0.6551, 0.1868), TYPE_NONE, false }, --  Elder Menkhaf - extra map pin
-        { 46, {97207, 97155, 97154, 97208, 97206}, 0, 2537, Coords(0.8149, 0.1614), TYPE_NONE, false },
-        { 47, {97209, 97210, 97211, 97212}, 0, 2537, Coords(0.5237, 0.2425), TYPE_NONE, false },
+        { 46, {97207, 97155, 97154, 97208, 97206}, 0, 2537, Coords(0.8149, 0.1614), TYPE_NONE, true },
+        { 47, {97209, 97210, 97211, 97212}, 0, 2537, Coords(0.5237, 0.2425), TYPE_NONE, true },
+        { 48, {97213}, 0, 2393, Coords(0.565, 0.709), TYPE_ENTRANCE, true },  -- Arcantina portal
     }
 )
