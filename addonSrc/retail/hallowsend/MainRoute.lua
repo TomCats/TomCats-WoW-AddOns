@@ -181,9 +181,9 @@ local function questComplete(event, ...)
     if (TomCats_Account.hallowsend.autoEnabled) then
         local _, texture = GetQuestItemInfo("reward", 1)
         if (texture and texture == 132940) then
-            if (not checkTreats()) then
+            --if (not checkTreats()) then
                 GetQuestReward(0)
-            end
+            --end
         end
     end
 end
