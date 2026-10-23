@@ -458,16 +458,21 @@ function TomCatsHallowsEndPinMixin:ShowTooltip()
             table.insert(questIDsToShow,questIDs[i])
         end
     end
-    for i = 1, #questIDsToShow do
-            --GameTooltip_AddColoredLine(tooltip, addon.getCreatureNameByQuestID(questIDsToShow[i]), TITLE_COLOR, true)
+    if (self.pinInfo.entrance and #questIDsToShow > 1) then
+        GameTooltip_AddColoredLine(tooltip, "Candy Bucket (x " .. #questIDsToShow .. ")", TITLE_COLOR, true)
+        if (self.completed) then
+            GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)
+        end
+    else
+        for i = 1, #questIDsToShow do
             GameTooltip_AddColoredLine(tooltip, "Candy Bucket", TITLE_COLOR, true)
-            --GameTooltip_AddColoredLine(tooltip, C_Map.GetAreaInfo(D["Quests"][questIDsToShow[i]]["Area ID"]), WHITE_COLOR, true)
             if (self.completed) then
                 GameTooltip_AddColoredLine(tooltip, "Completed", RED_COLOR, true)
             end
-            if (i < #questIDs) then
+            if (i < #questIDsToShow) then
                 GameTooltip_AddBlankLinesToTooltip(tooltip, 1);
             end
+        end
     end
     if (self.pinInfo.entrance) then
         if (self.pinInfo.entrance["Type"] == 1) then
